@@ -1,0 +1,5 @@
+<%= text_f f, :username, :value => @image.username || "root", :help_inline => _("The user that is used to ssh into the instance, normally docker-user, ubuntu, root etc") %>
+<%= password_f f, :password, :help_inline => _("Password to authenticate with - used for SSH finish step.") %>
+<%= image_field(f) %>
+<%= checkbox_f f, :user_data, :help_inline => _("Does this image support user data input?") %>
+
