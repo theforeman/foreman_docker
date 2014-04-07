@@ -1,6 +1,6 @@
 require 'uri'
 
-module Foreman::Model
+module ForemanDocker
   class Docker < ::ComputeResource
 
     validates :url, :format => { :with => URI.regexp }

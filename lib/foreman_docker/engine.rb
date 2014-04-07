@@ -16,11 +16,10 @@ module ForemanDocker
     end
 
     initializer 'foreman_docker.register_plugin', :after=> :finisher_hook do |app|
-      require File.expand_path('../../../app/models/compute_resources/foreman/model/docker', __FILE__)
       Foreman::Plugin.register :foreman_docker do
         requires_foreman '> 1.4'
         # Register docker compute resource in foreman
-        compute_resource 'Docker'
+        compute_resource ForemanDocker::Docker
       end
 
     end
