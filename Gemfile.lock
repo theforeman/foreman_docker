@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foreman_docker (0.0.2)
+    foreman_docker (0.0.3)
       docker-api (~> 1.8.0)
       fog
 

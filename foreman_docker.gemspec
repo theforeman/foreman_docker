@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = ForemanDocker::VERSION
   s.authors     = ["Amos Beanri"]
   s.email       = ["abenari@redhat.com"]
-  s.homepage    = "http://github.com/abenari/foreman_docker"
+  s.homepage    = "http://github.com/theforeman/foreman-docker"
   s.summary     = "Provision and manage Docker containers and images from Foreman"
   s.description = "Provision and manage Docker containers and images from Foreman."
   s.licenses    = ["GPL-3"]
