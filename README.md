@@ -14,7 +14,7 @@ The gem name is "foreman_docker".
 
 | Foreman Version | Plugin Version |
 | ---------------:| --------------:|
-| >  1.4          | 0.0.1          |
+| >=  1.5         | 0.0.1          |
 
 ## Latest code
 
