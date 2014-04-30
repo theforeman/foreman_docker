@@ -10,6 +10,8 @@ Please see the Foreman manual for appropriate instructions:
 
 The gem name is "foreman_docker".
 
+RPM users can install the "ruby193-rubygem-foreman_docker" or "rubygem-foreman_docker" packages.
+
 ## Compatibility
 
 | Foreman Version | Plugin Version |
