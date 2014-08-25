@@ -22,7 +22,7 @@ RPM users can install the "ruby193-rubygem-foreman_docker" or "rubygem-foreman_d
 
 You can get the develop branch of the plugin by specifying your Gemfile in this way:
 
-    gem 'foreman_docker', :git => "https://github.com/abenari/foreman_docker.git"
+    gem 'foreman_docker', :git => "https://github.com/theforeman/foreman-docker.git"
 
 # Copyright
 
