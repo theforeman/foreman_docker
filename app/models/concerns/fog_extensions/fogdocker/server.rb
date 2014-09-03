@@ -10,9 +10,9 @@ module FogExtensions
       end
 
       def command
-        c=[]
-        c += entrypoint if entrypoint.any?
-        c += cmd if cmd.any?
+        c = []
+        c += entrypoint if entrypoint.present?
+        c += cmd if cmd.present?
         c.join(' ')
       end
 
