@@ -1,0 +1,14 @@
+<%= render :layout => 'title', :locals => { :step => 3 } do %>
+  <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
+    <h3><%= _("Basic options") %></h3>
+    <%= text_f f, :name,       :size => 'col-md-4' %>
+    <%= text_f f, :command,    :size => 'col-md-4' %>
+    <%= text_f f, :entrypoint, :size => 'col-md-4' %>
+    <hr>
+    <h3><%= _("Compute options") %></h3>
+    <%= selectable_f f, :cpu_set, 1..f.object.compute_resource.max_cpu_count, { }, :class => "col-md-2", :label => _('Cores') %>
+    <%= text_f f, :cpu_shares, :class => "col-md-2", :label => _('CPU shares') %>
+    <%= selectable_f f, :memory, memory_options(f.object.compute_resource.max_memory), { }, :class => "col-md-2", :label => _('Memory') %>
+    <%= render :partial => 'form_buttons' %>
+  <% end %>
+<% end %>

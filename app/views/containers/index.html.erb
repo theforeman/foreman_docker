@@ -1,0 +1,29 @@
+<% title _("Containers") %>
+
+<% if authorized? %>
+  <% title_actions button_group(link_to_if_authorized _("New container"), hash_for_new_container_path,
+                                :class => 'btn-success' ) %>
+<% end %>
+
+<ul class="nav nav-tabs" data-tabs="tabs">
+  <% @container_resources.each_with_index do |resource, i| %>
+    <% if i == 0 %>
+      <li class="active"><a href="#<%= "primary" %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
+    <% else %>
+      <li><a href="#<%= resource.name %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<div class="tab-content">
+  <% @container_resources.each_with_index do |resource, i| %>
+    <% if i == 0 %>
+      <div class="tab-pane active" id="primary">
+    <% else %>
+      <div class="tab-pane" id="<%= resource.name %>">
+    <% end %>
+      <%= render 'list', :containers => resource.vms.to_a.paginate(:page => params[:page], :per_page => 10) ,
+                         :resource   => resource %>
+    </div>
+  <% end %>
+</div>

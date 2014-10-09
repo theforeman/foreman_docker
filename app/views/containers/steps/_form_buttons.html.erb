@@ -1,0 +1,20 @@
+<div class="clearfix">
+  <div class="form-actions">
+    <% if step == :preliminary %>
+      <%= link_to _("Cancel"), containers_path, :class => "btn btn-danger" %>
+    <% else %>
+      <a class="btn btn-default" href="<%= previous_wizard_path %>">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <%= _("Back") %>
+      </a>
+    <% end %>
+    <%= button_tag(:type => 'submit', :class => "btn btn-primary pull-right") do %>
+      <% if step == :environment %>
+        <%= _("Submit") %>
+      <% else %>
+        <%= _("Next") %>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
