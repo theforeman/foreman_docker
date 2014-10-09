@@ -7,8 +7,9 @@ require "foreman_docker/version"
 Gem::Specification.new do |s|
   s.name        = "foreman_docker"
   s.version     = ForemanDocker::VERSION
-  s.authors     = ["Amos Beanri"]
-  s.email       = ["abenari@redhat.com"]
+  s.date        = Date.today.to_s
+  s.authors     = ["Daniel Lobato, Amos Benari"]
+  s.email       = ["dlobatog@redhat.com, abenari@redhat.com"]
   s.homepage    = "http://github.com/theforeman/foreman-docker"
   s.summary     = "Provision and manage Docker containers and images from Foreman"
   s.description = "Provision and manage Docker containers and images from Foreman."
@@ -21,5 +22,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "fog"
   s.add_dependency "docker-api", "~> 1.8.0"
-
+  s.add_dependency "wicked"
 end
