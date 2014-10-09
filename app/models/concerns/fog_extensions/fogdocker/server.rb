@@ -9,6 +9,16 @@ module FogExtensions
         state_running ? "Running" :"Stopped"
       end
 
+      # Last time a container was started
+      # WARNING: this doesn't mean the container has been running since then.
+      def started_at
+        attributes["state_started_at"]
+      end
+
+      def image_friendly_name
+        attributes["config_image"]
+      end
+
       def command
         c = []
         c += entrypoint if entrypoint.present?

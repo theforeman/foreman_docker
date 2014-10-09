@@ -2,7 +2,6 @@ require 'uri'
 
 module ForemanDocker
   class Docker < ::ComputeResource
-
     validates :url, :format => { :with => URI.regexp }
 
     def self.model_name
@@ -43,7 +42,6 @@ module ForemanDocker
     end
 
     def create_vm args = {}
-      args['cmd'] = Array.wrap( args.delete('cmd') )
       options = vm_instance_defaults.merge(args)
       logger.debug("creating Docker with the following options: #{options.inspect}")
       client.servers.create options
@@ -57,6 +55,14 @@ module ForemanDocker
       ActiveSupport::HashWithIndifferentAccess.new('name' => "foreman_#{Time.now.to_i}", 'cmd' => ['/bin/bash'])
     end
 
+    def test_connection(options = {})
+      super
+      client
+    # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
+    rescue => e
+      errors[:base] << e.message
+    end
+
     protected
 
     def bootstrap(args)
@@ -66,13 +72,13 @@ module ForemanDocker
       false
     end
 
-
     def client
       @client ||= ::Fog::Compute.new(
           :provider         => "fogdocker",
-          :docker_username   => user,
-          :docker_password   => password,
-          :docker_url        => url
+          :docker_username  => user,
+          :docker_password  => password,
+          :docker_email     => email,
+          :docker_url       => url
       )
     end
 

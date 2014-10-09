@@ -1,4 +1,11 @@
 <%= text_f f, :url, :size => "col-md-8", :help_block => _("e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock") %>
 <%= text_f f, :user %>
 <%= password_f f, :password %>
-<%# text_f f, :email %>
+<%= text_f f, :email %>
+
+<% client = f.object.client rescue [] %>
+<%= link_to_function _("Test Connection"), "testConnection(this)",
+                    :class => "btn + #{client.nil? ? "btn-default" : "btn-success"}",
+                    :'data-url' => test_connection_compute_resources_path %>
+
+<%= image_tag('/assets/spinner.gif', :id => 'test_connection_indicator', :class => 'hide') %>
