@@ -6,17 +6,17 @@ module FogExtensions
       include ActionView::Helpers::NumberHelper
 
       def state
-        state_running ? "Running" :"Stopped"
+        state_running ? 'Running' : 'Stopped'
       end
 
       # Last time a container was started
       # WARNING: this doesn't mean the container has been running since then.
       def started_at
-        attributes["state_started_at"]
+        attributes['state_started_at']
       end
 
       def image_friendly_name
-        attributes["config_image"]
+        attributes['config_image']
       end
 
       def command
@@ -27,7 +27,7 @@ module FogExtensions
       end
 
       def poweroff
-        service.vm_action(:id =>id, :action => :kill)
+        service.vm_action(:id => id, :action => :kill)
       end
 
       def reset
@@ -36,9 +36,8 @@ module FogExtensions
       end
 
       def vm_description
-        _("%{cores} Cores and %{memory} memory") % {:cores => cpus, :memory => number_to_human_size(memory.to_i)}
+        _('%{cores} Cores and %{memory} memory') % { :cores => cpus, :memory => number_to_human_size(memory.to_i) }
       end
-
     end
   end
 end

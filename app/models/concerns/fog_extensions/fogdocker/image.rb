@@ -8,7 +8,6 @@ module FogExtensions
       def name
         repo_tags.empty? ? (repository || id) : repo_tags.first
       end
-
     end
   end
 end

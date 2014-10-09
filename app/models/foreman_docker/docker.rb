@@ -17,16 +17,16 @@ module ForemanDocker
     end
 
     def provided_attributes
-      super.merge({:mac => :mac})
+      super.merge(:mac => :mac)
     end
 
-    #FIXME
+    # FIXME
     def max_cpu_count
       8
     end
 
     def max_memory
-      16*1024*1024*1024
+      16 * 1024 * 1024 * 1024
     end
 
     def available_images
@@ -34,14 +34,14 @@ module ForemanDocker
     end
 
     def image(id)
-      client.image.get(id) || raise(ActiveRecord::RecordNotFound)
+      client.image.get(id) || fail(ActiveRecord::RecordNotFound)
     end
 
     def provider_friendly_name
-      "Docker"
+      'Docker'
     end
 
-    def create_vm args = {}
+    def create_vm(args = {})
       options = vm_instance_defaults.merge(args)
       logger.debug("creating Docker with the following options: #{options.inspect}")
       client.servers.create options
@@ -74,7 +74,7 @@ module ForemanDocker
 
     def client
       @client ||= ::Fog::Compute.new(
-          :provider         => "fogdocker",
+          :provider         => 'fogdocker',
           :docker_username  => user,
           :docker_password  => password,
           :docker_email     => email,
@@ -85,6 +85,5 @@ module ForemanDocker
     def api_version
       @api_version ||= client.send(:client).api_version
     end
-
   end
 end

@@ -1,7 +1,8 @@
 class ContainersController < ::ApplicationController
   def index
-    @container_resources = allowed_resources.select { |cr| cr.provider == "Docker" }
-  rescue => e
+    @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
+  # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
+  rescue
     process_error
   end
 
