@@ -30,6 +30,12 @@ module ForemanDocker
           menu :top_menu, :new_container, :caption => N_('New container'),
                                           :url_hash => { :controller => :containers, :action => :new }
         end
+
+        security_block :containers do
+          permission :view_containers,   { :containers         => [:index] }
+          permission :create_containers, { :'containers/steps' => [:show, :update],
+                                           :containers         => [:new] }
+        end
       end
 
     end
