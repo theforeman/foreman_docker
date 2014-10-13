@@ -30,11 +30,21 @@ module ForemanDocker
     end
 
     def available_images
-      client.images
+      client.images.all
+    end
+
+    def all_images(filter = '')
+      client # initialize Docker-Api
+      # we are using an older version of docker-api, which differs from the current
+      ::Docker::Image.all('filter' => filter)
     end
 
     def image(id)
       client.image.get(id) || fail(ActiveRecord::RecordNotFound)
+    end
+
+    def search(term = '')
+      client.images.image_search(:term => term)
     end
 
     def provider_friendly_name

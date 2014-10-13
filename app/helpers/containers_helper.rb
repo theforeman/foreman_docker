@@ -51,4 +51,9 @@ module ContainersHelper
         )
     )
   end
+
+  def auto_complete_search(name, val, options = {})
+    options.merge!(:class => "form-control", :'data-url' => options.delete(:path))
+    text_field_tag(name, val, options)
+  end
 end

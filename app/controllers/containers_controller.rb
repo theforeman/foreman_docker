@@ -1,5 +1,5 @@
 class ContainersController < ::ApplicationController
-  before_filter :find_resource, :only => [:show]
+  before_filter :find_resource, :only => [:show, :auto_complete_image, :auto_complete_image_tags]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -32,7 +32,38 @@ class ContainersController < ::ApplicationController
   def show
   end
 
+  def auto_complete_image
+    images = @container.compute_resource.all_images(params[:search]).map do |image|
+      image.info['RepoTags'].map do |image_tag|
+        name, _ = image_tag.split(':')
+        name
+      end
+    end
+    render :json => images.flatten.uniq.map do |n|
+      { :label => CGI.escapeHTML(n), :value => CGI.escapeHTML(n) }
+    end
+  end
+
+  def auto_complete_image_tags
+    images = @container.compute_resource.all_images(params[:search]).map do |image|
+      image.info['RepoTags'].map do |image_tag|
+        _, tag = image_tag.split(':')
+        { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) }
+      end
+    end
+    render :json => images.flatten
+  end
+
   private
+
+  def action_permission
+    case params[:action]
+    when 'auto_complete_image', 'auto_complete_image_tags'
+      'view'
+    else
+      super
+    end
+  end
 
   def resource_deletion
     # Unmanaged container - only present in Compute Resource

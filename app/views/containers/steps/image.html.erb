@@ -1,33 +1,57 @@
+<%= javascript 'foreman_docker/image_step' %>
+
 <%= render :layout => 'title', :locals => { :step => 2 } do %>
+  <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
+
   <ul class="nav nav-tabs" data-tabs="tabs">
     <li class="active"><a href="#primary" data-toggle="tab">
       <span class="glyphicon glyphicon-cloud-download"></span>
       <%= _("Docker hub") %>
     </a></li>
-    <li><a href="#others" data-toggle="tab">
+    <li><a href="#local" data-toggle="tab">
       <span class="glyphicon glyphicon-globe"></span>
-      <%= _("Others") %>
+      <%= _("Local") %>
     </a></li>
   </ul>
+
   <div class="tab-content">
-    <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
-      <div class="tab-pane active" id="primary">
-        <div class="input-group col-md-6">
-          <%= auto_complete_search(:image, '',
-                                   :path  => 'containers_path',
-                                   :value =>  f.object.image.present? ? f.object.image.image_id : '',
-                                   :placeholder => ('Find your favorite container, e.g: centos:latest')) %>
-          <span class="input-group-btn">
-          <%= button_tag(:class => 'btn btn-default') do %>
+    <div class="tab-pane active" id="primary">
+      <div class="input-group col-md-6">
+        <%= auto_complete_search(:image, '',
+                                 :path  => 'containers_path',
+                                 :value =>  f.object.image.present? ? f.object.image.image_id : '',
+                                 :placeholder => _('Find your favorite container, e.g: centos:latest')) %>
+        <span class="input-group-btn">
+            <%= button_tag(:class => 'btn btn-default') do %>
+              <span class="glyphicon glyphicon-search"></span>
+              <%= _("Search") %>
+            <% end %>
+          </span>
+      </div>
+      <hr>
+      <%= text_f f, :tag, :size => 'col-md-4' %>
+    </div>
+    <div class="tab-pane" id="local">
+      <div class="input-group col-md-6">
+        <%= auto_complete_search(:image, '',
+                                 :path => auto_complete_image_container_path(@container),
+                                 :id => :search,
+                                 :placeholder => _('Find your favorite container, e.g: centos:latest')) %>
+        <span class="input-group-btn">
+          <%= button_tag(:class => 'btn btn-default',
+                         :type => 'button',
+                         :onclick => "$('#search').trigger('focus')") do %>
             <span class="glyphicon glyphicon-search"></span>
             <%= _("Search") %>
           <% end %>
-          </span>
-        </div>
-        <hr>
-        <%= text_f f, :tag, :value => f.object.tag.present? ? f.object.tag.tag : '', :size => 'col-md-4' %>
+        </span>
       </div>
-      <%= render :partial => 'form_buttons' %>
-    <% end %>
+      <hr/>
+      <%= text_f f, :tag, :size => 'col-md-4',
+                 :id => 'local_tag', 'data-url' => auto_complete_image_tags_container_path(@container) %>
+    </div>
+    <%= render :partial => 'form_buttons' %>
   </div>
+
+  <% end %>
 <% end %>

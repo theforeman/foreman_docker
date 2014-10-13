@@ -13,12 +13,13 @@ module ForemanDocker
     end
 
     initializer "foreman_docker.assets.precompile" do |app|
-      app.config.assets.precompile += ['foreman_docker/terminal.css']
+      app.config.assets.precompile += %w(foreman_docker/terminal.css foreman_docker/image_step.js)
     end
 
     initializer 'foreman_docker.configure_assets', :group => :assets do
       SETTINGS[:foreman_docker_engine] =
-        { :assets => { :precompile => ['foreman_docker/terminal.css'] } }
+        { :assets => { :precompile => ['foreman_docker/terminal.css',
+                                       'foreman_docker/image_step.js'] } }
     end
 
     initializer 'foreman_docker.register_gettext', :after => :load_config_initializers do
@@ -44,7 +45,9 @@ module ForemanDocker
         end
 
         security_block :containers do
-          permission :view_containers,    :containers         => [:index, :show]
+          permission :view_containers,    :containers         => [:index, :show,
+                                                                  :auto_complete_image,
+                                                                  :auto_complete_image_tags]
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]
           permission :destroy_containers, :containers         => [:destroy]
