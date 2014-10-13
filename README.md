@@ -18,6 +18,10 @@ RPM users can install the "ruby193-rubygem-foreman_docker" or "rubygem-foreman_d
 | ---------------:| --------------:|
 | >=  1.5         | 0.0.1          |
 
+## Testing
+
+Run `rake test:docker:test` from your Foreman directory to run the test suite.
+
 ## Latest code
 
 You can get the develop branch of the plugin by specifying your Gemfile in this way:

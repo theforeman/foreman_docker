@@ -39,7 +39,12 @@ module ForemanDocker
       end
 
     end
+
+    rake_tasks do
+      load "#{ForemanDocker::Engine.root}/lib/foreman_docker/tasks/test.rake"
+    end
   end
+
 
   # extend fog docker server and image models.
   require 'fog/fogdocker/models/compute/server'
