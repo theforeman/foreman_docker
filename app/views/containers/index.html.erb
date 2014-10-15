@@ -22,8 +22,9 @@
     <% else %>
       <div class="tab-pane" id="<%= resource.name %>">
     <% end %>
-      <%= render 'list', :containers => resource.vms.to_a.paginate(:page => params[:page], :per_page => 10) ,
-                         :resource   => resource %>
+    <%= render 'list', :containers => resource.vms.to_a.sort_by(&:name).paginate(:page => params[:page],
+                                                                                 :per_page => 10),
+                       :resource   => resource %>
     </div>
   <% end %>
 </div>
