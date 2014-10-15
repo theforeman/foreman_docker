@@ -14,4 +14,14 @@ class ContainersControllerTest < ActionController::TestCase
     get :index, {}, set_session_user
     assert_template 'index'
   end
+
+  test 'deleting a container in compute resource redirects to containers index' do
+    Fog.mock!
+    container_resource = FactoryGirl.create(:docker_cr)
+    container          = container_resource.vms.first
+    container.class.any_instance.expects(:destroy).returns(true)
+    delete :destroy, { :compute_resource_id => container_resource,
+                       :id                  => container.id }, set_session_user
+    assert_redirected_to containers_path
+  end
 end

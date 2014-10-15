@@ -32,9 +32,10 @@ module ForemanDocker
         end
 
         security_block :containers do
-          permission :view_containers,   { :containers         => [:index] }
-          permission :create_containers, { :'containers/steps' => [:show, :update],
-                                           :containers         => [:new] }
+          permission :view_containers,    { :containers         => [:index] }
+          permission :create_containers,  { :'containers/steps' => [:show, :update],
+                                            :containers         => [:new] }
+          permission :destroy_containers, { :containers         => [:destroy] }
         end
       end
 
