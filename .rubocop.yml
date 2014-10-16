@@ -1,3 +1,6 @@
+AllCops:
+  RunRailsCops: true # always run the rails cops
+
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false
@@ -10,10 +13,10 @@ Style/HashSyntax:
 Rails/ActionFilter:
   EnforcedStyle: filter
 
-Style/LineLength:
-  Max: 100
+Metrics/LineLength:
+  Max: 132 # Half of a 1920x1080 screen
 
-Style/MethodLength:
+Metrics/MethodLength:
   Max: 20
 
 StringLiterals:

@@ -21,7 +21,8 @@ module Containers
       when :preliminary
         @container.update_attribute(:compute_resource_id, params[:container][:compute_resource_id])
       when :image
-        @container.update_attribute(:image, params[:image])
+        @container.image = params[:image]
+        @container.update_attributes(params[:container])
       when :configuration
         @container.update_attributes(params[:container])
       when :environment
