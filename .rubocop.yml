@@ -1,9 +1,3 @@
-inherit_from:
-  - .rubocop_todo.yml
-
-AllCops:
-  RunRailsCops: true # always run the rails cops
-
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false
@@ -17,7 +11,10 @@ Rails/ActionFilter:
   EnforcedStyle: filter
 
 Style/LineLength:
-  Max: 132 # Half of a 1920x1080 screen
+  Max: 100
 
 Style/MethodLength:
   Max: 20
+
+StringLiterals:
+  Enabled: false

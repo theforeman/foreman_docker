@@ -52,7 +52,8 @@ module ForemanDocker
     end
 
     def vm_instance_defaults
-      ActiveSupport::HashWithIndifferentAccess.new('name' => "foreman_#{Time.now.to_i}", 'cmd' => ['/bin/bash'])
+      ActiveSupport::HashWithIndifferentAccess.new('name' => "foreman_#{Time.now.to_i}",
+                                                   'cmd' => ['/bin/bash'])
     end
 
     def test_connection(options = {})

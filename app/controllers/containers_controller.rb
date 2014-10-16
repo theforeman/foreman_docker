@@ -16,20 +16,20 @@ class ContainersController < ::ApplicationController
   end
 
   def destroy
-    if params[:compute_resource_id].present?
-      destroy_as_compute_resource_vm
-    end
+    return unless params[:compute_resource_id].present?
+    destroy_as_compute_resource_vm
   end
 
   private
 
   def destroy_as_compute_resource_vm
-    @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms).find(params[:compute_resource_id])
+    @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms)
+      .find(params[:compute_resource_id])
     if @container_resource.destroy_vm(params[:id])
-      process_success({ :success_redirect => containers_path,
-                        :success_msg      => _('Container is being deleted.') })
+      process_success(:success_redirect => containers_path,
+                      :success_msg      => _('Container is being deleted.'))
     else
-      process_error({ :redirect => containers_path })
+      process_error(:redirect => containers_path)
     end
   end
 

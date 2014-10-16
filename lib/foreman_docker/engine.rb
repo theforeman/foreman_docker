@@ -24,18 +24,21 @@ module ForemanDocker
         requires_foreman '> 1.4'
         compute_resource ForemanDocker::Docker
 
-        sub_menu :top_menu, :containers_menu, :caption => N_('Containers'), :after => :monitor_menu do
+        sub_menu :top_menu, :containers_menu, :caption => N_('Containers'),
+                                              :after => :monitor_menu do
           menu :top_menu, :containers,    :caption => N_('All containers'),
-                                          :url_hash => { :controller => :containers, :action => :index }
+                                          :url_hash => { :controller => :containers,
+                                                         :action => :index }
           menu :top_menu, :new_container, :caption => N_('New container'),
-                                          :url_hash => { :controller => :containers, :action => :new }
+                                          :url_hash => { :controller => :containers,
+                                                         :action => :new }
         end
 
         security_block :containers do
-          permission :view_containers,    { :containers         => [:index] }
-          permission :create_containers,  { :'containers/steps' => [:show, :update],
-                                            :containers         => [:new] }
-          permission :destroy_containers, { :containers         => [:destroy] }
+          permission :view_containers,    :containers         => [:index]
+          permission :create_containers,  :'containers/steps' => [:show, :update],
+                                          :containers         => [:new]
+          permission :destroy_containers, :containers         => [:destroy]
         end
       end
 
@@ -45,7 +48,6 @@ module ForemanDocker
       load "#{ForemanDocker::Engine.root}/lib/foreman_docker/tasks/test.rake"
     end
   end
-
 
   # extend fog docker server and image models.
   require 'fog/fogdocker/models/compute/server'

@@ -23,5 +23,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'fog'
   s.add_dependency 'docker-api', '~> 1.8.0'
   s.add_dependency 'wicked'
-  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop', '~> 0.26.1'
 end

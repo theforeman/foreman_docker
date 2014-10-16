@@ -5,7 +5,7 @@ namespace :test do
     test_task = Rake::TestTask.new('docker_test_task') do |t|
       t.libs << ["test", "#{ForemanDocker::Engine.root}/test"]
       t.test_files = [
-        "#{ForemanDocker::Engine.root}/test/**/*_test.rb",
+        "#{ForemanDocker::Engine.root}/test/**/*_test.rb"
       ]
       t.verbose = true
     end
