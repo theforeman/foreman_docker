@@ -14,6 +14,23 @@ namespace :test do
   end
 end
 
+namespace :docker do
+  task :rubocop do
+    begin
+      require 'rubocop/rake_task'
+      RuboCop::RakeTask.new(:rubocop_docker) do |task|
+        task.patterns = ["#{ForemanDocker::Engine.root}/app/**/*.rb",
+                         "#{ForemanDocker::Engine.root}/lib/**/*.rb",
+                         "#{ForemanDocker::Engine.root}/test/**/*.rb"]
+      end
+    rescue
+      puts "Rubocop not loaded."
+    end
+
+    Rake::Task['rubocop_docker'].invoke
+  end
+end
+
 Rake::Task[:test].enhance do
   Rake::Task['test:docker'].invoke
 end
@@ -22,5 +39,6 @@ load 'tasks/jenkins.rake'
 if Rake::Task.task_defined?(:'jenkins:unit')
   Rake::Task["jenkins:unit"].enhance do
     Rake::Task['test:docker'].invoke
+    Rake::Task['docker:rubocop'].invoke
   end
 end
