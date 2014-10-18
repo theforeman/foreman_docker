@@ -13,7 +13,10 @@
     <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
       <div class="tab-pane active" id="primary">
         <div class="input-group col-md-6">
-          <%= auto_complete_search(:image, '', :path => 'containers_path', :placeholder => ('Find your favorite container, e.g: centos:latest')) %>
+          <%= auto_complete_search(:image, '',
+                                   :path  => 'containers_path',
+                                   :value =>  f.object.image.present? ? f.object.image.image_id : '',
+                                   :placeholder => ('Find your favorite container, e.g: centos:latest')) %>
           <span class="input-group-btn">
           <%= button_tag(:class => 'btn btn-default') do %>
             <span class="glyphicon glyphicon-search"></span>
@@ -22,7 +25,7 @@
           </span>
         </div>
         <hr>
-        <%= text_f f, :tag, :size => 'col-md-4' %>
+        <%= text_f f, :tag, :value => f.object.tag.present? ? f.object.tag.tag : '', :size => 'col-md-4' %>
       </div>
       <%= render :partial => 'form_buttons' %>
     <% end %>
