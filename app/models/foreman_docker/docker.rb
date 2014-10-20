@@ -45,7 +45,7 @@ module ForemanDocker
       options = vm_instance_defaults.merge(args)
       logger.debug("creating Docker with the following options: #{options.inspect}")
       client.servers.create options
-    rescue Fog::Errors::Error => e
+    rescue Excon::Errors::SocketError, Fog::Errors::Error => e
       logger.debug "Fog error: #{e.message}\n " + e.backtrace.join("\n ")
       errors.add(:base, e.message.to_s)
       false

@@ -27,7 +27,7 @@ module Containers
         @container.update_attributes(params[:container])
       when :environment
         @container.update_attributes(params[:container])
-        start_container
+        @container.uuid = start_container.id
       end
       render_wizard @container
     end

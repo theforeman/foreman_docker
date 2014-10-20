@@ -5,7 +5,7 @@ class Container < ActiveRecord::Base
 
   attr_accessible :command, :image, :name, :compute_resource_id, :entrypoint,
                   :cpu_set, :cpu_shares, :memory, :tty, :attach_stdin,
-                  :attach_stdout, :attach_stderr, :tag
+                  :attach_stdout, :attach_stderr, :tag, :uuid
 
   def parametrize
     { :name => name, :cmd => [command], :image => "#{image.image_id}:#{tag.tag}", :tty => tty,
@@ -21,5 +21,10 @@ class Container < ActiveRecord::Base
   def tag=(tag_name)
     self[:docker_tag_id] = DockerTag
                           .find_or_create_by_tag_and_docker_image_id!(tag_name, image.id).id
+  end
+
+  # Do not delete even if it's not being used - this is a convenience for developers
+  def in_fog
+    compute_resource.vms.get(uuid)
   end
 end

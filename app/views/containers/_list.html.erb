@@ -5,8 +5,9 @@
       <th class="hidden-tablet hidden-xs text-center"><%= sort :status, :as => _("Status") %></th>
       <th class="hidden-tablet hidden-xs text-center"><%= sort :image, :as => _("Image") %></th>
       <th class="hidden-tablet hidden-xs text-center"><%= sort :command, :as => _("Command") %></th>
-      <th class="hidden-tablet hidden-xs text-center"><%= sort :running_on, :as => _("Running on") %></th>
       <th class="hidden-tablet hidden-xs text-center"><%= sort :uptime, :as => _("Uptime") %></th>
+      <th class="hidden-tablet hidden-xs text-center"><%= sort :running_on, :as => _("Running on") %></th>
+      <th class="hidden-tablet hidden-xs text-center"><%= sort :managed , :as => _("Managed") %></th>
       <th></th>
     </tr>
   </thead>
@@ -16,9 +17,10 @@
       <td class="ellipsis text-center"><%= link_to_if_authorized container.name[1..-1].titleize, hash_for_compute_resource_vm_path(:compute_resource_id => resource, :id => container.identity) %></td>
       <td class="hidden-tablet hidden-xs text-center"><span <%= vm_power_class(container.ready?) %>><%= vm_state(container) %></span></td>
       <td class="hidden-tablet hidden-xs text-center"><%= trunc(container.image_friendly_name) %></td>
-      <td class="hidden-tablet hidden-xs text-center"><%= trunc(container.cmd) %> </td>
-      <td class="hidden-tablet hidden-xs text-center"><%= link_to resource, compute_resource_path(resource)%> </td>
+      <td class="hidden-tablet hidden-xs text-center"><%= trunc(container.cmd) %></td>
       <td class="hidden-tablet hidden-xs text-center"><span class="glyphicon glyphicon-time"></span> <%= container.ready? ? time_ago_in_words(container.started_at) : "N/A" %></td>
+      <td class="hidden-tablet hidden-xs text-center"><%= link_to resource, compute_resource_path(resource)%> </td>
+      <td class="hidden-tablet hidden-xs text-center"><%= managed?(container, resource) %></td>
       <% @compute_resource = resource %>
       <td><%= action_buttons(vm_power_action(container),
                              display_delete_if_authorized(hash_for_container_path(:compute_resource_id => resource,
