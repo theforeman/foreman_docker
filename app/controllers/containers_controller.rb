@@ -16,21 +16,39 @@ class ContainersController < ::ApplicationController
   end
 
   def destroy
-    return unless params[:compute_resource_id].present?
-    destroy_as_compute_resource_vm
+    if resource_deletion
+      process_success(:success_redirect => containers_path,
+                      :success_msg      => _("Container #{@deleted_identifier} is being deleted."))
+    else
+      process_error(:redirect => containers_path)
+    end
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
   private
 
-  def destroy_as_compute_resource_vm
-    @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms)
-      .find(params[:compute_resource_id])
-    if @container_resource.destroy_vm(params[:id])
-      process_success(:success_redirect => containers_path,
-                      :success_msg      => _('Container is being deleted.'))
-    else
-      process_error(:redirect => containers_path)
+  def resource_deletion
+    # Unmanaged container - only present in Compute Resource
+    if params[:compute_resource_id].present?
+      @deleted_identifier  = params[:id]
+      destroy_compute_resource_vm(params[:compute_resource_id], params[:id])
+    else # Managed container
+      find_resource
+      @deleted_identifier = @container.name
+
+      destroy_compute_resource_vm(@container.compute_resource, @container.uuid) &&
+      @container.destroy
     end
+  end
+
+  def destroy_compute_resource_vm(resource_id, uuid)
+    @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms)
+                                         .find(resource_id)
+    @container_resource.destroy_vm(uuid)
+  rescue => error
+    logger.error "#{error.message} (#{error.class})\n#{error.backtrace.join("\n")}"
+    false
   end
 
   def allowed_resources
