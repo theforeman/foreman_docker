@@ -12,6 +12,15 @@ module ForemanDocker
       app.config.paths['db/migrate'] += ForemanDocker::Engine.paths['db/migrate'].existent
     end
 
+    initializer "foreman_docker.assets.precompile" do |app|
+      app.config.assets.precompile += ['foreman_docker/terminal.css']
+    end
+
+    initializer 'foreman_docker.configure_assets', :group => :assets do
+      SETTINGS[:foreman_docker_engine] =
+        { :assets => { :precompile => ['foreman_docker/terminal.css'] } }
+    end
+
     initializer 'foreman_docker.register_gettext', :after => :load_config_initializers do
       locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
       locale_domain = 'foreman_docker'

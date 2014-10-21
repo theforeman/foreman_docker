@@ -1,4 +1,5 @@
 <% title "#{@container.name.titleize} - #{@container.in_fog.name}" %>
+<%= stylesheet 'foreman_docker/terminal' %>
 <%= container_title_actions(@container) %>
 <div id="host-show" class="row">
   <div class="col-md-4">
@@ -54,43 +55,50 @@
     </div>
   </div>
   <div class="col-md-8">
+    <% if @container.in_fog.ready? %>
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#processes" data-toggle="tab">
         <span class="glyphicon glyphicon-credit-card"></span>
         <%= _('Processes') %>
       </a></li>
+      <li><a href="#logs" data-toggle="tab">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= _('Logs') %>
+      </a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="processes">
-        <% if @container.in_fog.ready? %>
-          <% processes = Docker::Container.get(@container.uuid).top %>
-          <div class='accordion' id='accordion'>
-            <% processes.each do |process| %>
-            <div>
-              <h2>
-                <a href='#description-index'
-                 class='accordion-toggle'
-                 data-toggle='collapse'
-                 data-parent='#accordion'>
-                 <%= process['CMD'] %>
-                </a><br>
-                <small><%= process['UID'] %></small>
-              </h2>
-            </div>
-            <div id='description-index' class='collapse accordion-body'>
-              <pre class="prettyprint"><%= JSON.pretty_generate(process) %></code>
-            </div>
-          <% end %>
+        <% processes = Docker::Container.get(@container.uuid).top %>
+        <div class='accordion' id='accordion'>
+          <% processes.each do |process| %>
+          <div>
+            <h2>
+              <a href='#<%= process['PID'] %>-index'
+               class='accordion-toggle'
+               data-toggle='collapse'
+               data-parent='#accordion'>
+               <%= process['CMD'] %>
+              </a><br>
+              <small><%= process['UID'] %></small>
+            </h2>
           </div>
-        <% else %>
-          <div class="alert alert-block alert-warning">
-            <p><strong><%= _("Notice") %></strong>
-            <hr>
-            <%= _("It is not possible to view running processes right now. Your container is stopped.") %></p>
-            <p><%= _("Please turn on your container and try again.") %></p>
+          <div id='<%= process['PID'] %>-index' class='collapse accordion-body'>
+            <pre class="prettyprint"><%= JSON.pretty_generate(process) %></pre>
           </div>
         <% end %>
+        </div>
+      </div>
+      <div class="tab-pane" id="logs">
+        <pre class="terminal terminal-output pre-scrollable"><code><%= Docker::Container.get(@container.uuid).logs(:stdout => true, :tail => 100) %></code></pre>
       </div>
     </div>
+    <% else %>
+      <div class="alert alert-block alert-warning">
+        <p><strong><%= _("Notice") %></strong>
+        <hr>
+        <%= _("Your container is stopped.") %></p>
+        <p><%= _("Please turn on your container to see processes running, logs, and more.") %></p>
+      </div>
+    <% end %>
   </div>
 </div>

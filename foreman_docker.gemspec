@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'fog'
-  s.add_dependency 'docker-api', '~> 1.8.0'
+  s.add_dependency 'docker-api', '~> 1.13.6'
   s.add_dependency 'wicked'
   s.add_development_dependency 'rubocop', '~> 0.26.1'
 end
