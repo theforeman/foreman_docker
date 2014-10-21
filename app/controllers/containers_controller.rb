@@ -1,4 +1,6 @@
 class ContainersController < ::ApplicationController
+  before_filter :find_resource, :only => [:show]
+
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
     if @container_resources.empty?
@@ -24,6 +26,9 @@ class ContainersController < ::ApplicationController
     end
   rescue ActiveRecord::RecordNotFound
     not_found
+  end
+
+  def show
   end
 
   private

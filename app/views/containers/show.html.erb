@@ -1,0 +1,96 @@
+<% title "#{@container.name.titleize} - #{@container.in_fog.name}" %>
+<%= container_title_actions(@container) %>
+<div id="host-show" class="row">
+  <div class="col-md-4">
+   <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in">
+        <table id="properties_table" class="table table-bordered table-striped">
+          <tr><th colspan="2"><%= _('Properties') %></th></tr>
+            <tr>
+              <td><%= _('Name') %></td>
+              <td><%= @container.in_fog.name %></td>
+            </tr>
+            <tr>
+              <td><%= _('Image') %></td>
+              <td><%= @container.image.image_id %> </td>
+            </tr>
+            <tr>
+              <td><%= _('Tag') %></td>
+              <td><%= @container.tag.tag %> </td>
+            </tr>
+            <tr>
+              <td><%= _('IP Address') %></td>
+              <td><%= @container.in_fog.ipaddress %> </td>
+            </tr>
+            <tr>
+              <td><%= _('CPU shares') %></td>
+              <td><%= @container.in_fog.cores %></td>
+            </tr>
+            <tr>
+              <td><%= _('UUID') %></td>
+              <td><%= trunc @container.in_fog.identity %></td>
+            </tr>
+            <tr>
+              <td><%= _('Memory') %></td>
+              <td><%= number_to_human_size @container.in_fog.memory %> </td>
+            </tr>
+            <tr>
+              <td><%= _('Command') %></td>
+              <td><%= @container.in_fog.command %> </td>
+            </tr>
+            <tr>
+              <td><%= _('Exposed ports') %></td>
+              <td><%= @container.in_fog.exposed_ports %> </td>
+            </tr>
+
+            <tr>
+              <td><%= _('Running on') %></td>
+              <td><%= link_to @container.compute_resource,
+                              compute_resource_path(@container.compute_resource) %></td>
+            </tr>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#processes" data-toggle="tab">
+        <span class="glyphicon glyphicon-credit-card"></span>
+        <%= _('Processes') %>
+      </a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="processes">
+        <% if @container.in_fog.ready? %>
+          <% processes = Docker::Container.get(@container.uuid).top %>
+          <div class='accordion' id='accordion'>
+            <% processes.each do |process| %>
+            <div>
+              <h2>
+                <a href='#description-index'
+                 class='accordion-toggle'
+                 data-toggle='collapse'
+                 data-parent='#accordion'>
+                 <%= process['CMD'] %>
+                </a><br>
+                <small><%= process['UID'] %></small>
+              </h2>
+            </div>
+            <div id='description-index' class='collapse accordion-body'>
+              <pre class="prettyprint"><%= JSON.pretty_generate(process) %></code>
+            </div>
+          <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-block alert-warning">
+            <p><strong><%= _("Notice") %></strong>
+            <hr>
+            <%= _("It is not possible to view running processes right now. Your container is stopped.") %></p>
+            <p><%= _("Please turn on your container and try again.") %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

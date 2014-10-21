@@ -8,10 +8,10 @@ class Container < ActiveRecord::Base
                   :attach_stdout, :attach_stderr, :tag, :uuid
 
   def parametrize
-    { :name => name, :cmd => [command], :image => "#{image.image_id}:#{tag.tag}", :tty => tty,
+    { :name => name, :image => tag.tag.blank? ? image.image_id : "#{image.image_id}:#{tag.tag}",
+      :tty  => tty, :memory => memory, :cmd => command.nil? ? '' : command.split(','),
       :attach_stdout => attach_stdout, :attach_stdout => attach_stdout,
-      :attach_stderr => attach_stderr, :cpushares => cpu_shares, :cpuset => cpu_set,
-      :memory => memory }
+      :attach_stderr => attach_stderr, :cpushares => cpu_shares, :cpuset => cpu_set }
   end
 
   def image=(image_id)
@@ -23,8 +23,7 @@ class Container < ActiveRecord::Base
                           .find_or_create_by_tag_and_docker_image_id!(tag_name, image.id).id
   end
 
-  # Do not delete even if it's not being used - this is a convenience for developers
   def in_fog
-    compute_resource.vms.get(uuid)
+    @fog_container ||= compute_resource.vms.get(uuid)
   end
 end
