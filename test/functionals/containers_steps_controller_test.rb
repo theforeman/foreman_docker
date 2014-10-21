@@ -29,5 +29,11 @@ module Containers
                      :container_id => @container.id }, set_session_user
       assert_equal fake_container.id, Container.find(@container.id).uuid
     end
+
+    test 'wizard finishes with a redirect to the managed container' do
+      get :show, { :id => :wicked_finish,
+                   :container_id => @container.id }, set_session_user
+      assert_redirected_to container_path(:id => @container.id)
+    end
   end
 end

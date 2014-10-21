@@ -34,6 +34,10 @@ module Containers
 
     private
 
+    def finish_wizard_path
+      container_path(:id => params[:container_id])
+    end
+
     def allowed_resources
       ComputeResource.authorized(:view_compute_resources)
     end
