@@ -20,7 +20,8 @@ class ContainersController < ::ApplicationController
   def destroy
     if resource_deletion
       process_success(:success_redirect => containers_path,
-                      :success_msg      => (_("Container %s is being deleted.") % @deleted_identifier))
+                      :success_msg      => (_("Container %s is being deleted.") %
+                                            @deleted_identifier))
     else
       process_error(:redirect => containers_path)
     end
