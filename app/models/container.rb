@@ -14,15 +14,6 @@ class Container < ActiveRecord::Base
       :attach_stderr => attach_stderr, :cpushares => cpu_shares, :cpuset => cpu_set }
   end
 
-  def image=(image_id)
-    self[:docker_image_id] = DockerImage.find_or_create_by_image_id!(image_id).id
-  end
-
-  def tag=(tag_name)
-    self[:docker_tag_id] = DockerTag
-                          .find_or_create_by_tag_and_docker_image_id!(tag_name, image.id).id
-  end
-
   def in_fog
     @fog_container ||= compute_resource.vms.get(uuid)
   end

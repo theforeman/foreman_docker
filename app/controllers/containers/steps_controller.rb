@@ -21,8 +21,10 @@ module Containers
       when :preliminary
         @container.update_attribute(:compute_resource_id, params[:container][:compute_resource_id])
       when :image
-        @container.image = params[:image]
-        @container.update_attributes(params[:container])
+        @container.update_attributes!(
+            :image => (image = DockerImage.find_or_create_by_image_id!(params[:image])),
+            :tag => DockerTag.find_or_create_by_tag_and_docker_image_id!(params[:container][:tag],
+                                                                         image.id))
       when :configuration
         @container.update_attributes(params[:container])
       when :environment
