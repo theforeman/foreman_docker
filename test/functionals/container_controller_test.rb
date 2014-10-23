@@ -24,4 +24,17 @@ class ContainersControllerTest < ActionController::TestCase
                        :id                  => container.id }, set_session_user
     assert_redirected_to containers_path
   end
+
+  test 'committing a managed container' do
+    container = FactoryGirl.create(:container)
+    request.env['HTTP_REFERER'] = container_path(:id => container.id)
+    commit_hash = { :author => 'a', :repo => 'b', :tag => 'c', :comment => 'd' }
+
+    mock_container = mock
+    ::Docker::Container.expects(:get).with(container.uuid).returns(mock_container)
+    mock_container.expects(:commit).with(commit_hash)
+
+    post :commit, { :commit => commit_hash,
+                    :id     => container.id }, set_session_user
+  end
 end

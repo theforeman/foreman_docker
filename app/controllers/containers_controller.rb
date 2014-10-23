@@ -1,5 +1,6 @@
 class ContainersController < ::ApplicationController
-  before_filter :find_resource, :only => [:show, :auto_complete_image, :auto_complete_image_tags]
+  before_filter :find_resource, :only => [:show, :auto_complete_image, :auto_complete_image_tags,
+                                          :commit]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -54,12 +55,28 @@ class ContainersController < ::ApplicationController
     render :json => images.flatten
   end
 
+  def commit
+    Docker::Container.get(@container.uuid).commit(:author  => params[:commit][:author],
+                                                  :repo    => params[:commit][:repo],
+                                                  :tag     => params[:commit][:tag],
+                                                  :comment => params[:commit][:comment])
+
+    process_success :success_redirect => :back,
+                    :success_msg      => _("%{container} commit was successful") %
+                                         { :container => @container }
+  rescue => e
+    process_error :redirect => :back, :error_msg => _("Failed to commit %{container}: %{e}") %
+                                                    { :container => @container, :e => e }
+  end
+
   private
 
   def action_permission
     case params[:action]
     when 'auto_complete_image', 'auto_complete_image_tags'
-      'view'
+      :view
+    when 'commit'
+      :commit
     else
       super
     end

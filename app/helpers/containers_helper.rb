@@ -33,12 +33,7 @@ module ContainersHelper
     @compute_resource = container.compute_resource
     title_actions(
         button_group(
-          link_to_if_authorized(_("Commit"), hash_for_container_path(:id => container)
-                                  .merge(:auth_object => container,
-                                         :permission  => 'commit_containers'),
-                                :title => _('Saves differences between image' \
-                                            'and current state of container' \
-                                            'as a new image'))
+          link_to(_('Commit'), '#commit-modal', :'data-toggle' => 'modal')
         ),
         button_group(vm_power_action(container.in_fog)),
         button_group(

@@ -3,6 +3,7 @@ require 'gettext_i18n_rails'
 require 'fog'
 require 'fog/fogdocker'
 require 'wicked'
+require 'docker'
 
 module ForemanDocker
   # Inherit from the Rails module of the parent app (Foreman), not the plugin.
@@ -48,6 +49,7 @@ module ForemanDocker
           permission :view_containers,    :containers         => [:index, :show,
                                                                   :auto_complete_image,
                                                                   :auto_complete_image_tags]
+          permission :commit_containers,  :containers         => [:commit]
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]
           permission :destroy_containers, :containers         => [:destroy]

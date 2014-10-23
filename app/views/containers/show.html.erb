@@ -102,3 +102,45 @@
     <% end %>
   </div>
 </div>
+
+<div id="commit-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= _('Commit this container state') %></h4>
+      </div>
+      <div class="modal-body">
+        This will save your current container state to an image.
+      <hr/>
+      <%= form_tag commit_container_path(:id => @container.id), :id => 'commit-form', :class => 'form-horizontal' do %>
+        <div class="form-group">
+          <%= label_tag "commit[repo]", _("Repo"), :class=>"col-sm-2 control-label" %>
+          <%= text_field :commit, :repo, { :class => "col-sm-8", :focus_on_load => true,
+                                           :placeholder => _('docker/my-committed-image') } %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "commit[tag]", _("Tag"), :class=>"col-sm-2 control-label" %>
+          <%= text_field :commit, :tag, { :class => "col-sm-8", :focus_on_load => true,
+                                           :placeholder => _('latest') } %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "commit[author]", _("Author"), :class=>"col-sm-2 control-label" %>
+          <%= text_field :commit, :author, { :class => "col-sm-8",
+                                             :placeholder => _('Foreman user <foremaner@theforeman.org>') } %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "commit[comment]", _("Comment"), :class=>"col-sm-2 control-label" %>
+          <%= text_field :commit, :comment, { :class => "col-sm-8",
+                                              :placeholder => _('Description of the commit') } %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= _('Cancel') %></button>
+          <%= button_tag(:type => 'submit', :class => 'btn btn-primary') do %>
+            <%= _('Submit') %> <span class="glyphicon glyphicon-cloud-upload"></span>
+          <% end %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
