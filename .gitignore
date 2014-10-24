@@ -10,3 +10,4 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 .ruby-version
 .ruby-gemset
+public/assets/

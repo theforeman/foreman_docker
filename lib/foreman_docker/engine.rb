@@ -9,6 +9,8 @@ module ForemanDocker
   # Inherit from the Rails module of the parent app (Foreman), not the plugin.
   # Thus, inherits from ::Rails::Engine and not from Rails::Engine
   class Engine < ::Rails::Engine
+    engine_name 'foreman_docker'
+
     initializer 'foreman_docker.load_app_instance_data' do |app|
       app.config.paths['db/migrate'] += ForemanDocker::Engine.paths['db/migrate'].existent
     end
@@ -18,7 +20,7 @@ module ForemanDocker
     end
 
     initializer 'foreman_docker.configure_assets', :group => :assets do
-      SETTINGS[:foreman_docker_engine] =
+      SETTINGS[:foreman_docker] =
         { :assets => { :precompile => ['foreman_docker/terminal.css',
                                        'foreman_docker/image_step.js'] } }
     end
