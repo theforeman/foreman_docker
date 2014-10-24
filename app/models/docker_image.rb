@@ -4,4 +4,6 @@ class DockerImage < ActiveRecord::Base
   has_many :containers
 
   attr_accessible :image_id, :size
+
+  validates :image_id, :presence => true, :uniqueness => true
 end
