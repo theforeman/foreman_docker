@@ -9,7 +9,8 @@ class Container < ActiveRecord::Base
 
   def parametrize
     { :name => name, :image => tag.tag.blank? ? image.image_id : "#{image.image_id}:#{tag.tag}",
-      :tty  => tty, :memory => memory, :cmd => command.nil? ? '' : command.split(','),
+      :tty  => tty, :memory => memory,
+      :entrypoint => entrypoint.try(:split), :cmd => command.try(:split),
       :attach_stdout => attach_stdout, :attach_stdout => attach_stdout,
       :attach_stderr => attach_stderr, :cpushares => cpu_shares, :cpuset => cpu_set }
   end

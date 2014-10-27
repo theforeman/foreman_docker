@@ -3,7 +3,7 @@
     <h3><%= _("Basic options") %></h3>
     <%= text_f f, :name,       :size => 'col-md-4' %>
     <%= text_f f, :command,    :size => 'col-md-4' %>
-    <%= text_f f, :entrypoint, :size => 'col-md-4' %>
+    <%= text_f f, :entrypoint, :size => 'col-md-4', :placeholder => '/bin/sh -c by default' %>
     <hr>
     <h3><%= _("Compute options") %></h3>
     <%= selectable_f f, :cpu_set, 1..f.object.compute_resource.max_cpu_count, { }, :class => "col-md-2", :label => _('Cores') %>
