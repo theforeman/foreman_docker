@@ -39,8 +39,12 @@ module ForemanDocker
       ::Docker::Image.all('filter' => filter)
     end
 
+    def exist?(name)
+      ::Docker::Image.exist?(name)
+    end
+
     def image(id)
-      client.image.get(id) || fail(ActiveRecord::RecordNotFound)
+      client.image_get(id)
     end
 
     def search(term = '')

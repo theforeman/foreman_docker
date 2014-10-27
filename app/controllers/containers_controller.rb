@@ -34,14 +34,10 @@ class ContainersController < ::ApplicationController
   end
 
   def auto_complete_image
-    images = @container.compute_resource.all_images(params[:search]).map do |image|
-      image.info['RepoTags'].map do |image_tag|
-        name, _ = image_tag.split(':')
-        name
-      end
-    end
-    render :json => images.flatten.uniq.map do |n|
-      { :label => CGI.escapeHTML(n), :value => CGI.escapeHTML(n) }
+    if @container.compute_resource.exist?(params[:search])
+      render :text => 'true'
+    else
+      render :text => 'false'
     end
   end
 
