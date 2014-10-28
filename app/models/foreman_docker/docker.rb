@@ -20,11 +20,6 @@ module ForemanDocker
       super.merge(:mac => :mac)
     end
 
-    # FIXME
-    def max_cpu_count
-      8
-    end
-
     def max_memory
       16 * 1024 * 1024 * 1024
     end

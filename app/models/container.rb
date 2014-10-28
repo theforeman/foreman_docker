@@ -13,7 +13,8 @@ class Container < ActiveRecord::Base
       'Tty'          => tty,                    'Memory'       => memory,
       'Entrypoint'   => entrypoint.try(:split), 'Cmd'          => command.try(:split),
       'AttachStdout' => attach_stdout,          'AttachStdin'  => attach_stdin,
-      'AttachStderr' => attach_stderr,          'CpuShares'    => cpu_shares, :cpuset => cpu_set }
+      'AttachStderr' => attach_stderr,          'CpuShares'    => cpu_shares,
+      'Cpuset'       => cpu_set }
   end
 
   def in_fog

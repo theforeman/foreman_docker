@@ -6,9 +6,13 @@
     <%= text_f f, :entrypoint, :size => 'col-md-4', :placeholder => '/bin/sh -c by default' %>
     <hr>
     <h3><%= _("Compute options") %></h3>
-    <%= selectable_f f, :cpu_set, 1..f.object.compute_resource.max_cpu_count, { }, :class => "col-md-2", :label => _('Cores') %>
-    <%= text_f f, :cpu_shares, :class => "col-md-2", :label => _('CPU shares') %>
-    <%= selectable_f f, :memory, memory_options(f.object.compute_resource.max_memory), { }, :class => "col-md-2", :label => _('Memory') %>
+    <%= text_f f, :cpu_set, :class => "col-md-2", :label => _('CPU sets'),
+      :placeholder => '0-2,16 represents CPUs 0, 1, 2, and 16.',
+      :help_block => link_to(_("learn more about CPU sets"), 'http://docs.fedoraproject.org/en-US/Fedora/17/html/Resource_Management_Guide/sec-cpuset.html') %>
+    <%= text_f f, :cpu_shares, :class => "col-md-2", :label => _('CPU shares'),
+      :placeholder => 'relative share of CPU time in cgroup',
+      :help_block => link_to(_("learn more about CPU shares"), 'http://docs.fedoraproject.org/en-US/Fedora/17/html/Resource_Management_Guide/sec-cpuset.html') %>
+    <%= text_f f, :memory, :class => "col-md-2", :label => _('Memory'), :placeholder => '512m limits container memory usage to 512 MB' %>
     <%= render :partial => 'form_buttons' %>
   <% end %>
 <% end %>
