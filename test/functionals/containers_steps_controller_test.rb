@@ -8,8 +8,9 @@ module Containers
 
     test 'sets a docker image and tag for a new container' do
       put :update, { :id => :image,
+                     :image => { :docker_registry_id => '',
+                                 :image_id => 'centos' },
                      :container_id => @container.id,
-                     :image => 'centos',
                      :container => { :tag => 'latest' } }, set_session_user
       assert_response :found
       assert_redirected_to container_step_path(:container_id => @container.id,

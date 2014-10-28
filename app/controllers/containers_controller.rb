@@ -1,6 +1,9 @@
+# rubocop:disable Metrics/ClassLength
 class ContainersController < ::ApplicationController
   before_filter :find_container, :only => [:show, :auto_complete_image, :auto_complete_image_tags,
                                            :search_image, :commit]
+  before_filter :find_registry, :only => [:auto_complete_image, :auto_complete_image_tags,
+                                          :search_image]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -34,18 +37,38 @@ class ContainersController < ::ApplicationController
   end
 
   def auto_complete_image
-    render :text => @container.compute_resource.exist?(params[:search]).to_s
+    exist = if @registry.nil?
+              @container.compute_resource.exist?(params[:search])
+            else
+              registry_auto_complete_image(params[:search])
+            end
+    render :text => exist.to_s
+  end
+
+  def registry_auto_complete_image(term)
+    result = ::Service::RegistryApi.new(:url => @registry.url).search(term)
+    registry_name = term.split('/').size > 1 ? term :
+        'library/' + term
+    result['results'].any? { |r| r['name'] == registry_name }
   end
 
   def auto_complete_image_tags
     # This is the format jQuery UI autocomplete expects
-    tags = @container.compute_resource.tags(params[:search])
+    tags = if @registry.nil?
+             @container.compute_resource.tags(params[:search])
+           else
+             registry_auto_complete_image_tags(params[:search])
+           end
     respond_to do |format|
       format.js do
         tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
         render :json => tags
       end
     end
+  end
+
+  def registry_auto_complete_image_tags(term)
+    ::Service::RegistryApi.new(:url => @registry.url).list_repository_tags(term).keys
   end
 
   def commit
@@ -63,7 +86,12 @@ class ContainersController < ::ApplicationController
   end
 
   def search_image
-    images = @container.compute_resource.search(params[:search])
+    images = if @registry.nil?
+               @container.compute_resource.search(params[:search])
+             else
+               r = ::Service::RegistryApi.new(:url => @registry.url).search(params[:search])
+               r['results']
+             end
     respond_to do |format|
       format.js { render :partial => 'image_search_results', :locals => { :images => images } }
     end
@@ -117,5 +145,11 @@ class ContainersController < ::ApplicationController
     end
     @container = Container.authorized("#{action_permission}_#{controller_name}".to_sym)
                           .find(params[:id])
+  end
+
+  def find_registry
+    return if params[:registry_id].empty?
+    @registry = DockerRegistry.authorized("#{action_permission}_#{controller_name}".to_sym)
+    .find(params[:registry_id])
   end
 end

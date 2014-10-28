@@ -45,6 +45,9 @@ module ForemanDocker
           menu :top_menu, :new_container, :caption => N_('New container'),
                                           :url_hash => { :controller => :containers,
                                                          :action => :new }
+          menu :top_menu, :registries, :caption => N_('Registries'),
+                                       :url_hash => { :controller => :registries,
+                                                      :action => :index }
         end
 
         security_block :containers do
@@ -56,6 +59,12 @@ module ForemanDocker
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]
           permission :destroy_containers, :containers         => [:destroy]
+        end
+
+        security_block :registries do
+          permission :view_registries,    :registries         => [:index, :show]
+          permission :create_registries,  :registries         => [:new, :create, :update, :edit]
+          permission :destroy_registries, :registries         => [:destroy]
         end
       end
 

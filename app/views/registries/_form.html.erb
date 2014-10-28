@@ -1,0 +1,24 @@
+<%= form_for @registry, :url => (@registry.new_record? ? registries_path : registry_path(:id => @registry.id)) do |f| %>
+    <%= base_errors_for @registry %>
+    <ul class="nav nav-tabs" data-tabs="tabs">
+      <li class="active"><a href="#primary" data-toggle="tab"><%= _("Registry") %></a></li>
+      <% if show_location_tab? %>
+          <li><a href="#locations" data-toggle="tab"><%= _("Locations") %></a></li>
+      <% end %>
+      <% if show_organization_tab? %>
+          <li><a href="#organizations" data-toggle="tab"><%= _("Organizations") %></a></li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="primary">
+        <%= text_f   f, :name, :help_inline => _("Registry name") %>
+        <%= text_f   f, :url, :help_inline => _("Registry url") %>
+        <%= text_f   f, :description, :help_inline => _("Describing of the registry") %>
+      </div>
+
+      <%= render 'taxonomies/loc_org_tabs', :f => f, :obj => @registry %>
+    </div>
+
+    <%= submit_or_cancel f %>
+<% end %>

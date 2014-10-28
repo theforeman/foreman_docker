@@ -10,11 +10,15 @@ $(document).ready(function() {
   });
 
   var target = $('#search');
-  autoCompleteImage(target);
+  //autoCompleteImage(target);
   target.autocomplete({
     source: function( request, response ) { autoCompleteImage(target); },
     delay: 500,
     minLength: 1
+  });
+
+  $('#hub_tab').click( function() {
+      $('#image_registry_id').val('');
   });
 });
 
@@ -22,7 +26,8 @@ function autoCompleteImage(item) {
   $.ajax({
     type:'get',
     url: $(item).attr('data-url'),
-    data:'search=' + item.val(),
+    data: { search: item.val(), registry_id: $('#image_registry_id').val() },
+    //data:'search=' + item.val(),
     success:function (result) {
       if(result == 'true'){
         $('#search-addon').attr('title', 'Image found in the compute resource');
@@ -47,7 +52,7 @@ function setAutocompleteTags() {
   tag.addClass('tags-autocomplete-loading');
   tag.val('');
   var source = [];
-  $.getJSON( tag.data("url"), { search: $('#search').val() },
+  $.getJSON( tag.data("url"), { search: $('#search').val(), registry_id: $('#image_registry_id').val() },
       function(data) {
         $('#searching_spinner').hide();
         tag.removeClass('tags-autocomplete-loading');
@@ -67,7 +72,7 @@ function searchImage(item) {
     type:'get',
     dataType:'text',
     url: $(item).attr('data-url'),
-    data:'search=' + $('#search').val(),
+    data: { search: $('#search').val(), registry_id: $('#image_registry_id').val() },
     success: function (result) {
       $('#image_search_results').html(result);
     },

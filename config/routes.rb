@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     get :auto_complete_image_tags, :on => :member
     get :search_image,             :on => :member
   end
+  resources :registries, :only => [:index, :new, :create, :update, :destroy, :edit]
 end

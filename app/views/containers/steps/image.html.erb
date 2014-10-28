@@ -1,55 +1,64 @@
 <%= javascript 'foreman_docker/image_step' %>
 <%= stylesheet 'foreman_docker/autocomplete' %>
+
 <%= render :layout => 'title', :locals => { :step => 2 } do %>
-  <ul class="nav nav-tabs" data-tabs="tabs">
-    <li class="active"><a href="#primary" data-toggle="tab">
-      <span class="glyphicon glyphicon-cloud-download"></span>
-      <%= _("Docker hub") %>
-    </a></li>
-  </ul>
+    <ul class="nav nav-tabs" data-tabs="tabs">
+      <li class="active"><a href="#hub" data-toggle="tab" id="hub_tab">
+        <span class="glyphicon glyphicon-cloud-download"></span>
+        <%= _("Docker hub") %>
+      </a></li>
+      <li><a href="#registry" data-toggle="tab" id="registry_tab">
+        <span class="glyphicon glyphicon-cloud-download"></span>
+        <%= _("External registry") %>
+      </a></li>
+    </ul>
 
-  <%= form_for @container, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="hub">
-      <div class="form-group col-md-6">
-        <%= label_tag "image[search]", _('Search'), :class=>"col-sm-2 control-label" %>
-        <div class="input-group">
-          <%= auto_complete_search(:image, '',
-                                   :'data-url'  => auto_complete_image_container_path(@container),
-                                   :value       => f.object.image.present? ? f.object.image.image_id : '',
-                                   :id          => :search,
-                                   :focus_on_load => true,
-                                   :placeholder => _('Find your favorite container, e.g: centos')) %>
-          <span class="input-group-addon glyphicon" id="search-addon"></span>
-          <span class="input-group-btn">
-            <%= button_tag(:class      => 'btn btn-default',
-                           :type       => 'button',
-                           :id         => 'search_image',
-                           :'data-url' => search_image_container_path(@container),
-                           :onclick    => 'searchImage(this)') do %>
-            <span class="glyphicon glyphicon-search"></span>
-            <% end %>
-          </span>
+    <%= form_for @container, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
+        <div class="tab-content">
+          <div class="tab-pane active" id="hub">
+          </div>
+          <div class="tab-pane" id="registry">
+            <div class="input-group col-md-6">
+              <%= select_registry f %>
+            </div>
+          </div>
+          <div>
+            <div class="form-group col-md-6">
+              <%= label_tag "image[search]", _('Search'), :class=>"col-sm-2 control-label" %>
+              <div class="input-group">
+                <%= auto_complete_search('image[image_id]', '',
+                                         :'data-url'  => auto_complete_image_container_path(@container),
+                                         :value       => f.object.image.present? ? f.object.image.image_id : '',
+                                         :id          => :search,
+                                         :focus_on_load => true,
+                                         :placeholder => _('Find your favorite container, e.g: centos')) %>
+                <span class="input-group-addon glyphicon" id="search-addon"></span>
+                <span class="input-group-btn">
+                  <%= button_tag(:class      => 'btn btn-default',
+                                 :type       => 'button',
+                                 :id         => 'search_image',
+                                 :'data-url' => search_image_container_path(@container),
+                                 :onclick    => 'searchImage(this)') do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+            <%= text_f f, :tag,
+                          :value      => f.object.tag.present? ? f.object.tag.tag : '',
+                          :id         => 'tag',
+                          :'data-url' => auto_complete_image_tags_container_path(@container) %>
+            <div class="col-md-12">
+              <div id='searching_spinner' class='col-md-offset-3 hide'>
+                <span id='waiting_text'>
+                </span>
+                <%= image_tag('/assets/spinner.gif', :id => 'loading_images_indicator') %>
+              </div>
+              <div id='image_search_results'>
+              </div>
+            </div>
+          </div>
+          <%= render :partial => 'form_buttons' %>
         </div>
-      </div>
-      <%= text_f f, :tag,
-                    :value      => f.object.tag.present? ? f.object.tag.tag : '',
-                    :id         => 'tag',
-                    :'data-url' => auto_complete_image_tags_container_path(@container) %>
-      <div class="col-md-12">
-        <div id='searching_spinner' class='col-md-offset-3 hide'>
-          <span id='waiting_text'>
-          </span>
-          <%= image_tag('/assets/spinner.gif', :id => 'loading_images_indicator') %>
-        </div>
-        <div id='image_search_results'>
-        </div>
-      </div>
-      <hr/>
-      <%= render :partial => 'form_buttons' %>
-    </div>
-  </div>
-
-  <% end %>
+    <% end %>
 <% end %>
