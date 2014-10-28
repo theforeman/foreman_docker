@@ -55,13 +55,13 @@ module ForemanDocker
       'Docker'
     end
 
-    def create_vm(args = {})
+    def create_container(args = {})
       options = vm_instance_defaults.merge(args)
-      logger.debug("creating Docker with the following options: #{options.inspect}")
-      client.servers.create options
-    rescue Excon::Errors::SocketError, Fog::Errors::Error => e
+      logger.debug("Creating container with the following options: #{options.inspect}")
+      ::Docker::Container.create(options)
+    rescue Excon::Errors::Error, ::Docker::Error::DockerError => e
       logger.debug "Fog error: #{e.message}\n " + e.backtrace.join("\n ")
-      errors.add(:base, e.message.to_s)
+      errors.add(:base, _("Error creating container. Check the Foreman logs: %s") % e.message.to_s)
       false
     end
 

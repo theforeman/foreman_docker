@@ -8,11 +8,12 @@ class Container < ActiveRecord::Base
                   :attach_stdout, :attach_stderr, :tag, :uuid
 
   def parametrize
-    { :name => name, :image => tag.tag.blank? ? image.image_id : "#{image.image_id}:#{tag.tag}",
-      :tty  => tty, :memory => memory,
-      :entrypoint => entrypoint.try(:split), :cmd => command.try(:split),
-      :attach_stdout => attach_stdout, :attach_stdout => attach_stdout,
-      :attach_stderr => attach_stderr, :cpushares => cpu_shares, :cpuset => cpu_set }
+    { 'name'  => name, # key has to be lower case to be picked up by the Docker API
+      'Image' => tag.tag.blank? ? image.image_id : "#{image.image_id}:#{tag.tag}",
+      'Tty'          => tty,                    'Memory'       => memory,
+      'Entrypoint'   => entrypoint.try(:split), 'Cmd'          => command.try(:split),
+      'AttachStdout' => attach_stdout,          'AttachStdin'  => attach_stdin,
+      'AttachStderr' => attach_stderr,          'CpuShares'    => cpu_shares, :cpuset => cpu_set }
   end
 
   def in_fog

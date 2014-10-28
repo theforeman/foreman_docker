@@ -29,7 +29,12 @@ module Containers
         @container.update_attributes(params[:container])
       when :environment
         @container.update_attributes(params[:container])
-        @container.uuid = start_container.id
+        if (response = start_container)
+          @container.uuid = response.id
+        else
+          process_error(:object => @container.compute_resource, :render => 'environment')
+          return
+        end
       end
       render_wizard @container
     end
@@ -51,7 +56,7 @@ module Containers
     end
 
     def start_container
-      @container.compute_resource.create_vm(@container.parametrize)
+      @container.compute_resource.create_container(@container.parametrize)
     end
   end
 end
