@@ -16,4 +16,9 @@ class DockerRegistryTest < ActiveSupport::TestCase
     end
     assert r.used_organization_ids.include?(organization.id)
   end
+
+  test 'password is stored encrypted' do
+    r = as_admin { FactoryGirl.create(:docker_registry) }
+    assert r.is_decryptable?(r.password_in_db)
+  end
 end

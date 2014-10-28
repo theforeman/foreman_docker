@@ -1,8 +1,10 @@
 class DockerRegistry < ActiveRecord::Base
   include Authorizable
   include Taxonomix
+  include Encryptable
 
   has_many :containers, :foreign_key => "registry_id", :dependent => :destroy
+  encrypts :password
 
   scoped_search :on => :name, :complete_value => true
   scoped_search :on => :url

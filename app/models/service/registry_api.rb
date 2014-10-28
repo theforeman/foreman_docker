@@ -4,7 +4,11 @@ module Service
     attr_reader :config
 
     def initialize(params = {})
-      @config = DEFAULTS.merge(params)
+      config = DEFAULTS.merge(params)
+      uri = URI(config.delete(:url))
+      uri.user = config.delete(:user)
+      uri.password = config.delete(:password)
+      @config = config.merge(:url => uri.to_s)
     end
 
     def search(aquery)

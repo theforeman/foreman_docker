@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :docker_registry do
     sequence(:name) { |n| "hub#{n}" }
     sequence(:url) { |n| "http://localhost/#{n}" }
+    sequence(:username) { |n| "username#{n}" }
+    sequence(:password) { |n| "password#{n}" }
   end
 
   trait :with_location do

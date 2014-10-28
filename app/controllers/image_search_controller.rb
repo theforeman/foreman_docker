@@ -46,18 +46,24 @@ class ImageSearchController < ::ApplicationController
   end
 
   def registry_image_exists?(term)
-    result = ::Service::RegistryApi.new(:url => @registry.url).search(term)
+    result = ::Service::RegistryApi.new(:url => @registry.url,
+                                        :user => @registry.username,
+                                        :password => @registry.password).search(term)
     registry_name = term.split('/').size > 1 ? term :
         'library/' + term
     result['results'].any? { |r| r['name'] == registry_name }
   end
 
   def registry_auto_complete_image_tags(terms)
-    ::Service::RegistryApi.new(:url => @registry.url).list_repository_tags(terms).keys
+    ::Service::RegistryApi.new(:url => @registry.url,
+                               :user => @registry.username,
+                               :password => @registry.password).list_repository_tags(terms).keys
   end
 
   def registry_search_image(terms)
-    r = ::Service::RegistryApi.new(:url => @registry.url).search(terms)
+    r = ::Service::RegistryApi.new(:url => @registry.url,
+                                   :user => @registry.username,
+                                   :password => @registry.password).search(terms)
     r['results']
   end
 
