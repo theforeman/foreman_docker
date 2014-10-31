@@ -1,4 +1,6 @@
 class Container < ActiveRecord::Base
+  include Authorizable
+
   belongs_to :compute_resource
   belongs_to :image, :class_name => 'DockerImage', :foreign_key => 'docker_image_id'
   belongs_to :tag,   :class_name => 'DockerTag',   :foreign_key => 'docker_tag_id'

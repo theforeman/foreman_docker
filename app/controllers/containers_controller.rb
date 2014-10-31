@@ -1,6 +1,8 @@
 class ContainersController < ::ApplicationController
-  before_filter :find_resource, :only => [:show, :auto_complete_image, :auto_complete_image_tags,
-                                          :commit]
+  before_filter :find_container, :only => [:show,
+                                           :auto_complete_image,
+                                           :auto_complete_image_tags,
+                                           :commit]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -103,5 +105,15 @@ class ContainersController < ::ApplicationController
 
   def allowed_resources
     ComputeResource.authorized(:view_compute_resources)
+  end
+
+  # To be replaced by find_resource after 1.6 support is deprecated
+  def find_container
+    if params[:id].blank?
+      not_found
+      return
+    end
+    @container = Container.authorized("#{action_permission}_#{controller_name}".to_sym)
+                          .find(params[:id])
   end
 end
