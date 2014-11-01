@@ -15,13 +15,10 @@ Gem::Specification.new do |s|
   s.description = 'Provision and manage Docker containers and images from Foreman.'
   s.licenses    = ['GPL-3']
 
-  s.add_development_dependency('rake')
-
   s.files = Dir['{app,config,db,lib,locale}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'fog'
-  s.add_dependency 'docker-api', '~> 1.13.6'
-  s.add_dependency 'wicked'
-  s.add_development_dependency 'rubocop', '~> 0.26.1'
+  s.add_dependency 'docker-api', '~> 1.13'
+  s.add_dependency 'wicked', '~> 1.1'
+  s.add_development_dependency 'rubocop', '~> 0.26'
 end
