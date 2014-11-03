@@ -1,5 +1,9 @@
 # Foreman Docker Plugin
 
+[![Code Climate](https://codeclimate.com/github/theforeman/foreman-docker/badges/gpa.svg)](https://codeclimate.com/github/theforeman/foreman-docker)
+[![Gem Version](https://badge.fury.io/rb/foreman_docker.svg)](http://badge.fury.io/rb/foreman_docker)
+[![Dependency Status](https://gemnasium.com/theforeman/foreman-docker.svg)](https://gemnasium.com/theforeman/foreman-docker)
+
 ```foreman_docker``` enables provisioning and managing of [Docker](http://docker.com) containers and images in [Foreman](http://github.com/theforeman/foreman), all of that under the GPL v3+ license.
 
 * Website: [TheForeman.org](http://theforeman.org)
