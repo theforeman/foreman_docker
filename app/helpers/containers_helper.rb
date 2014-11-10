@@ -51,4 +51,12 @@ module ContainersHelper
     addClass options, 'form-control'
     text_field_tag(name, val, options)
   end
+
+  def hub_url(image)
+    if image['is_official']
+      "https://registry.hub.docker.com/_/#{image['name']}"
+    else
+      "https://registry.hub.docker.com/u/#{image['name']}"
+    end
+  end
 end

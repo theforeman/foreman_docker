@@ -1,8 +1,6 @@
 class ContainersController < ::ApplicationController
-  before_filter :find_container, :only => [:show,
-                                           :auto_complete_image,
-                                           :auto_complete_image_tags,
-                                           :commit]
+  before_filter :find_container, :only => [:show, :auto_complete_image, :auto_complete_image_tags,
+                                           :search_image, :commit]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -36,21 +34,18 @@ class ContainersController < ::ApplicationController
   end
 
   def auto_complete_image
-    if @container.compute_resource.exist?(params[:search])
-      render :text => 'true'
-    else
-      render :text => 'false'
-    end
+    render :text => @container.compute_resource.exist?(params[:search]).to_s
   end
 
   def auto_complete_image_tags
-    images = @container.compute_resource.all_images(params[:search]).map do |image|
-      image.info['RepoTags'].map do |image_tag|
-        _, tag = image_tag.split(':')
-        { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) }
+    # This is the format jQuery UI autocomplete expects
+    tags = @container.compute_resource.tags(params[:search])
+    respond_to do |format|
+      format.js do
+        tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
+        render :json => tags
       end
     end
-    render :json => images.flatten
   end
 
   def commit
@@ -67,11 +62,18 @@ class ContainersController < ::ApplicationController
                                                     { :container => @container, :e => e }
   end
 
+  def search_image
+    images = @container.compute_resource.search(params[:search])
+    respond_to do |format|
+      format.js { render :partial => 'image_search_results', :locals => { :images => images } }
+    end
+  end
+
   private
 
   def action_permission
     case params[:action]
-    when 'auto_complete_image', 'auto_complete_image_tags'
+    when 'auto_complete_image', 'auto_complete_image_tags', 'search_image'
       :view
     when 'commit'
       :commit

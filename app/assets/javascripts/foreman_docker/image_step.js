@@ -2,6 +2,7 @@ $(document).ready(function() {
   var tag = $('#tag');
   tag.autocomplete({
     source: [],
+    autoFocus: true,
     delay: 500,
     minLength: 0
   }).focus( function() {
@@ -28,6 +29,7 @@ function autoCompleteImage(item) {
         $('#search-addon').removeClass('glyphicon-remove');
         $('#search-addon').css('color', 'lightgreen');
         $('#search-addon').addClass('glyphicon-ok');
+        setWaitingText('Image found: <strong>' + item.val() + '</strong>. Retrieving available tags, please wait...');
         setAutocompleteTags();
       } else {
         $('#search-addon').attr('title', 'Image NOT found in the compute resource');
@@ -47,10 +49,42 @@ function setAutocompleteTags() {
   var source = [];
   $.getJSON( tag.data("url"), { search: $('#search').val() },
       function(data) {
+        $('#searching_spinner').hide();
         tag.removeClass('tags-autocomplete-loading');
         $.each( data, function(index, value) {
           source.push({label: value.label, value: value.value});
         });
+        $('#tag').focus();
       });
   tag.autocomplete('option', 'source', source);
+}
+
+function searchImage(item) {
+  setWaitingText('<strong>Searching</strong> in the hub, this can be slow, please wait...');
+  $('#image_search_results').html('');
+  $('#image_search_results').show();
+  $.ajax({
+    type:'get',
+    dataType:'text',
+    url: $(item).attr('data-url'),
+    data:'search=' + $('#search').val(),
+    success: function (result) {
+      $('#image_search_results').html(result);
+    },
+    complete: function (result) {
+      $('#searching_spinner').hide();
+    }
+  });
+}
+
+function imageSelected(item) {
+  $('#image_search_results').hide();
+  setWaitingText('Image selected: <strong>' + item.text + '</strong>. Retrieving available tags, please wait...');
+  $('#search').val(item.text);
+  setAutocompleteTags(item);
+}
+
+function setWaitingText(string) {
+  $('#waiting_text').html(string);
+  $('#searching_spinner').show();
 }

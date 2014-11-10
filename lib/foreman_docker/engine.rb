@@ -50,7 +50,8 @@ module ForemanDocker
         security_block :containers do
           permission :view_containers,    :containers         => [:index, :show,
                                                                   :auto_complete_image,
-                                                                  :auto_complete_image_tags]
+                                                                  :auto_complete_image_tags,
+                                                                  :search_image]
           permission :commit_containers,  :containers         => [:commit]
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]

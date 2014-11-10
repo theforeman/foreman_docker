@@ -28,10 +28,16 @@ module ForemanDocker
       client.images.all
     end
 
-    def all_images(filter = '')
+    def local_images(filter = '')
       client # initialize Docker-Api
-      # we are using an older version of docker-api, which differs from the current
       ::Docker::Image.all('filter' => filter)
+    end
+
+    def tags_for_local_image(image)
+      image.info['RepoTags'].map do |image_tag|
+        _, tag = image_tag.split(':')
+        tag
+      end
     end
 
     def exist?(name)
@@ -40,6 +46,18 @@ module ForemanDocker
 
     def image(id)
       client.image_get(id)
+    end
+
+    def tags(image_name)
+      if exist?(image_name)
+        tags_for_local_image(local_images(image_name).first)
+      else
+        # If image is not found in the compute resource, get the tags from the Hub
+        hub_api_url = "https://index.docker.io/v1/repositories/#{image_name}/tags"
+        JSON.parse(URI.parse(hub_api_url).read).map do |tag|
+          tag['name']
+        end
+      end
     end
 
     def search(term = '')
