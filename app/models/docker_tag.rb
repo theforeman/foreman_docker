@@ -3,6 +3,6 @@ class DockerTag < ActiveRecord::Base
 
   attr_accessible :tag, :image
 
-  validates :tag,   :presence => true, :uniqueness => { :scope => :docker_image_id }
+  validates :tag,   :presence => true
   validates :image, :presence => true
 end

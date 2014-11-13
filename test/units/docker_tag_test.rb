@@ -20,11 +20,11 @@ class DockerTagTest < ActiveSupport::TestCase
       refute FactoryGirl.build(:docker_tag, :tag => '').valid?
     end
 
-    test 'tag is unique within image scope' do
+    test 'tag is not unique within image scope' do
       image          = FactoryGirl.create(:docker_image)
       tag            = FactoryGirl.create(:docker_tag, :image => image)
       duplicated_tag = FactoryGirl.build(:docker_tag,  :image => image, :tag => tag.tag)
-      refute duplicated_tag.valid?
+      assert duplicated_tag.valid?
     end
 
     test 'tag is not unique for different images' do
