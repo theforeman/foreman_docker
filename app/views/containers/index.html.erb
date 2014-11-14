@@ -22,10 +22,16 @@
     <% else %>
       <div class="tab-pane" id="<%= resource.name %>">
     <% end %>
-    <%= render 'list', :containers => resource.vms.to_a
-                                     .sort_by(&:name).paginate(:page     => params[:page],
-                                                               :per_page => 10),
-                       :resource   => resource %>
+    <% if resource.test_connection %>
+      <%= render 'list', :containers => resource.vms.to_a
+                                       .sort_by(&:name).paginate(:page     => params[:page],
+                                                                 :per_page => 10),
+                         :resource   => resource %>
+    <% else %>
+      <div class="alert alert-warning">
+        <%= (_("Error connecting with the compute resource: <strong> %s </strong>") % resource.errors.messages[:base]).html_safe %>
+      </div>
+    <% end%>
     </div>
   <% end %>
 </div>

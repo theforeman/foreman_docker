@@ -95,10 +95,11 @@ module ForemanDocker
 
     def test_connection(options = {})
       super
-      client
+      client.present?
     # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
     rescue => e
       errors[:base] << e.message
+      false
     end
 
     protected
