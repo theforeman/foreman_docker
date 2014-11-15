@@ -9,9 +9,6 @@ module Containers
       case step
       when :preliminary
         @container_resources = ComputeResource.select { |cr| cr.provider == 'Docker' }
-      when :image
-      when :configuration
-      when :environment
       end
       render_wizard
     end

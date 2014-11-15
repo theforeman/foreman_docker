@@ -11,6 +11,8 @@ module ForemanDocker
   class Engine < ::Rails::Engine
     engine_name 'foreman_docker'
 
+    config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
+
     initializer 'foreman_docker.load_app_instance_data' do |app|
       app.config.paths['db/migrate'] += ForemanDocker::Engine.paths['db/migrate'].existent
     end

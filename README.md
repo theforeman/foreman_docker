@@ -93,6 +93,7 @@ That's it. You're now ready to create and manage containers in your new Docker c
 ## How to contribute?
 
 Generally, follow the [Foreman guidelines](http://theforeman.org/contribute.html). For code-related contributions, fork this project and send a pull request with all changes. Some things to keep in mind:
+* Code from the master branch can contain features only present in [Fog's](http://github.com/fog/fog) master branch, we commit to wait for the next Fog release to put that code in a foreman-docker release.
 * [Follow the rules](http://theforeman.org/contribute.html#SubmitPatches) about commit message style and create a Redmine issue. Doing this right will help reviewers to get your contribution merged faster.
 * [Rubocop](https://github.com/bbatsov/rubocop) will analyze your code, you can run it locally with `rake rubocop`.
 * All of our pull requests run the full test suite in our [Jenkins CI system](http://ci.theforeman.org/). Please include tests in your pull requests for any additions or changes in functionality

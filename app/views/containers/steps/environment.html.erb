@@ -1,9 +1,22 @@
 <%= render :layout => 'title', :locals => { :step => 4 } do %>
   <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
-    <%= checkbox_f f, :tty, :help_inline => _('Allocate a pseudo-tty'), :label => _('TTY') %>
-    <%= checkbox_f f, :attach_stdin,  :label => _('Attach STDIN') %>
-    <%= checkbox_f f, :attach_stdout, :label => _('Attach STDOUT') %>
-    <%= checkbox_f f, :attach_stderr, :label => _('Attach STDERR') %>
-    <%= render :partial => 'form_buttons' %>
+    <div class='row'>
+      <div class='col-md-6 col-md-push-7'>
+        <h3><%= _("Shell") %></h3>
+        <%= checkbox_f f, :tty, :help_inline => _('Allocate a pseudo-tty'), :label => _('TTY') %>
+        <%= checkbox_f f, :attach_stdin,  :label => _('Attach STDIN') %>
+        <%= checkbox_f f, :attach_stdout, :label => _('Attach STDOUT') %>
+        <%= checkbox_f f, :attach_stderr, :label => _('Attach STDERR') %>
+      </div>
+      <div class='col-md-6 col-md-pull-6'>
+        <h3><%= _("Environment variables") %></h3>
+        <%= f.fields_for :environment_variables do |builder| %>
+          <%= render 'foreman_docker/common_parameters/environment_variable', :f => builder %>
+        <% end %>
+        <%= link_to_add_fields(_("Add environment variable"), f, :environment_variables,
+                               'foreman_docker/common_parameters/environment_variable') %>
+      </div>
+   </div>
+   <%= render :partial => 'form_buttons' %>
   <% end %>
 <% end %>
