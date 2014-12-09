@@ -24,11 +24,11 @@
           </div>
           <div>
             <div class="form-group col-md-6">
-              <%= label_tag "image[search]", _('Search'), :class=>"col-sm-2 control-label" %>
+              <%= label_tag "repository[search]", _('Search'), :class=>"col-sm-2 control-label" %>
               <div class="input-group">
-                <%= auto_complete_docker_search('image[image_id]', '',
-                                         :'data-url'  => auto_complete_image_container_path(@container),
-                                         :value       => f.object.image.present? ? f.object.image.image_id : '',
+                <%= auto_complete_docker_search('container[repository_name]', '',
+                                         :'data-url'  => auto_complete_repository_name_container_path(@container),
+                                         :value       => f.object.repository_name.present? ? f.object.repository_name : '',
                                          :id          => :search,
                                          :focus_on_load => true,
                                          :placeholder => _('Find your favorite container, e.g: centos')) %>
@@ -36,25 +36,25 @@
                 <span class="input-group-btn">
                   <%= button_tag(:class      => 'btn btn-default',
                                  :type       => 'button',
-                                 :id         => 'search_image',
-                                 :'data-url' => search_image_container_path(@container),
-                                 :onclick    => 'searchImage(this)') do %>
+                                 :id         => 'search_repository',
+                                 :'data-url' => search_repository_container_path(@container),
+                                 :onclick    => 'searchRepo(this)') do %>
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
                 </span>
               </div>
             </div>
             <%= text_f f, :tag,
-                          :value      => f.object.tag.present? ? f.object.tag.tag : '',
+                          :value      => f.object.tag.present? ? f.object.tag : '',
                           :id         => 'tag',
-                          :'data-url' => auto_complete_image_tags_container_path(@container) %>
+                          :'data-url' => auto_complete_tag_container_path(@container) %>
             <div class="col-md-12">
               <div id='searching_spinner' class='col-md-offset-3 hide'>
                 <span id='waiting_text'>
                 </span>
-                <%= image_tag('/assets/spinner.gif', :id => 'loading_images_indicator') %>
+                <%= image_tag('/assets/spinner.gif', :id => 'loading_repositories_indicator') %>
               </div>
-              <div id='image_search_results'>
+              <div id='repository_search_results'>
               </div>
             </div>
           </div>

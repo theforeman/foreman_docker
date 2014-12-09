@@ -1,12 +1,12 @@
-<% images.each do |image| %>
-    <h3><%= link_to image['name'], '#', :onclick => 'imageSelected(this)' %></h3>
+<% repositories.each do |repository| %>
+    <h3><%= link_to repository['name'], '#', :onclick => 'repoSelected(this)' %></h3>
     <p>
-      <%= '<span class="glyphicon glyphicon-certificate" title="Official"></span>'.html_safe if image['is_official'] %>
-      <%= '<span class="glyphicon glyphicon-thumbs-up" title="Trusted"></span>'.html_safe    if image['is_trusted'] %>
-      <span class="glyphicon glyphicon-star"></span> <%= image['star_count'] %>
+      <%= '<span class="glyphicon glyphicon-certificate" title="Official"></span>'.html_safe if repository['is_official'] %>
+      <%= '<span class="glyphicon glyphicon-thumbs-up" title="Trusted"></span>'.html_safe    if repository['is_trusted'] %>
+      <span class="glyphicon glyphicon-star"></span> <%= repository['star_count'] %>
     </p>
     <p>
-      <%= trunc(image['description']) %>
-      <%= link_to '<span class="glyphicon glyphicon-share"></span>'.html_safe, hub_url(image), :target => '_blank' %>
+      <%= trunc(repository['description']) %>
+      <%= link_to '<span class="glyphicon glyphicon-share"></span>'.html_safe, hub_url(repository), :target => '_blank' %>
     </p>
 <% end %>

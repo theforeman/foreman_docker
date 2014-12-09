@@ -10,23 +10,23 @@ $(document).ready(function() {
   });
 
   var target = $('#search');
-  //autoCompleteImage(target);
+  //autoCompleteRepo(target);
   target.autocomplete({
-    source: function( request, response ) { autoCompleteImage(target); },
+    source: function( request, response ) { autoCompleteRepo(target); },
     delay: 500,
     minLength: 1
   });
 
   $('#hub_tab').click( function() {
-      $('#image_registry_id').val('');
+      $('#repository_registry_id').val('');
   });
 });
 
-function autoCompleteImage(item) {
+function autoCompleteRepo(item) {
   $.ajax({
     type:'get',
     url: $(item).attr('data-url'),
-    data: { search: item.val(), registry_id: $('#image_registry_id').val() },
+    data: { search: item.val(), registry_id: $('#registry_id').val() },
     //data:'search=' + item.val(),
     success:function (result) {
       if(result == 'true'){
@@ -52,7 +52,7 @@ function setAutocompleteTags() {
   tag.addClass('tags-autocomplete-loading');
   tag.val('');
   var source = [];
-  $.getJSON( tag.data("url"), { search: $('#search').val(), registry_id: $('#image_registry_id').val() },
+  $.getJSON( tag.data("url"), { search: $('#search').val(), registry_id: $('#repository_registry_id').val() },
       function(data) {
         $('#searching_spinner').hide();
         tag.removeClass('tags-autocomplete-loading');
@@ -64,17 +64,17 @@ function setAutocompleteTags() {
   tag.autocomplete('option', 'source', source);
 }
 
-function searchImage(item) {
+function searchRepo(item) {
   setWaitingText('<strong>Searching</strong> in the hub, this can be slow, please wait...');
-  $('#image_search_results').html('');
-  $('#image_search_results').show();
+  $('#repository_search_results').html('');
+  $('#repository_search_results').show();
   $.ajax({
     type:'get',
     dataType:'text',
     url: $(item).attr('data-url'),
-    data: { search: $('#search').val(), registry_id: $('#image_registry_id').val() },
+    data: { search: $('#search').val(), registry_id: $('#repository_registry_id').val() },
     success: function (result) {
-      $('#image_search_results').html(result);
+      $('#repository_search_results').html(result);
     },
     complete: function (result) {
       $('#searching_spinner').hide();
@@ -82,8 +82,8 @@ function searchImage(item) {
   });
 }
 
-function imageSelected(item) {
-  $('#image_search_results').hide();
+function repoSelected(item) {
+  $('#repository_search_results').hide();
   setWaitingText('Image selected: <strong>' + item.text + '</strong>. Retrieving available tags, please wait...');
   $('#search').val(item.text);
   setAutocompleteTags(item);

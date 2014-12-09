@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :docker_registry do
-    sequence(:name) { |n| "image#{n}" }
+    sequence(:name) { |n| "hub#{n}" }
     sequence(:url) { |n| "http://localhost/#{n}" }
   end
 

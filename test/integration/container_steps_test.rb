@@ -6,14 +6,14 @@ class ContainerStepsTest < ActionDispatch::IntegrationTest
     assert has_selector?("div.alert", :text => 'Please add a new one')
   end
 
-  # test 'clicking on search loads images' do
+  # test 'clicking on search loads repositories' do
   #   Capybara.javascript_driver = :webkit
   #   container = FactoryGirl.create(:container)
-  #   visit container_step_path(:container_id => container.id, :id => :image)
-  #   ComputeResource.any_instance.expects(:search).returns([{ 'name' => 'my_fake_image_result',
-  #                                                             'star_count' => 300,
-  #                                                             'description' => 'fake image'}])
-  #   click_button 'search_image'
-  #   assert has_link? 'my_fake_image_result'
+  #   visit container_step_path(:container_id => container.id, :id => :repository)
+  #   ComputeResource.any_instance.expects(:search).returns([{'name' => 'my_fake_repository_result',
+  #                                                           'star_count' => 300,
+  #                                                           'description' => 'fake repository'}])
+  #   click_button 'search_repository'
+  #   assert has_link? 'my_fake_repository_result'
   # end
 end

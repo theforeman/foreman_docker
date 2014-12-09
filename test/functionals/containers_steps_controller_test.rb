@@ -6,25 +6,25 @@ module Containers
       @container = FactoryGirl.create(:container)
     end
 
-    test 'sets a docker image and tag for a new container' do
+    test 'sets a docker repo and tag for a new container' do
+      container_attrs = { :repository_name => 'centos',
+                          :tag => 'latest',
+                          :registry_id => ''
+      }
       put :update, { :id => :image,
-                     :image => { :docker_registry_id => '',
-                                 :image_id => 'centos' },
                      :container_id => @container.id,
-                     :container => { :tag => 'latest' } }, set_session_user
+                     :container => container_attrs }, set_session_user
       assert_response :found
       assert_redirected_to container_step_path(:container_id => @container.id,
                                                :id           => :configuration)
-      assert_equal DockerImage.find_by_image_id('centos'), @container.reload.image
-      assert_equal DockerTag.find_by_tag('latest'), @container.tag
+      assert_equal "centos", @container.reload.repository_name
+      assert_equal "latest", @container.tag
     end
 
     context 'container creation' do
       setup do
-        @container.update_attribute(:image, (image = FactoryGirl.create(:docker_image,
-                                                                        :image_id => 'centos')))
-        @container.update_attribute(:tag, FactoryGirl.create(:docker_tag, :image => image,
-                                                                          :tag   => 'latest'))
+        @container.update_attribute(:repository_name, "centos")
+        @container.update_attribute(:tag, "latest")
       end
 
       test 'uuid of the created container is saved at the end of the wizard' do

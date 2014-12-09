@@ -1,9 +1,11 @@
 # rubocop:disable Metrics/ClassLength
 class ContainersController < ::ApplicationController
-  before_filter :find_container, :only => [:show, :auto_complete_image, :auto_complete_image_tags,
-                                           :search_image, :commit]
-  before_filter :find_registry, :only => [:auto_complete_image, :auto_complete_image_tags,
-                                          :search_image]
+  before_filter :find_container, :only => [:show, :auto_complete_repository_name,
+                                           :auto_complete_tag,
+                                           :search_repository, :commit]
+  before_filter :find_registry, :only => [:auto_complete_repository_name,
+                                          :auto_complete_tag,
+                                          :search_repository]
 
   def index
     @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
@@ -36,28 +38,28 @@ class ContainersController < ::ApplicationController
   def show
   end
 
-  def auto_complete_image
+  def auto_complete_repository_name
     exist = if @registry.nil?
               @container.compute_resource.exist?(params[:search])
             else
-              registry_auto_complete_image(params[:search])
+              registry_auto_complete_repository(params[:search])
             end
     render :text => exist.to_s
   end
 
-  def registry_auto_complete_image(term)
+  def registry_auto_complete_repository(term)
     result = ::Service::RegistryApi.new(:url => @registry.url).search(term)
     registry_name = term.split('/').size > 1 ? term :
         'library/' + term
     result['results'].any? { |r| r['name'] == registry_name }
   end
 
-  def auto_complete_image_tags
+  def auto_complete_tag
     # This is the format jQuery UI autocomplete expects
     tags = if @registry.nil?
              @container.compute_resource.tags(params[:search])
            else
-             registry_auto_complete_image_tags(params[:search])
+             registry_auto_complete_tags(params[:search])
            end
     respond_to do |format|
       format.js do
@@ -67,7 +69,7 @@ class ContainersController < ::ApplicationController
     end
   end
 
-  def registry_auto_complete_image_tags(term)
+  def registry_auto_complete_tags(term)
     ::Service::RegistryApi.new(:url => @registry.url).list_repository_tags(term).keys
   end
 
@@ -85,15 +87,18 @@ class ContainersController < ::ApplicationController
                                                     { :container => @container, :e => e }
   end
 
-  def search_image
-    images = if @registry.nil?
-               @container.compute_resource.search(params[:search])
-             else
-               r = ::Service::RegistryApi.new(:url => @registry.url).search(params[:search])
-               r['results']
-             end
+  def search_repository
+    repositories = if @registry.nil?
+                     @container.compute_resource.search(params[:search])
+                   else
+                     r = ::Service::RegistryApi.new(:url => @registry.url)
+                       .search(params[:search])
+                     r['results']
+                   end
     respond_to do |format|
-      format.js { render :partial => 'image_search_results', :locals => { :images => images } }
+      format.js do
+        render :partial => 'repository_search_results', :locals => { :repositories => repositories }
+      end
     end
   end
 
@@ -101,7 +106,7 @@ class ContainersController < ::ApplicationController
 
   def action_permission
     case params[:action]
-    when 'auto_complete_image', 'auto_complete_image_tags', 'search_image'
+    when 'auto_complete_repository_name', 'auto_complete_tag', 'search_repository'
       :view
     when 'commit'
       :commit

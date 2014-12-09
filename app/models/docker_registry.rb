@@ -2,9 +2,7 @@ class DockerRegistry < ActiveRecord::Base
   include Authorizable
   include Taxonomix
 
-  has_many :docker_image_docker_registries
-  has_many :images, :class_name => 'DockerImage',
-           :through => :docker_image_docker_registries, :uniq => true
+  has_many :containers, :foreign_key => "registry_id", :dependent => :destroy
 
   scoped_search :on => :name, :complete_value => true
   scoped_search :on => :url
