@@ -13,7 +13,7 @@
       </a></li>
     </ul>
 
-    <%= form_for @container, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
+    <%= form_for @image, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
         <div class="tab-content">
           <div class="tab-pane active" id="hub">
           </div>
@@ -24,10 +24,11 @@
           </div>
           <div>
             <div class="form-group col-md-6">
-              <%= label_tag "repository[search]", _('Search'), :class=>"col-sm-2 control-label" %>
+              <%= label_tag "image_id", _('Search'), :class=>"col-sm-2 control-label" %>
               <div class="input-group">
-                <%= auto_complete_docker_search('container[repository_name]', '',
-                                         :'data-url'  => auto_complete_repository_name_container_path(@container),
+
+                <%= auto_complete_docker_search('docker_container_wizard_states_image[repository_name]', '',
+                                         :'data-url'  => auto_complete_repository_name_image_search_path(@image.compute_resource_id),
                                          :value       => f.object.repository_name.present? ? f.object.repository_name : '',
                                          :id          => :search,
                                          :focus_on_load => true,
@@ -37,7 +38,7 @@
                   <%= button_tag(:class      => 'btn btn-default',
                                  :type       => 'button',
                                  :id         => 'search_repository',
-                                 :'data-url' => search_repository_container_path(@container),
+                                 :'data-url' => search_repository_image_search_path(@image.compute_resource_id),
                                  :onclick    => 'searchRepo(this)') do %>
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
@@ -45,9 +46,8 @@
               </div>
             </div>
             <%= text_f f, :tag,
-                          :value      => f.object.tag.present? ? f.object.tag : '',
                           :id         => 'tag',
-                          :'data-url' => auto_complete_tag_container_path(@container) %>
+                          :'data-url' => auto_complete_image_tag_image_search_path(@image.compute_resource_id) %>
             <div class="col-md-12">
               <div id='searching_spinner' class='col-md-offset-3 hide'>
                 <span id='waiting_text'>

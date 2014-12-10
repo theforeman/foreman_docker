@@ -66,7 +66,7 @@ class RemoveDockerTables < ActiveRecord::Migration
     when :sqlite
       execute "DROP TABLE #{table_name}"
     else
-      raise NotImplementedError, "Unknown adapter type '#{connection.adapter_name.downcase.to_sym}'"
+      fail NotImplementedError, "Unknown adapter type '#{connection.adapter_name.downcase.to_sym}'"
     end
   end
 end

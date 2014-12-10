@@ -5,7 +5,8 @@ class Container < ActiveRecord::Base
   belongs_to :registry, :class_name => "DockerRegistry", :foreign_key => :registry_id
   has_many :environment_variables, :dependent  => :destroy, :foreign_key => :reference_id,
                                    :inverse_of => :container,
-                                   :class_name => 'EnvironmentVariable'
+                                   :class_name => 'EnvironmentVariable',
+                                   :validate => false
   accepts_nested_attributes_for :environment_variables, :allow_destroy => true
   include ForemanDocker::ParameterValidators
 

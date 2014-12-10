@@ -1,11 +1,11 @@
 <%= render :layout => 'title', :locals => { :step => 1 } do %>
-  <%= form_for @container, :url => wizard_path, :method => :put do |f| %>
+  <%= form_for @preliminary, :url => wizard_path, :method => :put do |f| %>
     <div>
       <% if @container_resources.present? %>
         <h3><%= _("Resource selection") %></h3>
         <%= _("Where do you want to deploy your container?:") %>
         <hr>
-        <%= select_f f, :compute_resource_id, @container_resources, :id, :to_label, {}, { :label => _('Deploy on') } %>
+        <%= select_f f, 'compute_resource_id', @container_resources, :id, :to_label, {}, { :label => _('Deploy on') } %>
       <% else %>
         <div class="alert alert-warning alert-dismissable">
           <%= image_tag 'false.png' %> <%= (_("You need a Docker compute resource in order to create containers. Please %s and try again.") % link_to('add a new one', hash_for_new_compute_resource_path)).html_safe %>

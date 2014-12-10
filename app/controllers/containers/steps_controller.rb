@@ -3,12 +3,20 @@ module Containers
     include Wicked::Wizard
 
     steps :preliminary, :image, :configuration, :environment
-    before_filter :find_container
+    before_filter :find_state
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def show
       case step
       when :preliminary
-        @container_resources = ComputeResource.select { |cr| cr.provider == 'Docker' }
+        @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
+        @preliminary = @state.preliminary || @state.build_preliminary
+      when :image
+        @image = @state.image || @state.build_image
+      when :configuration
+        @configuration = @state.configuration || @state.build_configuration
+      when :environment
+        @environment = @state.environment || @state.build_environment
       end
       render_wizard
     end
@@ -17,41 +25,35 @@ module Containers
     def update
       case step
       when :preliminary
-        @container.update_attribute(:compute_resource_id, params[:container][:compute_resource_id])
+        @state.create_preliminary!(params[:docker_container_wizard_states_preliminary])
       when :image
-        @container.update_attributes!(params[:container])
+        @state.create_image!(params[:docker_container_wizard_states_image])
       when :configuration
-        @container.update_attributes(params[:container])
+        @state.create_configuration!(params[:docker_container_wizard_states_configuration])
       when :environment
-        @container.update_attributes(params[:container])
-        if (response = start_container)
-          @container.uuid = response.id
+        @state.create_environment!(params[:docker_container_wizard_states_environment])
+        container = Service::Containers.start_container!(@state)
+        if container
+          return redirect_to container_path(container)
         else
-          process_error(:object => @container.compute_resource, :render => 'environment')
+          @environment = @state.environment
+          process_error(:object => @state.environment, :render => 'environment')
           return
         end
       end
-      render_wizard @container
+      render_wizard @state
     end
 
     private
-
-    def finish_wizard_path
-      container_path(:id => params[:container_id])
-    end
 
     def allowed_resources
       ComputeResource.authorized(:view_compute_resources)
     end
 
-    def find_container
-      @container = Container.find(params[:container_id])
+    def find_state
+      @state = DockerContainerWizardState.find(params[:wizard_state_id])
     rescue ActiveRecord::RecordNotFound
       not_found
-    end
-
-    def start_container
-      @container.compute_resource.create_container(@container.parametrize)
     end
   end
 end

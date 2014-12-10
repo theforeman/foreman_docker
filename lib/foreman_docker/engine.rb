@@ -53,10 +53,7 @@ module ForemanDocker
         end
 
         security_block :containers do
-          permission :view_containers,    :containers         => [:index, :show,
-                                                                  :auto_complete_repository_name,
-                                                                  :auto_complete_tag,
-                                                                  :search_repository]
+          permission :view_containers,    :containers         => [:index, :show]
           permission :commit_containers,  :containers         => [:commit]
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]
@@ -67,6 +64,13 @@ module ForemanDocker
           permission :view_registries,    :registries         => [:index, :show]
           permission :create_registries,  :registries         => [:new, :create, :update, :edit]
           permission :destroy_registries, :registries         => [:destroy]
+        end
+
+        security_block :image_search do
+          permission :search_repository_image_search,
+                     :image_search => [:auto_complete_repository_name,
+                                       :auto_complete_image_tag,
+                                       :search_repository]
         end
       end
 
