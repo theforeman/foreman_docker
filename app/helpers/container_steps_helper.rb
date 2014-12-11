@@ -25,4 +25,26 @@ module ContainerStepsHelper
   def taxonomy_icon(taxonomy)
     taxonomy == 'locations' ? 'globe' : 'briefcase'
   end
+
+  def tab_class(tab_name)
+    active_tab.to_s == tab_name.to_s ? "active" : ""
+  end
+
+  def model_for(registry_type)
+    if active_tab.to_s == registry_type.to_s
+      @docker_container_wizard_states_image
+    else
+      DockerContainerWizardStates::Image.new(:wizard_state => @state)
+    end
+  end
+
+  def active_tab
+    if @docker_container_wizard_states_image.katello?
+      :katello
+    elsif @docker_container_wizard_states_image.registry_id.nil?
+      :hub
+    else
+      :registry
+    end
+  end
 end

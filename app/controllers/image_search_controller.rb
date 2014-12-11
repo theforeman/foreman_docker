@@ -24,7 +24,8 @@ class ImageSearchController < ::ApplicationController
     respond_to do |format|
       format.js do
         render :partial => 'repository_search_results',
-               :locals  => { :repositories => repositories }
+               :locals  => { :repositories => repositories,
+                             :use_hub => use_hub? }
       end
     end
   end

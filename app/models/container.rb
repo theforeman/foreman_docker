@@ -13,7 +13,8 @@ class Container < ActiveRecord::Base
 
   attr_accessible :command, :repository_name, :name, :compute_resource_id, :entrypoint,
                   :cpu_set, :cpu_shares, :memory, :tty, :attach_stdin, :registry_id,
-                  :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes
+                  :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes,
+                  :katello
 
   def repository_pull_url
     repo = tag.blank? ? repository_name : "#{repository_name}:#{tag}"

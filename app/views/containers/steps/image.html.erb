@@ -3,68 +3,39 @@
 
 <%= render :layout => 'title', :locals => { :step => 2 } do %>
     <ul class="nav nav-tabs" data-tabs="tabs">
-      <li class=<%= ("active" if @docker_container_wizard_states_image.registry_id.nil?) %>><a href="#hub" data-toggle="tab" id="hub_tab">
+      <% if defined? Katello -%>
+        <li class="<%= tab_class(:katello)%>"><a href="#katello" data-toggle="tab" id="katello_tab">
+          <span class="glyphicon glyphicon-tower"></span>
+          <%= _("Katello") %>
+        </a></li>
+      <% end -%>
+
+      <li class='<%= tab_class(:hub) %>'><a href="#hub" data-toggle="tab" id="hub_tab">
         <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("Docker hub") %>
       </a></li>
-      <li class=<%= ("active" unless @docker_container_wizard_states_image.registry_id.nil?) %>><a href="#registry" data-toggle="tab" id="registry_tab">
+      <li class='<%= tab_class(:registry) %>'><a href="#registry" data-toggle="tab" id="registry_tab">
         <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("External registry") %>
       </a></li>
     </ul>
-
-    <%= form_for @docker_container_wizard_states_image, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
-        <div class="tab-content">
-          <% if @docker_container_wizard_states_image.registry_id.nil? %>
-              <div class="tab-pane active" id="hub">
-              </div>
-              <div class="tab-pane" id="registry">
-          <% else %>
-              <div class="tab-pane" id="hub">
-              </div>
-              <div class="tab-pane active" id="registry">
-          <% end %>
-            <div class="input-group col-md-6">
-              <%= select_registry f %>
-            </div>
-          </div>
-          <div>
-            <div class="form-group col-md-6">
-              <%= label_tag "image_id", _('Search'), :class=>"col-sm-2 control-label" %>
-              <div class="input-group">
-
-                <%= auto_complete_docker_search('docker_container_wizard_states_image[repository_name]', '',
-                                         :'data-url'  => auto_complete_repository_name_image_search_path(@docker_container_wizard_states_image.compute_resource_id),
-                                         :value       => f.object.repository_name.present? ? f.object.repository_name : '',
-                                         :id          => :search,
-                                         :focus_on_load => true,
-                                         :placeholder => _('Find your favorite container, e.g: centos')) %>
-                <span class="input-group-addon glyphicon" id="search-addon"></span>
-                <span class="input-group-btn">
-                  <%= button_tag(:class      => 'btn btn-default',
-                                 :type       => 'button',
-                                 :id         => 'search_repository',
-                                 :'data-url' => search_repository_image_search_path(@docker_container_wizard_states_image.compute_resource_id),
-                                 :onclick    => 'searchRepo(this)') do %>
-                    <span class="glyphicon glyphicon-search"></span>
-                  <% end %>
-                </span>
-              </div>
-            </div>
-            <%= text_f f, :tag,
-                          :id         => 'tag',
-                          :'data-url' => auto_complete_image_tag_image_search_path(@docker_container_wizard_states_image.compute_resource_id) %>
-            <div class="col-md-12">
-              <div id='searching_spinner' class='col-md-offset-3 hide'>
-                <span id='waiting_text'>
-                </span>
-                <%= image_tag('/assets/spinner.gif', :id => 'loading_repositories_indicator') %>
-              </div>
-              <div id='repository_search_results'>
-              </div>
-            </div>
-          </div>
-          <%= render :partial => 'form_buttons' %>
+    <div class="tab-content">
+      <% if defined?(Katello) -%>
+        <div class='tab-pane <%= tab_class(:katello) %>' id="katello">
+          <%= form_for model_for("katello"), :namespace => "katello",
+                                             :class => 'form-horizontal',
+                                             :url => wizard_path,
+                                             :method => :put do |f| %>
+              <%= katello_partial(f) %>
+              <%= render :partial => 'form_buttons', locals: { :registry => "katello"} %>
+          <% end -%>
         </div>
-    <% end %>
+      <% end -%>
+      <div class='tab-pane <%= tab_class(:hub) %>' id="hub">
+        <%= render :partial => 'image_hub_tab' , locals: { :registry => "hub" }  %>
+      </div>
+      <div class='tab-pane <%= tab_class(:registry) %>' id="registry">
+        <%= render :partial => 'image_hub_tab' , locals: { :registry => "registry"}  %>
+      </div>
+    </div>
 <% end %>

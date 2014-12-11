@@ -15,6 +15,7 @@ class DockerContainerWizardState < ActiveRecord::Base
     { :repository_name     => image.repository_name,
       :tag                 => image.tag,
       :registry_id         => image.registry_id,
+      :katello             => image.katello?,
       :name                => configuration.name,
       :compute_resource_id => preliminary.compute_resource_id,
       :tty                 => environment.tty,
@@ -25,6 +26,7 @@ class DockerContainerWizardState < ActiveRecord::Base
       :attach_stdin        => environment.attach_stdin,
       :attach_stderr       => environment.attach_stderr,
       :cpu_shares          => configuration.cpu_shares,
-      :cpu_set             => configuration.cpu_set }
+      :cpu_set             => configuration.cpu_set
+    }
   end
 end

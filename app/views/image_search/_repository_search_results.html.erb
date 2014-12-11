@@ -1,5 +1,5 @@
 <% repositories.each do |repository| %>
-    <h3><%= link_to repository['name'], '#', :onclick => 'repoSelected(this)' %></h3>
+    <h3><%= link_to repository['name'], '#', :onclick => 'repoSelected(this)', "data-hub" => use_hub %></h3>
     <p>
       <%= '<span class="glyphicon glyphicon-certificate" title="Official"></span>'.html_safe if repository['is_official'] %>
       <%= '<span class="glyphicon glyphicon-thumbs-up" title="Trusted"></span>'.html_safe    if repository['is_trusted'] %>
