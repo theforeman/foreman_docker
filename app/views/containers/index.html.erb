@@ -2,7 +2,7 @@
 
 <% if authorized? %>
   <% title_actions button_group(link_to_if_authorized _("New container"), hash_for_new_container_path,
-                                :class => 'btn-success' ) %>
+                                                      :class => 'btn-success') %>
 <% end %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
@@ -23,15 +23,14 @@
       <div class="tab-pane" id="<%= resource.name %>">
     <% end %>
     <% if resource.test_connection %>
-      <%= render 'list', :containers => resource.vms.to_a
-                                       .sort_by(&:name).paginate(:page     => params[:page],
-                                                                 :per_page => 10),
-                         :resource   => resource %>
+      <%= render 'list', :containers => resource.vms,
+                 :resource           => resource %>
     <% else %>
       <div class="alert alert-warning">
         <%= (_("Error connecting with the compute resource: <strong> %s </strong>") % resource.errors.messages[:base]).html_safe %>
       </div>
-    <% end%>
+    <% end %>
     </div>
   <% end %>
+  </div>
 </div>

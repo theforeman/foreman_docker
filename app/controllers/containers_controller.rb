@@ -8,7 +8,7 @@ class ContainersController < ::ApplicationController
                                           :search_repository]
 
   def index
-    @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
+    @container_resources = allowed_resources
     if @container_resources.empty?
       warning('You need a Compute Resource of type Docker to start managing containers')
       redirect_to new_compute_resource_path
@@ -139,7 +139,7 @@ class ContainersController < ::ApplicationController
   end
 
   def allowed_resources
-    ComputeResource.authorized(:view_compute_resources)
+    ForemanDocker::Docker.authorized(:view_compute_resources)
   end
 
   # To be replaced by find_resource after 1.6 support is deprecated

@@ -1,10 +1,6 @@
 module ContainersHelper
   def managed_icon(container, resource)
-    if managed?(container, resource)
-      '<span class="glyphicon glyphicon-check"></span>'.html_safe
-    else
-      '<span class="glyphicon glyphicon-unchecked"></span>'.html_safe
-    end
+    icon_text(managed?(container, resource) ? 'check' : 'unchecked')
   end
 
   def managed?(container, resource)
