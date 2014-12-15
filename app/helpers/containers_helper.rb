@@ -47,7 +47,7 @@ module ContainersHelper
     )
   end
 
-  def auto_complete_search(name, val, options = {})
+  def auto_complete_docker_search(name, val, options = {})
     addClass options, 'form-control'
     text_field_tag(name, val, options)
   end
