@@ -14,9 +14,15 @@ class Container < ActiveRecord::Base
                   :cpu_set, :cpu_shares, :memory, :tty, :attach_stdin, :registry_id,
                   :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes
 
+  def repository_pull_url
+    repo = tag.blank? ? repository_name : "#{repository_name}:#{tag}"
+    repo = registry.prefixed_url(repo) if registry
+    repo
+  end
+
   def parametrize
     { 'name'  => name, # key has to be lower case to be picked up by the Docker API
-      'Image' => tag.blank? ? repository_name : "#{repository_name}:#{tag}",
+      'Image' => repository_pull_url,
       'Tty'          => tty,                    'Memory'       => memory,
       'Entrypoint'   => entrypoint.try(:split), 'Cmd'          => command.try(:split),
       'AttachStdout' => attach_stdout,          'AttachStdin'  => attach_stdin,

@@ -18,4 +18,9 @@ class DockerRegistry < ActiveRecord::Base
         'taxable_taxonomies.taxable_type' => 'DockerRegistry',
         'taxable_taxonomies.taxable_id' => id).pluck(:id)
   end
+
+  def prefixed_url(image_name)
+    uri = URI(url)
+    "#{uri.hostname}:#{uri.port}/#{image_name}"
+  end
 end
