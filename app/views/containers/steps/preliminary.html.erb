@@ -12,6 +12,8 @@
         </div>
       <% end %>
     </div>
-    <%= render :partial => 'form_buttons' %>
+    <% if @container_resources.present? %>
+      <%= render :partial => 'form_buttons' %>
+    <% end %>
   <% end %>
 <% end %>
