@@ -11,7 +11,7 @@
       :help_block => link_to(_("learn more about CPU sets"), 'http://docs.fedoraproject.org/en-US/Fedora/17/html/Resource_Management_Guide/sec-cpuset.html') %>
     <%= text_f f, :cpu_shares, :class => "col-md-2", :label => _('CPU shares'),
       :placeholder => 'relative share of CPU time in cgroup',
-      :help_block => link_to(_("learn more about CPU shares"), 'http://docs.fedoraproject.org/en-US/Fedora/17/html/Resource_Management_Guide/sec-cpuset.html') %>
+      :help_block => link_to(_("learn more about CPU shares"), 'http://docs.fedoraproject.org/en-US/Fedora/17/html/Resource_Management_Guide/sec-cpu.html') %>
     <%= text_f f, :memory, :class => "col-md-2", :label => _('Memory'), :placeholder => '512m limits container memory usage to 512 MB' %>
     <%= render :partial => 'form_buttons' %>
   <% end %>
