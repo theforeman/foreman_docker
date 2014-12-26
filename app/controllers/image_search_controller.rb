@@ -30,15 +30,15 @@ class ImageSearchController < ::ApplicationController
   end
 
   def hub_image_exists?(terms)
-    @cr.exist?(terms)
+    @compute_resource.exist?(terms)
   end
 
   def hub_auto_complete_image_tags(terms)
-    @cr.tags(terms)
+    @compute_resource.tags(terms)
   end
 
   def hub_search_image(terms)
-    @cr.search(terms)
+    @compute_resource.search(terms)
   end
 
   def registry_image_exists?(term)
@@ -67,10 +67,10 @@ class ImageSearchController < ::ApplicationController
   end
 
   def find_resource
-    if !params[:registry_id].empty?
+    if params[:registry_id].present?
       @registry = DockerRegistry.authorized(:view_registries).find(params[:registry_id])
     else
-      @cr = ComputeResource.authorized(:view_compute_resources).find(params[:id])
+      @compute_resource = ComputeResource.authorized(:view_compute_resources).find(params[:id])
     end
   rescue ActiveRecord::RecordNotFound
     not_found

@@ -5,7 +5,7 @@ module DockerContainerWizardStates
                               :foreign_key => :docker_container_wizard_state_id
     delegate :compute_resource_id, :to => :wizard_state
 
-    validates :tag,   :presence => true
+    validates :tag,             :presence => true
     validates :repository_name, :presence => true
   end
 end

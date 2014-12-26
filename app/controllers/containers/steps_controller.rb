@@ -1,37 +1,24 @@
 module Containers
   class StepsController < ::ApplicationController
     include Wicked::Wizard
+    include ForemanDocker::FindContainer
 
     steps :preliminary, :image, :configuration, :environment
-    before_filter :find_state
+    before_filter :build_state
+    before_filter :set_form
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     def show
       case step
       when :preliminary
-        @container_resources = allowed_resources.select { |cr| cr.provider == 'Docker' }
-        @preliminary = @state.preliminary || @state.build_preliminary
-      when :image
-        @image = @state.image || @state.build_image
-      when :configuration
-        @configuration = @state.configuration || @state.build_configuration
-      when :environment
-        @environment = @state.environment || @state.build_environment
+        @container_resources = allowed_resources
       end
       render_wizard
     end
 
-    # rubocop:disable Metrics/MethodLength
     def update
       case step
-      when :preliminary
-        @state.create_preliminary!(params[:docker_container_wizard_states_preliminary])
-      when :image
-        @state.create_image!(params[:docker_container_wizard_states_image])
-      when :configuration
-        @state.create_configuration!(params[:docker_container_wizard_states_configuration])
       when :environment
-        @state.create_environment!(params[:docker_container_wizard_states_environment])
+        @state.create_environment(params[:"docker_container_wizard_states_#{step}"])
         container = Service::Containers.start_container!(@state)
         if container
           return redirect_to container_path(container)
@@ -46,14 +33,15 @@ module Containers
 
     private
 
-    def allowed_resources
-      ComputeResource.authorized(:view_compute_resources)
-    end
-
-    def find_state
+    def build_state
       @state = DockerContainerWizardState.find(params[:wizard_state_id])
+      @state.send(:"build_#{step}", params[:"docker_container_wizard_states_#{step}"])
     rescue ActiveRecord::RecordNotFound
       not_found
+    end
+
+    def set_form
+      instance_variable_set("@#{step}", @state.send(:"#{step}") || @state.send(:"build_#{step}"))
     end
   end
 end

@@ -1,5 +1,6 @@
-# rubocop:disable Metrics/ClassLength
 class ContainersController < ::ApplicationController
+  include ForemanDocker::FindContainer
+
   before_filter :find_container, :only => [:show, :commit]
 
   def index
@@ -14,13 +15,12 @@ class ContainersController < ::ApplicationController
   end
 
   def new
-    redirect_to wizard_state_step_path(
-                    :wizard_state_id => DockerContainerWizardState.create!.id,
-                    :id => :preliminary)
+    redirect_to wizard_state_step_path(:wizard_state_id => DockerContainerWizardState.create.id,
+                                       :id              => :preliminary)
   end
 
   def destroy
-    if resource_deletion
+    if container_deletion
       process_success(:success_redirect => containers_path,
                       :success_msg      => (_("Container %s is being deleted.") %
                                             @deleted_identifier))
@@ -61,7 +61,7 @@ class ContainersController < ::ApplicationController
     end
   end
 
-  def resource_deletion
+  def container_deletion
     # Unmanaged container - only present in Compute Resource
     if params[:compute_resource_id].present?
       @deleted_identifier  = params[:id]
@@ -82,19 +82,5 @@ class ContainersController < ::ApplicationController
   rescue => error
     logger.error "#{error.message} (#{error.class})\n#{error.backtrace.join("\n")}"
     false
-  end
-
-  def allowed_resources
-    ForemanDocker::Docker.authorized(:view_compute_resources)
-  end
-
-  # To be replaced by find_resource after 1.6 support is deprecated
-  def find_container
-    if params[:id].blank?
-      not_found
-      return
-    end
-    @container = Container.authorized("#{action_permission}_#{controller_name}".to_sym)
-                          .find(params[:id])
   end
 end
