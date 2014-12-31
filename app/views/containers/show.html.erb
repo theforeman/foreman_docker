@@ -43,6 +43,20 @@
               <td><%= _('Exposed ports') %></td>
               <td><%= @container.in_fog.exposed_ports %> </td>
             </tr>
+            <tr>
+              <td><%= _('Environment Variables') %></td>
+              <td>
+                <table id="environment_variables" class="table table-bordered" style="table-layout:fixed; word-wrap: break-word">
+                  <% @container.in_fog.attributes['config_env'].each do |environment_variable| %>
+                  <% pair = environment_variable.split("=") %>
+                    <tr>
+                      <td><b><%= pair.first %></b></td>
+                      <td><i><%= pair.second %></i></td>
+                    </tr>
+                  <% end %>
+                </table>
+              </td>
+            </tr>
             <% Taxonomy.enabled_taxonomies.each do |taxonomy| %>
               <tr>
                 <td><%= _(taxonomy.humanize) %></td>
