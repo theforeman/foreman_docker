@@ -18,6 +18,12 @@ module ContainersHelper
                           container_link_hash(container, resource)
   end
 
+  def link_to_taxonomies(taxonomies)
+    taxonomies.map do |taxonomy|
+      link_to(taxonomy)
+    end.join(' ')
+  end
+
   def container_link_hash(container, resource)
     if managed?(container, resource)
       hash_for_container_path(:id => Container.find_by_uuid(container.identity).id)

@@ -1,5 +1,6 @@
 class Container < ActiveRecord::Base
   include Authorizable
+  include Taxonomix
 
   belongs_to :compute_resource
   belongs_to :registry, :class_name => "DockerRegistry", :foreign_key => :registry_id

@@ -1,7 +1,7 @@
 require 'test_plugin_helper'
 
 class DockerRegistryTest < ActiveSupport::TestCase
-  test 'used_location_ids should return coorect location ids' do
+  test 'used_location_ids should return correct location ids' do
     location = FactoryGirl.build(:location)
     r = as_admin do
       FactoryGirl.create(:docker_registry, :locations => ([location]))
@@ -9,7 +9,7 @@ class DockerRegistryTest < ActiveSupport::TestCase
     assert r.used_location_ids.include?(location.id)
   end
 
-  test 'used_organization_ids should return coorect organization ids' do
+  test 'used_organization_ids should return correct organization ids' do
     organization = FactoryGirl.build(:organization)
     r = as_admin do
       FactoryGirl.create(:docker_registry, :organizations => ([organization]))

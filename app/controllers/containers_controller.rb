@@ -67,7 +67,7 @@ class ContainersController < ::ApplicationController
       @deleted_identifier  = params[:id]
       destroy_compute_resource_vm(params[:compute_resource_id], params[:id])
     else # Managed container
-      find_resource
+      find_container
       @deleted_identifier = @container.name
 
       destroy_compute_resource_vm(@container.compute_resource, @container.uuid) &&

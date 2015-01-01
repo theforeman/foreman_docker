@@ -9,7 +9,7 @@
       </a>
     <% end %>
     <%= button_tag(:type => 'submit', :class => "btn btn-primary pull-right") do %>
-      <% if step == :environment %>
+      <% if last_step? %>
         <%= _("Submit") %>
       <% else %>
         <%= _("Next") %>

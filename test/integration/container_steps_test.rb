@@ -6,6 +6,11 @@ class ContainerStepsTest < ActionDispatch::IntegrationTest
     assert has_selector?("div.alert", :text => 'Please add a new one')
   end
 
+  test 'shows taxonomies tabs'  do
+    visit new_container_path
+    assert has_selector?("a", :text => 'Locations')
+    assert has_selector?("a", :text => 'Organizations')
+  end
   # test 'clicking on search loads repositories' do
   #   Capybara.javascript_driver = :webkit
   #   container = FactoryGirl.create(:container)

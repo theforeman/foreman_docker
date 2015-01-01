@@ -43,7 +43,12 @@
               <td><%= _('Exposed ports') %></td>
               <td><%= @container.in_fog.exposed_ports %> </td>
             </tr>
-
+            <% Taxonomy.enabled_taxonomies.each do |taxonomy| %>
+              <tr>
+                <td><%= _(taxonomy.humanize) %></td>
+                <td><%= link_to_taxonomies(@container.send(:"#{taxonomy}")).html_safe %> </td>
+              </tr>
+            <% end %>
             <tr>
               <td><%= _('Running on') %></td>
               <td><%= link_to @container.compute_resource,

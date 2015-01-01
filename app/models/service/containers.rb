@@ -6,18 +6,20 @@ module Service
           # eagerly load environment variables
           state = DockerContainerWizardState.includes(:environment => [:environment_variables])
             .find(wizard_state.id)
-          state.environment_variables.each do |e|
-            r.environment_variables.build(
-                :name => e.name, :value => e.value, :priority => e.priority)
+          state.environment_variables.each do |environment_variable|
+            r.environment_variables.build :name     => environment_variable.name,
+                                          :value    => environment_variable.value,
+                                          :priority => environment_variable.priority
           end
         end
+        Taxonomy.enabled_taxonomies.each do |taxonomy|
+          container.send(:"#{taxonomy}=", wizard_state.preliminary.send(:"#{taxonomy}"))
+        end
 
-        started = start_container(container)
-        fail ActiveRecord::Rollback unless started
+        fail ActiveRecord::Rollback unless start_container(container)
 
         container.save!
         destroy_wizard_state(wizard_state)
-
         container
       end
     end

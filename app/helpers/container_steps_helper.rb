@@ -2,10 +2,7 @@ module ContainerStepsHelper
   def container_wizard(step)
     wizard_header(
       step,
-      _('Resource'),
-      _('Image'),
-      _('Configuration'),
-      _('Environment')
+      *wizard_steps.map { |s| s.to_s.humanize }
     )
   end
 
@@ -19,5 +16,13 @@ module ContainerStepsHelper
                         { :prompt => _("Select a registry") },
                         :class => "form-control", :disabled => registries.size == 0
     end
+  end
+
+  def last_step?
+    step == wizard_steps.last
+  end
+
+  def taxonomy_icon(taxonomy)
+    taxonomy == 'locations' ? 'globe' : 'briefcase'
   end
 end

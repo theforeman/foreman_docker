@@ -1,6 +1,20 @@
 <%= render :layout => 'title', :locals => { :step => 1 } do %>
-  <%= form_for @preliminary, :url => wizard_path, :method => :put do |f| %>
-    <div>
+<%= form_for @preliminary, :url => wizard_path, :method => :put do |f| %>
+  <ul class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a href="#primary" data-toggle="tab">
+      <span class="glyphicon glyphicon-tasks"></span>
+      <%= _("Compute resource") %>
+    </a></li>
+    <% Taxonomy.enabled_taxonomies.each do |taxonomy| %>
+      <li><a href="#<%= taxonomy %>" data-toggle="tab">
+        <span class="glyphicon glyphicon-<%= taxonomy_icon(taxonomy) %>">
+        </span>
+        <%= _(taxonomy.humanize) %>
+      </a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="primary">
       <% if @container_resources.present? %>
         <h3><%= _("Resource selection") %></h3>
         <%= _("Where do you want to deploy your container?:") %>
@@ -12,8 +26,10 @@
         </div>
       <% end %>
     </div>
-    <% if @container_resources.present? %>
-      <%= render :partial => 'form_buttons' %>
-    <% end %>
+    <%= render "taxonomies/loc_org_tabs", :f => f, :obj => @preliminary %>
+  </div>
+  <% if @container_resources.present? %>
+    <%= render :partial => 'form_buttons' %>
   <% end %>
+<% end %>
 <% end %>
