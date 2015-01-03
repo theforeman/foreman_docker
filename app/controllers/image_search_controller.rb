@@ -19,9 +19,13 @@ class ImageSearchController < ::ApplicationController
   end
 
   def search_repository
-    images = use_hub? ? hub_search_image(params[:search]) : registry_search_image(params[:search])
+    repositories = use_hub? ? hub_search_image(params[:search]) :
+                              registry_search_image(params[:search])
     respond_to do |format|
-      format.js { render :partial => 'repository_search_results', :locals => { :images => images } }
+      format.js do
+        render :partial => 'repository_search_results',
+               :locals  => { :repositories => repositories }
+      end
     end
   end
 
