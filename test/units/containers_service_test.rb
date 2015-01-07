@@ -13,6 +13,10 @@ class ContainersServiceTest <  ActiveSupport::TestCase
   end
 
   test 'removes current state after successful container creation' do
+    ret = OpenStruct.new(:id => 1)
+    ForemanDocker::Docker.any_instance.expects(:create_image).returns(ret).with do |subject|
+      subject.must_equal(:fromImage => "test:test")
+    end
     ForemanDocker::Docker.any_instance.expects(:create_container)
                                       .returns(OpenStruct.new(:uuid => 1))
     Service::Containers.start_container!(@state)

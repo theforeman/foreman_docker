@@ -16,12 +16,16 @@ module Service
           container.send(:"#{taxonomy}=", wizard_state.preliminary.send(:"#{taxonomy}"))
         end
 
-        fail ActiveRecord::Rollback unless start_container(container)
+        fail ActiveRecord::Rollback unless pull_image(container) && start_container(container)
 
         container.save!
         destroy_wizard_state(wizard_state)
         container
       end
+    end
+
+    def self.pull_image(container)
+      container.compute_resource.create_image(:fromImage => container.repository_pull_url)
     end
 
     def self.start_container(container)

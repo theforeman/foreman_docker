@@ -71,16 +71,21 @@ module ForemanDocker
     def create_container(args = {})
       options = vm_instance_defaults.merge(args)
       logger.debug("Creating container with the following options: #{options.inspect}")
-      ::Docker::Container.create(options)
-    rescue Excon::Errors::Error, ::Docker::Error::DockerError => e
-      logger.debug "Fog error: #{e.message}\n " + e.backtrace.join("\n ")
-      errors.add(:base, _("Error creating container. Check the Foreman logs: %s") % e.message.to_s)
-      false
+      docker_command do
+        ::Docker::Container.create(options)
+      end
+    end
+
+    def create_image(args = {})
+      logger.debug("Creating docker image with the following options: #{args.inspect}")
+      docker_command do
+        ::Docker::Image.create(args)
+      end
     end
 
     def vm_instance_defaults
       ActiveSupport::HashWithIndifferentAccess.new('name' => "foreman_#{Time.now.to_i}",
-                                                   'cmd' => ['/bin/bash'])
+                                                   'Cmd' => ['/bin/bash'])
     end
 
     def console(uuid)
@@ -103,6 +108,16 @@ module ForemanDocker
     end
 
     protected
+
+    def docker_command
+      yield
+    rescue Excon::Errors::Error, ::Docker::Error::DockerError => e
+      logger.debug "Fog error: #{e.message}\n " + e.backtrace.join("\n ")
+      errors.add(:base,
+                 _("Error creating communicating with Docker. Check the Foreman logs: %s") %
+                 e.message.to_s)
+      false
+    end
 
     def bootstrap(args)
       client.servers.bootstrap vm_instance_defaults.merge(args.to_hash)
