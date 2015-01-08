@@ -86,10 +86,6 @@ That's it. You're now ready to create and manage containers in your new Docker c
 | >= 1.5         | 0.0.1 - 0.0.3   |
 | >= 1.6         | 0.1.0 - 0.2.0   |
 
-## Known bugs
-* Unsaved new containers leave a dangling container object in the database
-* Power operations redirect to compute resource container view even for managed container
-
 ## How to contribute?
 
 Generally, follow the [Foreman guidelines](http://theforeman.org/contribute.html). For code-related contributions, fork this project and send a pull request with all changes. Some things to keep in mind:
