@@ -21,3 +21,6 @@ Metrics/MethodLength:
 
 StringLiterals:
   Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
