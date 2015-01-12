@@ -1,0 +1,187 @@
+2015-01-12	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.0.0
+
+2015-01-12	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* Fixes #8393: added support for basic auth for standalone registries
+
+2015-01-11	David Davis <daviddavis@redhat.com>
+	* Refs #7977 - Adjusting class length check in rubocop
+
+2015-01-08	Daniel Lobato García <elobatocs@gmail.com>
+	* Remove known bugs section from README
+
+2015-01-05	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* Fixes #8815 - Corrects variable reference in image search
+
+2015-01-02	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* fixes #8226 - shows environment variables on container display
+
+2015-01-02	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8485 - Taxable containers
+
+2014-12-29	Partha Aji <paji@redhat.com>
+	* Fixes #8637 - local registry container support
+
+2014-12-26	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* fixes #8342 - disables form buttons on new container page in absence of docker compute resources
+
+2014-12-26	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #7867 - Container wizard state refactor
+
+2014-12-24	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #7867: container creation wizard now tracks state in dedicated objects
+
+2014-12-24	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* fixes #8789 - adds correct link for information about cpu shares
+
+2014-12-23	Ohad Levy <ohadlevy@gmail.com>
+	* fixes #8719 - remove n+1 queries on container index
+
+2014-12-22	Ohad Levy <ohadlevy@gmail.com>
+	* fixes #8718 - refactor container index
+
+2014-12-19	David Davis <daviddavis@redhat.com>
+	* Fixes #8632 - Move docker tables out of foreman-docker
+
+2014-12-17	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #8717 - Fix cop line too long
+
+2014-12-17	Ohad Levy <ohadlevy@gmail.com>
+	* fixes #8716 auto_complete helper now has a unique name.
+
+2014-12-05	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8226 - Support environment variables creation
+
+2014-12-04	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* Fixes #7647: Added support for external registries
+
+2014-11-20	David Davis <daviddavis@redhat.com>
+	* Fixes #8375 - Not validating tag uniqueness per image
+
+2014-11-14	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8398 - Authentication error returns 500
+
+2014-11-13	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8329 - Search images in the hub
+
+2014-11-03	Daniel Lobato García <elobatocs@gmail.com>
+	* Add rubygem badges
+
+2014-11-01	Daniel Lobato <elobatocs@gmail.com>
+	* Remove rake and fog dependencies
+	* Bump version to 0.2.0
+	* Fixes #8236: 1.6 compatibility
+
+2014-10-28	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8140: Memory and CPU set are strings
+	* Fixes #8096 #8097: Improve cpuset cpushare form
+	* Fixes #7872 - Create container without Fog to assign name
+
+2014-10-27	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8124 - Entrypoint sent to API
+	* Fixes #8123 - Faster auto-complete with spinner
+
+2014-10-25	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version
+
+2014-10-24	Dominic Cleal <dcleal@redhat.com>
+	* fixes #8100 - make engine and asset precompilation name consistent
+
+2014-10-24	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8036: Validate images and tags
+	* Fixes #8035: Commit container changes
+
+2014-10-23	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* Fixes #7870: support for auto-complete in image search
+
+2014-10-23	pujan14 <pujan14@users.noreply.github.com>
+	* Update README.md
+
+2014-10-22	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8034 - Console support for compute resources
+	* Refs #8004 - rubocop line is too long
+
+2014-10-22	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* Fixes #8031 - container model initialization is no longer order-dependent
+
+2014-10-22	Daniel Lobato García <elobatocs@gmail.com>
+	* Refs #8004 - fix i18n
+
+2014-10-21	Daniel Lobato García <elobatocs@gmail.com>
+	* Refs #8004 - i18n delete containers message
+
+2014-10-21	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7960 - Initial console logs support
+	* Fixes #7967 - Show processes running in a container
+	* Fixes #8003 - Wizard finish redirects to container
+	* Fixes #8004 - Delete managed containers
+
+2014-10-20	David Davis <daviddavis@redhat.com>
+	* Fixes #7997 - Fixing foreign key on tags relationship for images
+
+2014-10-20	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7986 - Save container UUID and display managed containers
+
+2014-10-18	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #7642 - Refactor image/tag and tests
+
+2014-10-18	David Davis <daviddavis@redhat.com>
+	* Refs #7642 - Create docker image and tag models
+
+2014-10-17	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #7977 - Chain rubocop to jenkins
+
+2014-10-17	David Davis <daviddavis@redhat.com>
+	* Fixes #7977 - Enabling rubocop for foreman-docker
+
+2014-10-15	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7948 - order containers index by name
+	* Fixes #7895 - Deleted containers message and redirect
+
+2014-10-13	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7924 - Chain foreman-docker tests to Jenkins
+	* Fixes #7912 - Wizard path error and tests
+
+2014-10-10	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7893 - Restrict routes and create permissions
+
+2014-10-09	Daniel Lobato <elobatocs@gmail.com>
+	* Rubocop support and config
+	* Containers wizard and index
+	* Controllers and engine for containers
+	* Clean up Gemfile and gitignore
+
+2014-09-03	Daniel Lobato <elobatocs@gmail.com>
+	* Add docker RABL to API
+	* Show container info even if entrypoint is empty
+	* Show exposed ports in container view
+
+2014-08-26	Dominic Cleal <dominic@computerkb.co.uk>
+	* Merge pull request #5 from Tombar/master
+
+2014-08-25	Martin Loy <martinloy.uy@gmail.com>
+	* update gem git reference to official theforeman repo
+
+2014-04-30	Dominic Cleal <dcleal@redhat.com>
+	* Add RPM info
+
+2014-04-22	Ohad Levy <ohadlevy@gmail.com>
+	* updated version requirement in readme.
+
+2014-04-09	Amos Benari <abenari@redhat.com>
+	* fix homepage reference and bump version
+
+2014-04-08	Amos Benari <abenari@redhat.com>
+	* bump version
+
+2014-04-08	abenari <abenari@redhat.com>
+	* Merge pull request #2 from domcleal/licence
+	* Merge pull request #1 from domcleal/master
+
+2014-04-03	Dominic Cleal <dcleal@redhat.com>
+	* Change licence to GPLv3+ to match Foreman
+	* Update to pass CR class to plugin registration
+
+2014-03-25	Amos Benari <abenari@redhat.com>
+	* initial commit
+
