@@ -24,6 +24,10 @@ module ForemanDocker
       16 * 1024 * 1024 * 1024
     end
 
+    def max_cpu_count
+      ::Docker.info['NCPU'] || 1
+    end
+
     def available_images
       client.images.all
     end
