@@ -10,7 +10,7 @@ module ContainerStepsHelper
     registries = DockerRegistry.with_taxonomy_scope_override(@location, @organization)
       .authorized(:view_registries)
     field(f, 'docker_container_wizard_states_image[registry_id]', :label => _("Registry")) do
-      collection_select :wizard_states_image, :registry_id,
+      collection_select :docker_container_wizard_states_image, :registry_id,
                         registries,
                         :id, :name,
                         { :prompt => _("Select a registry") },

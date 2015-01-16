@@ -1,5 +1,5 @@
 <%= render :layout => 'title', :locals => { :step => 4 } do %>
-  <%= form_for @environment, :url => wizard_path, :method => :put do |f| %>
+  <%= form_for @docker_container_wizard_states_environment, :url => wizard_path, :method => :put do |f| %>
     <div class='row'>
       <div class='col-md-6 col-md-push-7'>
         <h3><%= _("Shell") %></h3>
@@ -10,7 +10,7 @@
       </div>
       <div class='col-md-6 col-md-pull-6'>
         <h3><%= _("Environment variables") %></h3>
-        <%= f.fields_for :environment_variables, @environment.environment_variables do |builder| %>
+        <%= f.fields_for :environment_variables, @docker_container_wizard_states_environment.environment_variables do |builder| %>
           <%= render 'foreman_docker/common_parameters/environment_variable', :f => builder %>
         <% end %>
         <%= link_to_add_fields(_("Add environment variable"), f, :environment_variables,

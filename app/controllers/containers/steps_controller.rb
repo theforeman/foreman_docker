@@ -5,8 +5,9 @@ module Containers
 
     steps :preliminary, :image, :configuration, :environment
 
-    before_filter :build_state
-    before_filter :set_form
+    before_filter :find_state
+    before_filter :build_state, :only => [:update]
+    before_filter :set_form, :only => [:show]
 
     def show
       @container_resources = allowed_resources if step == :preliminary
@@ -23,15 +24,20 @@ module Containers
 
     private
 
-    def build_state
+    def find_state
       @state = DockerContainerWizardState.find(params[:wizard_state_id])
-      @state.send(:"build_#{step}", params[:"docker_container_wizard_states_#{step}"])
     rescue ActiveRecord::RecordNotFound
       not_found
     end
 
+    def build_state
+      @state.send(:"build_#{step}", params[:"docker_container_wizard_states_#{step}"])
+    end
+
     def set_form
-      instance_variable_set("@#{step}", @state.send(:"#{step}") || @state.send(:"build_#{step}"))
+      instance_variable_set(
+          "@docker_container_wizard_states_#{step}",
+          @state.send(:"#{step}") || @state.send(:"build_#{step}"))
     end
 
     def create_container

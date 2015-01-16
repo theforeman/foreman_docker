@@ -1,5 +1,5 @@
 <%= render :layout => 'title', :locals => { :step => 3 } do %>
-  <%= form_for @configuration, :url => wizard_path, :method => :put do |f| %>
+  <%= form_for @docker_container_wizard_states_configuration, :url => wizard_path, :method => :put do |f| %>
     <h3><%= _("Basic options") %></h3>
     <%= text_f f, :name,       :size => 'col-md-4' %>
     <%= text_f f, :command,    :size => 'col-md-4' %>

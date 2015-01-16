@@ -18,7 +18,7 @@ $(document).ready(function() {
   });
 
   $('#hub_tab').click( function() {
-      $('#wizard_states_image_registry_id').val('');
+      $('#docker_container_wizard_states_image_registry_id').val('');
   });
 });
 
@@ -26,7 +26,7 @@ function autoCompleteRepo(item) {
   $.ajax({
     type:'get',
     url: $(item).attr('data-url'),
-    data: { search: item.val(), registry_id: $('#wizard_states_image_registry_id').val() },
+    data: { search: item.val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
     //data:'search=' + item.val(),
     success:function (result) {
       if(result == 'true'){
@@ -52,7 +52,7 @@ function setAutocompleteTags() {
   tag.addClass('tags-autocomplete-loading');
   tag.val('');
   var source = [];
-  $.getJSON( tag.data("url"), { search: $('#search').val(), registry_id: $('#wizard_states_image_registry_id').val() },
+  $.getJSON( tag.data("url"), { search: $('#search').val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
       function(data) {
         $('#searching_spinner').hide();
         tag.removeClass('tags-autocomplete-loading');
@@ -72,7 +72,7 @@ function searchRepo(item) {
     type:'get',
     dataType:'text',
     url: $(item).attr('data-url'),
-    data: { search: $('#search').val(), registry_id: $('#wizard_states_image_registry_id').val() },
+    data: { search: $('#search').val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
     success: function (result) {
       $('#repository_search_results').html(result);
     },

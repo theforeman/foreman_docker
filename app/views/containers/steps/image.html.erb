@@ -3,21 +3,27 @@
 
 <%= render :layout => 'title', :locals => { :step => 2 } do %>
     <ul class="nav nav-tabs" data-tabs="tabs">
-      <li class="active"><a href="#hub" data-toggle="tab" id="hub_tab">
+      <li class=<%= ("active" if @docker_container_wizard_states_image.registry_id.nil?) %>><a href="#hub" data-toggle="tab" id="hub_tab">
         <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("Docker hub") %>
       </a></li>
-      <li><a href="#registry" data-toggle="tab" id="registry_tab">
+      <li class=<%= ("active" unless @docker_container_wizard_states_image.registry_id.nil?) %>><a href="#registry" data-toggle="tab" id="registry_tab">
         <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("External registry") %>
       </a></li>
     </ul>
 
-    <%= form_for @image, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
+    <%= form_for @docker_container_wizard_states_image, :class => 'form-horizontal', :url => wizard_path, :method => :put do |f| %>
         <div class="tab-content">
-          <div class="tab-pane active" id="hub">
-          </div>
-          <div class="tab-pane" id="registry">
+          <% if @docker_container_wizard_states_image.registry_id.nil? %>
+              <div class="tab-pane active" id="hub">
+              </div>
+              <div class="tab-pane" id="registry">
+          <% else %>
+              <div class="tab-pane" id="hub">
+              </div>
+              <div class="tab-pane active" id="registry">
+          <% end %>
             <div class="input-group col-md-6">
               <%= select_registry f %>
             </div>
@@ -28,7 +34,7 @@
               <div class="input-group">
 
                 <%= auto_complete_docker_search('docker_container_wizard_states_image[repository_name]', '',
-                                         :'data-url'  => auto_complete_repository_name_image_search_path(@image.compute_resource_id),
+                                         :'data-url'  => auto_complete_repository_name_image_search_path(@docker_container_wizard_states_image.compute_resource_id),
                                          :value       => f.object.repository_name.present? ? f.object.repository_name : '',
                                          :id          => :search,
                                          :focus_on_load => true,
@@ -38,7 +44,7 @@
                   <%= button_tag(:class      => 'btn btn-default',
                                  :type       => 'button',
                                  :id         => 'search_repository',
-                                 :'data-url' => search_repository_image_search_path(@image.compute_resource_id),
+                                 :'data-url' => search_repository_image_search_path(@docker_container_wizard_states_image.compute_resource_id),
                                  :onclick    => 'searchRepo(this)') do %>
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
@@ -47,7 +53,7 @@
             </div>
             <%= text_f f, :tag,
                           :id         => 'tag',
-                          :'data-url' => auto_complete_image_tag_image_search_path(@image.compute_resource_id) %>
+                          :'data-url' => auto_complete_image_tag_image_search_path(@docker_container_wizard_states_image.compute_resource_id) %>
             <div class="col-md-12">
               <div id='searching_spinner' class='col-md-offset-3 hide'>
                 <span id='waiting_text'>

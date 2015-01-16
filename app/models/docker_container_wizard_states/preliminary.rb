@@ -7,5 +7,17 @@ module DockerContainerWizardStates
                               :foreign_key => :docker_container_wizard_state_id
 
     validates :compute_resource_id, :presence => true
+
+    def used_location_ids
+      Location.joins(:taxable_taxonomies).where(
+          'taxable_taxonomies.taxable_type' => 'DockerContainerWizardStates::Preliminary',
+          'taxable_taxonomies.taxable_id' => id).pluck(:id)
+    end
+
+    def used_organization_ids
+      Organization.joins(:taxable_taxonomies).where(
+          'taxable_taxonomies.taxable_type' => 'DockerContainerWizardStates::Preliminary',
+          'taxable_taxonomies.taxable_id' => id).pluck(:id)
+    end
   end
 end
