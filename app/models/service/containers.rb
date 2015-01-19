@@ -1,6 +1,10 @@
 module Service
   class Containers
-    def self.start_container!(wizard_state)
+    def errors
+      @errors ||= []
+    end
+
+    def start_container!(wizard_state)
       ActiveRecord::Base.transaction do
         container = Container.new(wizard_state.container_attributes) do |r|
           # eagerly load environment variables
@@ -24,17 +28,21 @@ module Service
       end
     end
 
-    def self.pull_image(container)
-      ForemanTasks.async_task(::Service::Actions::ComputeResource::Pull, container)
+    def pull_image(container)
+      container.compute_resource.create_image(:fromImage => container.repository_pull_url)
     end
 
-    def self.start_container(container)
+    def start_container(container)
       started = container.compute_resource.create_container(container.parametrize)
-      container.uuid = started.id if started
+      if started
+        container.uuid = started.id
+      else
+        errors << container.compute_resource.errors[:base]
+      end
       started
     end
 
-    def self.destroy_wizard_state(wizard_state)
+    def destroy_wizard_state(wizard_state)
       wizard_state.destroy
       DockerContainerWizardState.destroy_all(["updated_at < ?", (Time.now - 24.hours)])
     end

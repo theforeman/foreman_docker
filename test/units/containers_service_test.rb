@@ -7,7 +7,7 @@ class ContainersServiceTest <  ActiveSupport::TestCase
                           :locations           => [taxonomies(:location1)],
                           :organizations       => [taxonomies(:organization1)])
       s.build_image(:repository_name => 'test', :tag => 'test')
-      s.build_configuration(:name => 'test')
+      s.build_configuration(:name => 'test', :command => '/bin/bash')
       s.build_environment(:tty => false)
     end
   end
@@ -19,7 +19,7 @@ class ContainersServiceTest <  ActiveSupport::TestCase
     end
     ForemanDocker::Docker.any_instance.expects(:create_container)
                                       .returns(OpenStruct.new(:uuid => 1))
-    Service::Containers.start_container!(@state)
+    Service::Containers.new.start_container!(@state)
     assert_equal DockerContainerWizardState.where(:id => @state.id).count, 0
   end
 end

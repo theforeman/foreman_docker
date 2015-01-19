@@ -31,7 +31,8 @@ module Containers
     end
 
     def build_state
-      @state.send(:"build_#{step}", params[:"docker_container_wizard_states_#{step}"])
+      s = @state.send(:"build_#{step}", params[:"docker_container_wizard_states_#{step}"])
+      instance_variable_set("@docker_container_wizard_states_#{step}", s)
     end
 
     def set_form
@@ -42,12 +43,15 @@ module Containers
 
     def create_container
       @state.send(:"create_#{step}", params[:"docker_container_wizard_states_#{step}"])
-      container = Service::Containers.start_container!(@state)
+      container = (service = Service::Containers.new).start_container!(@state)
       if container.present?
         process_success(:object => container, :success_redirect => container_path(container))
       else
-        @environment = @state.environment
-        process_error(:object => @state.environment, :render => 'environment')
+        @docker_container_wizard_states_environment = @state.environment
+        process_error(
+            :error_msg => service.errors,
+            :object => @state.environment,
+            :render => 'environment')
       end
     end
   end
