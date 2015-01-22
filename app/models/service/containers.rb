@@ -25,7 +25,7 @@ module Service
     end
 
     def self.pull_image(container)
-      container.compute_resource.create_image(:fromImage => container.repository_pull_url)
+      ForemanTasks.async_task(::Service::Actions::ComputeResource::Pull, container)
     end
 
     def self.start_container(container)
