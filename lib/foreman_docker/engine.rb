@@ -14,11 +14,6 @@ module ForemanDocker
     config.autoload_paths += Dir["#{config.root}/app/controllers/concerns"]
     config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
 
-    initializer "foreman_docker.require_dynflow",
-                :before => "foreman_tasks.initialize_dynflow" do |app|
-      ForemanTasks.dynflow.require!
-    end
-
     initializer 'foreman_docker.load_app_instance_data' do |app|
       app.config.paths['db/migrate'] += ForemanDocker::Engine.paths['db/migrate'].existent
     end
