@@ -77,7 +77,6 @@ module ForemanDocker
                                        :search_repository]
         end
       end
-
     end
 
     rake_tasks do

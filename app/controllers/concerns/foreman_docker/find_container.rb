@@ -9,7 +9,7 @@ module ForemanDocker
         return
       end
       @container = Container.authorized("#{action_permission}_#{controller_name}".to_sym)
-                            .find(params[:id])
+                   .find(params[:id])
     end
 
     def allowed_resources

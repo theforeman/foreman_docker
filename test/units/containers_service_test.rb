@@ -18,7 +18,7 @@ class ContainersServiceTest <  ActiveSupport::TestCase
       subject.must_equal(:fromImage => "test:test")
     end
     ForemanDocker::Docker.any_instance.expects(:create_container)
-                                      .returns(OpenStruct.new(:uuid => 1))
+      .returns(OpenStruct.new(:uuid => 1))
     Service::Containers.new.start_container!(@state)
     assert_equal DockerContainerWizardState.where(:id => @state.id).count, 0
   end

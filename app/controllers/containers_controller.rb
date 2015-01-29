@@ -42,10 +42,10 @@ class ContainersController < ::ApplicationController
 
     process_success :success_redirect => :back,
                     :success_msg      => _("%{container} commit was successful") %
-                                         { :container => @container }
+                      { :container => @container }
   rescue => e
     process_error :redirect => :back, :error_msg => _("Failed to commit %{container}: %{e}") %
-                                                    { :container => @container, :e => e }
+      { :container => @container, :e => e }
   end
 
   private
@@ -71,13 +71,13 @@ class ContainersController < ::ApplicationController
       @deleted_identifier = @container.name
 
       destroy_compute_resource_vm(@container.compute_resource, @container.uuid) &&
-      @container.destroy
+        @container.destroy
     end
   end
 
   def destroy_compute_resource_vm(resource_id, uuid)
     @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms)
-                                         .find(resource_id)
+                          .find(resource_id)
     @container_resource.destroy_vm(uuid)
   rescue => error
     logger.error "#{error.message} (#{error.class})\n#{error.backtrace.join("\n")}"

@@ -4,7 +4,7 @@ class RegistriesController < ::ApplicationController
 
   def index
     @registries = DockerRegistry.search_for(params[:search], :order => params[:order])
-      .paginate :page => params[:page]
+                  .paginate :page => params[:page]
   end
 
   def new

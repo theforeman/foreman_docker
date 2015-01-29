@@ -7,9 +7,10 @@ module DockerContainerWizardStates
     # that forces validation of reference_id. This will fail on new records as
     # validations are executed before parent and children records have been persisted.
     has_many :environment_variables, :dependent  => :destroy, :foreign_key => :reference_id,
-             :inverse_of => :environment,
-             :class_name => 'DockerContainerWizardStates::EnvironmentVariable',
-             :validate => false
+                                     :inverse_of => :environment,
+                                     :class_name =>
+                                       'DockerContainerWizardStates::EnvironmentVariable',
+                                     :validate => false
     include ::ParameterValidators
 
     accepts_nested_attributes_for :environment_variables, :allow_destroy => true

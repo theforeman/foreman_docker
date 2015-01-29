@@ -20,5 +20,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'docker-api', '~> 1.13'
   s.add_dependency 'wicked', '~> 1.1'
-  s.add_development_dependency 'rubocop', '~> 0.26'
 end

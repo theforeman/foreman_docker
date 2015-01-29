@@ -10,7 +10,7 @@ module ContainersHelper
   def uuids_in_resource(resource)
     @uuids_in_resource ||= {}
     @uuids_in_resource[resource.id] ||= Container.where(:compute_resource_id => resource.id)
-                                                 .pluck(:uuid)
+                                        .pluck(:uuid)
   end
 
   def link_to_container(container, resource)

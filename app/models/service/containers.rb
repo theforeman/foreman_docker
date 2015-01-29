@@ -9,7 +9,7 @@ module Service
         container = Container.new(wizard_state.container_attributes) do |r|
           # eagerly load environment variables
           state = DockerContainerWizardState.includes(:environment => [:environment_variables])
-            .find(wizard_state.id)
+                  .find(wizard_state.id)
           state.environment_variables.each do |environment_variable|
             r.environment_variables.build :name     => environment_variable.name,
                                           :value    => environment_variable.value,

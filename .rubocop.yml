@@ -24,3 +24,6 @@ StringLiterals:
 
 Metrics/ClassLength:
   Max: 200
+
+Metrics/AbcSize:
+  Enabled: false # should we turn this on?
