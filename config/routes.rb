@@ -11,10 +11,34 @@ Rails.application.routes.draw do
   end
 
   resources :image_search, :only => [] do
-    get :auto_complete_repository_name, :on => :member
-    get :auto_complete_image_tag, :on => :member
-    get :search_repository, :on => :member
+    member do
+      get :auto_complete_repository_name
+      get :auto_complete_image_tag
+      get :search_repository
+    end
   end
 
-  resources :registries, :only => [:index, :new, :create, :update, :destroy, :edit]
+  resources :registries, :except => [:show]
+
+  scope :foreman_docker, :path => '/docker' do
+    namespace :api, :defaults => { :format => 'json' } do
+      scope "(:apiv)", :module => :v2, :defaults => { :apiv => 'v2' }, :apiv => /v2/,
+                       :constraints => ApiConstraints.new(:version => 2) do
+        resources :containers, :only => [:index, :create, :show, :destroy] do
+          member do
+            get :logs
+            put :power
+          end
+        end
+        resources :compute_resources, :only => [] do
+          resources :containers, :only => [:index, :create, :show, :destroy] do
+            member do
+              get :logs
+              put :power
+            end
+          end
+        end
+      end
+    end
+  end
 end

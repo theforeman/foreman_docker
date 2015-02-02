@@ -57,12 +57,20 @@ module ForemanDocker
         end
 
         security_block :containers do
-          permission :view_containers,    :containers         => [:index, :show]
-          permission :commit_containers,  :containers         => [:commit]
-          permission :create_containers,  :'containers/steps' => [:show, :update],
-                                          :containers         => [:new]
-          permission :destroy_containers, :containers         => [:destroy]
-          permission :power_compute_resources_vms, :containers => [:power]
+          permission :view_containers,
+                     :containers          => [:index, :show],
+                     :'api/v2/containers' => [:index, :show, :logs]
+          permission :commit_containers, :containers => [:commit]
+          permission :create_containers,
+                     :'containers/steps'  => [:show, :update],
+                     :containers          => [:new],
+                     :'api/v2/containers' => [:create, :power]
+          permission :destroy_containers,
+                     :containers          => [:destroy],
+                     :'api/v2/containers' => [:destroy]
+          permission :power_compute_resources_vms,
+                     :containers          => [:power],
+                     :'api/v2/containers' => [:create, :power]
         end
 
         security_block :registries do
@@ -76,6 +84,26 @@ module ForemanDocker
                      :image_search => [:auto_complete_repository_name,
                                        :auto_complete_image_tag,
                                        :search_repository]
+        end
+
+        # apipie API documentation
+        # Only available in 1.8, otherwise it has to be in the initializer below
+        if SETTINGS[:version].to_s.include?('develop') ||
+           Gem::Version.new(SETTINGS[:version]) >= Gem::Version.new('1.8')
+          apipie_documented_controllers [
+            "#{ForemanDocker::Engine.root}/app/controllers/api/v2/*.rb"]
+        end
+      end
+    end
+
+    initializer "foreman_docker.apipie" do
+      # this condition is here for compatibility reason to work with Foreman 1.4.x
+      # Also need to handle the reverse of the 1.8 method above
+      unless SETTINGS[:version].to_s.include?('develop') ||
+             Gem::Version.new(SETTINGS[:version]) >= Gem::Version.new('1.8')
+        if Apipie.configuration.api_controllers_matcher.is_a?(Array)
+          Apipie.configuration.api_controllers_matcher <<
+            "#{ForemanDocker::Engine.root}/app/controllers/api/v2/*.rb"
         end
       end
     end

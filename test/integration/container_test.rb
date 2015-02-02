@@ -8,6 +8,7 @@ class ContainerIntegrationTest < ActionDispatch::IntegrationTest
 
   context 'available compute resource' do
     test 'shows containers list if compute resource is available' do
+      Fog.mock!
       ComputeResource.any_instance.stubs(:vms).returns([])
       FactoryGirl.create(:docker_cr)
       visit containers_path
