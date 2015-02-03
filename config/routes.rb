@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :containers, :only => [:index, :new, :show, :destroy] do
     member do
       post :commit
+      put :power
     end
   end
 

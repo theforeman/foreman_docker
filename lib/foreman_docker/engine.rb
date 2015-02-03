@@ -62,6 +62,7 @@ module ForemanDocker
           permission :create_containers,  :'containers/steps' => [:show, :update],
                                           :containers         => [:new]
           permission :destroy_containers, :containers         => [:destroy]
+          permission :power_compute_resources_vms, :containers => [:power]
         end
 
         security_block :registries do

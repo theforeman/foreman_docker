@@ -1,7 +1,7 @@
 class ContainersController < ::ApplicationController
   include ForemanDocker::FindContainer
 
-  before_filter :find_container, :only => [:show, :commit]
+  before_filter :find_container, :only => [:show, :commit, :power]
 
   def index
     @container_resources = allowed_resources
@@ -48,6 +48,28 @@ class ContainersController < ::ApplicationController
       { :container => @container, :e => e }
   end
 
+  def power
+    compute_resource = @container.compute_resource
+    @docker_container = compute_resource.find_vm_by_uuid(@container.uuid)
+    run_container_action(@docker_container.ready? ? :stop : :start)
+  end
+
+  def run_container_action(action)
+    if @docker_container.send(action)
+      @docker_container.reload
+      notice _("%{vm} is now %{vm_state}") %
+        { :vm => @docker_container, :vm_state => @docker_container.state.capitalize }
+      redirect_to containers_path(:id => @container.id)
+    else
+      error _("failed to %{action} %{vm}") % { :action => _(action), :vm => @docker_container }
+      redirect_to :back
+    end
+    # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
+  rescue => e
+    error _("Error - %{message}") % { :message => _(e.message) }
+    redirect_to :back
+  end
+
   private
 
   def action_permission
@@ -56,6 +78,16 @@ class ContainersController < ::ApplicationController
       :view
     when 'commit'
       :commit
+    when 'power'
+      :power_compute_resources_vms
+    else
+      super
+    end
+  end
+
+  def current_permission
+    if params[:action] == 'power'
+      :power_compute_resources_vms
     else
       super
     end

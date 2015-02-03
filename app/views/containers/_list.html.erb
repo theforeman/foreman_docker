@@ -26,7 +26,7 @@
       <td class="hidden-tablet hidden-xs text-center"><%= link_to resource, compute_resource_path(resource) %> </td>
       <td class="hidden-tablet hidden-xs text-center"><%= managed_icon(container, resource) %></td>
       <% @compute_resource = resource %>
-      <td><%= action_buttons(vm_power_action(container),
+      <td><%= action_buttons(container_power_action(container),
                              display_delete_if_authorized(hash_for_container_path(:compute_resource_id => resource,
                                                           :id => container.id).
                                                           merge(:auth_object => resource, :auth_action => 'destroy',

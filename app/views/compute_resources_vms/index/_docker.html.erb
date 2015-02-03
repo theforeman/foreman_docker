@@ -20,7 +20,7 @@
       <td> <%= vm.attributes['status'] %> </td>
       <td> <span <%= vm_power_class(vm.ready?) %>> <%= vm_state(vm) %></span> </td>
       <td>
-        <%= action_buttons(vm_power_action(vm),
+        <%= action_buttons(container_power_action(vm),
                            display_delete_if_authorized(hash_for_compute_resource_vm_path(:compute_resource_id => @compute_resource, :id => vm.id))) %>
       </td>
 
