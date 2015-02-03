@@ -18,8 +18,8 @@
       <td class="ellipsis text-center"><%= link_to_container(container, resource) %></td>
       <td class="hidden-tablet hidden-xs text-center">
         <span <%= vm_power_class(container.ready?) %>><%= vm_state(container) %></span></td>
-      <td class="hidden-tablet hidden-xs text-center"><%= trunc(container.image_friendly_name) %></td>
-      <td class="hidden-tablet hidden-xs text-center"><%= trunc(container.command) %></td>
+      <td class="hidden-tablet hidden-xs text-center"><%= trunc_with_tooltip(container.image_friendly_name) %></td>
+      <td class="hidden-tablet hidden-xs text-center"><%= trunc_with_tooltip(container.command) %></td>
       <td class="hidden-tablet hidden-xs text-center">
         <span class="glyphicon glyphicon-time"></span> <%= container.ready? ? time_ago_in_words(container.started_at) : "N/A" %>
       </td>
