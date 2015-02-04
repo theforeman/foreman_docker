@@ -82,13 +82,17 @@ module ForemanDocker
     rake_tasks do
       load "#{ForemanDocker::Engine.root}/lib/foreman_docker/tasks/test.rake"
     end
-  end
 
-  # extend fog docker server and image models.
-  require 'fog/fogdocker/models/compute/server'
-  require 'fog/fogdocker/models/compute/image'
-  require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/server', __FILE__)
-  require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/image', __FILE__)
-  Fog::Compute::Fogdocker::Server.send(:include, ::FogExtensions::Fogdocker::Server)
-  Fog::Compute::Fogdocker::Image.send(:include, ::FogExtensions::Fogdocker::Image)
+    require 'fog/fogdocker/models/compute/server'
+    require 'fog/fogdocker/models/compute/image'
+    require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/server',
+                             __FILE__)
+    require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/image',
+                             __FILE__)
+    config.to_prepare do
+      Fog::Compute::Fogdocker::Server.send(:include, ::FogExtensions::Fogdocker::Server)
+      Fog::Compute::Fogdocker::Image.send(:include, ::FogExtensions::Fogdocker::Image)
+      ::Taxonomy.send(:include, ForemanDocker::TaxonomyExtensions)
+    end
+  end
 end
