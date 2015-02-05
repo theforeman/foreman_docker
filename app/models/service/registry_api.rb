@@ -6,8 +6,8 @@ module Service
     def initialize(params = {})
       config = DEFAULTS.merge(params)
       uri = URI(config.delete(:url))
-      uri.user = config.delete(:user)
-      uri.password = config.delete(:password)
+      uri.user = config.delete(:user) unless config[:user].blank?
+      uri.password = config.delete(:password) unless config[:password].blank?
       @config = config.merge(:url => uri.to_s)
     end
 
