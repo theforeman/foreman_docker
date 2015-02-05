@@ -1,3 +1,31 @@
+2015-02-05	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.0.1
+	* Fixes #9177 - 1.7 compatibility fixes
+
+2015-02-03	Partha Aji <paji@redhat.com>
+	* refs #8963 - Renaming truncs to trunc with tool tips
+
+2015-01-29	David Davis <daviddavis@redhat.com>
+	* Fixes #9159 - Fix rubocop 0.28.0 errors
+
+2015-01-28	Daniel Lobato <elobatocs@gmail.com>
+	* Revert "Fixes #8409 - Pull docker image asynchronously"
+
+2015-01-28	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #9033: errors encountered in new container wizard are being shown now
+
+2015-01-22	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #8409 - Pull docker image asynchronously
+
+2015-01-20	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #8784: defines max_cpu_count for docker compute resource
+
+2015-01-19	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #9004: wizard moves correctly between persisted states now
+
+2015-01-19	Partha Aji <paji@redhat.com>
+	* Refs #8409 - Partially addressing pull before create container
+
 2015-01-12	Daniel Lobato <elobatocs@gmail.com>
 	* Bump version to 1.0.0
 
