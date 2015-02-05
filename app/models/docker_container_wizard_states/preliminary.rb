@@ -11,13 +11,13 @@ module DockerContainerWizardStates
     def used_location_ids
       Location.joins(:taxable_taxonomies).where(
           'taxable_taxonomies.taxable_type' => 'DockerContainerWizardStates::Preliminary',
-          'taxable_taxonomies.taxable_id' => id).pluck(:id)
+          'taxable_taxonomies.taxable_id' => id).pluck("#{Taxonomy.table_name}.id")
     end
 
     def used_organization_ids
       Organization.joins(:taxable_taxonomies).where(
           'taxable_taxonomies.taxable_type' => 'DockerContainerWizardStates::Preliminary',
-          'taxable_taxonomies.taxable_id' => id).pluck(:id)
+          'taxable_taxonomies.taxable_id' => id).pluck("#{Taxonomy.table_name}.id")
     end
   end
 end
