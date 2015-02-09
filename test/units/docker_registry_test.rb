@@ -18,7 +18,12 @@ class DockerRegistryTest < ActiveSupport::TestCase
   end
 
   test 'password is stored encrypted' do
-    r = as_admin { FactoryGirl.create(:docker_registry) }
-    assert r.is_decryptable?(r.password_in_db)
+    registry = as_admin { FactoryGirl.create(:docker_registry) }
+    assert registry.is_decryptable?(registry.password_in_db)
+  end
+
+  test 'registries need a name' do
+    registry = FactoryGirl.build(:docker_registry, :name => '')
+    refute registry.valid?
   end
 end
