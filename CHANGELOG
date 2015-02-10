@@ -1,3 +1,15 @@
+2015-02-10	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9269 - Validate registry name
+
+2015-02-06	Partha Aji <paji@redhat.com>
+	* Fixes #9229 - Handles non username/password private registry case
+
+2015-02-05	Partha Aji <paji@redhat.com>
+	* refs #8918 - Enable creating container via katello
+
+2015-02-05	Mike McCune <mmccune@redhat.com>
+	* fixes #9230 - add table name to query to avoid psql errors
+
 2015-02-05	Daniel Lobato <elobatocs@gmail.com>
 	* Bump version to 1.0.1
 	* Fixes #9177 - 1.7 compatibility fixes
