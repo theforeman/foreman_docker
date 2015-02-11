@@ -24,7 +24,7 @@
         <span class="glyphicon glyphicon-time"></span> <%= container.ready? ? time_ago_in_words(container.started_at) : "N/A" %>
       </td>
       <td class="hidden-tablet hidden-xs text-center"><%= link_to resource, compute_resource_path(resource) %> </td>
-      <td class="hidden-tablet hidden-xs text-center"><%= managed_icon(container, resource) %></td>
+      <td class="hidden-tablet hidden-xs text-center"><%= managed?(container, resource) ? _('Yes') : _('No') %></td>
       <% @compute_resource = resource %>
       <td><%= action_buttons(container_power_action(container),
                              display_delete_if_authorized(hash_for_container_path(:compute_resource_id => resource,

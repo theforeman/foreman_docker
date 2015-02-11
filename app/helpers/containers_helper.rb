@@ -1,8 +1,4 @@
 module ContainersHelper
-  def managed_icon(container, resource)
-    icon_text(managed?(container, resource) ? 'check' : 'unchecked')
-  end
-
   def managed?(container, resource)
     uuids_in_resource(resource).include? container.identity
   end
