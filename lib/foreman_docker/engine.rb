@@ -86,13 +86,18 @@ module ForemanDocker
 
     require 'fog/fogdocker/models/compute/server'
     require 'fog/fogdocker/models/compute/image'
+    require 'fog/fogdocker/models/compute/images'
     require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/server',
                              __FILE__)
     require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/image',
                              __FILE__)
+    require File.expand_path('../../../app/models/concerns/fog_extensions/fogdocker/images',
+                             __FILE__)
     config.to_prepare do
       Fog::Compute::Fogdocker::Server.send(:include, ::FogExtensions::Fogdocker::Server)
       Fog::Compute::Fogdocker::Image.send(:include, ::FogExtensions::Fogdocker::Image)
+      # Compatibility fixes - to be removed once 1.7 compatibility is no longer required
+      Fog::Compute::Fogdocker::Images.send(:include, ::FogExtensions::Fogdocker::Images)
       ::Taxonomy.send(:include, ForemanDocker::TaxonomyExtensions)
     end
   end
