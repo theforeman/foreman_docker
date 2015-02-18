@@ -8,6 +8,11 @@ module ForemanDocker
       ComputeResource.model_name
     end
 
+    def self.get_container(container)
+      conn = container.compute_resource.docker_connection
+      ::Docker::Container.get(container.uuid, {}, conn)
+    end
+
     def capabilities
       [:image]
     end
@@ -29,12 +34,11 @@ module ForemanDocker
     end
 
     def available_images
-      client.images.all
+      ::Docker::Image.all({}, docker_connection)
     end
 
     def local_images(filter = '')
-      client # initialize Docker-Api
-      ::Docker::Image.all('filter' => filter)
+      ::Docker::Image.all({ 'filter' => filter }, docker_connection)
     end
 
     def tags_for_local_image(image)
@@ -45,11 +49,11 @@ module ForemanDocker
     end
 
     def exist?(name)
-      ::Docker::Image.exist?(name)
+      ::Docker::Image.exist?(name, {}, docker_connection)
     end
 
     def image(id)
-      client.image_get(id)
+      ::Docker::Image.get(id, {}, docker_connection)
     end
 
     def tags(image_name)
@@ -65,7 +69,7 @@ module ForemanDocker
     end
 
     def search(term = '')
-      client.images.image_search(:term => term)
+      ::Docker::Image.search({ :term => term }, docker_connection)
     end
 
     def provider_friendly_name
@@ -76,14 +80,14 @@ module ForemanDocker
       options = vm_instance_defaults.merge(args)
       logger.debug("Creating container with the following options: #{options.inspect}")
       docker_command do
-        ::Docker::Container.create(options)
+        ::Docker::Container.create(options, docker_connection)
       end
     end
 
     def create_image(args = {})
       logger.debug("Creating docker image with the following options: #{args.inspect}")
       docker_command do
-        ::Docker::Image.create(args)
+        ::Docker::Image.create(args, credentials, docker_connection)
       end
     end
 
@@ -94,7 +98,7 @@ module ForemanDocker
 
     def console(uuid)
       test_connection
-      container = ::Docker::Container.get(uuid)
+      container = ::Docker::Container.get(uuid, {}, docker_connection)
       {
         :name       => container.info['Name'],
         'timestamp' => Time.now.utc,
@@ -102,13 +106,26 @@ module ForemanDocker
       }
     end
 
+    def api_version
+      ::Docker.version(docker_connection)
+    end
+
+    def authenticate!
+      ::Docker.authenticate!(credentials, docker_connection)
+    end
+
     def test_connection(options = {})
       super
-      client.present?
+      api_version
+      credentials.empty? ? true : authenticate!
     # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
     rescue => e
       errors[:base] << e.message
       false
+    end
+
+    def docker_connection
+      @docker_connection ||= ::Docker::Connection.new(url, credentials)
     end
 
     protected
@@ -141,8 +158,12 @@ module ForemanDocker
       @client ||= ::Fog::Compute.new(opts)
     end
 
-    def api_version
-      @api_version ||= client.send(:client).api_version
+    def credentials
+      @credentials ||= {}.tap do |options|
+        options[:username] = user if user.present?
+        options[:password] = password if password.present?
+        options[:email] = email if email.present?
+      end
     end
   end
 end

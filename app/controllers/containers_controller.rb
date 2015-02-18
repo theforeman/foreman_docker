@@ -16,13 +16,13 @@ class ContainersController < ::ApplicationController
 
   def new
     redirect_to wizard_state_step_path(:wizard_state_id => DockerContainerWizardState.create.id,
-                                       :id              => :preliminary)
+                                       :id => :preliminary)
   end
 
   def destroy
     if container_deletion
       process_success(:success_redirect => containers_path,
-                      :success_msg      => (_("Container %s is being deleted.") %
+                      :success_msg => (_("Container %s is being deleted.") %
                                             @deleted_identifier))
     else
       process_error(:redirect => containers_path)
@@ -35,10 +35,10 @@ class ContainersController < ::ApplicationController
   end
 
   def commit
-    Docker::Container.get(@container.uuid).commit(:author  => params[:commit][:author],
-                                                  :repo    => params[:commit][:repo],
-                                                  :tag     => params[:commit][:tag],
-                                                  :comment => params[:commit][:comment])
+    ForemanDocker::Docker.get_container(@container).commit(:author  => params[:commit][:author],
+                                                           :repo => params[:commit][:repo],
+                                                           :tag => params[:commit][:tag],
+                                                           :comment => params[:commit][:comment])
 
     process_success :success_redirect => :back,
                     :success_msg      => _("%{container} commit was successful") %

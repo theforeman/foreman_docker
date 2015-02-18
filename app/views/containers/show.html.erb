@@ -87,9 +87,8 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="processes">
-        <% processes = Docker::Container.get(@container.uuid).top %>
         <div class='accordion' id='accordion'>
-          <% processes.each do |process| %>
+          <% processes(@container).each do |process| %>
           <div>
             <h2>
               <a href='#<%= process['PID'] %>-index'
@@ -108,7 +107,9 @@
         </div>
       </div>
       <div class="tab-pane" id="logs">
-        <pre class="terminal terminal-output pre-scrollable"><code><%= Docker::Container.get(@container.uuid).logs(:stdout => true, :tail => 100) %></code></pre>
+        <pre class="terminal terminal-output pre-scrollable"><code>
+          <%= logs(@container, :stdout => true, :tail => 100) %>
+        </code></pre>
       </div>
     </div>
     <% else %>

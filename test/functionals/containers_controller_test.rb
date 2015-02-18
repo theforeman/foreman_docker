@@ -31,7 +31,8 @@ class ContainersControllerTest < ActionController::TestCase
     commit_hash = { :author => 'a', :repo => 'b', :tag => 'c', :comment => 'd' }
 
     mock_container = mock
-    ::Docker::Container.expects(:get).with(container.uuid).returns(mock_container)
+    ::Docker::Container.expects(:get).with(container.uuid, anything, anything)
+      .returns(mock_container)
     mock_container.expects(:commit).with(commit_hash)
 
     post :commit, { :commit => commit_hash,

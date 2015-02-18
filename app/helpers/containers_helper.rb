@@ -91,4 +91,12 @@ module ContainersHelper
       trunc(text, length)
     end
   end
+
+  def processes(container)
+    ForemanDocker::Docker.get_container(container).top
+  end
+
+  def logs(container, opts = {})
+    ForemanDocker::Docker.get_container(container).log(opts)
+  end
 end
