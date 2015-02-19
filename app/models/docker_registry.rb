@@ -8,6 +8,7 @@ class DockerRegistry < ActiveRecord::Base
 
   validates_lengths_from_database
   validates :name, :presence => true, :uniqueness => true
+  validates :url,  :presence => true, :uniqueness => true
 
   scoped_search :on => :name, :complete_value => true
   scoped_search :on => :url

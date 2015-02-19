@@ -22,8 +22,9 @@ class DockerRegistryTest < ActiveSupport::TestCase
     assert registry.is_decryptable?(registry.password_in_db)
   end
 
-  test 'registries need a name' do
-    registry = FactoryGirl.build(:docker_registry, :name => '')
-    refute registry.valid?
+  %w(name url).each do |property|
+    test "registries need a #{property}" do
+      refute FactoryGirl.build(:docker_registry, property.to_sym => '').valid?
+    end
   end
 end
