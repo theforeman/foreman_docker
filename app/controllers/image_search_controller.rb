@@ -2,32 +2,49 @@ class ImageSearchController < ::ApplicationController
   before_filter :find_resource
 
   def auto_complete_repository_name
-    render :text => (use_hub? ? hub_image_exists?(params[:search]) :
-        registry_image_exists?(params[:search])).to_s
+    catch_network_errors do
+      render :text => (use_hub? ? hub_image_exists?(params[:search]) :
+          registry_image_exists?(params[:search])).to_s
+    end
   end
 
   def auto_complete_image_tag
-    # This is the format jQuery UI autocomplete expects
-    tags = use_hub? ? hub_auto_complete_image_tags(params[:search]) :
-        registry_auto_complete_image_tags(params[:search])
-    respond_to do |format|
-      format.js do
-        tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
-        render :json => tags
+    catch_network_errors do
+      # This is the format jQuery UI autocomplete expects
+      tags = use_hub? ? hub_auto_complete_image_tags(params[:search]) :
+          registry_auto_complete_image_tags(params[:search])
+      respond_to do |format|
+        format.js do
+          tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
+          render :json => tags
+        end
       end
     end
   end
 
   def search_repository
-    repositories = use_hub? ? hub_search_image(params[:search]) :
-                              registry_search_image(params[:search])
-    respond_to do |format|
-      format.js do
-        render :partial => 'repository_search_results',
-               :locals  => { :repositories => repositories,
-                             :use_hub => use_hub? }
+    catch_network_errors do
+      repositories = use_hub? ? hub_search_image(params[:search]) :
+                                registry_search_image(params[:search])
+      respond_to do |format|
+        format.js do
+          render :partial => 'repository_search_results',
+                 :locals  => { :repositories => repositories,
+                               :use_hub => use_hub? }
+        end
       end
     end
+  end
+
+  def catch_network_errors
+    yield
+  rescue Docker::Error::NotFoundError => e
+    # not an error
+    logger.debug "image not found: #{e.backtrace}"
+    render :js, :nothing => true
+  rescue Docker::Error::DockerError, Excon::Errors::Error, SystemCallError => e
+    render :js => _("An error occured during repository search: '%s'") % e.message,
+           :status => 500
   end
 
   def use_hub?

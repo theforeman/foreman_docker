@@ -50,6 +50,9 @@ function autoCompleteRepo(item) {
         search_add_on.addClass('glyphicon-remove');
         tag.autocomplete('option', 'source', []);
       }
+    },
+    error: function(result) {
+      $.jnotify(result.responseText, "error", true);
     }
   });
 }
@@ -67,6 +70,9 @@ function setAutocompleteTags(registryType) {
           source.push({label: value.label, value: value.value});
         });
         tag.focus();
+      })
+      .error(function(result) {
+        $.jnotify(result.responseText, "error", true);
       });
   tag.autocomplete('option', 'source', source);
 }
@@ -86,6 +92,9 @@ function searchRepo(item) {
     data: { search: search.val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
     success: function (result) {
       results.html(result);
+    },
+    error: function(result) {
+      $.jnotify(result.responseText, "error", true);
     },
     complete: function (result) {
       searching_spinner.hide();
