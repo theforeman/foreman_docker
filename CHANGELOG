@@ -1,4 +1,21 @@
+2015-02-24	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7874 - Docker Containers API
+
+2015-02-19	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9456 - Validate docker registry URL
+	* Fixes #9242 - Backport image_search to fog 1.24
+
+2015-02-16	Shlomi Zadok <shlomi@ben-hanna.com>
+	* fixes #9332 - Add yes/no text to managed info on containers index
+
+2015-02-16	Partha Aji <paji@redhat.com>
+	* refs #9341 - Updating the docker-api gem spec
+
+2015-02-11	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #8033: container power on/off redirects to container view now
+
 2015-02-10	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.1.0
 	* Fixes #9269 - Validate registry name
 
 2015-02-06	Partha Aji <paji@redhat.com>
