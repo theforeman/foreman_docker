@@ -58,32 +58,41 @@ module ForemanDocker
 
         security_block :containers do
           permission :view_containers,
-                     :containers          => [:index, :show],
-                     :'api/v2/containers' => [:index, :show, :logs]
-          permission :commit_containers, :containers => [:commit]
+                     { :containers          => [:index, :show],
+                       :'api/v2/containers' => [:index, :show, :logs] },
+                     :resource_type => 'Container'
+          permission :commit_containers, { :containers => [:commit] },
+                     :resource_type => 'Container'
           permission :create_containers,
-                     :'containers/steps'  => [:show, :update],
-                     :containers          => [:new],
-                     :'api/v2/containers' => [:create, :power]
+                     { :'containers/steps'  => [:show, :update],
+                       :containers          => [:new],
+                       :'api/v2/containers' => [:create, :power] },
+                     :resource_type => 'Container'
           permission :destroy_containers,
-                     :containers          => [:destroy],
-                     :'api/v2/containers' => [:destroy]
+                     { :containers          => [:destroy],
+                       :'api/v2/containers' => [:destroy] },
+                     :resource_type => 'Container'
           permission :power_compute_resources_vms,
-                     :containers          => [:power],
-                     :'api/v2/containers' => [:create, :power]
+                     { :containers          => [:power],
+                       :'api/v2/containers' => [:create, :power] },
+                     :resource_type => 'ComputeResource'
         end
 
         security_block :registries do
-          permission :view_registries,    :registries         => [:index, :show]
-          permission :create_registries,  :registries         => [:new, :create, :update, :edit]
-          permission :destroy_registries, :registries         => [:destroy]
+          permission :view_registries, { :registries => [:index, :show] },
+                     :resource_type => 'DockerRegistry'
+          permission :create_registries, { :registries  => [:new, :create, :update, :edit] },
+                     :resource_type => 'DockerRegistry'
+          permission :destroy_registries, { :registries => [:destroy] },
+                     :resource_type => 'DockerRegistry'
         end
 
         security_block :image_search do
           permission :search_repository_image_search,
-                     :image_search => [:auto_complete_repository_name,
-                                       :auto_complete_image_tag,
-                                       :search_repository]
+                     { :image_search => [:auto_complete_repository_name,
+                                         :auto_complete_image_tag,
+                                         :search_repository] },
+                     :resource_type => 'Docker/ImageSearch'
         end
 
         # apipie API documentation

@@ -29,4 +29,8 @@ class DockerRegistry < ActiveRecord::Base
     uri = URI(url)
     "#{uri.hostname}:#{uri.port}/#{image_name}"
   end
+
+  def self.humanize_class_name(_name = nil)
+    _("Docker/Registry")
+  end
 end

@@ -38,4 +38,8 @@ class Container < ActiveRecord::Base
   def in_fog
     @fog_container ||= compute_resource.vms.get(uuid)
   end
+
+  def self.humanize_class_name(_name = nil)
+    _("Docker/Container")
+  end
 end
