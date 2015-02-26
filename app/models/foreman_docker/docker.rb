@@ -131,13 +131,14 @@ module ForemanDocker
     end
 
     def client
-      @client ||= ::Fog::Compute.new(
-          :provider         => 'fogdocker',
-          :docker_username  => user,
-          :docker_password  => password,
-          :docker_email     => email,
-          :docker_url       => url
-      )
+      opts = {
+        :provider => 'fogdocker',
+        :docker_url => url
+      }
+      opts[:docker_username] = user if user.present?
+      opts[:docker_password] = password if password.present?
+      opts[:docker_email] = email if email.present?
+      @client ||= ::Fog::Compute.new(opts)
     end
 
     def api_version
