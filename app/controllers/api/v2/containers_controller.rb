@@ -7,7 +7,7 @@ module Api
       resource_description do
         resource_id 'containers'
         api_version 'v2'
-        api_base_url '/api/v2'
+        api_base_url '/docker/api/v2'
       end
 
       api :GET, '/containers/', N_('List all containers')
