@@ -1,4 +1,14 @@
+2015-03-01	David Davis <daviddavis@redhat.com>
+	* Fixes #9570 - Only set username/password/email if present
+	* Fixes #9573 - Locking docker-api to 1.17
+	* Fixes #9562 - Fixing the baseurl in the containers api
+
+2015-02-25	Daniel Lobato García <elobatocs@gmail.com>
+	* Add issue stats badge
+	* Typo describing -> description on registry form
+
 2015-02-24	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.2.0
 	* Fixes #7874 - Docker Containers API
 
 2015-02-19	Daniel Lobato <elobatocs@gmail.com>
