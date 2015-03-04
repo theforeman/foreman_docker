@@ -14,14 +14,16 @@ module Api
       api :GET, '/compute_resources/:compute_resource_id/containers/',
           N_('List all containers in a compute resource')
       param :compute_resource_id, :identifier
-      param_group :pagination, ::Api::V2::BaseController
+      param_group :search_and_pagination, ::Api::V2::BaseController
 
       def index
         if params[:compute_resource_id].present?
-          @containers = Container.where(:compute_resource_id => params[:compute_resource_id])
+          scoped = Container.where(:compute_resource_id => params[:compute_resource_id])
         else
-          @containers = Container.all
+          scoped = Container.scoped
         end
+        @containers = scoped.search_for(params[:search], :order => params[:order])
+                      .paginate(:page => params[:page])
       end
 
       api :GET, '/containers/:id/', N_('Show a container')

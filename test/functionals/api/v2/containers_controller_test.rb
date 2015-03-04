@@ -9,6 +9,15 @@ module Api
         assert_template 'index'
       end
 
+      test 'index can be filtered by name' do
+        %w(thomas clayton wolfe).each do |name|
+          FactoryGirl.create(:container, :name => name)
+        end
+        get :index, { :search => 'name = thomas' }, set_session_user
+        assert_response :success
+        assert_equal 1, assigns(:containers).length
+      end
+
       context 'container operations' do
         setup do
           @container = FactoryGirl.create(:container, :name => 'foo')
