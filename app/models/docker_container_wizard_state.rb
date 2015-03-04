@@ -15,7 +15,6 @@ class DockerContainerWizardState < ActiveRecord::Base
     { :repository_name     => image.repository_name,
       :tag                 => image.tag,
       :registry_id         => image.registry_id,
-      :katello             => image.katello?,
       :name                => configuration.name,
       :compute_resource_id => preliminary.compute_resource_id,
       :tty                 => environment.tty,

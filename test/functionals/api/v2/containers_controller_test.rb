@@ -21,6 +21,8 @@ module Api
       context 'container operations' do
         setup do
           @container = FactoryGirl.create(:container, :name => 'foo')
+          @registry = FactoryGirl.create(:docker_registry)
+          @compute_resource = FactoryGirl.create(:docker_cr)
         end
 
         test 'logs returns latest lines of container log' do
@@ -68,9 +70,53 @@ module Api
         end
 
         test 'creates a container with correct params' do
+          repository_name = "centos"
+          tag = "7"
+          name = "foo"
+          registry_uri = URI.parse(@registry.url)
           Service::Containers.any_instance.expects(:pull_image).returns(true)
-          Service::Containers.any_instance.expects(:start_container).returns(true)
-          post :create, :container => { :name => 'foo', :registry_id => 3, :image => 'centos:7' }
+          Service::Containers.any_instance
+            .expects(:start_container).returns(true).with do |container|
+            container.must_be_kind_of(Container)
+            container.repository_name.must_equal(repository_name)
+            container.tag.must_equal(tag)
+            container.compute_resource_id.must_equal(@compute_resource.id)
+            container.name.must_equal(name)
+            container.repository_pull_url.must_include(registry_uri.host)
+            container.repository_pull_url.must_include("#{repository_name}:#{tag}")
+          end
+          post :create, :container => { :compute_resource_id => @compute_resource.id,
+                                        :name => name,
+                                        :registry_id => @registry.id,
+                                        :repository_name => repository_name,
+                                        :tag => tag }
+          assert_response :created
+        end
+
+        test 'creates a katello container with correct params' do
+          DockerContainerWizardStates::Image.class_eval do
+            attr_accessor :capsule_id
+          end
+          DockerContainerWizardStates::Image.attribute_names.stubs(:include?).returns(true)
+          repository_name = "katello_centos"
+          tag = "7"
+          name = "foo"
+          capsule_id = "10000"
+          Service::Containers.any_instance.expects(:start_container!)
+            .returns(@container).with do |wizard_state|
+            wizard_state.must_be_kind_of(DockerContainerWizardState)
+            container_attributes = wizard_state.container_attributes
+            container_attributes[:repository_name].must_equal(repository_name)
+            container_attributes[:tag].must_equal(tag)
+            container_attributes[:compute_resource_id].must_equal(@compute_resource.id)
+            container_attributes[:name].must_equal(name)
+            wizard_state.image.capsule_id.must_equal(capsule_id)
+          end
+          post :create, :container => { :compute_resource_id => @compute_resource.id,
+                                        :name => name,
+                                        :capsule_id => capsule_id,
+                                        :repository_name => repository_name,
+                                        :tag => tag }
           assert_response :created
         end
       end

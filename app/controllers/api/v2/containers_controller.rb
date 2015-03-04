@@ -40,13 +40,16 @@ module Api
           param :name, String, :required => true
           param_group :taxonomies, ::Api::V2::BaseController
           param :compute_resource_id, :identifier, :required => true
-          param :registry_id, :identifier, :desc => N_('Registry this container will have to use
-                                                        to get the image')
-          param :image, String, :desc => N_('Image to use to create the container.
-                                            Format should be repository:tag, e.g: centos:7')
+          param :registry_id, :identifier, :desc => N_('Registry this container will have to
+                                                        use to get the image')
+          param :repository_name, String, :required => true,
+                                          :desc => N_('Name of the repository to use
+                                                       to create the container. e.g: centos')
+          param :tag, String, :required => true,
+                              :desc => N_('Tag to use to create the container. e.g: latest')
           param :tty, :bool
           param :entrypoint, String
-          param :cmd, String
+          param :command, String, :required => true
           param :memory, String
           param :cpu_shares, :number
           param :cpu_sets, String
@@ -54,7 +57,9 @@ module Api
           param :attach_stdout, :bool
           param :attach_stdin, :bool
           param :attach_stderr, :bool
-          param :katello, :bool
+          param :capsule_id, :identifier, :desc => N_('The capsule this container will have to use
+                                                       to get the image. Relevant for images
+                                                       retrieved from katello registry.')
         end
       end
 
@@ -125,14 +130,20 @@ module Api
 
       private
 
-      def set_wizard_state
-        wizard_properties = { :preliminary   => [:compute_resource_id],
-                              :image         => [:registry_id, :repository_name, :tag, :katello],
-                              :configuration => [:name, :command, :entrypoint, :cpu_set,
-                                                 :cpu_shares, :memory],
-                              :environment   => [:tty, :attach_stdin, :attach_stdout,
-                                                 :attach_stderr] }
+      def wizard_properties
+        wizard_props = { :preliminary => [:compute_resource_id],
+                         :image => [:registry_id, :repository_name, :tag],
+                         :configuration => [:name, :command, :entrypoint, :cpu_set,
+                                            :cpu_shares, :memory],
+                         :environment => [:tty, :attach_stdin, :attach_stdout,
+                                          :attach_stderr] }
+        if DockerContainerWizardStates::Image.attribute_names.include?("capsule_id")
+          wizard_props[:image] << :capsule_id
+        end
+        wizard_props
+      end
 
+      def set_wizard_state
         wizard_state = DockerContainerWizardState.create
         wizard_properties.each do |step, properties|
           property_values = properties.each_with_object({}) do |property, values|
