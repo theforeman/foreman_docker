@@ -88,10 +88,7 @@ That's it. You're now ready to create and manage containers in your new Docker c
 | >= 1.6         | 0.1.0 - 0.2.0   |
 | >= 1.7         | 1.0.0+          |
 
-We will follow [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html). This means:
-* MAJOR versions: will break compatibility with the latest supported Foreman version. For instance, foreman-docker 1.0 breaks Foreman 1.6 compatibility.
-* MINOR versions: will enhance foreman-docker with features in a backwards-compatible manner.
-* PATCH versions: will contain bugfixes for the latest minor version in a backwards-compatible manner.
+See extras/RELEASE.md for more detailed information on compatibility and releases.
 
 ## How to contribute?
 
