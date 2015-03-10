@@ -27,3 +27,9 @@ Metrics/ClassLength:
 
 Metrics/AbcSize:
   Enabled: false # should we turn this on?
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Style/DotPosition:
+  EnforcedStyle: 'leading'

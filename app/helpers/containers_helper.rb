@@ -15,9 +15,7 @@ module ContainersHelper
   end
 
   def link_to_taxonomies(taxonomies)
-    taxonomies.map do |taxonomy|
-      link_to(taxonomy)
-    end.join(' ')
+    taxonomies.map { |taxonomy| link_to(taxonomy) }.join(" ")
   end
 
   def container_link_hash(container, resource)
