@@ -89,7 +89,7 @@ module ForemanDocker
         # apipie API documentation
         # Only available in 1.8, otherwise it has to be in the initializer below
         if SETTINGS[:version].to_s.include?('develop') ||
-           Gem::Version.new(SETTINGS[:version]) >= Gem::Version.new('1.8')
+           Gem::Version.new(SETTINGS[:version].notag) >= Gem::Version.new('1.8')
           apipie_documented_controllers [
             "#{ForemanDocker::Engine.root}/app/controllers/api/v2/*.rb"]
         end
@@ -100,7 +100,7 @@ module ForemanDocker
       # this condition is here for compatibility reason to work with Foreman 1.4.x
       # Also need to handle the reverse of the 1.8 method above
       unless SETTINGS[:version].to_s.include?('develop') ||
-             Gem::Version.new(SETTINGS[:version]) >= Gem::Version.new('1.8')
+             Gem::Version.new(SETTINGS[:version].notag) >= Gem::Version.new('1.8')
         if Apipie.configuration.api_controllers_matcher.is_a?(Array)
           Apipie.configuration.api_controllers_matcher <<
             "#{ForemanDocker::Engine.root}/app/controllers/api/v2/*.rb"
