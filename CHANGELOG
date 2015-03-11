@@ -1,3 +1,15 @@
+2015-03-11	David Davis <daviddavis@redhat.com>
+	* Fixes #9716 - Handle 1.8.0-rc1 version format
+
+2015-03-07	Daniel Lobato <elobatocs@gmail.com>
+	* Make HoundCI use project rubocop rules
+
+2015-03-05	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #9271: user is now informed about http connection errors when using search in the new container wizard.
+
+2015-03-03	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.2.1
+
 2015-03-01	David Davis <daviddavis@redhat.com>
 	* Fixes #9570 - Only set username/password/email if present
 	* Fixes #9573 - Locking docker-api to 1.17
