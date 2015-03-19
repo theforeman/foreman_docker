@@ -69,7 +69,7 @@ module ForemanDocker
     end
 
     def search(term = '')
-      ::Docker::Image.search({ :term => term }, docker_connection)
+      client.images.image_search(:term => term)
     end
 
     def provider_friendly_name
