@@ -1,3 +1,21 @@
+2015-03-19	David Davis <daviddavis@redhat.com>
+	* Fixes #9830 - Fixing log call
+
+2015-03-19	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9829 - Revert image_search to old method
+
+2015-03-19	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #9544: added downcase_hash_keys mathod
+
+2015-03-18	David Davis <daviddavis@redhat.com>
+	* Fixes #9382 - Use connection info when connecting to docker
+
+2015-03-15	David Davis <daviddavis@redhat.com>
+	* Fixes #9708 - Fixing rubocop config so it can be used with houndci
+
+2015-03-11	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.2.2
+
 2015-03-11	David Davis <daviddavis@redhat.com>
 	* Fixes #9716 - Handle 1.8.0-rc1 version format
 
