@@ -97,6 +97,6 @@ module ContainersHelper
   end
 
   def logs(container, opts = {})
-    ForemanDocker::Docker.get_container(container).log(opts)
+    ForemanDocker::Docker.get_container(container).logs(opts)
   end
 end
