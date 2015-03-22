@@ -8,8 +8,8 @@ class ContainerStepsTest < ActionDispatch::IntegrationTest
 
   test 'shows taxonomies tabs'  do
     visit new_container_path
-    assert has_selector?("a", :text => 'Locations')
-    assert has_selector?("a", :text => 'Organizations')
+    assert has_selector?("a", :text => 'Locations') if SETTINGS[:locations_enabled]
+    assert has_selector?("a", :text => 'Organizations') if SETTINGS[:organizations_enabled]
   end
   # test 'clicking on search loads repositories' do
   #   Capybara.javascript_driver = :webkit

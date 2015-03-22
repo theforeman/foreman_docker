@@ -19,7 +19,7 @@ module Containers
         if process_resource!(@state).nil?
           render_wizard @state
         else
-          create_container
+          params[:start_on_create] ? create_container : create_container(false)
         end
       else
         render_wizard @state
@@ -45,9 +45,14 @@ module Containers
           @state.send(:"#{step}") || @state.send(:"build_#{step}"))
     end
 
-    def create_container
+    def create_container(start = true)
       @state.send(:"create_#{step}", params[:"docker_container_wizard_states_#{step}"])
-      container = (service = Service::Containers.new).start_container!(@state)
+      service = Service::Containers.new
+      container = if start.is_a? TrueClass
+                    service.start_container!(@state)
+                  else
+                    service.create_container!(@state)
+                  end
       if container.present?
         process_success(:object => container, :success_redirect => container_path(container))
       else

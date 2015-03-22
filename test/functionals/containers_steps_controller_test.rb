@@ -12,6 +12,7 @@ module Containers
         .returns(@container)
       put :update, { :wizard_state_id => state.id,
                      :id => :environment,
+                     :start_on_create => true,
                      :docker_container_wizard_states_environment => { :tty => false } },
           set_session_user
 
