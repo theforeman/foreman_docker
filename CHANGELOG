@@ -1,4 +1,9 @@
+2015-03-20	Partha Aji <paji@redhat.com>
+	* Fixes #9310, #9518 - Create containers using katello repos
+
 2015-03-19	David Davis <daviddavis@redhat.com>
+	* Fixes #9643 - Added search param to the containers index API
+	* Bump version to 1.2.3
 	* Fixes #9830 - Fixing log call
 
 2015-03-19	Daniel Lobato <elobatocs@gmail.com>
