@@ -20,6 +20,11 @@ module Service
           container.send(:"#{taxonomy}=", wizard_state.preliminary.send(:"#{taxonomy}"))
         end
 
+        unless container.valid?
+          @errors = container.errors
+          fail ActiveRecord::Rollback
+        end
+
         fail ActiveRecord::Rollback unless pull_image(container) && start_container(container)
 
         container.save!
@@ -68,6 +73,10 @@ module Service
         r.dns.build :name => e.name,
                     :priority => e.priority
       end
+    end
+
+    def full_messages
+      @errors.respond_to?(:full_messages) ? @errors.full_messages : @errors
     end
   end
 end

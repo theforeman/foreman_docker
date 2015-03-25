@@ -29,6 +29,8 @@ class Container < ActiveRecord::Base
                   :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes,
                   :katello, :exposed_ports_attributes, :dns
 
+  validates :name, :uniqueness => { :scope => :compute_resource_id }
+
   def repository_pull_url
     repo = tag.blank? ? repository_name : "#{repository_name}:#{tag}"
     repo = registry.prefixed_url(repo) if registry

@@ -69,9 +69,17 @@ module Api
       param_group :container, :as => :create
 
       def create
-        @container = Service::Containers.new.start_container!(set_wizard_state)
-        set_container_taxonomies
-        process_response @container.save
+        service = Service::Containers.new
+        @container = service.start_container!(set_wizard_state)
+        if service.errors.any?
+          render :json => { :errors => service.errors,
+                            :full_messages => service.full_messages
+                          },
+                 :status => :unprocessable_entity
+        else
+          set_container_taxonomies
+          process_response @container.save
+        end
       rescue ActiveModel::MassAssignmentSecurity::Error => e
         render :json => { :error  => _("Wrong attributes: %s") % e.message },
                :status => :unprocessable_entity

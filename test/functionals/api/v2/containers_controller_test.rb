@@ -119,6 +119,15 @@ module Api
                                         :tag => tag }
           assert_response :created
         end
+
+        test 'creation fails with invalid container name' do
+          post :create, :container => { :compute_resource_id => @container.compute_resource_id,
+                                        :name => @container.name,
+                                        :registry_id => @registry.id,
+                                        :repository_name => 'centos',
+                                        :tag => 'latest' }
+          assert_response :unprocessable_entity
+        end
       end
     end
   end
