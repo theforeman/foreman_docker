@@ -38,6 +38,7 @@ Rails.application.routes.draw do
             end
           end
         end
+        resources :registries, :except => [:new, :edit]
       end
     end
   end
