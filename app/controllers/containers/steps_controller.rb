@@ -16,7 +16,11 @@ module Containers
 
     def update
       if step == wizard_steps.last
-        create_container
+        if process_resource!(@state).nil?
+          render_wizard @state
+        else
+          create_container
+        end
       else
         render_wizard @state
       end

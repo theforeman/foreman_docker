@@ -41,7 +41,17 @@
             </tr>
             <tr>
               <td><%= _('Exposed ports') %></td>
-              <td><%= @container.in_fog.exposed_ports %> </td>
+              <td>
+                <table id="exposed_ports" class="table table-bordered" style="table-layout:fixed; word-wrap: break-word">
+                  <% (@container.in_fog.exposed_ports || []).each do |exposed_port| %>
+                  <% pair = exposed_port.first.split("/") %>
+                    <tr>
+                      <td><b><%= pair.first %></b></td>
+                      <td><i><%= pair.second %></i></td>
+                    </tr>
+                  <% end %>
+                </table>
+              </td>
             </tr>
             <tr>
               <td><%= _('Environment Variables') %></td>

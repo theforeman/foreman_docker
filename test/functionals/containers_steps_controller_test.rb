@@ -35,5 +35,29 @@ module Containers
       end
       assert_equal state.image, docker_image
     end
+
+    test 'new container respects exposed_ports configuration' do
+      state = DockerContainerWizardState.create!
+      environment_options = {
+        :docker_container_wizard_state_id => state.id
+      }
+      state.environment = DockerContainerWizardStates::Environment.create!(environment_options)
+      state.environment.exposed_ports.create!(:name => '1654', :value => 'tcp')
+      state.environment.exposed_ports.create!(:name => '1655', :value => 'udp')
+      get :show, { :wizard_state_id => state.id, :id => :environment }, set_session_user
+      assert response.body.include?("1654")
+      assert response.body.include?("1655")
+
+      # Load ExposedPort variables into container
+      state.environment.exposed_ports.each do |e|
+        @container.exposed_ports.build :name => e.name,
+                                       :value => e.value,
+                                       :priority => e.priority
+      end
+      # Check if parametrized value of container matches Docker API's expectations
+      assert @container.parametrize.key? "ExposedPorts"
+      assert @container.parametrize["ExposedPorts"].key? "1654/tcp"
+      assert @container.parametrize["ExposedPorts"].key? "1655/udp"
+    end
   end
 end

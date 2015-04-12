@@ -1,0 +1,17 @@
+<div class='fields'>
+  <table class="table table-bordered table-hover table-striped">
+    <tr class="form-group <%= 'has-error' if f.object.errors.any? %>">
+      <td><%= f.text_field(:name,  :class => "form-control",
+                                   :placeholder => _("Port Number e.g: 22")) %></td>
+      <td><%= f.select :value, [['TCP','tcp'],['UDP','udp']]  %></td>
+      <td style='vertical-align: middle' class='text-center'>
+        <span class="help-block">
+          <%= link_to_remove_fields('', f) %>
+        </span>
+      </td>
+      <span class="help-block">
+        <%= f.object.errors.full_messages.to_sentence %>
+      </span>
+    </tr>
+  </table>
+</div>

@@ -10,6 +10,7 @@ class DockerContainerWizardState < ActiveRecord::Base
 
   delegate :compute_resource_id,   :to => :preliminary
   delegate :environment_variables, :to => :environment
+  delegate :exposed_ports, :to => :environment
 
   def container_attributes
     { :repository_name     => image.repository_name,

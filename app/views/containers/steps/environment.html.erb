@@ -15,6 +15,13 @@
         <% end %>
         <%= link_to_add_fields(_("Add environment variable"), f, :environment_variables,
                                'foreman_docker/common_parameters/environment_variable') %>
+
+        <h3><%= _("Exposed Ports") %></h3>
+        <%= f.fields_for :exposed_ports, @docker_container_wizard_states_environment.exposed_ports do |builder| %>
+          <%= render 'foreman_docker/common_parameters/exposed_ports', :f => builder %>
+        <% end %>
+        <%= link_to_add_fields(_("Add Exposed Port"), f, :exposed_ports,
+                               'foreman_docker/common_parameters/exposed_ports') %>
       </div>
    </div>
    <%= render :partial => 'form_buttons' %>
