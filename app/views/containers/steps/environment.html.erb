@@ -22,6 +22,12 @@
         <% end %>
         <%= link_to_add_fields(_("Add Exposed Port"), f, :exposed_ports,
                                'foreman_docker/common_parameters/exposed_ports') %>
+        <h3><%= _("DNS") %></h3>
+        <%= f.fields_for :dns, @docker_container_wizard_states_environment.dns do |builder| %>
+          <%= render 'foreman_docker/common_parameters/dns', :f => builder %>
+        <% end %>
+        <%= link_to_add_fields(_("Add DNS"), f, :dns,
+                               'foreman_docker/common_parameters/dns') %>                               
       </div>
    </div>
    <%= render :partial => 'form_buttons' %>

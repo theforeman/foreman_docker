@@ -17,9 +17,14 @@ module DockerContainerWizardStates
                               :inverse_of => :environment,
                               :class_name => 'DockerContainerWizardStates::ExposedPort',
                               :validate => true
+    has_many :dns,  :dependent  => :destroy, :foreign_key => :reference_id,
+                    :inverse_of => :environment,
+                    :class_name => 'DockerContainerWizardStates::Dns',
+                    :validate => true
 
     accepts_nested_attributes_for :environment_variables, :allow_destroy => true
     accepts_nested_attributes_for :exposed_ports, :allow_destroy => true
+    accepts_nested_attributes_for :dns, :allow_destroy => true
 
     def parameters_symbol
       :environment_variables

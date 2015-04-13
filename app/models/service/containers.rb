@@ -13,6 +13,7 @@ module Service
 
           load_environment_variables(state, r)
           load_exposed_ports(state, r)
+          load_dns(state, r)
         end
 
         Taxonomy.enabled_taxonomies.each do |taxonomy|
@@ -59,6 +60,13 @@ module Service
         r.exposed_ports.build :name => e.name,
                               :value => e.value,
                               :priority => e.priority
+      end
+    end
+
+    def load_dns(state, r)
+      state.dns.each do |e|
+        r.dns.build :name => e.name,
+                    :priority => e.priority
       end
     end
   end

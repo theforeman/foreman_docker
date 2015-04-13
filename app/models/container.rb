@@ -16,13 +16,18 @@ class Container < ActiveRecord::Base
                             :class_name => 'ExposedPort',
                             :validate => true
 
+  has_many :dns,  :dependent  => :destroy, :foreign_key => :reference_id,
+                  :inverse_of => :container,
+                  :class_name => 'ForemanDocker::Dns',
+                  :validate => true
+
   accepts_nested_attributes_for :exposed_ports, :allow_destroy => true
   scoped_search :on => :name
 
   attr_accessible :command, :repository_name, :name, :compute_resource_id, :entrypoint,
                   :cpu_set, :cpu_shares, :memory, :tty, :attach_stdin, :registry_id,
                   :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes,
-                  :katello, :exposed_ports_attributes
+                  :katello, :exposed_ports_attributes, :dns
 
   def repository_pull_url
     repo = tag.blank? ? repository_name : "#{repository_name}:#{tag}"
@@ -39,8 +44,10 @@ class Container < ActiveRecord::Base
       'AttachStderr' => attach_stderr,          'CpuShares'    => cpu_shares,
       'Cpuset'       => cpu_set,
       'Env' => environment_variables.map { |env| "#{env.name}=#{env.value}" },
-      'ExposedPorts' => Hash[*exposed_ports.map { |v| [v.name + "/" + v.value, {}] }.flatten]
-    }
+      'ExposedPorts' => Hash[*exposed_ports.map { |v| [v.name + "/" + v.value, {}] }.flatten],
+      'HostConfig' => {
+        'Dns' => dns.map { |env| "#{env.name}" }
+      } }
   end
 
   def in_fog

@@ -54,6 +54,14 @@
               </td>
             </tr>
             <tr>
+              <td><%= _('DNS') %></td>
+              <td>
+                  <% (@container.in_fog.attributes['host_config_dns'] || []).each do |dns| %>
+                    <%= dns %><br/>
+                  <% end %>
+                </td>
+            </tr>            
+            <tr>
               <td><%= _('Environment Variables') %></td>
               <td>
                 <table id="environment_variables" class="table table-bordered" style="table-layout:fixed; word-wrap: break-word">

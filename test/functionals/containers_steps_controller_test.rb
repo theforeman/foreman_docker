@@ -59,5 +59,28 @@ module Containers
       assert @container.parametrize["ExposedPorts"].key? "1654/tcp"
       assert @container.parametrize["ExposedPorts"].key? "1655/udp"
     end
+
+    test 'new container respects dns configuration' do
+      state = DockerContainerWizardState.create!
+      environment_options = {
+        :docker_container_wizard_state_id => state.id
+      }
+      state.environment = DockerContainerWizardStates::Environment.create!(environment_options)
+      state.environment.dns.create!(:name => '18.18.18.18')
+      state.environment.dns.create!(:name => '19.19.19.19')
+      get :show, { :wizard_state_id => state.id, :id => :environment }, set_session_user
+      assert response.body.include?("18.18.18.18")
+      assert response.body.include?("19.19.19.19")
+
+      # Load Dns variables into container
+      state.environment.dns.each do |e|
+        @container.dns.build :name => e.name,
+                             :priority => e.priority
+      end
+      # Check if parametrized value of container matches Docker API's expectations
+      assert @container.parametrize.key? "HostConfig"
+      assert @container.parametrize["HostConfig"].key? "Dns"
+      assert @container.parametrize["HostConfig"].value? ["18.18.18.18", "19.19.19.19"]
+    end
   end
 end
