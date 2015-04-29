@@ -1,3 +1,5 @@
+require 'resolv'
+
 module ForemanDocker
   class Dns < Parameter
     # The Parameter class from which this Dns class inherits,validates for the
