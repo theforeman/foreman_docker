@@ -1,3 +1,31 @@
+2015-04-28	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.3.0
+
+2015-04-28	David Davis <daviddavis@redhat.com>
+	* Fixes #9901 - Better handling of errors in container api
+	* Fixes #10029 - Docker registry API
+
+2015-04-24	David Davis <daviddavis@redhat.com>
+	* Fixes 9311 - Change the Katello tab text
+
+2015-04-14	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* Fixes #7865 - Adds support for configuring dns during container creation
+
+2015-04-13	Vanya Jauhal <vanyajauhal1995@gmail.com>
+	* Fixes #7864 - Adds support for exposed_ports
+
+2015-04-07	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9997 - Release process docs
+
+2015-03-25	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9897 - Stub encryption key in registry test
+
+2015-03-25	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* Fixes #9338: permission filters can be created now
+
+2015-03-24	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.2.4
+
 2015-03-20	Partha Aji <paji@redhat.com>
 	* Fixes #9310, #9518 - Create containers using katello repos
 
