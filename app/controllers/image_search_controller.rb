@@ -60,7 +60,15 @@ class ImageSearchController < ::ApplicationController
   end
 
   def hub_search_image(terms)
-    @compute_resource.search(terms)
+    @compute_resource.search(terms).map do |item|
+      # el7 returns -> "name" => "docker.io: docker.io/centos",
+      # while f20 returns -> "name" => "centos"
+      # we need repo name to be => "docker.io/centos" for el7 and "centos" for fedora
+      # to ensure proper search with respect to the tags, image creation etc.
+      new_item = item.clone
+      new_item["name"] = item["name"].split.last
+      new_item
+    end
   end
 
   def registry_image_exists?(term)

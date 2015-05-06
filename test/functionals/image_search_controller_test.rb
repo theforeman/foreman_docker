@@ -26,6 +26,40 @@ class ImageSearchControllerTest < ActionController::TestCase
     end
   end
 
+  test "centos 7 search responses are handled correctly" do
+    repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
+    repo_full_name = "redhat.com: #{repository}"
+    request.env["HTTP_ACCEPT"] = "application/javascript"
+    expected = [{  "description" => "Really fancy database app...",
+                   "is_official" => true,
+                   "is_trusted" => true,
+                   "name" =>  repo_full_name,
+                   "star_count" => 0
+                }]
+    ForemanDocker::Docker.any_instance.expects(:search).returns(expected).at_least_once
+    get :search_repository, { :search => "centos", :id => @container.id }, set_session_user
+    assert_response :success
+    refute response.body.include?(repo_full_name)
+    assert response.body.include?(repository)
+  end
+
+  test "fedora search responses are handled correctly" do
+    repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
+    repo_full_name = repository
+    request.env["HTTP_ACCEPT"] = "application/javascript"
+    expected = [{ "description" => "Really fancy database app...",
+                  "is_official" => true,
+                  "is_trusted" => true,
+                  "name" =>  repo_full_name,
+                  "star_count" => 0
+                }]
+    ForemanDocker::Docker.any_instance.expects(:search).returns(expected).at_least_once
+    get :search_repository, { :search => "centos", :id => @container.id }, set_session_user
+    assert_response :success
+    assert response.body.include?(repo_full_name)
+    assert response.body.include?(repository)
+  end
+
   def assert_response_is_expected
     assert_response :error
     assert response.body.include?('An error occured during repository search:')

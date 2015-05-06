@@ -77,14 +77,6 @@ module ContainersHelper
     text_field_tag(name, val, options)
   end
 
-  def hub_url(image)
-    if image['is_official']
-      "https://registry.hub.docker.com/_/#{image['name']}"
-    else
-      "https://registry.hub.docker.com/u/#{image['name']}"
-    end
-  end
-
   # Compatibility fixes - to be removed once 1.7 compatibility is no longer required
   if SETTINGS[:version].to_s.to_f <= 1.7
     def trunc_with_tooltip(text, length = 32)
