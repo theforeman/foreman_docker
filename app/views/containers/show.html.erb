@@ -25,7 +25,11 @@
             </tr>
             <tr>
               <td><%= _('CPU shares') %></td>
-              <td><%= @container.in_fog.cores %></td>
+              <td><%= @container.in_fog.cpu_shares %></td>
+            </tr>
+            <tr>
+              <td><%= _('CPU set') %></td>
+              <td><%= @container.cpu_set %></td>
             </tr>
             <tr>
               <td><%= _('UUID') %></td>

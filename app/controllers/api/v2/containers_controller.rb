@@ -52,7 +52,7 @@ module Api
           param :command, String, :required => true
           param :memory, String
           param :cpu_shares, :number
-          param :cpu_sets, String
+          param :cpu_set, String
           param :environment_variables, Hash
           param :attach_stdout, :bool
           param :attach_stdin, :bool
