@@ -37,7 +37,7 @@ module Api
 
       def_param_group :container do
         param :container, Hash, :required => true, :action_aware => true do
-          param :name, String, :required => true
+          param :name, String
           param_group :taxonomies, ::Api::V2::BaseController
           param :compute_resource_id, :identifier, :required => true
           param :registry_id, :identifier, :desc => N_('Registry this container will have to

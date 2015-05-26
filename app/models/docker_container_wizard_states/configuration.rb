@@ -4,7 +4,6 @@ module DockerContainerWizardStates
     belongs_to :wizard_state, :class_name => DockerContainerWizardState,
                               :foreign_key => :docker_container_wizard_state_id
 
-    validates :name, :presence => true
     validates :command, :presence => true
   end
 end
