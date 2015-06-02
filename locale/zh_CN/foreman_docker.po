@@ -1,0 +1,441 @@
+# Leah Liu <lliu@redhat.com>, 2015. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: version 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-22 12:12-0400\n"
+"PO-Revision-Date: 2015-04-27 01:21+0000\n"
+"Last-Translator: Leah Liu <lliu@redhat.com>\n"
+"Language-Team: Chinese (China)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh-CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.6.0\n"
+
+msgid "\"#{resource.name}\""
+msgstr "\"#{resource.name}\""
+
+msgid "%{container} commit was successful"
+msgstr "%{container} 提交成功"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "%{cores} Cores and %{memory} memory"
+msgstr "%{cores} Core 和 %{memory} 内存"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "%{vm} is now %{vm_state}"
+msgstr "%{vm} 状态为 %{vm_state}"
+
+msgid "Add environment variable"
+msgstr "添加环境变量"
+
+msgid "All containers"
+msgstr "所有容器"
+
+msgid "Allocate a pseudo-tty"
+msgstr "分配 pseudo-tty"
+
+msgid "An error occured during repository search: '%s'"
+msgstr "搜索储存库时出错： '%s'"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Are you sure you want to power %{act} %{vm}?"
+msgstr "您确定要打开 %{act} %{vm} 吗？"
+
+msgid "Attach STDERR"
+msgstr "附加 STDERR"
+
+msgid "Attach STDIN"
+msgstr "附加 STDIN"
+
+msgid "Attach STDOUT"
+msgstr "附加 STDOUT"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Author"
+msgstr "作者"
+
+# translation auto-copied from project Satellite6 Foreman Bootdisk, version 6.1, document foreman_bootdisk
+msgid "Back"
+msgstr "后退"
+
+msgid "Basic options"
+msgstr "基本选项"
+
+msgid "CPU sets"
+msgstr "CPU 集合"
+
+msgid "CPU shares"
+msgstr "CPU 共享"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "CPUs"
+msgstr "处理器"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Cancel"
+msgstr "取消"
+
+# translation auto-copied from project nautilus, version 3.8.2, document nautilus
+msgid "Command"
+msgstr "命令"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Comment"
+msgstr "注释"
+
+msgid "Commit"
+msgstr "提交"
+
+msgid "Commit this container state"
+msgstr "提交这个容器的状态"
+
+msgid "Compute options"
+msgstr "计算选项"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Compute resource"
+msgstr "计算机资源"
+
+msgid "Container %s is being deleted."
+msgstr "要删除容器 %s。"
+
+msgid "Containers"
+msgstr "容器"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Cores"
+msgstr "Cores"
+
+msgid "Create a container"
+msgstr "生成容器"
+
+msgid "Create container in a compute resource"
+msgstr "在计算资源中生成容器"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Delete %s?"
+msgstr "是否删除 %s？"
+
+msgid "Delete a container"
+msgstr "删除容器"
+
+msgid "Delete container in a compute resource"
+msgstr "删除计算资源中的容器"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Deploy on"
+msgstr "部署到"
+
+msgid "Describing of the registry"
+msgstr "描述注册"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Description"
+msgstr "描述"
+
+msgid "Description of the commit"
+msgstr "提交描述"
+
+msgid "Docker hub"
+msgstr "Docker 集线器"
+
+msgid "Docker/Container"
+msgstr "Docker/容器"
+
+msgid "Docker/Registry"
+msgstr "Docker/注册"
+
+msgid "Does this image support user data input?"
+msgstr "这个映像是否支持用户数据输入？"
+
+msgid "Edit Registry"
+msgstr "编辑注册"
+
+msgid "Environment Variables"
+msgstr "环境变量"
+
+msgid "Environment variables"
+msgstr "环境变量"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author Leah Liu
+msgid "Error - %{message}"
+msgstr "错误 - %{message}"
+
+msgid "Error connecting with the compute resource: <strong> %s </strong>"
+msgstr "与这个计算资源有关的错误：<strong> %s </strong>"
+
+msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
+msgstr "创建与 Docker 的沟通时出错。请查看 Foreman 日志：%s"
+
+msgid "Exposed ports"
+msgstr "暴露的端口"
+
+msgid "External registry"
+msgstr "外部注册"
+
+msgid "Failed to commit %{container}: %{e}"
+msgstr "提交 %{container}: %{e} 失败"
+
+msgid "Find your favorite container, e.g: centos"
+msgstr "找到您最喜欢的容器，例如：centos"
+
+msgid "Foreman user <foremaner@theforeman.org>"
+msgstr "Foreman 用户 <foremaner@theforeman.org>"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "IP Address"
+msgstr "IP地址"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Image"
+msgstr "介质"
+
+msgid "Image Repository"
+msgstr "映像库"
+
+msgid "Image Tag"
+msgstr "映像标签"
+
+msgid ""
+"Image to use to create the container.\\n                                     "
+"       Format should be repository:tag, e.g: centos:7"
+msgstr ""
+"用来生成容器的映像\\n                                            格式应为程序库:标签，例如：centos:"
+"7"
+
+# translation auto-copied from project Red Hat Satellite User Guide, version 6.0, document chap-Introduction_to_Red_Hat_Satellite
+msgid "Katello"
+msgstr "Katello"
+
+msgid "List all containers"
+msgstr "列出所有容器"
+
+msgid "List all containers in a compute resource"
+msgstr "列出计算资源中的所有容器"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Locations"
+msgstr "位置"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Logs"
+msgstr "日志"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Managed"
+msgstr "已管理"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Memory"
+msgstr "内存"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "Name"
+msgstr "名称"
+
+msgid "Name, e.g: PING_HOST"
+msgstr "名称，例如：PING_HOST"
+
+msgid "New Registry"
+msgstr "新注册"
+
+msgid "New container"
+msgstr "新容器"
+
+# translation auto-copied from project subscription-manager, version 1.10.10, document keys
+msgid "Next"
+msgstr "下一步"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "No"
+msgstr "否"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Notice"
+msgstr "注意"
+
+msgid "Number of lines to tail. Default: 100"
+msgstr "查看的行数。默认为 100。"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Organizations"
+msgstr "机构"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Password to authenticate with - used for SSH finish step."
+msgstr "用于认证的密码 - 用于 SSH 完成步骤。"
+
+msgid "Password used for authentication to the registry"
+msgstr "用来授权注册的密码"
+
+msgid ""
+"Please turn on your container to see processes running, logs, and more."
+msgstr "请打开容器查看运行的进程、日志及其他信息。"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Power"
+msgstr "开启"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Power ON this machine"
+msgstr "开启本机"
+
+# translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
+msgid "Processes"
+msgstr "进程"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Properties"
+msgstr "属性"
+
+msgid "Registries"
+msgstr "注册"
+
+msgid "Registry"
+msgstr "注册"
+
+msgid "Registry name"
+msgstr "注册名称"
+
+msgid ""
+"Registry this container will have to use\\n                                  "
+"                      to get the image"
+msgstr ""
+"必须使用\\n                                                        获取映像方可注册这个容器"
+
+msgid "Registry url"
+msgstr "注册 url"
+
+msgid "Repo"
+msgstr "库"
+
+msgid "Resource selection"
+msgstr "资源选择"
+
+msgid "Run power operation on a container"
+msgstr "在容器中运行电源操作"
+
+msgid "Run power operation on a container in a compute resource"
+msgstr "在计算资源中的容器中运行电源操作"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Running on"
+msgstr "运行中"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Search"
+msgstr "搜"
+
+msgid "Select a registry"
+msgstr "选择注册"
+
+msgid "Shell"
+msgstr "Shell"
+
+msgid "Show a container"
+msgstr "显示容器"
+
+msgid "Show container in a compute resource"
+msgstr "显示计算资源中的容器"
+
+msgid "Show container logs"
+msgstr "显示容器日志"
+
+msgid "Show logs from a container in a compute resource"
+msgstr "显示来自计算资源容器中的日志"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Start"
+msgstr "起始"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Status"
+msgstr "状态"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Submit"
+msgstr "提交"
+
+# translation auto-copied from project gnome-contacts, version 3.8.2, document gnome-contacts
+msgid "TTY"
+msgstr "电传打字机"
+
+# translation auto-copied from project shotwell-core, version 0.14.1, document shotwell-core
+msgid "Tag"
+msgstr "标签"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Test Connection"
+msgstr "测试连接"
+
+msgid ""
+"The user that is used to ssh into the instance, normally docker-user, "
+"ubuntu, root etc"
+msgstr "用来 ssh 入该实例的用户，通常为 cloud-user, ubuntu, root 等等。"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "URL"
+msgstr "链接"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unknown method: available power operations are %s"
+msgstr "未知方法：可用电源操作为 %s"
+
+msgid "Uptime"
+msgstr "运行时间"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Url"
+msgstr "Url"
+
+msgid "Username used to access the registry"
+msgstr "访问注册的用户名"
+
+msgid "Value, e.g: theforeman.org"
+msgstr "数值，例如：e.g: theforeman.org"
+
+msgid "Where do you want to deploy your container?:"
+msgstr "您要在哪里部署您的容器？："
+
+msgid "Wrong attributes: %s"
+msgstr "错误属性：%s"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "Yes"
+msgstr "是"
+
+msgid ""
+"You need a Docker compute resource in order to create containers. Please %s "
+"and try again."
+msgstr "您需要一个 Docker 计算资源方可生成容器。请 %s，并再试一次。"
+
+msgid "Your container is stopped."
+msgstr "您的容器已停止。"
+
+msgid "docker/my-committed-image"
+msgstr "docker/my-committed-image"
+
+msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
+msgstr "例如：https://docker.example.com:4243 or unix:///var/run/docker.sock"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "failed to %{action} %{vm}"
+msgstr "%{action} %{vm} 失败"
+
+msgid "latest"
+msgstr "最新"
+
+msgid "learn more about CPU sets"
+msgstr "了解更多 CPU 集合"
+
+msgid "learn more about CPU shares"
+msgstr "了解更多 CPU 共享"
+
+msgid "power action, valid actions are (start), (stop), (status)"
+msgstr "电源操作，有效操作为 (start), (stop), (status)"

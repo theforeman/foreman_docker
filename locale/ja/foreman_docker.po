@@ -1,0 +1,446 @@
+# myamamot <myamamot@redhat.com>, 2014. #zanata
+# asasaki <asasaki@redhat.com>, 2015. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: version 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-22 12:12-0400\n"
+"PO-Revision-Date: 2015-04-27 06:24+0000\n"
+"Last-Translator: asasaki <asasaki@redhat.com>\n"
+"Language-Team: Japanese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 3.6.0\n"
+
+msgid "\"#{resource.name}\""
+msgstr "\"#{resource.name}\""
+
+msgid "%{container} commit was successful"
+msgstr "%{container} のコミットが正常に行なわれました"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "%{cores} Cores and %{memory} memory"
+msgstr "%{cores} コアおよび %{memory} メモリー"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "%{vm} is now %{vm_state}"
+msgstr "%{vm} は %{vm_state} になりました"
+
+msgid "Add environment variable"
+msgstr "環境変数の追加"
+
+msgid "All containers"
+msgstr "すべてのコンテナー"
+
+msgid "Allocate a pseudo-tty"
+msgstr "pseudo-tty の割り当て"
+
+msgid "An error occured during repository search: '%s'"
+msgstr "リポジトリーの検索中にエラーが発生しました: '%s'"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author asasaki
+msgid "Are you sure you want to power %{act} %{vm}?"
+msgstr "%{vm} の %{act} を実行してもよいですか?"
+
+msgid "Attach STDERR"
+msgstr "STDERR の割り当て"
+
+msgid "Attach STDIN"
+msgstr "STDIN の割り当て"
+
+msgid "Attach STDOUT"
+msgstr "STDOUT の割り当て"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Author"
+msgstr "作成者"
+
+# translation auto-copied from project Satellite6 Foreman Bootdisk, version 6.1, document foreman_bootdisk
+msgid "Back"
+msgstr "戻る"
+
+# translation auto-copied from project RHEL Virtualization Administration Guide, version 6.4, document QEMUKVMCommands, author noriko
+msgid "Basic options"
+msgstr "基本オプション"
+
+msgid "CPU sets"
+msgstr "CPU セット"
+
+msgid "CPU shares"
+msgstr "CPU シェア"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "CPUs"
+msgstr "CPU"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Cancel"
+msgstr "取り消し"
+
+# translation auto-copied from project nautilus, version 3.8.2, document nautilus
+msgid "Command"
+msgstr "コマンド"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Comment"
+msgstr "コメント"
+
+# translation auto-copied from project PressGang CCMS topics, version 1, document 4283-155458, author tnagamot
+msgid "Commit"
+msgstr "コミット"
+
+msgid "Commit this container state"
+msgstr "このコンテナーの状態をコミット"
+
+msgid "Compute options"
+msgstr "コンピュートオプション"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Compute resource"
+msgstr "コンピュートリソース"
+
+msgid "Container %s is being deleted."
+msgstr "コンテナー %s が削除されています。"
+
+msgid "Containers"
+msgstr "コンテナー"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Cores"
+msgstr "コア数"
+
+# translation auto-copied from project RHELOSP End User Guide, version 5.0, document section_dashboard_manage_containers, author myamamot
+msgid "Create a container"
+msgstr "コンテナーの作成"
+
+msgid "Create container in a compute resource"
+msgstr "コンピュートリソースにコンテナーを作成"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Delete %s?"
+msgstr "%s を削除しますか?"
+
+msgid "Delete a container"
+msgstr "コンテナーの削除"
+
+msgid "Delete container in a compute resource"
+msgstr "コンピュートリソースのコンテナーを削除"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Deploy on"
+msgstr "デプロイ先"
+
+msgid "Describing of the registry"
+msgstr "レジストリーの説明"
+
+# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello, author myamamot
+msgid "Description"
+msgstr "説明"
+
+msgid "Description of the commit"
+msgstr "コミットの説明"
+
+msgid "Docker hub"
+msgstr "Docker ハブ"
+
+msgid "Docker/Container"
+msgstr "Docker/コンテナー"
+
+msgid "Docker/Registry"
+msgstr "Docker/レジストリー"
+
+msgid "Does this image support user data input?"
+msgstr "このイメージはユーザーのデータ入力に対応しますか?"
+
+msgid "Edit Registry"
+msgstr "レジストリーの編集"
+
+msgid "Environment Variables"
+msgstr "環境変数"
+
+msgid "Environment variables"
+msgstr "環境変数"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author asasaki
+msgid "Error - %{message}"
+msgstr "エラー - %{message}"
+
+msgid "Error connecting with the compute resource: <strong> %s </strong>"
+msgstr "コンピュートリソースに接続中にエラーが発生しました: <strong> %s </strong>"
+
+msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
+msgstr "作成中および Docker との通信中にエラーが発生しました。Foreman ログを確認してください: %s"
+
+msgid "Exposed ports"
+msgstr "表示されるポート"
+
+msgid "External registry"
+msgstr "外部レジストリー"
+
+msgid "Failed to commit %{container}: %{e}"
+msgstr "%{container} のコミットに失敗しました: %{e}"
+
+msgid "Find your favorite container, e.g: centos"
+msgstr "お気に入りのコンテナーを検索 (例: centos)"
+
+msgid "Foreman user <foremaner@theforeman.org>"
+msgstr "Foreman ユーザー <foremaner@theforeman.org>"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "IP Address"
+msgstr "IP アドレス"
+
+# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello
+msgid "Image"
+msgstr "イメージ"
+
+msgid "Image Repository"
+msgstr "イメージリポジトリー"
+
+msgid "Image Tag"
+msgstr "イメージタグ"
+
+msgid ""
+"Image to use to create the container.\\n                                     "
+"       Format should be repository:tag, e.g: centos:7"
+msgstr ""
+"コンテナーを作成するために使用するイメージです。\\n               フォーマットはリポジトリー:タグにする必要があります。例: "
+"centos:7"
+
+# translation auto-copied from project Red Hat Satellite Installation Guide, version 6.0, document RednbspHat_Satellite_6_Supported_Usage
+msgid "Katello"
+msgstr "Katello"
+
+msgid "List all containers"
+msgstr "すべてのコンテナーの一覧表示"
+
+msgid "List all containers in a compute resource"
+msgstr "コンピュートリソースのすべてのコンテナーを一覧表示"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Locations"
+msgstr "ロケーション"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Logs"
+msgstr "ログ"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Managed"
+msgstr "管理"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Memory"
+msgstr "メモリー"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "Name"
+msgstr "名前"
+
+msgid "Name, e.g: PING_HOST"
+msgstr "名前 (例: PING_HOST)"
+
+msgid "New Registry"
+msgstr "新規レジストリー"
+
+msgid "New container"
+msgstr "新規コンテナー"
+
+# translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author asasaki
+msgid "Next"
+msgstr "次へ"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello, author asasaki
+msgid "No"
+msgstr "No"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Notice"
+msgstr "通知"
+
+msgid "Number of lines to tail. Default: 100"
+msgstr "末尾の表示する行の数。デフォルト: 100"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Organizations"
+msgstr "組織"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Password to authenticate with - used for SSH finish step."
+msgstr "認証に使用するパスワード - SSH の最終ステップで使用されます。"
+
+msgid "Password used for authentication to the registry"
+msgstr "レジストリーへの認証に使用されるパスワード"
+
+msgid ""
+"Please turn on your container to see processes running, logs, and more."
+msgstr "実行中のプロセスやログなどを確認するためのコンテナーをオンにしてください。"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Power"
+msgstr "パワー"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Power ON this machine"
+msgstr "このマシンのパワーをオンにする"
+
+# translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
+msgid "Processes"
+msgstr "プロセス"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Properties"
+msgstr "プロパティー"
+
+msgid "Registries"
+msgstr "レジストリー"
+
+msgid "Registry"
+msgstr "レジストリー"
+
+msgid "Registry name"
+msgstr "レジストリー名"
+
+msgid ""
+"Registry this container will have to use\\n                                  "
+"                      to get the image"
+msgstr "イメージを取得するためにこのコンテナーが使用する\\n 　　必要のあるレジストリー"
+
+msgid "Registry url"
+msgstr "レジストリー URL"
+
+msgid "Repo"
+msgstr "リポジトリー"
+
+msgid "Resource selection"
+msgstr "リソースの選択"
+
+msgid "Run power operation on a container"
+msgstr "コンテナーでパワー操作を実行"
+
+msgid "Run power operation on a container in a compute resource"
+msgstr "コンピュートリソースのコンテナーでパワー操作を実行"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Running on"
+msgstr "実行中: "
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Search"
+msgstr "検索"
+
+msgid "Select a registry"
+msgstr "レジストリーの選択"
+
+# translation auto-copied from project RHEL Deployment Guide, version 6.2, document Managing_Users_and_Groups
+msgid "Shell"
+msgstr "シェル"
+
+msgid "Show a container"
+msgstr "コンテナーの表示"
+
+msgid "Show container in a compute resource"
+msgstr "コンピュートリソースのコンテナーを表示"
+
+msgid "Show container logs"
+msgstr "コンテナーログの表示"
+
+msgid "Show logs from a container in a compute resource"
+msgstr "コンピューターリソースのコンテナーからログを表示"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Start"
+msgstr "開始"
+
+# translation auto-copied from project PressGang CCMS topics, version 1, document 6888-635853, author tnagamot
+msgid "Status"
+msgstr "状態"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Submit"
+msgstr "送信"
+
+# translation auto-copied from project gnome-contacts, version 3.8.2, document gnome-contacts
+msgid "TTY"
+msgstr "TTY"
+
+# translation auto-copied from project shotwell-core, version 0.14.1, document shotwell-core
+msgid "Tag"
+msgstr "タグ"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Test Connection"
+msgstr "テスト接続"
+
+msgid ""
+"The user that is used to ssh into the instance, normally docker-user, "
+"ubuntu, root etc"
+msgstr "SSH をインスタンスに実行するために、通常 docker-user、ubuntu、root などのユーザーを使用します。"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "URL"
+msgstr "URL"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unknown method: available power operations are %s"
+msgstr "不明なメソッド: 選択できるパワー操作は %s です"
+
+# translation auto-copied from project RHN Satellite UI, version 5.6, document java/code/src/com/redhat/rhn/frontend/strings/database/StringResource
+msgid "Uptime"
+msgstr "アップタイム"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Url"
+msgstr "URL"
+
+msgid "Username used to access the registry"
+msgstr "レジストリーにアクセスするために使用されるユーザー名"
+
+msgid "Value, e.g: theforeman.org"
+msgstr "値 (例: theforeman.org)"
+
+msgid "Where do you want to deploy your container?:"
+msgstr "コンテナーのデプロイ先:"
+
+msgid "Wrong attributes: %s"
+msgstr "正しくない属性: %s"
+
+# translation auto-copied from project PressGang CCMS topics, version 1, document 5213-684429, author jito
+msgid "Yes"
+msgstr "Yes"
+
+msgid ""
+"You need a Docker compute resource in order to create containers. Please %s "
+"and try again."
+msgstr "コンテナーを作成するには Docker コンピュートリソースが必要です。%s を実行してからやり直してください。"
+
+msgid "Your container is stopped."
+msgstr "コンテナーが停止しています。"
+
+msgid "docker/my-committed-image"
+msgstr "docker/my-committed-image"
+
+msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
+msgstr "例:  https://docker.example.com:4243 または unix:///var/run/docker.sock"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "failed to %{action} %{vm}"
+msgstr "%{vm} に対する %{action} の実行に失敗しました"
+
+msgid "latest"
+msgstr "最新"
+
+msgid "learn more about CPU sets"
+msgstr "CPU セットについての詳細"
+
+msgid "learn more about CPU shares"
+msgstr "CPU シェアについての詳細"
+
+msgid "power action, valid actions are (start), (stop), (status)"
+msgstr "パワーアクション。有効なアクションは (start)、(stop)、(status) です。"

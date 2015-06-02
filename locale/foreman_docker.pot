@@ -1,0 +1,437 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: version 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-16 16:25-0500\n"
+"PO-Revision-Date: 2015-02-16 16:25-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../foreman-docker/app/controllers/containers_controller.rb:25
+msgid "Container %s is being deleted."
+msgstr ""
+
+#: ../foreman-docker/app/controllers/containers_controller.rb:44
+msgid "%{container} commit was successful"
+msgstr ""
+
+#: ../foreman-docker/app/controllers/containers_controller.rb:47
+msgid "Failed to commit %{container}: %{e}"
+msgstr ""
+
+#: ../foreman-docker/app/helpers/containers_helper.rb:40
+msgid "Commit"
+msgstr ""
+
+#: ../foreman-docker/app/helpers/containers_helper.rb:49
+#: ../foreman-docker/app/views/registries/index.html.erb:23
+#: ../foreman-docker/app/views/containers/_list.html.erb:34
+msgid "Delete %s?"
+msgstr ""
+
+#: ../foreman-docker/app/helpers/container_steps_helper.rb:12
+#: ../foreman-docker/app/views/registries/_form.html.erb:4
+msgid "Registry"
+msgstr ""
+
+#: ../foreman-docker/app/helpers/container_steps_helper.rb:16
+msgid "Select a registry"
+msgstr ""
+
+#: ../foreman-docker/app/models/foreman_docker/docker.rb:121
+msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
+msgstr ""
+
+#: ../foreman-docker/app/models/concerns/fog_extensions/fogdocker/server.rb:39
+msgid "%{cores} Cores and %{memory} memory"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:6
+msgid "Locations"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:9
+msgid "Organizations"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:15
+msgid "Registry name"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:16
+msgid "Registry url"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:17
+msgid "Describing of the registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:18
+msgid "Username used to access the registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/_form.html.erb:19
+msgid "Password used for authentication to the registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/new.html.erb:1
+#: ../foreman-docker/app/views/registries/index.html.erb:4
+msgid "New Registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/index.html.erb:1
+#: ../foreman-docker/lib/foreman_docker/engine.rb:54
+msgid "Registries"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/index.html.erb:11
+#: ../foreman-docker/app/views/containers/_list.html.erb:4
+#: ../foreman-docker/app/views/containers/show.html.erb:11
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:4
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:6
+msgid "Name"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/index.html.erb:12
+msgid "Url"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/index.html.erb:13
+msgid "Description"
+msgstr ""
+
+#: ../foreman-docker/app/views/registries/edit.html.erb:1
+msgid "Edit Registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/images/form/_docker.html.erb:1
+msgid ""
+"The user that is used to ssh into the instance, normally docker-user, "
+"ubuntu, root etc"
+msgstr ""
+
+#: ../foreman-docker/app/views/images/form/_docker.html.erb:2
+msgid "Password to authenticate with - used for SSH finish step."
+msgstr ""
+
+#: ../foreman-docker/app/views/images/form/_docker.html.erb:4
+msgid "Does this image support user data input?"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources/form/_docker.html.erb:1
+msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources/form/_docker.html.erb:7
+msgid "Test Connection"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources/show/_docker.html.erb:2
+msgid "URL"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:3
+msgid "Basic options"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:8
+msgid "Compute options"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:9
+msgid "CPU sets"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:11
+msgid "learn more about CPU sets"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:12
+#: ../foreman-docker/app/views/containers/show.html.erb:27
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:14
+msgid "CPU shares"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:14
+msgid "learn more about CPU shares"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/configuration.html.erb:15
+#: ../foreman-docker/app/views/containers/show.html.erb:35
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:11
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:7
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:22
+msgid "Memory"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_form_buttons.html.erb:4
+#: ../foreman-docker/app/views/containers/show.html.erb:157
+msgid "Cancel"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_form_buttons.html.erb:8
+msgid "Back"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_form_buttons.html.erb:14
+#: ../foreman-docker/app/views/containers/show.html.erb:159
+msgid "Submit"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_form_buttons.html.erb:16
+msgid "Next"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/image.html.erb:9
+msgid "Katello"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/image.html.erb:15
+msgid "Docker hub"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/image.html.erb:19
+msgid "External registry"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/preliminary.html.erb:6
+msgid "Compute resource"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/preliminary.html.erb:19
+msgid "Resource selection"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/preliminary.html.erb:20
+msgid "Where do you want to deploy your container?:"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/preliminary.html.erb:22
+msgid "Deploy on"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/preliminary.html.erb:25
+msgid ""
+"You need a Docker compute resource in order to create containers. Please %s "
+"and try again."
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:5
+msgid "Shell"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:6
+msgid "Allocate a pseudo-tty"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:6
+msgid "TTY"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:7
+msgid "Attach STDIN"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:8
+msgid "Attach STDOUT"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:9
+msgid "Attach STDERR"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:12
+msgid "Environment variables"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/environment.html.erb:16
+msgid "Add environment variable"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_title.html.erb:1
+#: ../foreman-docker/app/views/containers/index.html.erb:4
+#: ../foreman-docker/lib/foreman_docker/engine.rb:51
+msgid "New container"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_image_hub_tab.html.erb:15
+msgid "Search"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/steps/_image_hub_tab.html.erb:24
+msgid "Find your favorite container, e.g: centos"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:5
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:8
+msgid "Status"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:6
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:6
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:5
+msgid "Image"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:7
+#: ../foreman-docker/app/views/containers/show.html.erb:39
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:13
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:26
+msgid "Command"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:8
+msgid "Uptime"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:9
+#: ../foreman-docker/app/views/containers/show.html.erb:67
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:35
+msgid "Running on"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/_list.html.erb:10
+msgid "Managed"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:9
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:4
+msgid "Properties"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:15
+msgid "Image Repository"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:19
+msgid "Image Tag"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:23
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:10
+msgid "IP Address"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:31
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:18
+msgid "UUID"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:43
+#: ../foreman-docker/app/views/compute_resources_vms/show/_docker.html.erb:30
+msgid "Exposed ports"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:47
+msgid "Environment Variables"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:81
+msgid "Processes"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:85
+msgid "Logs"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:116
+msgid "Notice"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:118
+msgid "Your container is stopped."
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:119
+msgid ""
+"Please turn on your container to see processes running, logs, and more."
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:130
+msgid "Commit this container state"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:137
+msgid "Repo"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:139
+msgid "docker/my-committed-image"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:142
+msgid "Tag"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:144
+msgid "latest"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:147
+msgid "Author"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:149
+msgid "Foreman user <foremaner@theforeman.org>"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:152
+msgid "Comment"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/show.html.erb:154
+msgid "Description of the commit"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/index.html.erb:1
+#: ../foreman-docker/lib/foreman_docker/engine.rb:46
+msgid "Containers"
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/index.html.erb:11
+#: ../foreman-docker/app/views/containers/index.html.erb:13
+msgid "\"#{resource.name}\""
+msgstr ""
+
+#: ../foreman-docker/app/views/containers/index.html.erb:30
+msgid "Error connecting with the compute resource: <strong> %s </strong>"
+msgstr ""
+
+#: ../foreman-docker/app/views/foreman_docker/common_parameters/_environment_variable.html.erb:5
+msgid "Name, e.g: PING_HOST"
+msgstr ""
+
+#: ../foreman-docker/app/views/foreman_docker/common_parameters/_environment_variable.html.erb:7
+msgid "Value, e.g: theforeman.org"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:10
+msgid "Cores"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:15
+msgid "Power ON this machine"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources_vms/form/_docker.html.erb:15
+msgid "Start"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:6
+msgid "CPUs"
+msgstr ""
+
+#: ../foreman-docker/app/views/compute_resources_vms/index/_docker.html.erb:9
+msgid "Power"
+msgstr ""
+
+#: ../foreman-docker/lib/foreman_docker/engine.rb:48
+msgid "All containers"
+msgstr ""
+

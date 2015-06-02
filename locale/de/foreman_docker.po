@@ -1,0 +1,456 @@
+# hpeters <hpeters@redhat.com>, 2015. #zanata
+# jdimanos <jdimanos@redhat.com>, 2015. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: version 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-22 12:12-0400\n"
+"PO-Revision-Date: 2015-04-27 11:49+0000\n"
+"Last-Translator: hpeters <hpeters@redhat.com>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Zanata 3.6.0\n"
+
+msgid "\"#{resource.name}\""
+msgstr "\"#{resource.name}\""
+
+msgid "%{container} commit was successful"
+msgstr "Festschreiben von %{container} war erfolgreich"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "%{cores} Cores and %{memory} memory"
+msgstr "%{cores} Kerne und %{memory} Speicher"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author hpeters
+msgid "%{vm} is now %{vm_state}"
+msgstr "%{vm} ist jetzt %{vm_state}"
+
+msgid "Add environment variable"
+msgstr "Umgebungsvariable hinzufügen"
+
+msgid "All containers"
+msgstr "Alle Container"
+
+msgid "Allocate a pseudo-tty"
+msgstr "Pseudo-TTY zuweisen"
+
+msgid "An error occured during repository search: '%s'"
+msgstr "Ein Fehler ist während der Repository-Suche aufgetreten: \"%s\""
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Are you sure you want to power %{act} %{vm}?"
+msgstr "Sind Sie sicher, dass Sie %{vm} %{act} möchten?"
+
+msgid "Attach STDERR"
+msgstr "Standardfehlerausgabe anfügen"
+
+msgid "Attach STDIN"
+msgstr "Standardeingabe anfügen"
+
+msgid "Attach STDOUT"
+msgstr "Standardausgabe anfügen"
+
+# translation auto-copied from project Satellite6 Hammer CLI Katello, version 6.1, document hammer-cli-katello
+msgid "Author"
+msgstr "Autor"
+
+# translation auto-copied from project Satellite6 Foreman Bootdisk, version 6.1, document foreman_bootdisk
+msgid "Back"
+msgstr "Zurück"
+
+msgid "Basic options"
+msgstr "Grundlegende Optionen"
+
+msgid "CPU sets"
+msgstr "CPU-Gruppen"
+
+msgid "CPU shares"
+msgstr "CPU-Anteile"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "CPUs"
+msgstr "CPUs"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Cancel"
+msgstr "Abbrechen"
+
+# translation auto-copied from project nautilus, version 3.8.2, document nautilus
+msgid "Command"
+msgstr "Befehl"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Commit"
+msgstr "Festschreiben"
+
+msgid "Commit this container state"
+msgstr "Diesen Container-Status festschreiben"
+
+msgid "Compute options"
+msgstr "Rechenoptionen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Compute resource"
+msgstr "Rechnerressource"
+
+msgid "Container %s is being deleted."
+msgstr "Container %s wird gelöscht."
+
+msgid "Containers"
+msgstr "Container"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Cores"
+msgstr "Kerne"
+
+msgid "Create a container"
+msgstr "Container erstellen"
+
+msgid "Create container in a compute resource"
+msgstr "Container in einer Rechnerressource erstellen"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Delete %s?"
+msgstr "%s löschen?"
+
+msgid "Delete a container"
+msgstr "Container löschen"
+
+msgid "Delete container in a compute resource"
+msgstr "Container in einer Rechnerressource löschen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Deploy on"
+msgstr "Bereitstellen auf"
+
+msgid "Describing of the registry"
+msgstr "Beschreibung der Registry"
+
+# translation auto-copied from project Satellite6 Hammer CLI Katello, version 6.1, document hammer-cli-katello
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Description of the commit"
+msgstr "Beschreibung der Festschreibung"
+
+msgid "Docker hub"
+msgstr "Docker-Hub"
+
+msgid "Docker/Container"
+msgstr "Docker/Container"
+
+msgid "Docker/Registry"
+msgstr "Docker/Registry"
+
+msgid "Does this image support user data input?"
+msgstr "Unterstützt dieses Image die Eingabe von Benutzerdaten?"
+
+msgid "Edit Registry"
+msgstr "Registry bearbeiten"
+
+msgid "Environment Variables"
+msgstr "Umgebungsvariablen"
+
+msgid "Environment variables"
+msgstr "Umgebungsvariablen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Error - %{message}"
+msgstr "Fehler - %{message}"
+
+msgid "Error connecting with the compute resource: <strong> %s </strong>"
+msgstr "Fehler beim Verbinden mit der Rechnerressource: <strong> %s </strong>"
+
+msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
+msgstr ""
+"Fehler bei der Kommunikation mit Docker. Prüfen Sie die Foreman-Protokolle: "
+"%s"
+
+msgid "Exposed ports"
+msgstr "Offene Ports"
+
+msgid "External registry"
+msgstr "Externe Registry"
+
+msgid "Failed to commit %{container}: %{e}"
+msgstr "Festschreiben von %{container} fehlgeschlagen: %{e}"
+
+msgid "Find your favorite container, e.g: centos"
+msgstr "Suchen Sie Ihren bevorzugten Container, z. B.: centos"
+
+msgid "Foreman user <foremaner@theforeman.org>"
+msgstr "Foreman-Benutzer <foremaner@theforeman.org>"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "IP Address"
+msgstr "IP-Adresse"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Image"
+msgstr "Image"
+
+msgid "Image Repository"
+msgstr "Image-Repository"
+
+msgid "Image Tag"
+msgstr "Image-Tag"
+
+msgid ""
+"Image to use to create the container.\\n                                     "
+"       Format should be repository:tag, e.g: centos:7"
+msgstr ""
+"Image zur Erstellung des Containers.\\n                                      "
+"      Format lautet Repository:Tag, z. B.: centos:7"
+
+# translation auto-copied from project Red Hat Satellite Installation Guide, version 6.0, document RednbspHat_Satellite_6_Supported_Usage
+msgid "Katello"
+msgstr "Katello"
+
+msgid "List all containers"
+msgstr "Alle Container auflisten"
+
+msgid "List all containers in a compute resource"
+msgstr "Alle Container in einer Rechnerressource auflisten"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Locations"
+msgstr "Standorte"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Logs"
+msgstr "Protokolle"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Managed"
+msgstr "Verwaltet"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Memory"
+msgstr "Speicher"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "Name"
+msgstr "Name"
+
+msgid "Name, e.g: PING_HOST"
+msgstr "Name, z. B.: PING_HOST"
+
+msgid "New Registry"
+msgstr "Neue Registry"
+
+msgid "New container"
+msgstr "Neuer Container"
+
+# translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author jdimanos
+msgid "Next"
+msgstr "Weiter"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello, author jdimanos
+msgid "No"
+msgstr "Nein"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Notice"
+msgstr "Hinweis"
+
+msgid "Number of lines to tail. Default: 100"
+msgstr "Anzahl der anzuzeigenden Zeilen. Standard: 100"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Organizations"
+msgstr "Organisationen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Password to authenticate with - used for SSH finish step."
+msgstr ""
+"Passwort zur Authentifizierung – verwendet im letzten Schritt von SSH."
+
+msgid "Password used for authentication to the registry"
+msgstr "Passwort zur Authentifikation bei Registry"
+
+msgid ""
+"Please turn on your container to see processes running, logs, and more."
+msgstr ""
+"Bitte schalten Sie Ihren Container an, um laufende Prozesse, Protokolle und "
+"mehr zu sehen."
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Power"
+msgstr "Strom"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Power ON this machine"
+msgstr "System starten"
+
+# translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
+msgid "Processes"
+msgstr "Prozesse"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Properties"
+msgstr "Eigenschaften"
+
+msgid "Registries"
+msgstr "Registrys"
+
+msgid "Registry"
+msgstr "Registry"
+
+msgid "Registry name"
+msgstr "Registry-Name"
+
+msgid ""
+"Registry this container will have to use\\n                                  "
+"                      to get the image"
+msgstr ""
+"Registry, die dieser Container verwenden muss,\\n                            "
+"                            um das Image zu erhalten"
+
+msgid "Registry url"
+msgstr "Registry-URL"
+
+msgid "Repo"
+msgstr "Repository"
+
+msgid "Resource selection"
+msgstr "Ressourcenauswahl"
+
+msgid "Run power operation on a container"
+msgstr "Stromoperation auf einem Container ausführen"
+
+msgid "Run power operation on a container in a compute resource"
+msgstr ""
+"Stromoperation auf einem Container in einer Rechnerressource ausführen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Running on"
+msgstr "Läuft auf"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Search"
+msgstr "Suche"
+
+msgid "Select a registry"
+msgstr "Registry wählen"
+
+# translation auto-copied from project RHEL Deployment Guide, version 6.2, document Managing_Users_and_Groups
+msgid "Shell"
+msgstr "Shell"
+
+msgid "Show a container"
+msgstr "Container anzeigen"
+
+msgid "Show container in a compute resource"
+msgstr "Container in einer Rechnerressource anzeigen"
+
+msgid "Show container logs"
+msgstr "Container-Protokolle anzeigen"
+
+msgid "Show logs from a container in a compute resource"
+msgstr "Protokolle von einem Container in einer Rechnerressource anzeigen"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Start"
+msgstr "Start"
+
+# translation auto-copied from project Satellite6 Hammer CLI Katello, version 6.1, document hammer-cli-katello
+msgid "Status"
+msgstr "Status"
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Submit"
+msgstr "Absenden"
+
+# translation auto-copied from project gnome-contacts, version 3.8.2, document gnome-contacts
+msgid "TTY"
+msgstr "TTY"
+
+# translation auto-copied from project shotwell-core, version 0.14.1, document shotwell-core
+msgid "Tag"
+msgstr "Tag"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Test Connection"
+msgstr "Verbindung testen"
+
+msgid ""
+"The user that is used to ssh into the instance, normally docker-user, "
+"ubuntu, root etc"
+msgstr ""
+"Der Benutzer für die SSH-Verbindung zur Instanz. Normalerweise docker-user, "
+"ubuntu, root etc."
+
+# translation auto-copied from project Satellite6 Hammer CLI Katello, version 6.1, document hammer-cli-katello
+msgid "URL"
+msgstr "URL"
+
+# translation auto-copied from project Satellite6 Hammer CLI Katello, version 6.1, document hammer-cli-katello
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unknown method: available power operations are %s"
+msgstr "Unbekannte Methode: verfügbare Stromoperationen sind %s"
+
+# translation auto-copied from project RHN Satellite UI, version 5.6, document java/code/src/com/redhat/rhn/frontend/strings/database/StringResource
+msgid "Uptime"
+msgstr "Betriebszeit"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Url"
+msgstr "URL"
+
+msgid "Username used to access the registry"
+msgstr "Benutzername zum Zugriff auf Registry"
+
+msgid "Value, e.g: theforeman.org"
+msgstr "Wert, z. B.: theforeman.org"
+
+msgid "Where do you want to deploy your container?:"
+msgstr "Wo möchten Sie Ihren Container bereitstellen?"
+
+msgid "Wrong attributes: %s"
+msgstr "Fehlerhafte Attribute: %s"
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello, author jdimanos
+msgid "Yes"
+msgstr "Ja"
+
+msgid ""
+"You need a Docker compute resource in order to create containers. Please %s "
+"and try again."
+msgstr ""
+"Sie benötigen eine Docker-Rechnerressource, um Container zu erstellen. Bitte "
+"%s und erneut versuchen."
+
+msgid "Your container is stopped."
+msgstr "Ihr Container ist gestoppt."
+
+msgid "docker/my-committed-image"
+msgstr "docker/my-committed-image"
+
+msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
+msgstr ""
+"z. B. https://docker.example.com:4243 oder unix:///var/run/docker.sock"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author hpeters
+msgid "failed to %{action} %{vm}"
+msgstr "Fehler beim %{action} von %{vm}"
+
+msgid "latest"
+msgstr "neueste"
+
+msgid "learn more about CPU sets"
+msgstr "Mehr Informationen über CPU-Gruppen"
+
+msgid "learn more about CPU shares"
+msgstr "Mehr Informationen über CPU-Anteile"
+
+msgid "power action, valid actions are (start), (stop), (status)"
+msgstr "Stromaktion, gültige Aktionen sind (start), (stop), (status)"
