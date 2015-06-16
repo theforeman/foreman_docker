@@ -1,6 +1,5 @@
 require 'fast_gettext'
 require 'gettext_i18n_rails'
-require 'fog'
 require 'fog/fogdocker'
 require 'wicked'
 require 'docker'
