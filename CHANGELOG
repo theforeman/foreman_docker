@@ -1,8 +1,33 @@
-2015-04-29	Dominic Cleal <dcleal@redhat.com>
-	* fixes #10306 - require resolv for access to regexps
+2015-07-01	Adam Ruzicka <aruzicka@redhat.com>
+	* Fixes #10191 - Pass proper memory parameter to Docker
+
+2015-06-29	Shlomi Zadok <shlomi@ben-hanna.com>
+	* fixes #10812 - remove require fog from plugin's engine
+
+2015-06-15	Adam Ruzicka <aruzicka@redhat.com>
+	* Fixes #9753 - container name is optional
+
+2015-06-11	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #10779 - Error messages hidden after wizard
+
+2015-06-10	Dmitri Dolguikh <dmitri@appliedlogic.ca>
+	* fixes #10128: 'test connection' button on the CR screen turns green only after connection has been verified.
+
+2015-06-02	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #10416 - Pulled translations
+
+2015-05-20	Partha Aji <paji@redhat.com>
+	* Fixes #10404 - Finds correct repo name for Docker Hub registry
+
+2015-05-05	Shlomi Zadok <shlomi@ben-hanna.com>
+	* Fixes #9393 - Allow users to create container without starting it
 
 2015-04-29	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.3.1
 	* CHANGELOG
+
+2015-04-29	Dominic Cleal <dcleal@redhat.com>
+	* fixes #10306 - require resolv for access to regexps
 
 2015-04-28	Daniel Lobato <elobatocs@gmail.com>
 	* Bump version to 1.3.0
