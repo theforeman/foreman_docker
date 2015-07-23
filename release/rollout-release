@@ -37,7 +37,7 @@ git push upstream ${MAJOR_VERSION}.0-stable
 
 echo -e "${GREEN} -- Pushing ${VERSION} to rubygems $1\033[0m"
 gem build foreman_docker.gemspec
-gem push foreman-docker-${VERSION}.gem
+gem push foreman_docker-${VERSION}.gem
 
 echo -e "${GREEN} -- Done! Gem is published in rubygems and your repository is tagged. $1\033[0m"
 echo -e "${GREEN} -- To complete the release just update the version on foreman-packaging rpm/deb packages, $1\033[0m"
