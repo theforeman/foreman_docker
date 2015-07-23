@@ -1,0 +1,44 @@
+#!/bin/bash
+
+GITHUB_TOKEN=$(cat ~/.codereview)
+RED='\e[31m';
+GREEN='\e[32m';
+
+echo -e "${GREEN} foreman-docker releaser $1\033[0m"
+echo -e "${GREEN} Current version: $(grep VERSION lib/foreman_docker/version.rb) $1\033[0m"
+echo -e "${GREEN} -- Checking out branch master $1\033[0m"
+hub checkout master --quiet
+if [ $? -ne 0 ]; then
+  echo -e "${RED} -- Error checking out master branch. Aborting... \033[0m"
+  exit 1
+fi
+read -p "What version are we going to release today? : " VERSION
+sed -i s/"VERSION = .*"/"VERSION = '${VERSION}'"/g  lib/foreman_docker/version.rb
+
+echo -e "${GREEN} -- Creating contributors list and CHANGELOG $1\033[0m"
+./release/changelog
+
+echo -e "${GREEN} -- Commiting version bump $1\033[0m"
+git add lib/foreman_docker/version.rb
+git add CHANGELOG
+git add Contributors
+git commit -m "Bump version to ${VERSION}"
+git push upstream master
+
+echo -e "${GREEN} -- Tagging version ${VERSION} $1\033[0m"
+git tag ${VERSION}
+git push upstream ${VERSION}
+
+MAJOR_VERSION=$(echo $VERSION | cut -c1)
+echo -e "${GREEN} -- Checking out stable branch ${MAJOR_VERSION} $1\033[0m"
+git checkout ${MAJOR_VERSION}.0-stable
+git pull --rebase upstream master
+git push upstream ${MAJOR_VERSION}.0-stable
+
+echo -e "${GREEN} -- Pushing ${VERSION} to rubygems $1\033[0m"
+gem build foreman_docker.gemspec
+gem push foreman-docker-${VERSION}.gem
+
+echo -e "${GREEN} -- Done! Gem is published in rubygems and your repository is tagged. $1\033[0m"
+echo -e "${GREEN} -- To complete the release just update the version on foreman-packaging rpm/deb packages, $1\033[0m"
+echo -e "${GREEN} -- and submit a pull request to rpm/develop and deb/develop.$1\033[0m"

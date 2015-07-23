@@ -4,6 +4,9 @@ This document will cover process and tips regarding foreman-docker releases.
 It should serve as a reference to the person doing the release, however the project should
 strive to automate as much as possible of this process.
 
+A preliminary script for all actions required in this repository can be found under this repository
+under the namerollout-release.
+
 ## Versioning
 
 `foreman-docker` follows [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html). This means:
