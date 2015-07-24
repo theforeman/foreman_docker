@@ -1,4 +1,6 @@
 2015-07-23	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #11204 - Automate rubygem release, typo
+	* Bump version to 1.4.0
 	* Fixes #11204 - Automate rubygem release
 
 2015-07-01	Adam Ruzicka <aruzicka@redhat.com>
