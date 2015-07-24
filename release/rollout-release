@@ -2,9 +2,15 @@
 
 GITHUB_TOKEN=$(cat ~/.codereview)
 RED='\e[31m';
+BLUE='\e[44m';
 GREEN='\e[32m';
+PLUGIN_DIR=$(pwd)
+DATE="$(date +'%a %b %d %Y')"
 
 echo -e "${GREEN} foreman-docker releaser $1\033[0m"
+echo -e "--------------------------"
+echo -e "${BLUE} Part 1: Rubygems $1\033[0m"
+echo -e "--------------------------"
 echo -e "${GREEN} Current version: $(grep VERSION lib/foreman_docker/version.rb) $1\033[0m"
 echo -e "${GREEN} -- Checking out branch master $1\033[0m"
 hub checkout master --quiet
@@ -14,10 +20,8 @@ if [ $? -ne 0 ]; then
 fi
 read -p "What version are we going to release today? : " VERSION
 sed -i s/"VERSION = .*"/"VERSION = '${VERSION}'"/g  lib/foreman_docker/version.rb
-
 echo -e "${GREEN} -- Creating contributors list and CHANGELOG $1\033[0m"
 ./release/changelog
-
 echo -e "${GREEN} -- Commiting version bump $1\033[0m"
 git add lib/foreman_docker/version.rb
 git add CHANGELOG
@@ -40,5 +44,61 @@ gem build foreman_docker.gemspec
 gem push foreman_docker-${VERSION}.gem
 
 echo -e "${GREEN} -- Done! Gem is published in rubygems and your repository is tagged. $1\033[0m"
-echo -e "${GREEN} -- To complete the release just update the version on foreman-packaging rpm/deb packages, $1\033[0m"
-echo -e "${GREEN} -- and submit a pull request to rpm/develop and deb/develop.$1\033[0m"
+
+###########################
+####### PACKAGING #########
+###########################
+
+echo -e "--------------------------"
+echo -e "${BLUE} Part 2: Red Hat packaging $1\033[0m"
+echo -e "--------------------------"
+
+# Assume there is a foreman-packaging directory with two remotes:
+#   origin pointing to fork
+#   upstream pointing to theforeman/foreman-packaging
+cd foreman-packaging
+read -p "CHANGELOG: What's your full name? e.g: John Doe : " NAME
+read -p "CHANGELOG: What's your email? e.g: jdoe@foo.bar : " EMAIL
+
+## RPM packaging
+git checkout rpm/develop
+git pull --rebase upstream rpm/develop
+echo -e "${GREEN} -- Checking out branch rpm/foreman-docker-$VERSION $1\033[0m"
+git checkout -b rpm/foreman-docker-${VERSION}
+echo -e "${GREEN} -- Bumping version and changelog $1\033[0m"
+# Bump rubygem-foreman_docker.spec version
+sed -i s/"Version: .*"/"Version: ${VERSION}"/g rubygem-foreman_docker/rubygem-foreman_docker.spec
+## Add changelog date and message
+awk -i inplace -v VERSION="$VERSION" -v EMAIL="$EMAIL" -v NAME="$NAME" -v DATE="$(date +'%a %b %d %Y')" '/%changelog/ { print; print "* " DATE " " NAME " <" EMAIL "> " VERSION "-1.fm1_10"; print "- plugins:foreman_docker - Release " VERSION " (" EMAIL ")"; print ""; next }1' rubygem-foreman_docker/rubygem-foreman_docker.spec
+echo -e "${GREEN} -- Annexing rubygem to commit $1\033[0m"
+git rm rubygem-foreman_docker/foreman_docker-*.gem
+cp $PLUGIN_DIR/foreman_docker-${VERSION}.gem rubygem-foreman_docker/
+git annex add rubygem-foreman_docker/foreman_docker-${VERSION}.gem
+echo -e "${GREEN} -- Committing changes to git $1\033[0m"
+git add .
+git commit -m "plugins:foreman_docker - Release ${VERSION}"
+git push origin rpm/foreman-docker-${VERSION}
+hub pull-request -b rpm/develop
+echo -e "${GREEN} -- Pull request submitted to rpm/develop $1\033[0m"
+
+echo -e "--------------------------"
+echo -e "${BLUE} Part 2.1: Debian packaging $1\033[0m"
+echo -e "--------------------------"
+git checkout deb/develop
+git pull --rebase upstream deb/develop
+echo -e "${GREEN} -- Checking out branch deb/foreman-docker-$VERSION $1\033[0m"
+git checkout -b deb/foreman-docker-${VERSION}
+echo -e "${GREEN} -- Bumping version and changelog $1\033[0m"
+# Bump version in plugins/ruby-foreman-docker/foreman_docker.rb with sed
+sed -i s/"gem 'foreman_docker', .*"/"gem 'foreman_docker', '${VERSION}'"/g  plugins/ruby-foreman-docker/foreman_docker.rb
+# update changelog in plugins/ruby-foreman-docker/debian/changelog
+sed -i "1i ruby-foreman-docker ($VERSION-1) stable; urgency=low\n\n  * Update release to $VERSION\n -- $NAME <$EMAIL> $(date +'%a, %b %d %Y %T %z')" plugins/ruby-foreman-docker/debian/changelog
+# update gem.list in plugins/ruby-foreman-docker/debian/gem.list
+sed -i s/"foreman_docker.*"/"foreman_docker-${VERSION}.gem"/g  plugins/ruby-foreman-docker/debian/gem.list
+echo -e "${GREEN} -- Committing changes to git $1\033[0m"
+git add .
+git commit -m "plugins:foreman_docker - Release ${VERSION}"
+git push origin deb/foreman-docker-${VERSION}
+hub pull-request -b deb/develop
+echo -e "${GREEN} -- Pull request submitted to deb/develop $1\033[0m"
+echo -e "${BLUE} -- DONE! Congratulations, your plugin has been released. $1\033[0m"
