@@ -92,7 +92,7 @@ echo -e "${GREEN} -- Bumping version and changelog $1\033[0m"
 # Bump version in plugins/ruby-foreman-docker/foreman_docker.rb with sed
 sed -i s/"gem 'foreman_docker', .*"/"gem 'foreman_docker', '${VERSION}'"/g  plugins/ruby-foreman-docker/foreman_docker.rb
 # update changelog in plugins/ruby-foreman-docker/debian/changelog
-sed -i "1i ruby-foreman-docker ($VERSION-1) stable; urgency=low\n\n  * Update release to $VERSION\n -- $NAME <$EMAIL> $(date +'%a, %b %d %Y %T %z')" plugins/ruby-foreman-docker/debian/changelog
+sed -i "1i ruby-foreman-docker ($VERSION-1) stable; urgency=low\n\n  * Update release to $VERSION\n\n -- $NAME <$EMAIL>  $(date +'%a, %b %d %Y %T %z')\n" plugins/ruby-foreman-docker/debian/changelog
 # update gem.list in plugins/ruby-foreman-docker/debian/gem.list
 sed -i s/"foreman_docker.*"/"foreman_docker-${VERSION}.gem\""/g  plugins/ruby-foreman-docker/debian/gem.list
 echo -e "${GREEN} -- Committing changes to git $1\033[0m"
