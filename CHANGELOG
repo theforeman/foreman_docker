@@ -1,4 +1,16 @@
+2015-08-17	Partha Aji <paji@redhat.com>
+	* Fixes #11354 - Made the container deal with cpu shares and cpu sets correctly
+
+2015-07-27	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #11204 - Automate packaging, deb changelog typo
+
+2015-07-24	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #11204 - Automate deb packaging, typo
+	* Refs #11204 - Automate foreman-packaging pull-requests
+
 2015-07-23	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #11204 - Automate rubygem release, typo
+	* Bump version to 1.4.0
 	* Fixes #11204 - Automate rubygem release
 
 2015-07-01	Adam Ruzicka <aruzicka@redhat.com>
