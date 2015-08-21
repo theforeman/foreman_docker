@@ -34,8 +34,6 @@
 * Events stream ([#8037](http://projects.theforeman.org/issues/8037))
 * Tight integration between Docker hosts [Atomic](http://www.projectatomic.io/) and [CoreOS](http://coreos.com/) and containers ([#7653](http://projects.theforeman.org/issues/7653), [#7652](http://projects.theforeman.org/issues/7652))
 * Quickstart images - pre-supplied images and configuration ([#7869](http://projects.theforeman.org/issues/7869))
-* Environment variables support ([#8226](http://projects.theforeman.org/issues/8226))
-* Support to expose ports during creation or at runtime ([#7864](http://projects.theforeman.org/issues/7864))
 * Links to other containers ([#7866](http://projects.theforeman.org/issues/7866))
 * API ([#7874](http://projects.theforeman.org/issues/7874))
 * [Hammer CLI](http://github.com/theforeman/hammer-cli-foreman) support ([#8227](http://projects.theforeman.org/issues/8227))
