@@ -15,7 +15,7 @@
   <tbody>
   <% containers.each do |container| %>
     <tr>
-      <td class="ellipsis text-center"><%= link_to_container(container, resource) %></td>
+      <td class="ellipsis text-center" id="<%= container.name[1..-1] %>"><%= link_to_container(container, resource) %></td>
       <td class="hidden-tablet hidden-xs text-center">
         <span <%= vm_power_class(container.ready?) %>><%= vm_state(container) %></span></td>
       <td class="hidden-tablet hidden-xs text-center"><%= trunc_with_tooltip(container.image_friendly_name) %></td>
