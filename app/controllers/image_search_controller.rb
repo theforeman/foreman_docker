@@ -1,6 +1,11 @@
 class ImageSearchController < ::ApplicationController
   before_filter :find_resource
 
+  # this is incredibly odd. for some reason, rails sees the
+  # requests ImageSearchControllerTest makes as requests from another host
+  # thus, violating CSRF.
+  protect_from_forgery :only => :nothing if Rails.env.test?
+
   def auto_complete_repository_name
     catch_network_errors do
       text = if use_hub?

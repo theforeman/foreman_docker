@@ -77,13 +77,6 @@ module ContainersHelper
     text_field_tag(name, val, options)
   end
 
-  # Compatibility fixes - to be removed once 1.7 compatibility is no longer required
-  if SETTINGS[:version].to_s.to_f <= 1.7
-    def trunc_with_tooltip(text, length = 32)
-      trunc(text, length)
-    end
-  end
-
   def processes(container)
     ForemanDocker::Docker.get_container(container).top
   end

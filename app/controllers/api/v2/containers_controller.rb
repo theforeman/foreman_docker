@@ -20,7 +20,7 @@ module Api
         if params[:compute_resource_id].present?
           scoped = Container.where(:compute_resource_id => params[:compute_resource_id])
         else
-          scoped = Container.scoped
+          scoped = Container.where(nil)
         end
         @containers = scoped.search_for(params[:search], :order => params[:order])
                       .paginate(:page => params[:page])

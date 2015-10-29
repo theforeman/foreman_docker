@@ -3,13 +3,11 @@ class CreateDockerRegistries < ActiveRecord::Migration
     create_table :docker_registries do |t|
       t.string :url
       t.string :name
-      t.integer :id
       t.string :description
       t.timestamps
     end
 
     create_table :docker_image_docker_registries do |t|
-      t.integer :id
       t.integer :docker_registry_id
       t.integer :docker_image_id
     end
