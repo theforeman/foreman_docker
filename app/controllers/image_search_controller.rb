@@ -3,16 +3,23 @@ class ImageSearchController < ::ApplicationController
 
   def auto_complete_repository_name
     catch_network_errors do
-      render :text => (use_hub? ? hub_image_exists?(params[:search]) :
-          registry_image_exists?(params[:search])).to_s
+      text = if use_hub?
+               hub_image_exists?(params[:search])
+             else
+               registry_image_exists?(params[:search])
+             end
+      render :text => text.to_s
     end
   end
 
   def auto_complete_image_tag
     catch_network_errors do
       # This is the format jQuery UI autocomplete expects
-      tags = use_hub? ? hub_auto_complete_image_tags(params[:search]) :
-          registry_auto_complete_image_tags(params[:search])
+      tags = if use_hub?
+               hub_auto_complete_image_tags(params[:search])
+             else
+               registry_auto_complete_image_tags(params[:search])
+             end
       respond_to do |format|
         format.js do
           tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
@@ -24,8 +31,12 @@ class ImageSearchController < ::ApplicationController
 
   def search_repository
     catch_network_errors do
-      repositories = use_hub? ? hub_search_image(params[:search]) :
-                                registry_search_image(params[:search])
+      repositories = if use_hub?
+                       hub_search_image(params[:search])
+                     else
+                       registry_search_image(params[:search])
+                     end
+
       respond_to do |format|
         format.js do
           render :partial => 'repository_search_results',
@@ -75,8 +86,12 @@ class ImageSearchController < ::ApplicationController
     result = ::Service::RegistryApi.new(:url => @registry.url,
                                         :user => @registry.username,
                                         :password => @registry.password).search(term)
-    registry_name = term.split('/').size > 1 ? term :
-        'library/' + term
+    registry_name = if term.split('/').size > 1
+                      term
+                    else
+                      "library/#{term}"
+                    end
+
     result['results'].any? { |r| r['name'] == registry_name }
   end
 

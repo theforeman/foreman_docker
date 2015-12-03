@@ -41,8 +41,8 @@ module Containers
 
     def set_form
       instance_variable_set(
-          "@docker_container_wizard_states_#{step}",
-          @state.send(:"#{step}") || @state.send(:"build_#{step}"))
+        "@docker_container_wizard_states_#{step}",
+        @state.send(:"#{step}") || @state.send(:"build_#{step}"))
     end
 
     def create_container(start = true)
@@ -58,9 +58,9 @@ module Containers
       else
         @docker_container_wizard_states_environment = @state.environment
         process_error(
-            :error_msg => service.errors.full_messages.join(','),
-            :object => @state.environment,
-            :render => 'environment')
+          :error_msg => service.errors.full_messages.join(','),
+          :object => @state.environment,
+          :render => 'environment')
       end
     end
   end

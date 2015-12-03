@@ -108,7 +108,7 @@ module Api
         render :json => { :logs => Docker::Container.get(@container.uuid)
           .logs(:stdout => (params[:stdout] || true),
                 :stderr => (params[:stderr] || false),
-                :tail   => (params[:tail]   || 100)) }
+                :tail   => (params[:tail] || 100)) }
       end
 
       api :PUT, '/containers/:id/power', N_('Run power operation on a container')

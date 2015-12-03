@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ContainerIntegrationTest < ActionDispatch::IntegrationTest
-  test 'redirects to a new compute resource if none is available'  do
+  test 'redirects to a new compute resource if none is available' do
     visit containers_path
     assert_equal current_path, new_compute_resource_path
   end

@@ -44,7 +44,7 @@ class RemoveDockerTables < ActiveRecord::Migration
       t.timestamps
     end
     create_table :docker_tags do |t|
-      t.string  :tag
+      t.string :tag
       t.references :docker_image, :null => false
       t.timestamps
     end

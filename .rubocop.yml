@@ -33,3 +33,7 @@ Style/MethodCalledOnDoEndBlock:
 
 Style/DotPosition:
   EnforcedStyle: 'leading'
+
+Rails/Date:
+  Exclude:
+   - foreman_docker.gemspec

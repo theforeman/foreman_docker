@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-class RegistryApiTest <  ActiveSupport::TestCase
+class RegistryApiTest < ActiveSupport::TestCase
   test "initialize handles username password info correctly" do
     uname = "tardis"
     password = "boo"

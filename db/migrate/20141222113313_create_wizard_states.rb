@@ -1,9 +1,7 @@
 class CreateWizardStates < ActiveRecord::Migration
   # rubocop:disable Metrics/MethodLength
   def change
-    create_table :docker_container_wizard_states do |t|
-      t.timestamps
-    end
+    create_table :docker_container_wizard_states, &:timestamps
 
     create_table :docker_container_wizard_states_preliminaries do |t|
       t.integer :compute_resource_id, :null => false
@@ -11,7 +9,7 @@ class CreateWizardStates < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table  :docker_container_wizard_states_images do |t|
+    create_table :docker_container_wizard_states_images do |t|
       t.integer :registry_id
       t.string :repository_name, :null => false
       t.string :tag, :null => false
@@ -19,7 +17,7 @@ class CreateWizardStates < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table  :docker_container_wizard_states_configurations do |t|
+    create_table :docker_container_wizard_states_configurations do |t|
       t.string :name
       t.string :command
       t.string :entrypoint

@@ -30,18 +30,18 @@ module ContainersHelper
   def container_title_actions(container)
     @compute_resource = container.compute_resource
     title_actions(
-        button_group(
-          link_to(_('Commit'), '#commit-modal', :'data-toggle' => 'modal')
-        ),
-        button_group(container_power_action(container.in_fog)),
-        button_group(
-          display_delete_if_authorized(
-            hash_for_container_path(:id => container.id)
-                                    .merge(:auth_object => container,
-                                           :auth_action => 'destroy',
-                                           :authorizer  => authorizer),
-            :confirm     => _("Delete %s?") % container.name)
-        )
+      button_group(
+        link_to(_('Commit'), '#commit-modal', :'data-toggle' => 'modal')
+      ),
+      button_group(container_power_action(container.in_fog)),
+      button_group(
+        display_delete_if_authorized(
+          hash_for_container_path(:id => container.id)
+                                  .merge(:auth_object => container,
+                                         :auth_action => 'destroy',
+                                         :authorizer  => authorizer),
+          :confirm     => _("Delete %s?") % container.name)
+      )
     )
   end
 
@@ -69,7 +69,7 @@ module ContainersHelper
 
   def power_on_off_message(vm)
     _("Are you sure you want to power %{act} %{vm}?") % { :act => action_string(vm).downcase.strip,
-                                                          :vm => vm  }
+                                                          :vm => vm }
   end
 
   def auto_complete_docker_search(name, val, options = {})

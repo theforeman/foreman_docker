@@ -34,7 +34,7 @@ module Api
           assert_equal ActiveSupport::JSON.decode(response.body)['logs'], fake_container.logs
         end
 
-        test 'show returns information about container'  do
+        test 'show returns information about container' do
           get :show, :id => @container.id
           assert_response :success
           assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'

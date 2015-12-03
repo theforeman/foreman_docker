@@ -1,6 +1,6 @@
 require 'test_plugin_helper'
 
-class ContainersServiceTest <  ActiveSupport::TestCase
+class ContainersServiceTest < ActiveSupport::TestCase
   setup do
     @state = DockerContainerWizardState.create! do |s|
       s.build_preliminary(:compute_resource_id => FactoryGirl.create(:docker_cr).id,

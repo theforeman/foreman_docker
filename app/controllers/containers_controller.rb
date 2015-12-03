@@ -96,7 +96,7 @@ class ContainersController < ::ApplicationController
   def container_deletion
     # Unmanaged container - only present in Compute Resource
     if params[:compute_resource_id].present?
-      @deleted_identifier  = params[:id]
+      @deleted_identifier = params[:id]
       destroy_compute_resource_vm(params[:compute_resource_id], params[:id])
     else # Managed container
       find_container

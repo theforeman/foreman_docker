@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class ContainerStepsTest < ActionDispatch::IntegrationTest
-  test 'shows a link to a new compute resource if none is available'  do
+  test 'shows a link to a new compute resource if none is available' do
     visit new_container_path
     assert has_selector?("div.alert", :text => 'Please add a new one')
   end
 
-  test 'shows taxonomies tabs'  do
+  test 'shows taxonomies tabs' do
     visit new_container_path
     assert has_selector?("a", :text => 'Locations') if SETTINGS[:locations_enabled]
     assert has_selector?("a", :text => 'Organizations') if SETTINGS[:organizations_enabled]
