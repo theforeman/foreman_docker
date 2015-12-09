@@ -2,6 +2,8 @@ require 'uri'
 
 module ForemanDocker
   class Docker < ::ComputeResource
+    attr_accessible :email
+
     validates :url, :format => { :with => URI.regexp }
 
     def self.model_name
