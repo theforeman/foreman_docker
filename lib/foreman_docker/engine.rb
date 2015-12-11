@@ -41,7 +41,7 @@ module ForemanDocker
 
     initializer 'foreman_docker.register_plugin', :after => :finisher_hook do
       Foreman::Plugin.register :foreman_docker do
-        requires_foreman '> 1.4'
+        requires_foreman '>= 1.11'
         compute_resource ForemanDocker::Docker
 
         sub_menu :top_menu, :containers_menu, :caption => N_('Containers'),
