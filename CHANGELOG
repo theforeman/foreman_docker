@@ -1,3 +1,33 @@
+2015-12-15	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #12785 - Raise requires_foreman version to 1.11
+
+2015-12-14	Eric D. Helms <ericdhelms@gmail.com>
+	* Fixes #11065: Add .rubocop.yml as a test file for the gem.
+
+2015-12-11	Tom Caspy <tcaspy@gmail.com>
+	* fixes #7230 - rails 4 compatibility
+
+2015-12-09	John Mitsch <jomitsch@redhat.com>
+	* Refs #12726 - Adding attr_accessible :email to docker model
+
+2015-12-08	Tom Caspy <tcaspy@gmail.com>
+	* fixes #12726 - adding attr_accessible
+
+2015-12-03	David Davis <daviddavis@redhat.com>
+	* Fixes #12681 - Support rubocop 0.35.1 by fixing broken rules
+
+2015-10-14	oshtaier <alexshtayer@yahoo.com>
+	* Fixes #12141 - Add unique id for container object name on 'All containers' page
+
+2015-09-02	Partha Aji <paji@redhat.com>
+	* Fixes #11672 - Exposed username in the registries json call
+
+2015-08-21	Daniel Lobato García <elobatocs@gmail.com>
+	* Remove env variables & DNS from planned in README
+
+2015-08-18	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 1.4.1
+
 2015-08-17	Partha Aji <paji@redhat.com>
 	* Fixes #11354 - Made the container deal with cpu shares and cpu sets correctly
 
