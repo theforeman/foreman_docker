@@ -10,7 +10,7 @@
     <% if i == 0 %>
       <li class="active"><a href="#<%= "primary" %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
     <% else %>
-      <li><a href="#<%= resource.name %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
+      <li><a href="#<%= resource.id %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
     <% end %>
   <% end %>
 </ul>
@@ -20,7 +20,7 @@
     <% if i == 0 %>
       <div class="tab-pane active" id="primary">
     <% else %>
-      <div class="tab-pane" id="<%= resource.name %>">
+      <div class="tab-pane" id="<%= resource.id %>">
     <% end %>
     <% if resource.test_connection %>
       <%= render 'list', :containers => resource.vms,
