@@ -5,5 +5,7 @@ module DockerContainerWizardStates
                               :foreign_key => :docker_container_wizard_state_id
 
     validates :command, :presence => true
+
+    attr_accessible :name, :command, :entrypoint, :cpu_set, :cpu_shares, :memory, :wizard_state
   end
 end

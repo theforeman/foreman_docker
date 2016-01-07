@@ -4,7 +4,8 @@ module DockerContainerWizardStates
     belongs_to :wizard_state, :class_name => DockerContainerWizardState
 
     attr_accessible :tty, :docker_container_wizard_state_id,
-                    :attach_stdin, :attach_stdout, :attach_stderr
+                    :attach_stdin, :attach_stdout, :attach_stderr,
+                    :exposed_ports_attributes, :dns_attributes
     # Fix me:
     # Validations are off on this association as there's a bug in ::Parameter
     # that forces validation of reference_id. This will fail on new records as
