@@ -10,24 +10,11 @@
       </div>
       <div class='col-md-6 col-md-pull-6'>
         <h3><%= _("Environment variables") %></h3>
-        <%= f.fields_for :environment_variables, @docker_container_wizard_states_environment.environment_variables do |builder| %>
-          <%= render 'foreman_docker/common_parameters/environment_variable', :f => builder %>
-        <% end %>
-        <%= link_to_add_fields(_("Add environment variable"), f, :environment_variables,
-                               'foreman_docker/common_parameters/environment_variable') %>
-
+        <%= render 'foreman_docker/common_parameters/environment_variables', :f => f %>
         <h3><%= _("Exposed Ports") %></h3>
-        <%= f.fields_for :exposed_ports, @docker_container_wizard_states_environment.exposed_ports do |builder| %>
-          <%= render 'foreman_docker/common_parameters/exposed_ports', :f => builder %>
-        <% end %>
-        <%= link_to_add_fields(_("Add Exposed Port"), f, :exposed_ports,
-                               'foreman_docker/common_parameters/exposed_ports') %>
+        <%= render 'foreman_docker/common_parameters/exposed_ports', :f => f %>
         <h3><%= _("DNS") %></h3>
-        <%= f.fields_for :dns, @docker_container_wizard_states_environment.dns do |builder| %>
-          <%= render 'foreman_docker/common_parameters/dns', :f => builder %>
-        <% end %>
-        <%= link_to_add_fields(_("Add DNS"), f, :dns,
-                               'foreman_docker/common_parameters/dns') %>                               
+        <%= render 'foreman_docker/common_parameters/dns', :f => f %>
       </div>
     </div>
     <div class="row">

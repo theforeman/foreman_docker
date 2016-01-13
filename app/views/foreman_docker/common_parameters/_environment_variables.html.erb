@@ -1,0 +1,10 @@
+<table class="table table-bordered table-hover table-striped" id="environment_variable_table">
+  <tbody>
+    <%= f.fields_for :environment_variables, @docker_container_wizard_states_environment.environment_variables do |builder| %>
+      <%= render 'foreman_docker/common_parameters/environment_variable', :f => builder %>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to_add_fields(_("Add environment variable"), f, :environment_variables,
+                       'foreman_docker/common_parameters/environment_variable',
+                       :target => '#environment_variable_table tbody') %>
