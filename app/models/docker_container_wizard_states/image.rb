@@ -8,6 +8,6 @@ module DockerContainerWizardStates
     validates :tag,             :presence => true
     validates :repository_name, :presence => true
 
-    attr_accessible :repository_name, :tag, :wizard_state, :registry_id, :capsule_id
+    attr_accessible :repository_name, :tag, :wizard_state, :registry_id, :capsule_id, :katello
   end
 end
