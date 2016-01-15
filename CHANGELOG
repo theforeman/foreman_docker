@@ -1,3 +1,22 @@
+2016-01-15	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #13225 - Use Patternfly spinners helper
+
+2016-01-15	Ori Rabin <orabin@redhat.com>
+	* Fixes #13228 - add attr_accessible to enviroment and image
+
+2016-01-15	Ranjan Kumar <ranjankumar188@gmail.com>
+	* Fixes #12971 - Container tab switch doesn't work when docker registry name contains special character
+
+2016-01-14	Eric D. Helms <ericdhelms@gmail.com>
+	* Fixes #13225: Don't declare spinner.gif with /assets prefixed
+
+2016-01-13	Ori Rabin <orabin@redhat.com>
+	* Fixes #13167 - Add buttons fixed
+	* Fixes #12973 - adding missing attr_accessible
+
+2015-12-18	Daniel Lobato <elobatocs@gmail.com>
+	* Bump version to 2.0.0
+
 2015-12-15	Daniel Lobato <elobatocs@gmail.com>
 	* Fixes #12785 - Raise requires_foreman version to 1.11
 

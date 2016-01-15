@@ -8,7 +8,7 @@
     <th class="hidden-tablet hidden-xs text-center"><%= _("Uptime") %></th>
     <th class="hidden-tablet hidden-xs text-center"><%= _("Running on") %></th>
     <th class="hidden-tablet hidden-xs text-center"><%= _("Managed") %></th>
-    <th></th>
+    <th class="col-md-1 text-center"><%= _('Action') %></th>
   </tr>
   </thead>
 
@@ -26,12 +26,15 @@
       <td class="hidden-tablet hidden-xs text-center"><%= link_to resource, compute_resource_path(resource) %> </td>
       <td class="hidden-tablet hidden-xs text-center"><%= managed?(container, resource) ? _('Yes') : _('No') %></td>
       <% @compute_resource = resource %>
-      <td><%= action_buttons(container_power_action(container),
-                             display_delete_if_authorized(hash_for_container_path(:compute_resource_id => resource,
-                                                          :id => container.id).
-                                                          merge(:auth_object => resource, :auth_action => 'destroy',
-                                                          :authorizer => authorizer),
-                                                          :confirm => _("Delete %s?") % container.name)) %></td>
+      <td class="text-center">
+        <%= action_buttons(container_power_action(container),
+                           display_delete_if_authorized(hash_for_container_path(
+                             :compute_resource_id => resource,
+                             :id => container.id).
+                             merge(:auth_object => resource, :auth_action => 'destroy',
+                                   :authorizer => authorizer),
+                                   :confirm => _("Delete %s?") % container.name)) %>
+      </td>
     </tr>
   <% end %>
   </tbody>

@@ -19,11 +19,12 @@
     </div>
     <div class="row">
       <div class="form-group col-md-6">
-        <label class="col-md-2"><%= _('Run ?') %></label>
-	<div class="col-md-4">
-	  <%= check_box_tag(:start_on_create) %>
-	  <%= content_tag(:span, _('If selected, the container will start after it is created'), :class => "help-block").html_safe %>
-	</div>
+        <label class="col-md-2"><%= _('Run?') %>
+          <%= popover('', _('If selected, the container will start after it is created')) %>
+        </label>
+      <div class="col-md-4">
+        <%= check_box_tag(:start_on_create) %>
+      </div>
       </div>
     </div>
    <%= render :partial => 'form_buttons' %>

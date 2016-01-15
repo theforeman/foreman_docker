@@ -39,7 +39,7 @@ module ForemanDocker
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
 
-    initializer 'foreman_docker.register_plugin', :after => :finisher_hook do
+    initializer 'foreman_docker.register_plugin', :before => :finisher_hook do
       Foreman::Plugin.register :foreman_docker do
         requires_foreman '>= 1.11'
         compute_resource ForemanDocker::Docker
