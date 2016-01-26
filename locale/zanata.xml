@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <config xmlns="http://zanata.org/namespace/config/">
-    <url>https://translate.engineering.redhat.com/</url> 
-    <project>satellite6-foreman-docker</project> 
-    <project-version>6.1</project-version>
+    <url>https://translate.zanata.org/zanata/</url>
+    <project>foreman-docker</project>
+    <project-version>master</project-version>
     <project-type>podir</project-type>
     <locales>
         <locale>fr</locale>
