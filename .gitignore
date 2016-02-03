@@ -11,3 +11,8 @@ test/dummy/.sass-cache
 .ruby-version
 .ruby-gemset
 public/assets/
+locale/*.mo
+locale/*/*.pox
+locale/*/*.edit.po
+locale/*/*.po.time_stamp
+

@@ -40,11 +40,11 @@ module Api
           param :name, String
           param_group :taxonomies, ::Api::V2::BaseController
           param :compute_resource_id, :identifier, :required => true
-          param :registry_id, :identifier, :desc => N_('Registry this container will have to
-                                                        use to get the image')
+          param :registry_id, :identifier, :desc => N_('Registry this container will have to ' +
+                                                        'use to get the image')
           param :repository_name, String, :required => true,
-                                          :desc => N_('Name of the repository to use
-                                                       to create the container. e.g: centos')
+                                          :desc => N_('Name of the repository to use ' +
+                                                       'to create the container. e.g: centos')
           param :tag, String, :required => true,
                               :desc => N_('Tag to use to create the container. e.g: latest')
           param :tty, :bool
@@ -57,9 +57,9 @@ module Api
           param :attach_stdout, :bool
           param :attach_stdin, :bool
           param :attach_stderr, :bool
-          param :capsule_id, :identifier, :desc => N_('The capsule this container will have to use
-                                                       to get the image. Relevant for images
-                                                       retrieved from katello registry.')
+          param :capsule_id, :identifier, :desc => N_('The capsule this container will have to ' +
+                                                       'use to get the image. Relevant for images ' +
+                                                       'retrieved from katello registry.')
         end
       end
 
