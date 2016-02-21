@@ -93,7 +93,7 @@ module Service
     end
 
     def full_messages
-      @errors.respond_to?(:full_messages) ? @errors.full_messages : @errors
+      errors.respond_to?(:full_messages) ? errors.full_messages : errors
     end
 
     def run_container(container)

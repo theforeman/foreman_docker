@@ -58,9 +58,9 @@ module Containers
       else
         @docker_container_wizard_states_environment = @state.environment
         process_error(
-          :error_msg => service.errors.full_messages.join(','),
-          :object => @state.environment,
-          :render => 'environment')
+          :redirect => containers_path,
+          :error_msg => service.full_messages.join(','),
+          :object => @state.environment)
       end
     end
   end
