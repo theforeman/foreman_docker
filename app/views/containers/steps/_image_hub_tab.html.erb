@@ -34,6 +34,9 @@
           <% end %>
         </span>
       </div>
+       <span class="help-block <%= 'has-error' if f.object.errors.any? %>">
+          <%= f.object.errors.full_messages.to_sentence %>
+        </span>
     </div>
     <%= text_f f, :tag,
                   :'data-registry' => registry,
