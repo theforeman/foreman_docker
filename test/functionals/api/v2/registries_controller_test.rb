@@ -24,6 +24,7 @@ module Api
 
       test 'creates a new registry with valid params' do
         docker_attrs = FactoryGirl.attributes_for(:docker_registry)
+        DockerRegistry.any_instance.stubs(:attempt_login)
         post :create, :registry => docker_attrs
         assert_response :success
       end
@@ -41,6 +42,7 @@ module Api
       end
 
       test 'update a docker registry' do
+        DockerRegistry.any_instance.stubs(:attempt_login)
         put :update, :id => @registry.id, :registry => { :name => 'hello_world' }
         assert_response :success
         assert DockerRegistry.exists?(:name => 'hello_world')

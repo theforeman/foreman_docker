@@ -6,6 +6,10 @@ FactoryGirl.define do
     sequence(:password) { |n| "password#{n}" }
   end
 
+  after(:build) do |registry|
+    registry.stubs(:attempt_login)
+  end
+
   trait :with_location do
     locations { [FactoryGirl.build(:location)] }
   end

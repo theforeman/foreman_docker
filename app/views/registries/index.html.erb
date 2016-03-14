@@ -11,7 +11,7 @@
     <th class="text-center"><%= sort :name, :as => _("Name") %></th>
     <th class="hidden-tablet hidden-xs text-center"><%= sort :url, :as => _("Url") %></th>
     <th class="hidden-tablet hidden-xs text-center"><%= _("Description") %></th>
-    <th></th>
+    <th><%= _('Actions') %></th>
   </tr>
   </thead>
 
@@ -20,7 +20,10 @@
         <td><%= link_to_if_authorized trunc_with_tooltip(r.name), hash_for_edit_registry_path(:id => r).merge(:auth_object => r, :authorizer => authorizer) %></td>
         <td class="hidden-tablet hidden-xs text-center"><%= trunc_with_tooltip(r.url) %></td>
         <td class="hidden-tablet hidden-xs text-center"><%= trunc_with_tooltip(r.description) %></td>
-        <td><%= display_delete_if_authorized hash_for_registry_path(:id => r).merge(:auth_object => r, :authorizer => authorizer), :confirm => _("Delete %s?") % r.name %></td>
+        <td><%= action_buttons(
+          display_delete_if_authorized hash_for_registry_path(:id => r).
+          merge(:auth_object => r, :authorizer => authorizer),
+          :confirm => _("Delete %s?") % r.name) %></td>
       </tr>
   <% end %>
 </table>

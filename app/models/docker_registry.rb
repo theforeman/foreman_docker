@@ -3,16 +3,17 @@ class DockerRegistry < ActiveRecord::Base
   include Taxonomix
   include Encryptable
 
-  attr_accessible :name, :url, :username, :password, :locations, :organizations
-
   has_many :containers, :foreign_key => "registry_id", :dependent => :destroy
   encrypts :password
 
-  attr_accessible :name, :url, :username, :password, :locations, :organizations
+  attr_accessible :name, :url, :username, :password, :locations, :organizations,
+    :description
 
   validates_lengths_from_database
   validates :name, :presence => true, :uniqueness => true
-  validates :url,  :presence => true, :uniqueness => true
+  validates :url,  :presence => true, :uniqueness => true,
+    :url_schema => ['http', 'https']
+  validate :attempt_login
 
   scoped_search :on => :name, :complete_value => true
   scoped_search :on => :url
@@ -36,5 +37,17 @@ class DockerRegistry < ActiveRecord::Base
 
   def self.humanize_class_name(_name = nil)
     _("Docker/Registry")
+  end
+
+  private
+
+  def attempt_login
+    credentials = { 'username' => username, 'password' => password }
+    connection = ::Docker::Connection.new(
+      url,
+      credentials)
+    ::Docker.authenticate!(credentials, connection)
+  rescue => e
+    errors.add(:base, _('Unable to log in to this Docker Registry - %s') % e)
   end
 end

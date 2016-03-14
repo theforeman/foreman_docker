@@ -24,9 +24,26 @@ class DockerRegistryTest < ActiveSupport::TestCase
     assert registry.is_decryptable?(registry.password_in_db)
   end
 
-  %w(name url).each do |property|
-    test "registries need a #{property}" do
-      refute FactoryGirl.build(:docker_registry, property.to_sym => '').valid?
+  should validate_presence_of(:name)
+  should validate_presence_of(:url)
+  should validate_uniqueness_of(:name)
+  should validate_uniqueness_of(:url)
+
+  context 'attempt to login' do
+    setup do
+      @registry = FactoryGirl.build(:docker_registry)
+      @registry.unstub(:attempt_login)
+    end
+
+    test 'before creating a registry' do
+      ::Docker.expects(:authenticate!)
+      assert @registry.valid?
+    end
+
+    test 'display errors in case authentication failed' do
+      ::Docker.expects(:authenticate!).
+        raises(Docker::Error::AuthenticationError)
+      refute @registry.valid?
     end
   end
 end
