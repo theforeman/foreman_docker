@@ -36,7 +36,7 @@ module FogExtensions
       end
 
       def vm_description
-        _('%{cores} Cores and %{memory} memory') %
+        _('%{cores} cores and %{memory} memory') %
           { :cores => cpus, :memory => number_to_human_size(memory.to_i) }
       end
     end

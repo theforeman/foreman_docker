@@ -64,7 +64,7 @@
                     <%= dns %><br/>
                   <% end %>
                 </td>
-            </tr>            
+            </tr>
             <tr>
               <td><%= _('Environment Variables') %></td>
               <td>
@@ -169,7 +169,7 @@
         <div class="form-group">
           <%= label_tag "commit[author]", _("Author"), :class=>"col-sm-2 control-label" %>
           <%= text_field :commit, :author, { :class => "col-sm-8",
-                                             :placeholder => _('Foreman user <foremaner@theforeman.org>') } %>
+                                             :placeholder => _('Foreman user <foremaner@example.org>') } %>
         </div>
         <div class="form-group">
           <%= label_tag "commit[comment]", _("Comment"), :class=>"col-sm-2 control-label" %>

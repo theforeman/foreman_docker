@@ -8,9 +8,9 @@
 <ul class="nav nav-tabs" data-tabs="tabs">
   <% @container_resources.each_with_index do |resource, i| %>
     <% if i == 0 %>
-      <li class="active"><a href="#<%= "primary" %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
+      <li class="active"><a href="#<%= "primary" %>" data-toggle="tab"><%= resource.name %></a></li>
     <% else %>
-      <li><a href="#<%= resource.id %>" data-toggle="tab"><%= _("#{resource.name}") %></a></li>
+      <li><a href="#<%= resource.id %>" data-toggle="tab"><%= resource.name %></a></li>
     <% end %>
   <% end %>
 </ul>

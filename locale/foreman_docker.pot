@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_docker 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-03 09:15-0500\n"
-"PO-Revision-Date: 2016-02-03 09:15-0500\n"
+"POT-Creation-Date: 2016-03-16 16:35-0400\n"
+"PO-Revision-Date: 2016-03-16 16:35-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -23,7 +23,7 @@ msgid "List all containers"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:15
-msgid "List all containers in a compute resource"
+msgid "List all containers on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:29
@@ -31,7 +31,7 @@ msgid "Show a container"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:31
-msgid "Show container in a compute resource"
+msgid "Show container on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:43
@@ -39,11 +39,11 @@ msgid "Registry this container will have to use to get the image"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:46
-msgid "Name of the repository to use to create the container. e.g: centos"
+msgid "Name of the repository to use to create the container. e.g. centos"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:49
-msgid "Tag to use to create the container. e.g: latest"
+msgid "Tag to use to create the container. e.g. latest"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:60
@@ -57,7 +57,7 @@ msgid "Create a container"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:68
-msgid "Create container in a compute resource"
+msgid "Create container on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:84
@@ -69,7 +69,7 @@ msgid "Delete a container"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:90
-msgid "Delete container in a compute resource"
+msgid "Delete container on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:98
@@ -77,7 +77,7 @@ msgid "Show container logs"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:100
-msgid "Show logs from a container in a compute resource"
+msgid "Show logs from a container on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:105
@@ -89,7 +89,7 @@ msgid "Run power operation on a container"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:116
-msgid "Run power operation on a container in a compute resource"
+msgid "Run power operation on a container on a compute resource"
 msgstr ""
 
 #: ../app/controllers/api/v2/containers_controller.rb:121
@@ -120,16 +120,12 @@ msgstr ""
 msgid "Delete a docker registry"
 msgstr ""
 
-#: ../app/controllers/containers_controller.rb:9
-msgid "You need a Compute Resource of type Docker to start managing containers."
-msgstr ""
-
 #: ../app/controllers/containers_controller.rb:25
 msgid "Container %s is being deleted."
 msgstr ""
 
 #: ../app/controllers/containers_controller.rb:44
-msgid "%{container} commit was successful."
+msgid "%{container} commit was successful"
 msgstr ""
 
 #: ../app/controllers/containers_controller.rb:47
@@ -167,12 +163,8 @@ msgstr ""
 
 #: ../app/helpers/containers_helper.rb:43
 #: ../app/views/containers/_list.html.erb:36
-#: ../app/views/registries/index.html.erb:23
+#: ../app/views/registries/index.html.erb:26
 msgid "Delete %s?"
-msgstr ""
-
-#: ../app/helpers/containers_helper.rb:67
-msgid "Power %{act}"
 msgstr ""
 
 #: ../app/helpers/containers_helper.rb:71
@@ -180,15 +172,19 @@ msgid "Are you sure you want to power %{act} %{vm}?"
 msgstr ""
 
 #: ../app/models/concerns/fog_extensions/fogdocker/server.rb:39
-msgid "%{cores} Cores and %{memory} memory"
+msgid "%{cores} cores and %{memory} memory"
 msgstr ""
 
 #: ../app/models/container.rb:61
 msgid "Docker/Container"
 msgstr ""
 
-#: ../app/models/docker_registry.rb:38
+#: ../app/models/docker_registry.rb:39
 msgid "Docker/Registry"
+msgstr ""
+
+#: ../app/models/docker_registry.rb:51
+msgid "Unable to log in to this Docker Registry - %s"
 msgstr ""
 
 #: ../app/models/foreman_docker/docker.rb:140
@@ -196,11 +192,7 @@ msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
 msgstr ""
 
 #: ../app/models/service/containers.rb:101
-msgid "Could not start container."
-msgstr ""
-
-#: ../app/services/foreman_docker/utility.rb:16
-msgid "Unknown size unit '%{unit}'"
+msgid "Could not start container"
 msgstr ""
 
 #: ../app/views/compute_resources/form/_docker.html.erb:1
@@ -212,6 +204,7 @@ msgid "Test Connection"
 msgstr ""
 
 #: ../app/views/compute_resources/show/_docker.html.erb:2
+#: ../app/views/registries/index.html.erb:12
 msgid "URL"
 msgstr ""
 
@@ -314,11 +307,11 @@ msgid "Action"
 msgstr ""
 
 #: ../app/views/containers/_list.html.erb:27
-msgid "Yes"
+msgid "No"
 msgstr ""
 
 #: ../app/views/containers/_list.html.erb:27
-msgid "No"
+msgid "Yes"
 msgstr ""
 
 #: ../app/views/containers/index.html.erb:1 ../lib/foreman_docker/engine.rb:47
@@ -329,11 +322,6 @@ msgstr ""
 #: ../app/views/containers/steps/_title.html.erb:1
 #: ../lib/foreman_docker/engine.rb:52
 msgid "New container"
-msgstr ""
-
-#: ../app/views/containers/index.html.erb:11
-#: ../app/views/containers/index.html.erb:13
-msgid "\"#{resource.name}\""
 msgstr ""
 
 #: ../app/views/containers/index.html.erb:30
@@ -406,7 +394,7 @@ msgid "Author"
 msgstr ""
 
 #: ../app/views/containers/show.html.erb:172
-msgid "Foreman user <foremaner@theforeman.org>"
+msgid "Foreman user <foremaner@example.org>"
 msgstr ""
 
 #: ../app/views/containers/show.html.erb:175
@@ -440,7 +428,7 @@ msgid "Search"
 msgstr ""
 
 #: ../app/views/containers/steps/_image_hub_tab.html.erb:24
-msgid "Find your favorite container, e.g: centos"
+msgid "Find your favorite container, e.g. centos"
 msgstr ""
 
 #: ../app/views/containers/steps/configuration.html.erb:3
@@ -468,11 +456,11 @@ msgid "Shell"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:6
-msgid "TTY"
+msgid "Allocate a pseudo-tty"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:6
-msgid "Allocate a pseudo-tty"
+msgid "TTY"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:7
@@ -542,17 +530,17 @@ msgid "Add DNS"
 msgstr ""
 
 #: ../app/views/foreman_docker/common_parameters/_dns_entry.html.erb:3
-msgid "DNS e.g: 8.8.8.8"
+msgid "DNS e.g. 8.8.8.8"
 msgstr ""
 
 #:
 #: ../app/views/foreman_docker/common_parameters/_environment_variable.html.erb:3
-msgid "Name, e.g: PING_HOST"
+msgid "Name, e.g. PING_HOST"
 msgstr ""
 
 #:
 #: ../app/views/foreman_docker/common_parameters/_environment_variable.html.erb:5
-msgid "Value, e.g: theforeman.org"
+msgid "Value, e.g. example.org"
 msgstr ""
 
 #:
@@ -561,7 +549,7 @@ msgid "Add environment variable"
 msgstr ""
 
 #: ../app/views/foreman_docker/common_parameters/_exposed_port.html.erb:3
-msgid "Port Number e.g: 22"
+msgid "Port number e.g. 22"
 msgstr ""
 
 #: ../app/views/foreman_docker/common_parameters/_exposed_ports.erb:8
@@ -615,12 +603,12 @@ msgstr ""
 msgid "New Registry"
 msgstr ""
 
-#: ../app/views/registries/index.html.erb:12
-msgid "Url"
-msgstr ""
-
 #: ../app/views/registries/index.html.erb:13
 msgid "Description"
+msgstr ""
+
+#: ../app/views/registries/index.html.erb:14
+msgid "Actions"
 msgstr ""
 
 #: ../lib/foreman_docker/engine.rb:49

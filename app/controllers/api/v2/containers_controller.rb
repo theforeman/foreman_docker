@@ -12,7 +12,7 @@ module Api
 
       api :GET, '/containers/', N_('List all containers')
       api :GET, '/compute_resources/:compute_resource_id/containers/',
-          N_('List all containers in a compute resource')
+          N_('List all containers on a compute resource')
       param :compute_resource_id, :identifier
       param_group :search_and_pagination, ::Api::V2::BaseController
 
@@ -28,7 +28,7 @@ module Api
 
       api :GET, '/containers/:id/', N_('Show a container')
       api :GET, '/compute_resources/:compute_resource_id/containers/:id',
-          N_('Show container in a compute resource')
+          N_('Show container on a compute resource')
       param :id, :identifier, :required => true
       param :compute_resource_id, :identifier
 
@@ -44,9 +44,9 @@ module Api
                                                         'use to get the image')
           param :repository_name, String, :required => true,
                                           :desc => N_('Name of the repository to use ' +
-                                                       'to create the container. e.g: centos')
+                                                       'to create the container. e.g. centos')
           param :tag, String, :required => true,
-                              :desc => N_('Tag to use to create the container. e.g: latest')
+                              :desc => N_('Tag to use to create the container. e.g. latest')
           param :tty, :bool
           param :entrypoint, String
           param :command, String, :required => true
@@ -65,7 +65,7 @@ module Api
 
       api :POST, '/containers/', N_('Create a container')
       api :POST, '/compute_resources/:compute_resource_id/containers/',
-          N_('Create container in a compute resource')
+          N_('Create container on a compute resource')
       param_group :container, :as => :create
 
       def create
@@ -87,7 +87,7 @@ module Api
 
       api :DELETE, '/containers/:id/', N_('Delete a container')
       api :DELETE, '/compute_resources/:compute_resource_id/containers/:id',
-          N_('Delete container in a compute resource')
+          N_('Delete container on a compute resource')
       param :id, :identifier, :required => true
       param :compute_resource_id, :identifier
 
@@ -97,7 +97,7 @@ module Api
 
       api :GET, '/containers/:id/logs', N_('Show container logs')
       api :GET, '/compute_resources/:compute_resource_id/containers/:id/logs',
-          N_('Show logs from a container in a compute resource')
+          N_('Show logs from a container on a compute resource')
       param :id, :identifier, :required => true
       param :compute_resource_id, :identifier
       param :stdout, :bool
@@ -113,7 +113,7 @@ module Api
 
       api :PUT, '/containers/:id/power', N_('Run power operation on a container')
       api :PUT, '/compute_resources/:compute_resource_id/containers/:id/power',
-          N_('Run power operation on a container in a compute resource')
+          N_('Run power operation on a container on a compute resource')
       param :id, :identifier, :required => true
       param :compute_resource_id, :identifier
       param :power_action, String,

@@ -13,363 +13,46 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Zanata 3.6.0\n"
 
-msgid "List all containers"
-msgstr "모든 컨테이너 목록 나열"
-
-msgid "List all containers in a compute resource"
-msgstr "컴퓨터 리소스에 모든 컨테이너 목록 나열"
-
-msgid "Show a container"
-msgstr "컨테이너 표시"
-
-msgid "Show container in a compute resource"
-msgstr "컴퓨터 리소스에 컨테이너 표시"
-
-msgid "Registry this container will have to use to get the image"
+msgid "%{container} commit was successful"
 msgstr ""
 
-msgid "Name of the repository to use to create the container. e.g: centos"
+msgid "%{cores} cores and %{memory} memory"
 msgstr ""
-
-msgid "Tag to use to create the container. e.g: latest"
-msgstr ""
-
-msgid ""
-"The capsule this container will have to use to get the image. Relevant for ima"
-"ges retrieved from katello registry."
-msgstr ""
-
-msgid "Create a container"
-msgstr "컨테이너 생성"
-
-msgid "Create container in a compute resource"
-msgstr "컴퓨터 리소스에 컨테이너 생성"
-
-msgid "Wrong attributes: %s"
-msgstr "잘못된 속성: %s"
-
-msgid "Delete a container"
-msgstr "컨테이너 삭제"
-
-msgid "Delete container in a compute resource"
-msgstr "컴퓨터 리소스에 컨테이너 삭제"
-
-msgid "Show container logs"
-msgstr "컨테이너 로그 표시"
-
-msgid "Show logs from a container in a compute resource"
-msgstr "컴퓨터 리소스에 있는 컨테이너에서 로그 표시 "
-
-msgid "Number of lines to tail. Default: 100"
-msgstr "끝에 표시할 행 수. 기본값: 100"
-
-msgid "Run power operation on a container"
-msgstr "컨테이너에서 전원 동작을 실행합니다"
-
-msgid "Run power operation on a container in a compute resource"
-msgstr "컴퓨터 리소스에 있는 컨테이너에서 전원 동작을 실행합니다"
-
-msgid "power action, valid actions are (start), (stop), (status)"
-msgstr "전원 동작, 유효한 동작은 (start), (stop), (status)입니다"
-
-msgid "Unknown method: available power operations are %s"
-msgstr "알 수 없는 방법: 사용 가능한 전원 동작은 %s입니다"
-
-msgid "List all docker registries"
-msgstr ""
-
-msgid "Show a docker registry"
-msgstr ""
-
-msgid "Create a docker registry"
-msgstr ""
-
-msgid "Update a docker registry"
-msgstr ""
-
-msgid "Delete a docker registry"
-msgstr ""
-
-msgid "You need a Compute Resource of type Docker to start managing containers."
-msgstr ""
-
-msgid "Container %s is being deleted."
-msgstr "컨테이너 %s이(가) 삭제되어 있습니다. "
-
-msgid "%{container} commit was successful."
-msgstr ""
-
-msgid "Failed to commit %{container}: %{e}"
-msgstr "%{container} 커밋 실패: %{e}"
 
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "%{vm} is now %{vm_state}"
 msgstr "%{vm}은 현재 %{vm_state}입니다 "
 
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "failed to %{action} %{vm}"
-msgstr "%{vm}에 대한 %{action} 실행 실패 "
+msgid "Action"
+msgstr ""
 
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author eukim
-msgid "Error - %{message}"
-msgstr "오류 - %{message}"
+msgid "Actions"
+msgstr ""
+
+msgid "Add DNS"
+msgstr ""
+
+msgid "Add Exposed Port"
+msgstr ""
+
+msgid "Add environment variable"
+msgstr "환경 변수 추가 "
+
+msgid "All containers"
+msgstr "전체 컨테이너 "
+
+msgid "Allocate a pseudo-tty"
+msgstr "pseudo-tty 할당 "
 
 msgid "An error occured during repository search: '%s'"
 msgstr "리포지터리 검색 도중 오류가 발생했습니다: '%s'"
-
-msgid "Registry"
-msgstr "레지스트리"
-
-msgid "Select a registry"
-msgstr "레지스트리 선택 "
-
-msgid "Commit"
-msgstr "커밋 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "Delete %s?"
-msgstr "%s 을(를) 삭제하시겠습니까?"
-
-msgid "Power %{act}"
-msgstr ""
 
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Are you sure you want to power %{act} %{vm}?"
 msgstr "%{vm}의 %{act}을(를) 실행하시겠습니까?"
 
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "%{cores} Cores and %{memory} memory"
-msgstr "%{cores} 코어 및 %{memory} 메모리 "
-
-msgid "Docker/Container"
-msgstr "Docker/컨테이너"
-
-msgid "Docker/Registry"
-msgstr "Docker/레지스트리"
-
-msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
-msgstr "Docker와 통신하는 도중 오류가 발생했습니다. Foreman 로그를 확인하십시오: %s"
-
-msgid "Could not start container."
-msgstr ""
-
-msgid "Unknown size unit '%{unit}'"
-msgstr ""
-
-msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
-msgstr "예: https://docker.example.com:4243 또는 unix:///var/run/docker.sock"
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Test Connection"
-msgstr "연결 테스트 "
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "URL"
-msgstr "URL"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Image"
-msgstr "이미지 "
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Cores"
-msgstr "코어 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "Memory"
-msgstr "메모리 "
-
-# translation auto-copied from project nautilus, version 3.8.2, document nautilus
-msgid "Command"
-msgstr "명령어"
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Power ON this machine"
-msgstr "컴퓨터의 전원 켜기 "
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Start"
-msgstr "시작 "
-
-# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
-msgid "Name"
-msgstr "이름 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "CPUs"
-msgstr "CPU"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Status"
-msgstr "상태 "
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Power"
-msgstr "전원"
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Properties"
-msgstr "속성 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "IP Address"
-msgstr "IP 주소"
-
-msgid "CPU shares"
-msgstr "CPU 공유 "
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "UUID"
-msgstr "UUID"
-
-msgid "Exposed ports"
-msgstr "표시된 포트 "
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Running on"
-msgstr "실행 "
-
-# translation auto-copied from project RHN Satellite UI, version 5.6, document java/code/src/com/redhat/rhn/frontend/strings/database/StringResource
-msgid "Uptime"
-msgstr "업타임"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Managed"
-msgstr "관리됨 "
-
-msgid "Action"
-msgstr ""
-
-# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello
-msgid "Yes"
-msgstr "예  "
-
-# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello
-msgid "No"
-msgstr "아니오  "
-
-msgid "Containers"
-msgstr "컨테이너 "
-
-msgid "New container"
-msgstr "새 컨테이너 "
-
-msgid "\"#{resource.name}\""
-msgstr "\"#{resource.name}\""
-
-msgid "Error connecting with the compute resource: <strong> %s </strong>"
-msgstr "컴퓨팅 리소스에 연결하는 도중 오류가 발생했습니다: <strong> %s </strong>"
-
-msgid "Image Repository"
-msgstr "이미지 리포지터리 "
-
-msgid "Image Tag"
-msgstr "이미지 태그 "
-
-msgid "CPU set"
-msgstr ""
-
-msgid "DNS"
-msgstr ""
-
-msgid "Environment Variables"
-msgstr "환경 변수 "
-
-# translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
-msgid "Processes"
-msgstr "프로세스"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Logs"
-msgstr "로그"
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Notice"
-msgstr "주의 "
-
-msgid "Your container is stopped."
-msgstr "컨테이너가 중지되어 있습니다. "
-
-msgid "Please turn on your container to see processes running, logs, and more."
-msgstr "실행 중인 프로세스, 로그 등을 확인하려면 컨테이너를 활성화하십시오."
-
-msgid "Commit this container state"
-msgstr "컨테이너 상태를 커밋 "
-
-msgid "Repo"
-msgstr "리포지터리 "
-
-msgid "docker/my-committed-image"
-msgstr "docker/my-committed-image"
-
-# translation auto-copied from project shotwell-core, version 0.14.1, document shotwell-core
-msgid "Tag"
-msgstr "태그"
-
-msgid "latest"
-msgstr "최신 버전 "
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Author"
-msgstr "저자 "
-
-msgid "Foreman user <foremaner@theforeman.org>"
-msgstr "Foreman 사용자 <foremaner@theforeman.org>"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Comment"
-msgstr "코멘트 "
-
-msgid "Description of the commit"
-msgstr "커밋 설명 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "Cancel"
-msgstr "취소 "
-
-# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
-msgid "Submit"
-msgstr "제출 "
-
-# translation auto-copied from project Satellite6 Foreman Bootdisk, version 6.1, document foreman_bootdisk
-msgid "Back"
-msgstr "뒤로 "
-
-# translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author eukim
-msgid "Next"
-msgstr "다음"
-
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Search"
-msgstr "검색 "
-
-msgid "Find your favorite container, e.g: centos"
-msgstr "선호하는 컨텐이너를 검색합니다, 예: centos"
-
-msgid "Basic options"
-msgstr "기본 옵션"
-
-msgid "Compute options"
-msgstr "컴퓨팅 옵션 "
-
-msgid "CPU sets"
-msgstr "CPU 세트"
-
-msgid "learn more about CPU sets"
-msgstr "CPU 세트에 대한 상세 정보 "
-
-msgid "learn more about CPU shares"
-msgstr "CPU 공유에 대한 상세 정보 "
-
-msgid "Shell"
-msgstr "쉘 "
-
-# translation auto-copied from project gnome-contacts, version 3.8.2, document gnome-contacts
-msgid "TTY"
-msgstr "TTY"
-
-msgid "Allocate a pseudo-tty"
-msgstr "pseudo-tty 할당 "
+msgid "Attach STDERR"
+msgstr "STDERR 할당 "
 
 msgid "Attach STDIN"
 msgstr "STDIN 할당 "
@@ -377,115 +60,415 @@ msgstr "STDIN 할당 "
 msgid "Attach STDOUT"
 msgstr "STDOUT 할당 "
 
-msgid "Attach STDERR"
-msgstr "STDERR 할당 "
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Author"
+msgstr "저자 "
 
-msgid "Environment variables"
-msgstr "환경 변수 "
+# translation auto-copied from project Satellite6 Foreman Bootdisk, version 6.1, document foreman_bootdisk
+msgid "Back"
+msgstr "뒤로 "
 
-msgid "Exposed Ports"
+msgid "Basic options"
+msgstr "기본 옵션"
+
+msgid "CPU set"
 msgstr ""
 
-msgid "Run?"
-msgstr ""
+msgid "CPU sets"
+msgstr "CPU 세트"
 
-msgid "If selected, the container will start after it is created"
-msgstr ""
+msgid "CPU shares"
+msgstr "CPU 공유 "
 
-msgid "Content View"
-msgstr ""
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "CPUs"
+msgstr "CPU"
 
-msgid "Docker hub"
-msgstr "Docker 허브 "
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Cancel"
+msgstr "취소 "
 
-msgid "External registry"
-msgstr "외부 레지스트리 "
+# translation auto-copied from project nautilus, version 3.8.2, document nautilus
+msgid "Command"
+msgstr "명령어"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Comment"
+msgstr "코멘트 "
+
+msgid "Commit"
+msgstr "커밋 "
+
+msgid "Commit this container state"
+msgstr "컨테이너 상태를 커밋 "
+
+msgid "Compute options"
+msgstr "컴퓨팅 옵션 "
 
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Compute resource"
 msgstr "컴퓨터 리소스 "
 
-msgid "Resource selection"
-msgstr "리소스 선택 "
+msgid "Container %s is being deleted."
+msgstr "컨테이너 %s이(가) 삭제되어 있습니다. "
 
-msgid "Where do you want to deploy your container?:"
-msgstr "컨테이너 배포 위치:"
+msgid "Containers"
+msgstr "컨테이너 "
+
+msgid "Content View"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Cores"
+msgstr "코어 "
+
+msgid "Could not start container"
+msgstr ""
+
+msgid "Create a container"
+msgstr "컨테이너 생성"
+
+msgid "Create a docker registry"
+msgstr ""
+
+msgid "Create container on a compute resource"
+msgstr ""
+
+msgid "DNS"
+msgstr ""
+
+msgid "DNS e.g. 8.8.8.8"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Delete %s?"
+msgstr "%s 을(를) 삭제하시겠습니까?"
+
+msgid "Delete a container"
+msgstr "컨테이너 삭제"
+
+msgid "Delete a docker registry"
+msgstr ""
+
+msgid "Delete container on a compute resource"
+msgstr ""
 
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Deploy on"
 msgstr "배포 "
 
-msgid ""
-"You need a Docker compute resource in order to create containers. Please %s an"
-"d try again."
-msgstr "컨테이너를 생성하려면 Docker 컴퓨팅 리소스가 필요합니다. %s을(를) 실행한 후 다시 시도하십시오."
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Description"
+msgstr "설명 "
 
-msgid "Add DNS"
+msgid "Description of the commit"
+msgstr "커밋 설명 "
+
+msgid "Description of the registry"
 msgstr ""
 
-msgid "DNS e.g: 8.8.8.8"
-msgstr ""
+msgid "Docker hub"
+msgstr "Docker 허브 "
 
-msgid "Name, e.g: PING_HOST"
-msgstr "이름 (예: PING_HOST)"
+msgid "Docker/Container"
+msgstr "Docker/컨테이너"
 
-msgid "Value, e.g: theforeman.org"
-msgstr "값 (예: theforeman.org)"
-
-msgid "Add environment variable"
-msgstr "환경 변수 추가 "
-
-msgid "Port Number e.g: 22"
-msgstr ""
-
-msgid "Add Exposed Port"
-msgstr ""
-
-msgid ""
-"The user that is used to ssh into the instance, normally docker-user, ubuntu, "
-"root etc"
-msgstr "ssh를 인스턴스에 사용하는 사용자는 일반적으로 docker-user, ubuntu, root 등 입니다"
-
-# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
-msgid "Password to authenticate with - used for SSH finish step."
-msgstr "인증에 사용될 암호 - SSH 마지막 단계에서 사용됩니다."
+msgid "Docker/Registry"
+msgstr "Docker/레지스트리"
 
 msgid "Does this image support user data input?"
 msgstr "이 이미지는 사용자 데이터 입력을 지원하고 있습니까?"
+
+msgid "Edit Registry"
+msgstr "레지스트리 편집 "
+
+msgid "Environment Variables"
+msgstr "환경 변수 "
+
+msgid "Environment variables"
+msgstr "환경 변수 "
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman, author eukim
+msgid "Error - %{message}"
+msgstr "오류 - %{message}"
+
+msgid "Error connecting with the compute resource: <strong> %s </strong>"
+msgstr "컴퓨팅 리소스에 연결하는 도중 오류가 발생했습니다: <strong> %s </strong>"
+
+msgid "Error creating communicating with Docker. Check the Foreman logs: %s"
+msgstr "Docker와 통신하는 도중 오류가 발생했습니다. Foreman 로그를 확인하십시오: %s"
+
+msgid "Exposed Ports"
+msgstr ""
+
+msgid "Exposed ports"
+msgstr "표시된 포트 "
+
+msgid "External registry"
+msgstr "외부 레지스트리 "
+
+msgid "Failed to commit %{container}: %{e}"
+msgstr "%{container} 커밋 실패: %{e}"
+
+msgid "Find your favorite container, e.g. centos"
+msgstr ""
+
+msgid "Foreman user <foremaner@example.org>"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "IP Address"
+msgstr "IP 주소"
+
+msgid "If selected, the container will start after it is created"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Image"
+msgstr "이미지 "
+
+msgid "Image Repository"
+msgstr "이미지 리포지터리 "
+
+msgid "Image Tag"
+msgstr "이미지 태그 "
+
+msgid "List all containers"
+msgstr "모든 컨테이너 목록 나열"
+
+msgid "List all containers on a compute resource"
+msgstr ""
+
+msgid "List all docker registries"
+msgstr ""
 
 # translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
 msgid "Locations"
 msgstr "위치 "
 
 # translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Organizations"
-msgstr "조직 "
+msgid "Logs"
+msgstr "로그"
 
-msgid "Description of the registry"
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Managed"
+msgstr "관리됨 "
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Memory"
+msgstr "메모리 "
+
+# translation auto-copied from project Satellite6 Katello, version 6.1, document katello
+msgid "Name"
+msgstr "이름 "
+
+msgid "Name of the repository to use to create the container. e.g. centos"
 msgstr ""
 
-msgid "Username used to access the registry"
-msgstr "레지스트리 액세스에 사용된 사용자 이름 "
-
-msgid "Password used for authentication to the registry"
-msgstr "레지스트리 인증에 사용된 암호 "
-
-msgid "Edit Registry"
-msgstr "레지스트리 편집 "
-
-msgid "Registries"
-msgstr "레지스트리 "
+msgid "Name, e.g. PING_HOST"
+msgstr ""
 
 msgid "New Registry"
 msgstr "새 레지스트리 "
 
-# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Url"
-msgstr "Url"
+msgid "New container"
+msgstr "새 컨테이너 "
+
+# translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author eukim
+msgid "Next"
+msgstr "다음"
+
+# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello
+msgid "No"
+msgstr "아니오  "
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Notice"
+msgstr "주의 "
+
+msgid "Number of lines to tail. Default: 100"
+msgstr "끝에 표시할 행 수. 기본값: 100"
 
 # translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
-msgid "Description"
-msgstr "설명 "
+msgid "Organizations"
+msgstr "조직 "
 
-msgid "All containers"
-msgstr "전체 컨테이너 "
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Password to authenticate with - used for SSH finish step."
+msgstr "인증에 사용될 암호 - SSH 마지막 단계에서 사용됩니다."
+
+msgid "Password used for authentication to the registry"
+msgstr "레지스트리 인증에 사용된 암호 "
+
+msgid "Please turn on your container to see processes running, logs, and more."
+msgstr "실행 중인 프로세스, 로그 등을 확인하려면 컨테이너를 활성화하십시오."
+
+msgid "Port number e.g. 22"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Power"
+msgstr "전원"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Power ON this machine"
+msgstr "컴퓨터의 전원 켜기 "
+
+# translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
+msgid "Processes"
+msgstr "프로세스"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Properties"
+msgstr "속성 "
+
+msgid "Registries"
+msgstr "레지스트리 "
+
+msgid "Registry"
+msgstr "레지스트리"
+
+msgid "Registry this container will have to use to get the image"
+msgstr ""
+
+msgid "Repo"
+msgstr "리포지터리 "
+
+msgid "Resource selection"
+msgstr "리소스 선택 "
+
+msgid "Run power operation on a container"
+msgstr "컨테이너에서 전원 동작을 실행합니다"
+
+msgid "Run power operation on a container on a compute resource"
+msgstr ""
+
+msgid "Run?"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Running on"
+msgstr "실행 "
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Search"
+msgstr "검색 "
+
+msgid "Select a registry"
+msgstr "레지스트리 선택 "
+
+msgid "Shell"
+msgstr "쉘 "
+
+msgid "Show a container"
+msgstr "컨테이너 표시"
+
+msgid "Show a docker registry"
+msgstr ""
+
+msgid "Show container logs"
+msgstr "컨테이너 로그 표시"
+
+msgid "Show container on a compute resource"
+msgstr ""
+
+msgid "Show logs from a container on a compute resource"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Start"
+msgstr "시작 "
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "Status"
+msgstr "상태 "
+
+# translation auto-copied from project Satellite6 Foreman Discovery, version 6.1, document foreman_discovery
+msgid "Submit"
+msgstr "제출 "
+
+# translation auto-copied from project gnome-contacts, version 3.8.2, document gnome-contacts
+msgid "TTY"
+msgstr "TTY"
+
+# translation auto-copied from project shotwell-core, version 0.14.1, document shotwell-core
+msgid "Tag"
+msgstr "태그"
+
+msgid "Tag to use to create the container. e.g. latest"
+msgstr ""
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "Test Connection"
+msgstr "연결 테스트 "
+
+msgid "The capsule this container will have to use to get the image. Relevant for images retrieved from katello registry."
+msgstr ""
+
+msgid "The user that is used to ssh into the instance, normally docker-user, ubuntu, root etc"
+msgstr "ssh를 인스턴스에 사용하는 사용자는 일반적으로 docker-user, ubuntu, root 등 입니다"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "URL"
+msgstr "URL"
+
+# translation auto-copied from project Satellite6 Hammer CLI Foreman, version 6.1, document hammer-cli-foreman
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unable to log in to this Docker Registry - %s"
+msgstr ""
+
+msgid "Unknown method: available power operations are %s"
+msgstr "알 수 없는 방법: 사용 가능한 전원 동작은 %s입니다"
+
+msgid "Update a docker registry"
+msgstr ""
+
+# translation auto-copied from project RHN Satellite UI, version 5.6, document java/code/src/com/redhat/rhn/frontend/strings/database/StringResource
+msgid "Uptime"
+msgstr "업타임"
+
+msgid "Username used to access the registry"
+msgstr "레지스트리 액세스에 사용된 사용자 이름 "
+
+msgid "Value, e.g. example.org"
+msgstr ""
+
+msgid "Where do you want to deploy your container?:"
+msgstr "컨테이너 배포 위치:"
+
+msgid "Wrong attributes: %s"
+msgstr "잘못된 속성: %s"
+
+# translation auto-copied from project Satellite6 Bastion Katello, version 6.1, document bastion_katello
+msgid "Yes"
+msgstr "예  "
+
+msgid "You need a Docker compute resource in order to create containers. Please %s and try again."
+msgstr "컨테이너를 생성하려면 Docker 컴퓨팅 리소스가 필요합니다. %s을(를) 실행한 후 다시 시도하십시오."
+
+msgid "Your container is stopped."
+msgstr "컨테이너가 중지되어 있습니다. "
+
+msgid "docker/my-committed-image"
+msgstr "docker/my-committed-image"
+
+msgid "e.g. https://docker.example.com:4243 or unix:///var/run/docker.sock"
+msgstr "예: https://docker.example.com:4243 또는 unix:///var/run/docker.sock"
+
+# translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
+msgid "failed to %{action} %{vm}"
+msgstr "%{vm}에 대한 %{action} 실행 실패 "
+
+msgid "latest"
+msgstr "최신 버전 "
+
+msgid "learn more about CPU sets"
+msgstr "CPU 세트에 대한 상세 정보 "
+
+msgid "learn more about CPU shares"
+msgstr "CPU 공유에 대한 상세 정보 "
+
+msgid "power action, valid actions are (start), (stop), (status)"
+msgstr "전원 동작, 유효한 동작은 (start), (stop), (status)입니다"

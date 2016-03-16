@@ -1,8 +1,8 @@
 <tr class="fields form-group <%= 'error' if f.object.errors.any? %>">
   <td><%= f.text_field(:name, :class => "form-control",
-                       :placeholder  => _("Name, e.g: PING_HOST")) %></td>
+                       :placeholder  => _("Name, e.g. PING_HOST")) %></td>
   <td><%= f.text_field(:value, :class => "form-control",
-                       :placeholder   => _("Value, e.g: theforeman.org")) %></td>
+                       :placeholder   => _("Value, e.g. example.org")) %></td>
   <td style='vertical-align: middle' class='text-center'>
     <span class="help-block">
       <%= link_to_remove_fields('', f) %>
