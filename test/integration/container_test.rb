@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'integration_test_helper'
 
 class ContainerIntegrationTest < ActionDispatch::IntegrationTest
   test 'redirects to a new compute resource if none is available' do

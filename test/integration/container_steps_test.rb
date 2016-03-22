@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'integration_test_helper'
 
 class ContainerStepsTest < ActionDispatch::IntegrationTest
   test 'shows a link to a new compute resource if none is available' do

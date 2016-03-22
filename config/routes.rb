@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :registries, :except => [:show]
 
-  scope :foreman_docker, :path => '/docker' do
+  scope path: '/docker', as: :foreman_docker do
     namespace :api, :defaults => { :format => 'json' } do
       scope "(:apiv)", :module => :v2, :defaults => { :apiv => 'v2' }, :apiv => /v2/,
                        :constraints => ApiConstraints.new(:version => 2) do
