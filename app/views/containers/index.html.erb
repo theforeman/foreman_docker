@@ -1,9 +1,6 @@
 <% title _("Containers") %>
 
-<% if authorized? %>
-  <% title_actions button_group(link_to_if_authorized _("New container"), hash_for_new_container_path,
-                                                      :class => 'btn-success') %>
-<% end %>
+<%= title_actions(new_link(_("New container"))) %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
   <% @container_resources.each_with_index do |resource, i| %>

@@ -1,9 +1,6 @@
 <% title _("Registries") %>
 
-<% if authorized? %>
-    <% title_actions button_group(link_to_if_authorized _("New Registry"), hash_for_new_registry_path,
-                                                        :class => 'btn-success' ) %>
-<% end %>
+<%= title_actions(new_link(_("New registry"))) %>
 
 <table class="table table-bordered table-striped table-condensed" data-table="inline">
   </thead>
