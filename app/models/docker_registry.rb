@@ -42,11 +42,10 @@ class DockerRegistry < ActiveRecord::Base
   private
 
   def attempt_login
-    credentials = { 'username' => username, 'password' => password }
-    connection = ::Docker::Connection.new(
-      url,
-      credentials)
-    ::Docker.authenticate!(credentials, connection)
+    login_endpoint = RestClient::Resource.new(url + '/v1/users',
+                                              :user => username,
+                                              :password => password)
+    login_endpoint.get == "\"OK\""
   rescue => e
     errors.add(:base, _('Unable to log in to this Docker Registry - %s') % e)
   end

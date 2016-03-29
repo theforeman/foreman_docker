@@ -36,12 +36,12 @@ class DockerRegistryTest < ActiveSupport::TestCase
     end
 
     test 'before creating a registry' do
-      ::Docker.expects(:authenticate!)
+      RestClient::Resource.any_instance.expects(:get)
       assert @registry.valid?
     end
 
     test 'display errors in case authentication failed' do
-      ::Docker.expects(:authenticate!).
+      RestClient::Resource.any_instance.expects(:get).
         raises(Docker::Error::AuthenticationError)
       refute @registry.valid?
     end
