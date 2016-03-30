@@ -110,6 +110,9 @@ msgstr "Rechenoptionen"
 msgid "Compute resource"
 msgstr "Rechnerressource"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "Container %s wird gelöscht."
 
@@ -182,6 +185,9 @@ msgstr "Unterstützt dieses Image die Eingabe von Benutzerdaten?"
 
 msgid "Edit Registry"
 msgstr "Registry bearbeiten"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "Umgebungsvariablen"
@@ -275,6 +281,9 @@ msgstr "Neue Registry"
 msgid "New container"
 msgstr "Neuer Container"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author jdimanos
 msgid "Next"
 msgstr "Weiter"
@@ -314,6 +323,9 @@ msgstr "Strom"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "System starten"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

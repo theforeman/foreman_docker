@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_docker 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-16 16:35-0400\n"
-"PO-Revision-Date: 2016-03-16 16:35-0400\n"
+"POT-Creation-Date: 2016-03-30 11:55+0200\n"
+"PO-Revision-Date: 2016-03-30 11:55+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -157,13 +157,32 @@ msgstr ""
 msgid "Select a registry"
 msgstr ""
 
+#: ../app/helpers/container_steps_helper.rb:22
+#: ../app/views/compute_resources_vms/form/_docker.html.erb:6
+#: ../app/views/compute_resources_vms/index/_docker.html.erb:5
+#: ../app/views/containers/_list.html.erb:6
+msgid "Image"
+msgstr ""
+
+#: ../app/helpers/container_steps_helper.rb:22
+msgid "Environment"
+msgstr ""
+
+#: ../app/helpers/container_steps_helper.rb:22
+msgid "Configuration"
+msgstr ""
+
+#: ../app/helpers/container_steps_helper.rb:22
+msgid "Preliminary"
+msgstr ""
+
 #: ../app/helpers/containers_helper.rb:34
 msgid "Commit"
 msgstr ""
 
 #: ../app/helpers/containers_helper.rb:43
 #: ../app/views/containers/_list.html.erb:36
-#: ../app/views/registries/index.html.erb:26
+#: ../app/views/registries/index.html.erb:23
 msgid "Delete %s?"
 msgstr ""
 
@@ -183,7 +202,7 @@ msgstr ""
 msgid "Docker/Registry"
 msgstr ""
 
-#: ../app/models/docker_registry.rb:51
+#: ../app/models/docker_registry.rb:50
 msgid "Unable to log in to this Docker Registry - %s"
 msgstr ""
 
@@ -204,14 +223,8 @@ msgid "Test Connection"
 msgstr ""
 
 #: ../app/views/compute_resources/show/_docker.html.erb:2
-#: ../app/views/registries/index.html.erb:12
+#: ../app/views/registries/index.html.erb:9
 msgid "URL"
-msgstr ""
-
-#: ../app/views/compute_resources_vms/form/_docker.html.erb:6
-#: ../app/views/compute_resources_vms/index/_docker.html.erb:5
-#: ../app/views/containers/_list.html.erb:6
-msgid "Image"
 msgstr ""
 
 #: ../app/views/compute_resources_vms/form/_docker.html.erb:10
@@ -245,7 +258,7 @@ msgstr ""
 #: ../app/views/compute_resources_vms/show/_docker.html.erb:6
 #: ../app/views/containers/_list.html.erb:4
 #: ../app/views/containers/show.html.erb:11
-#: ../app/views/registries/index.html.erb:11
+#: ../app/views/registries/index.html.erb:8
 msgid "Name"
 msgstr ""
 
@@ -318,13 +331,13 @@ msgstr ""
 msgid "Containers"
 msgstr ""
 
-#: ../app/views/containers/index.html.erb:4
+#: ../app/views/containers/index.html.erb:3
 #: ../app/views/containers/steps/_title.html.erb:1
 #: ../lib/foreman_docker/engine.rb:52
 msgid "New container"
 msgstr ""
 
-#: ../app/views/containers/index.html.erb:30
+#: ../app/views/containers/index.html.erb:27
 msgid "Error connecting with the compute resource: <strong> %s </strong>"
 msgstr ""
 
@@ -456,11 +469,11 @@ msgid "Shell"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:6
-msgid "Allocate a pseudo-tty"
+msgid "TTY"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:6
-msgid "TTY"
+msgid "Allocate a pseudo-tty"
 msgstr ""
 
 #: ../app/views/containers/steps/environment.html.erb:7
@@ -598,17 +611,20 @@ msgstr ""
 msgid "Registries"
 msgstr ""
 
-#: ../app/views/registries/index.html.erb:4
-#: ../app/views/registries/new.html.erb:1
-msgid "New Registry"
+#: ../app/views/registries/index.html.erb:3
+msgid "New registry"
 msgstr ""
 
-#: ../app/views/registries/index.html.erb:13
+#: ../app/views/registries/index.html.erb:10
 msgid "Description"
 msgstr ""
 
-#: ../app/views/registries/index.html.erb:14
+#: ../app/views/registries/index.html.erb:11
 msgid "Actions"
+msgstr ""
+
+#: ../app/views/registries/new.html.erb:1
+msgid "New Registry"
 msgstr ""
 
 #: ../lib/foreman_docker/engine.rb:49

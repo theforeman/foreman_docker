@@ -112,6 +112,9 @@ msgstr "コンピュートオプション"
 msgid "Compute resource"
 msgstr "コンピュートリソース"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "コンテナー %s が削除されています。"
 
@@ -185,6 +188,9 @@ msgstr "このイメージはユーザーのデータ入力に対応しますか
 
 msgid "Edit Registry"
 msgstr "レジストリーの編集"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "環境変数"
@@ -278,6 +284,9 @@ msgstr "新規レジストリー"
 msgid "New container"
 msgstr "新規コンテナー"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author asasaki
 msgid "Next"
 msgstr "次へ"
@@ -317,6 +326,9 @@ msgstr "パワー"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "このマシンのパワーをオンにする"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

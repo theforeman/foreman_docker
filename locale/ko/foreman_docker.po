@@ -109,6 +109,9 @@ msgstr "컴퓨팅 옵션 "
 msgid "Compute resource"
 msgstr "컴퓨터 리소스 "
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "컨테이너 %s이(가) 삭제되어 있습니다. "
 
@@ -181,6 +184,9 @@ msgstr "이 이미지는 사용자 데이터 입력을 지원하고 있습니까
 
 msgid "Edit Registry"
 msgstr "레지스트리 편집 "
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "환경 변수 "
@@ -274,6 +280,9 @@ msgstr "새 레지스트리 "
 msgid "New container"
 msgstr "새 컨테이너 "
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author eukim
 msgid "Next"
 msgstr "다음"
@@ -313,6 +322,9 @@ msgstr "전원"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "컴퓨터의 전원 켜기 "
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

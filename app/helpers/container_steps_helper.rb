@@ -2,7 +2,7 @@ module ContainerStepsHelper
   def container_wizard(step)
     wizard_header(
       step,
-      *wizard_steps.map { |s| s.to_s.humanize }
+      *humanized_steps
     )
   end
 
@@ -16,6 +16,10 @@ module ContainerStepsHelper
                         { :prompt => _("Select a registry") },
                         :class => "form-control", :disabled => registries.size == 0
     end
+  end
+
+  def humanized_steps
+    [_('Preliminary'), _('Image'), _('Configuration'), _('Environment')]
   end
 
   def last_step?

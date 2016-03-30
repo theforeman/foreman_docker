@@ -110,6 +110,9 @@ msgstr "Opciones de cómputo"
 msgid "Compute resource"
 msgstr "Recurso de cómputo"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "El contenedor se ha eliminado %s ."
 
@@ -182,6 +185,9 @@ msgstr "¿Esta imagen soporta entrada de datos de usuario?"
 
 msgid "Edit Registry"
 msgstr "Modificar registro"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "Variables de entorno"
@@ -275,6 +281,9 @@ msgstr "Nuevo registro"
 msgid "New container"
 msgstr "Nuevo contenedor"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author gguerrer
 msgid "Next"
 msgstr "Siguiente"
@@ -314,6 +323,9 @@ msgstr "Energía"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "Encender esta máquina"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

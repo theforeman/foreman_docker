@@ -109,6 +109,9 @@ msgstr "Opzioni di calcolo"
 msgid "Compute resource"
 msgstr "Risorsa di calcolo"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "Il container %s è stato cancellato."
 
@@ -181,6 +184,9 @@ msgstr "Questa immagine supporta l'input dei dati utente?"
 
 msgid "Edit Registry"
 msgstr "Modifica registro"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "Variabili dell'ambiente"
@@ -274,6 +280,9 @@ msgstr "Nuovo registro"
 msgid "New container"
 msgstr "Nuovo container"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author fvalen
 msgid "Next"
 msgstr "Avanti"
@@ -313,6 +322,9 @@ msgstr "Alimentazione"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "Attiva questa macchina"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

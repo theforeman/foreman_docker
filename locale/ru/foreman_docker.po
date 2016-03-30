@@ -110,6 +110,9 @@ msgstr "Вычислительные параметры"
 msgid "Compute resource"
 msgstr "Ресурс"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "Удаление контейнера %s..."
 
@@ -182,6 +185,9 @@ msgstr "Допускает ли этот образ ввод пользоват�
 
 msgid "Edit Registry"
 msgstr "Изменение реестра"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "Переменные окружения"
@@ -275,6 +281,9 @@ msgstr "Добавить"
 msgid "New container"
 msgstr "Новый контейнер"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project Customer Portal Translations, version Portal-Case-Management, document Template, author ypoyarko
 msgid "Next"
 msgstr "Вперед"
@@ -314,6 +323,9 @@ msgstr "Питание"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "Включить машину"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"

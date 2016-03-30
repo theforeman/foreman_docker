@@ -109,6 +109,9 @@ msgstr "運算選項"
 msgid "Compute resource"
 msgstr "運算資源"
 
+msgid "Configuration"
+msgstr ""
+
 msgid "Container %s is being deleted."
 msgstr "Container %s 正被刪除中。"
 
@@ -181,6 +184,9 @@ msgstr "此映像檔是否支援使用者資料輸入？"
 
 msgid "Edit Registry"
 msgstr "編輯登錄檔"
+
+msgid "Environment"
+msgstr ""
 
 msgid "Environment Variables"
 msgstr "環境變數"
@@ -274,6 +280,9 @@ msgstr "新增登錄檔"
 msgid "New container"
 msgstr "新增 container"
 
+msgid "New registry"
+msgstr ""
+
 # translation auto-copied from project subscription-manager, version 1.10.10, document keys
 msgid "Next"
 msgstr "下一步"
@@ -313,6 +322,9 @@ msgstr "電源"
 # translation auto-copied from project Satellite6 Foreman, version 6.1, document foreman
 msgid "Power ON this machine"
 msgstr "開啟這部機器的電源"
+
+msgid "Preliminary"
+msgstr ""
 
 # translation auto-copied from project gnome-system-monitor, version 3.8.2.1, document gnome-system-monitor
 msgid "Processes"
