@@ -16,7 +16,7 @@ module ForemanDocker
     end
 
     def capabilities
-      [:image]
+      []
     end
 
     def supports_update?
