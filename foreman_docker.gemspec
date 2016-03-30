@@ -20,5 +20,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*', '.rubocop.yml']
 
   s.add_dependency 'docker-api', '~> 1.17'
+  s.add_dependency 'deface', '< 2.0'
   s.add_dependency 'wicked', '~> 1.1'
 end

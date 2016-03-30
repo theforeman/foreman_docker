@@ -3,6 +3,7 @@ require 'gettext_i18n_rails'
 require 'fog/fogdocker'
 require 'wicked'
 require 'docker'
+require 'deface'
 
 module ForemanDocker
   # Inherit from the Rails module of the parent app (Foreman), not the plugin.
