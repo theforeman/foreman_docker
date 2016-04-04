@@ -5,6 +5,7 @@ module ForemanDocker
     attr_accessible :email
 
     validates :url, :format => { :with => URI.regexp }
+    validates :email, :format => { :with => /.+@.+\..+/i }, :allow_blank => true
 
     def self.model_name
       ComputeResource.model_name
