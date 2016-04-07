@@ -92,7 +92,15 @@ module Api
       param :compute_resource_id, :identifier
 
       def destroy
-        process_response @container.destroy
+        deleted_identifier = ForemanDocker::ContainerRemover.remove_unmanaged(
+          @container.compute_resource_id,
+          @container.uuid)
+
+        if deleted_identifier
+          process_response @container.destroy
+        else
+          render :json => { :error => 'Could not delete container on Docker host' }, :status => :precondition_failed
+        end
       end
 
       api :GET, '/containers/:id/logs', N_('Show container logs')

@@ -19,7 +19,9 @@ class ContainersServiceTest < ActiveSupport::TestCase
     end
     ForemanDocker::Docker.any_instance.expects(:create_container)
       .returns(OpenStruct.new(:uuid => 1))
+    Fog.mock!
     Service::Containers.new.start_container!(@state)
+    Fog.unmock!
     assert_equal DockerContainerWizardState.where(:id => @state.id).count, 0
   end
 end

@@ -40,10 +40,24 @@ module Api
           assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
         end
 
-        test 'delete removes a container in foreman and in Docker host' do
-          delete :destroy, :id => @container.id
-          assert_response :success
-          assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
+        context 'deletion' do
+          setup do
+            Container.any_instance.stubs(:uuid).returns('randomuuid')
+          end
+
+          test 'delete removes a container in foreman and in Docker host' do
+            delete :destroy, :id => @container.id
+            assert_response :success
+            assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
+          end
+
+          test 'if deletion on Docker host fails, Foreman deletion fails' do
+            ComputeResource.any_instance.expects(:destroy_vm).
+              with('randomuuid').
+              raises(::Foreman::Exception.new('Problem removing container'))
+            delete :destroy, :id => @container.id
+            assert_response :precondition_failed
+          end
         end
 
         test 'power call turns on/off container in Docker host' do

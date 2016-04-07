@@ -20,12 +20,17 @@ class ContainersController < ::ApplicationController
   end
 
   def destroy
-    if container_deletion
+    if (deleted_identifier = container_deletion)
       process_success(:success_redirect => containers_path,
                       :success_msg => (_("Container %s is being deleted.") %
-                                            @deleted_identifier))
+                                       deleted_identifier))
     else
-      process_error(:redirect => containers_path)
+      error(_('Your container could not be deleted in Docker'))
+      if @container.present?
+        process_error(:redirect => containers_path)
+      else
+        redirect_to :back
+      end
     end
   rescue ActiveRecord::RecordNotFound
     not_found
@@ -94,25 +99,18 @@ class ContainersController < ::ApplicationController
   end
 
   def container_deletion
-    # Unmanaged container - only present in Compute Resource
     if params[:compute_resource_id].present?
-      @deleted_identifier = params[:id]
-      destroy_compute_resource_vm(params[:compute_resource_id], params[:id])
-    else # Managed container
+      compute_resource_id = params[:compute_resource_id]
+      container_uuid      = params[:id]
+    else
       find_container
-      @deleted_identifier = @container.name
-
-      destroy_compute_resource_vm(@container.compute_resource, @container.uuid) &&
-        @container.destroy
+      compute_resource_id = @container.compute_resource_id
+      container_uuid      = @container.uuid
     end
-  end
 
-  def destroy_compute_resource_vm(resource_id, uuid)
-    @container_resource = ComputeResource.authorized(:destroy_compute_resources_vms)
-                          .find(resource_id)
-    @container_resource.destroy_vm(uuid)
-  rescue => error
-    logger.error "#{error.message} (#{error.class})\n#{error.backtrace.join("\n")}"
-    false
+    deleted_identifier = ForemanDocker::ContainerRemover.remove_unmanaged(
+      compute_resource_id, container_uuid)
+    @container.destroy if @container.present?
+    deleted_identifier
   end
 end
