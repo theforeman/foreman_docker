@@ -27,27 +27,28 @@ function setupAutoComplete(registryType) {
 }
 
 function autoCompleteRepo(item) {
+  var registryType = $(item).data('registry'),
+      search_add_on = getImageConfirmation(registryType),
+      tag = getTag(registryType);
+
+  // Patternfly spinner uses 'float: left' and moves it to the left of the
+  // search button. Instead, we use FontAwesome's spinner to keep it at
+  // the right.
+  search_add_on.attr('class', 'fa fa-spin fa-circle-o-notch');
+
   $.ajax({
     type:'get',
     url: $(item).attr('data-url'),
     data: { search: item.val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
-    //data:'search=' + item.val(),
     success:function (result) {
-      var registryType = $(item).data('registry'),
-          search_add_on = getSearchAddOn(registryType),
-          tag = getTag(registryType);
-      if(result == 'true'){
+       if(result == 'true'){
         search_add_on.attr('title', 'Image found in the compute resource');
-        search_add_on.removeClass('glyphicon-remove');
-        search_add_on.css('color', 'lightgreen');
-        search_add_on.addClass('glyphicon-ok');
+        search_add_on.attr('class', 'pficon pficon-ok');
         setWaitingText('Image found: <strong>' + item.val() + '</strong>. Retrieving available tags, please wait...', registryType);
         setAutocompleteTags(registryType);
       } else {
         search_add_on.attr('title', 'Image NOT found in the compute resource');
-        search_add_on.removeClass('glyphicon-ok');
-        search_add_on.css('color', 'red');
-        search_add_on.addClass('glyphicon-remove');
+        search_add_on.attr('class', 'pficon pficon-error-circle-o');
         tag.autocomplete('option', 'source', []);
       }
     },
@@ -59,13 +60,13 @@ function autoCompleteRepo(item) {
 
 function setAutocompleteTags(registryType) {
   var tag = getTag(registryType);
-  tag.addClass('tags-autocomplete-loading');
+  tag.addClass('spinner-label');
   tag.val('');
   var source = [];
   $.getJSON( tag.data("url"), { search: getRepo(registryType).val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
       function(data) {
         getSearchSpinner(registryType).hide();
-        tag.removeClass('tags-autocomplete-loading');
+        tag.removeClass('spinner-label');
         $.each( data, function(index, value) {
           source.push({label: value.label, value: value.value});
         });
@@ -135,8 +136,8 @@ function getRepositorySearchResults(registryType) {
   return  $('form[data-registry="' + registryType + '"] [data-repository-search-results]:first');
 }
 
-function getSearchAddOn(registryType) {
-  return  $('form[data-registry="' + registryType + '"] [data-search-addon]:first');
+function getImageConfirmation(registryType) {
+  return  $('form[data-registry="' + registryType + '"] #image-confirmation');
 }
 
 function getWaitText(registryType) {

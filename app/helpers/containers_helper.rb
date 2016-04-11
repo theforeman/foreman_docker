@@ -75,11 +75,6 @@ module ContainersHelper
                                                           :vm => vm }
   end
 
-  def auto_complete_docker_search(name, val, options = {})
-    addClass options, 'form-control'
-    text_field_tag(name, val, options)
-  end
-
   def processes(container)
     ForemanDocker::Docker.get_container(container).top
   end
