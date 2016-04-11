@@ -31,7 +31,9 @@ module ContainersHelper
     @compute_resource = container.compute_resource
     title_actions(
       button_group(
-        link_to(_('Commit'), '#commit-modal', :'data-toggle' => 'modal')
+        link_to(_('Commit'), '#commit-modal',
+                :'data-toggle' => 'modal',
+                :class => 'btn btn-default')
       ),
       button_group(container_power_action(container.in_fog)),
       button_group(
@@ -40,7 +42,8 @@ module ContainersHelper
                                   .merge(:auth_object => container,
                                          :auth_action => 'destroy',
                                          :authorizer  => authorizer),
-          :confirm     => _("Delete %s?") % container.name)
+          :confirm => _("Delete %s?") % container.name,
+          :class => 'btn btn-default')
       )
     )
   end
