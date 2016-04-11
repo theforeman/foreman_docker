@@ -20,8 +20,14 @@ class RemoveDockerTables < ActiveRecord::Migration
       tag = DockerTag.find(container.docker_tag_id)
       container.update_attribute(:tag, tag.tag)
     end
-    remove_foreign_key :containers, :name => :containers_docker_image_id_fk
-    remove_foreign_key :containers, :name => :containers_docker_tag_id_fk
+
+    if foreign_key_exists?(:containers, :name => :containers_docker_image_id_fk)
+      remove_foreign_key :containers, :name => :containers_docker_image_id_fk
+    end
+    if foreign_key_exists?(:containers, :name => :containers_docker_tag_id_fk)
+      remove_foreign_key :containers, :name => :containers_docker_tag_id_fk
+    end
+
     remove_column :containers, :docker_image_id
     remove_column :containers, :docker_tag_id
 
