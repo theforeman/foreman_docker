@@ -1,4 +1,48 @@
+2016-04-15	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #9270 - Add email validation
+	* Fixes #14569 - Display image found/not found on search image step
+
+2016-04-14	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #14570 - Set docker-api to 1.18 to avoid image parsing errors
+	* Fixes #14577 - Commit and delete buttons styling
+
+2016-04-12	David Davis <daviddavis@redhat.com>
+	* Fixes #14581 - Fixing migration for Rails 4.2
+
+2016-04-11	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #14519 - Removing containers from API removes them from Docker
+
+2016-04-01	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #7894 - Compute resource should show 'containers' tab
+	* Fixes #10199 - Disable image capabilities under compute resource
+	* Fixes #10417 - Translate wizard states
+	* Fixes #14391 - Hide access to Docker compute resource via compute profile
+
+2016-03-29	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #14181 - Fix authentication validation when creating registry
+	* Fixes #14370 - Adapt containers and registries index to core 1.12
+
+2016-03-28	Bryan Kearney <bkearney@redhat.com>
+	* Fixes #14244 - Update the strings to be more compliant with the project standards
+
+2016-03-28	David Davis <daviddavis@redhat.com>
+	* Fixes #14322 - Fixing API route scope
+
+2016-03-14	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #14181 - Validate registry URL and attempt login
+
+2016-03-14	Ori Rabin <orabin@redhat.com>
+	* Fixes #13227 - error when creating a container without an image
+	* Fixes #13231 - error processing uses full_messages
+
+2016-02-18	Bryan Kearney <bkearney@redhat.com>
+	* Fixes #11984 - Update the plugin to use the latest gettext from core, and re-extract the strings.
+
+2016-02-08	Bryan Kearney <bkearney@redhat.com>
+	* Fixes #13391 - Update the zanata mapping file
+
 2016-01-15	Daniel Lobato <elobatocs@gmail.com>
+	* Multiple fixes to release 2.0.1
 	* Refs #13225 - Use Patternfly spinners helper
 
 2016-01-15	Ori Rabin <orabin@redhat.com>
