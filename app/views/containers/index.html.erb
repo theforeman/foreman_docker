@@ -1,6 +1,8 @@
 <% title _("Containers") %>
 
-<%= title_actions(new_link(_("New container"))) %>
+<%= title_actions(display_link_if_authorized(
+  _('New container'),
+  hash_for_new_container_path)) %>
 
 <ul class="nav nav-tabs" data-tabs="tabs">
   <% @container_resources.each_with_index do |resource, i| %>
