@@ -1,4 +1,6 @@
 2016-04-15	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #14662 - Revert new_link to ensure 1.11 compatibility
+	* Release 2.1.0
 	* Fixes #9270 - Add email validation
 	* Fixes #14569 - Display image found/not found on search image step
 
