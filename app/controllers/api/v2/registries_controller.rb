@@ -12,6 +12,7 @@ module Api
       def_param_group :registry do
         param :registry, Hash, :required => true, :action_aware => true do
           param :name, String, :required => true
+          param_group :taxonomies, ::Api::V2::BaseController
           param :url, String, :required => true
           param :description, String
           param :username, String
