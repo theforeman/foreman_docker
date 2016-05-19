@@ -46,7 +46,9 @@ module Api
           end
 
           test 'delete removes a container in foreman and in Docker host' do
+            Fog.mock!
             delete :destroy, :id => @container.id
+            Fog.unmock!
             assert_response :success
             assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
           end

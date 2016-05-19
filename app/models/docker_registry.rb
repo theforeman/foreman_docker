@@ -3,6 +3,12 @@ class DockerRegistry < ActiveRecord::Base
   include Taxonomix
   include Encryptable
 
+  default_scope do
+    with_taxonomy_scope do
+      order('docker_registries.name')
+    end
+  end
+
   has_many :containers, :foreign_key => "registry_id", :dependent => :destroy
   encrypts :password
 
