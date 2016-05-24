@@ -7,7 +7,7 @@ FactoryGirl.define do
       user 'dockeruser'
       password 'dockerpassword'
       email 'container@containerization.com'
-      url 'unix:///var/run/docker.sock'
+      url 'unix:///var/run/docker.falsesock'
     end
 
     factory :docker_cr, :class => ForemanDocker::Docker, :traits => [:docker]
