@@ -24,4 +24,15 @@ class ContainersServiceTest < ActiveSupport::TestCase
     Fog.unmock!
     assert_equal DockerContainerWizardState.where(:id => @state.id).count, 0
   end
+
+  test 'passes errors from compute resource' do
+    # Since the compute resource will be unreachable, this test will always
+    # fail at the 'pull_image' step
+    containers_service = Service::Containers.new
+    assert_raises(ActiveRecord::Rollback) do
+      containers_service.create_container_object(@state)
+    end
+    assert containers_service.errors.present?
+  end
+
 end

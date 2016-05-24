@@ -38,12 +38,11 @@ module Service
         container.send(:"#{taxonomy}=", wizard_state.preliminary.send(:"#{taxonomy}"))
       end
 
-      unless container.valid?
-        @errors = container.errors
-        fail ActiveRecord::Rollback
-      end
+      pull_image(container)
+      start_container(container)
+      errors << container.errors unless container.valid?
 
-      fail ActiveRecord::Rollback unless pull_image(container) && start_container(container)
+      fail ActiveRecord::Rollback if @errors.present?
 
       container.name = container.in_fog.name[1..-1] unless container.name.present?
 
@@ -51,7 +50,9 @@ module Service
     end
 
     def pull_image(container)
-      container.compute_resource.create_image(:fromImage => container.repository_pull_url)
+      success = container.compute_resource.
+        create_image(:fromImage => container.repository_pull_url)
+      errors << container.compute_resource.errors[:base] unless success
     end
 
     def start_container(container)
