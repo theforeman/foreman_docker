@@ -60,51 +60,53 @@ module Api
           end
         end
 
-        test 'power call turns on/off container in Docker host' do
-          Fog.mock!
-          Fog::Compute::Fogdocker::Server.any_instance.expects(:start)
-          put :power, :id => @container.id, :power_action => 'start'
-          assert_response :success
-        end
+        context 'power calls' do
+          setup { Fog.mock! }
+          teardown { Fog.unmock! }
 
-        test 'power call checks status of container in Docker host' do
-          Fog.mock!
-          Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
-          put :power, :id => @container.id, :power_action => 'status'
-          assert_response :success
-          assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
-        end
-
-        test 'power call host' do
-          Fog.mock!
-          Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
-          put :power, :id => @container.id, :power_action => 'status'
-          assert_response :success
-          assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
-        end
-
-        test 'creates a container with correct params' do
-          repository_name = "centos"
-          tag = "7"
-          name = "foo"
-          registry_uri = URI.parse(@registry.url)
-          Service::Containers.any_instance.expects(:pull_image).returns(true)
-          Service::Containers.any_instance
-            .expects(:start_container).returns(true).with do |container|
-            container.must_be_kind_of(Container)
-            container.repository_name.must_equal(repository_name)
-            container.tag.must_equal(tag)
-            container.compute_resource_id.must_equal(@compute_resource.id)
-            container.name.must_equal(name)
-            container.repository_pull_url.must_include(registry_uri.host)
-            container.repository_pull_url.must_include("#{repository_name}:#{tag}")
+          test 'power call turns on/off container in Docker host' do
+            Fog::Compute::Fogdocker::Server.any_instance.expects(:start)
+            put :power, :id => @container.id, :power_action => 'start'
+            assert_response :success
           end
-          post :create, :container => { :compute_resource_id => @compute_resource.id,
-                                        :name => name,
-                                        :registry_id => @registry.id,
-                                        :repository_name => repository_name,
-                                        :tag => tag }
-          assert_response :created
+
+          test 'power call checks status of container in Docker host' do
+            Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
+            put :power, :id => @container.id, :power_action => 'status'
+            assert_response :success
+            assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
+          end
+
+          test 'power call host' do
+            Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
+            put :power, :id => @container.id, :power_action => 'status'
+            assert_response :success
+            assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
+          end
+
+          test 'creates a container with correct params' do
+            repository_name = "centos"
+            tag = "7"
+            name = "foo"
+            registry_uri = URI.parse(@registry.url)
+            Service::Containers.any_instance.expects(:pull_image).returns(true)
+            Service::Containers.any_instance
+              .expects(:start_container).returns(true).with do |container|
+              container.must_be_kind_of(Container)
+              container.repository_name.must_equal(repository_name)
+              container.tag.must_equal(tag)
+              container.compute_resource_id.must_equal(@compute_resource.id)
+              container.name.must_equal(name)
+              container.repository_pull_url.must_include(registry_uri.host)
+              container.repository_pull_url.must_include("#{repository_name}:#{tag}")
+            end
+            post :create, :container => { :compute_resource_id => @compute_resource.id,
+                                          :name => name,
+                                          :registry_id => @registry.id,
+                                          :repository_name => repository_name,
+                                          :tag => tag }
+            assert_response :created
+          end
         end
 
         test 'creates a katello container with correct params' do
