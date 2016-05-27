@@ -28,8 +28,8 @@ class RemoveDockerTables < ActiveRecord::Migration
       remove_foreign_key :containers, :name => :containers_docker_tag_id_fk
     end
 
-    remove_column :containers, :docker_image_id
-    remove_column :containers, :docker_tag_id
+    remove_reference :containers, :docker_image, :foreign_key => true
+    remove_reference :containers, :docker_tag, :foreign_key => true
 
     # these tables might have foreign keys from plugins like katello so use cascade
     cascade_drop(:docker_images)
