@@ -59,6 +59,21 @@ class ContainersControllerTest < ActionController::TestCase
         flash[:notice]
     end
 
+    test 'deleting with container params deletes container object' do
+      managed_container = FactoryGirl.create(
+        :container,
+        :compute_resource => @container_resource)
+      managed_container.update(:uuid => @container.id)
+      ComputeResource.any_instance.expects(:destroy_vm).
+        with(@container.id).returns(true)
+      Container.any_instance.expects(:destroy)
+      delete :destroy, { :compute_resource_id => @container_resource.id,
+                         :id                  => @container.id }, set_session_user
+      assert_redirected_to containers_path
+      assert_equal "Container #{managed_container.uuid} is being deleted.",
+        flash[:notice]
+    end
+
     test 'failed deletion of managed container keeps container in Foreman' do
       ComputeResource.any_instance.stubs(:destroy_vm).
         raises(::Foreman::Exception.new('Could not destroy Docker container'))

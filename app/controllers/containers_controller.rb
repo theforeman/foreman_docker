@@ -102,6 +102,7 @@ class ContainersController < ::ApplicationController
     if params[:compute_resource_id].present?
       compute_resource_id = params[:compute_resource_id]
       container_uuid      = params[:id]
+      @container ||= Container.authorized("#{action_permission}_#{controller_name}".to_sym).find_by_uuid(container_uuid)
     else
       find_container
       compute_resource_id = @container.compute_resource_id
