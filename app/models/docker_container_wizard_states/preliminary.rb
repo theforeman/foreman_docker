@@ -2,8 +2,6 @@ module DockerContainerWizardStates
   class Preliminary < ActiveRecord::Base
     include Taxonomix
 
-    attr_accessible :wizard_state, :compute_resource_id
-
     self.table_name_prefix = 'docker_container_wizard_states_'
     belongs_to :wizard_state, :class_name => DockerContainerWizardState,
                               :foreign_key => :docker_container_wizard_state_id

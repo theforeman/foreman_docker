@@ -3,7 +3,5 @@ module DockerContainerWizardStates
     self.table_name_prefix = 'docker_container_wizard_states_'
     belongs_to :wizard_state, :class_name => DockerContainerWizardState,
                               :foreign_key => :docker_container_wizard_state_id
-
-    attr_accessible :name, :command, :entrypoint, :cpu_set, :cpu_shares, :memory, :wizard_state
   end
 end

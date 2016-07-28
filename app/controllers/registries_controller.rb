@@ -1,5 +1,6 @@
 class RegistriesController < ::ApplicationController
   include Foreman::Controller::AutoCompleteSearch
+  include Foreman::Controller::Parameters::DockerRegistry
   before_filter :find_registry, :only => [:edit, :update, :destroy]
 
   def index
@@ -12,7 +13,7 @@ class RegistriesController < ::ApplicationController
   end
 
   def create
-    @registry = DockerRegistry.new(params[:docker_registry])
+    @registry = DockerRegistry.new(docker_registry_params)
     if @registry.save
       process_success
     else
@@ -24,7 +25,7 @@ class RegistriesController < ::ApplicationController
   end
 
   def update
-    if @registry.update_attributes(params[:docker_registry])
+    if @registry.update_attributes(docker_registry_params)
       process_success
     else
       process_error

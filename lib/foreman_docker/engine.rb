@@ -103,6 +103,8 @@ module ForemanDocker
                      :resource_type => 'Docker/ImageSearch'
         end
 
+        parameter_filter ComputeResource, :email
+
         # apipie API documentation
         # Only available in 1.8, otherwise it has to be in the initializer below
         if SETTINGS[:version].to_s.include?('develop') ||

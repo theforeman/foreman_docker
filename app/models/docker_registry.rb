@@ -12,9 +12,6 @@ class DockerRegistry < ActiveRecord::Base
   has_many :containers, :foreign_key => "registry_id", :dependent => :destroy
   encrypts :password
 
-  attr_accessible :name, :url, :username, :password, :locations, :organizations,
-    :description
-
   validates_lengths_from_database
   validates :name, :presence => true, :uniqueness => true
   validates :url,  :presence => true, :uniqueness => true,

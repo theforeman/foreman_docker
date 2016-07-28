@@ -24,11 +24,6 @@ class Container < ActiveRecord::Base
   accepts_nested_attributes_for :exposed_ports, :allow_destroy => true
   scoped_search :on => :name
 
-  attr_accessible :command, :repository_name, :name, :compute_resource_id, :entrypoint,
-                  :cpu_set, :cpu_shares, :memory, :tty, :attach_stdin, :registry_id,
-                  :attach_stdout, :attach_stderr, :tag, :uuid, :environment_variables_attributes,
-                  :katello, :exposed_ports_attributes, :dns
-
   validates :name, :uniqueness => { :scope => :compute_resource_id }
 
   def repository_pull_url

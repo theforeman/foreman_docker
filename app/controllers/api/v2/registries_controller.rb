@@ -1,6 +1,7 @@
 module Api
   module V2
     class RegistriesController < ::Api::V2::BaseController
+      include Foreman::Controller::Parameters::DockerRegistry
       before_filter :find_resource, :except => %w(index create)
 
       resource_description do
@@ -35,7 +36,7 @@ module Api
       api :POST, '/registries/', N_('Create a docker registry')
       param_group :registry, :as => :create
       def create
-        @registry = DockerRegistry.new(params[:registry])
+        @registry = DockerRegistry.new(docker_registry_params)
         process_response @registry.save
       end
 
@@ -43,7 +44,7 @@ module Api
       param :id, :identifier, :required => true
       param_group :registry, :as => :update
       def update
-        process_response @registry.update_attributes(params[:registry])
+        process_response @registry.update_attributes(docker_registry_params)
       end
 
       api :DELETE, '/registries/:id/', N_('Delete a docker registry')

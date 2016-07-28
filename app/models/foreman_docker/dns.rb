@@ -2,8 +2,6 @@ require 'resolv'
 
 module ForemanDocker
   class Dns < Parameter
-    attr_accessible :priority
-
     # The Parameter class from which this Dns class inherits,validates for the
     # presence of an associated domain,  operating system, host or host group.
     # We will have to reset those validations for the Dns class as they do not

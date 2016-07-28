@@ -1,5 +1,4 @@
 class ExposedPort < Parameter
-  attr_accessible :priority
   # The Parameter class from which ExposedPort class inherits,validates for the
   # presence of an  associated domain, operating system, host or host group. We
   # will have to reset those validations for the  ExposedPort class as  they do
