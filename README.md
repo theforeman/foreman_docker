@@ -84,7 +84,8 @@ That's it. You're now ready to create and manage containers in your new Docker c
 | ---------------:| --------------:|
 | >= 1.5         | 0.0.1 - 0.0.3   |
 | >= 1.6         | 0.1.0 - 0.2.0   |
-| >= 1.7         | 1.0.0+          |
+| >= 1.7         | 1.0.0 - 2.1.1   |
+| >= 1.7         | 3.0.0+          |
 
 See extras/RELEASE.md for more detailed information on compatibility and releases.
 

@@ -1,4 +1,30 @@
+2016-08-01	David Davis <daviddavis@redhat.com>
+	* Fixes #15888 - Remove attr_accessible calls
+
+2016-06-28	Shlomi Zadok <shlomi@ben-hanna.com>
+	* Fixes #15528 - 'command' should not be required
+
+2016-06-23	Shlomi Zadok <shlomi@ben-hanna.com>
+	* Refs #14570 - Destroy Container db object When deleting with container uuid params, the container object should be destroyed as well
+
+2016-05-30	Daniel Lobato <elobatocs@gmail.com>
+	* Refs #14570 - Fetch tags from local images properly
+	* Fixes #9752 - Pass Docker errors to controller
+	* Fixes #15135 - Fix JS error in datatables
+
+2016-05-27	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #15098 - Scope registry by taxonomies
+	* Ensure Fog is mocked before running API/v2/create test
+	* Use remove_reference to remove FK with Rails 4
+
+2016-05-20	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #15107 - Rails 4.2 test breakages
+
+2016-04-19	Daniel Lobato <elobatocs@gmail.com>
+	* Fixes #14703 - Add taxonomies to Registries API
+
 2016-04-15	Daniel Lobato <elobatocs@gmail.com>
+	* Release 2.1.1
 	* Fixes #14662 - Revert new_link to ensure 1.11 compatibility
 	* Release 2.1.0
 	* Fixes #9270 - Add email validation
