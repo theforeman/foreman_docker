@@ -23,7 +23,7 @@
       <% else %>
 
         <div class="alert alert-warning alert-dismissable">
-          <%= image_tag 'false.png' %> <%= (_("You need a Docker compute resource in order to create containers. Please %s and try again.") % link_to('add a new one', new_compute_resource_path)).html_safe %>
+          <%= (_("You need a Docker compute resource in order to create containers. Please %s and try again.") % link_to('add a new one', new_compute_resource_path)).html_safe %>
         </div>
       <% end %>
     </div>
