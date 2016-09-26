@@ -41,9 +41,14 @@ module Service
 
       pull_image(container)
       start_container(container)
-      errors << container.errors unless container.valid?
+      unless container.valid?
+        @errors = errors + container.errors.full_messages
+      end
 
-      fail ActiveRecord::Rollback if @errors.present?
+      if @errors.present?
+        @errors = @errors.flatten.uniq
+        fail ActiveRecord::Rollback
+      end
 
       container.name = container.in_fog.name[1..-1] unless container.name.present?
 
@@ -53,7 +58,8 @@ module Service
     def pull_image(container)
       success = container.compute_resource.
         create_image(:fromImage => container.repository_pull_url)
-      errors << container.compute_resource.errors[:base] unless success
+      return true if success
+      @errors = errors + container.compute_resource.errors.full_messages
     end
 
     def start_container(container)
@@ -61,7 +67,7 @@ module Service
       if started
         container.uuid = started.id
       else
-        errors << container.compute_resource.errors[:base]
+        @errors = errors + container.compute_resource.errors.full_messages
       end
       started
     end
@@ -98,7 +104,8 @@ module Service
     end
 
     def full_messages
-      errors.respond_to?(:full_messages) ? errors.full_messages : errors
+      return errors.full_messages if errors.respond_to?(:full_messages)
+      @errors
     end
 
     def run_container(container)

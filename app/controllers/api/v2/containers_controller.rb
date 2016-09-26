@@ -73,7 +73,7 @@ module Api
         @container = service.start_container!(set_wizard_state)
         if service.errors.any?
           render :json => { :errors => service.errors,
-                            :full_messages => service.full_messages
+                            :full_messages => service.full_messages.join(', ')
                           },
                  :status => :unprocessable_entity
         else

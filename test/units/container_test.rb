@@ -6,5 +6,5 @@ class ContainerTest < ActiveSupport::TestCase
   should have_many(:environment_variables)
   should have_many(:dns)
   should have_many(:exposed_ports)
-  should validate_uniqueness_of(:name)
+  should validate_uniqueness_of(:name).scoped_to(:compute_resource_id)
 end

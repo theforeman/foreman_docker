@@ -145,6 +145,7 @@ module Api
                                         :repository_name => 'centos',
                                         :tag => 'latest' }
           assert_response :unprocessable_entity
+          assert_match /Name has already been taken/, @response.body
         end
       end
     end
