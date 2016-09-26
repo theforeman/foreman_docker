@@ -69,7 +69,7 @@
               <td><%= _('Environment Variables') %></td>
               <td>
                 <table id="environment_variables" class="table table-bordered" style="table-layout:fixed; word-wrap: break-word">
-                  <% (@container.in_fog.attributes['config_env'] || []).each do |environment_variable| %>
+                  <% (@container.in_fog.environment_variables || []).each do |environment_variable| %>
                   <% pair = environment_variable.split("=") %>
                     <tr>
                       <td><b><%= pair.first %></b></td>

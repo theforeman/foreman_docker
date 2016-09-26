@@ -43,17 +43,16 @@ module Containers
         :docker_container_wizard_state_id => state.id
       }
       state.environment = DockerContainerWizardStates::Environment.create!(environment_options)
-      state.environment.exposed_ports.create!(:name => '1654', :value => 'tcp')
-      state.environment.exposed_ports.create!(:name => '1655', :value => 'udp')
+      state.environment.exposed_ports.create!(:key => '1654', :value => 'tcp')
+      state.environment.exposed_ports.create!(:key => '1655', :value => 'udp')
       get :show, { :wizard_state_id => state.id, :id => :environment }, set_session_user
       assert response.body.include?("1654")
       assert response.body.include?("1655")
 
       # Load ExposedPort variables into container
       state.environment.exposed_ports.each do |e|
-        @container.exposed_ports.build :name => e.name,
-                                       :value => e.value,
-                                       :priority => e.priority
+        @container.exposed_ports.build :key => e.key,
+                                       :value => e.value
       end
       # Check if parametrized value of container matches Docker API's expectations
       assert @container.parametrize.key? "ExposedPorts"
@@ -67,21 +66,32 @@ module Containers
         :docker_container_wizard_state_id => state.id
       }
       state.environment = DockerContainerWizardStates::Environment.create!(environment_options)
-      state.environment.dns.create!(:name => '18.18.18.18')
-      state.environment.dns.create!(:name => '19.19.19.19')
+      state.environment.dns.create!(:key => '18.18.18.18')
+      state.environment.dns.create!(:key => '19.19.19.19')
       get :show, { :wizard_state_id => state.id, :id => :environment }, set_session_user
       assert response.body.include?("18.18.18.18")
       assert response.body.include?("19.19.19.19")
 
       # Load Dns variables into container
       state.environment.dns.each do |e|
-        @container.dns.build :name => e.name,
-                             :priority => e.priority
+        @container.dns.build :key => e.key
       end
       # Check if parametrized value of container matches Docker API's expectations
       assert @container.parametrize.key? "HostConfig"
       assert @container.parametrize["HostConfig"].key? "Dns"
       assert @container.parametrize["HostConfig"].value? ["18.18.18.18", "19.19.19.19"]
+    end
+
+    test "does not create a container with 2 exposed ports with the same key" do
+      state = DockerContainerWizardState.new
+      environment_options = {
+          :docker_container_wizard_state_id => state.id
+      }
+      state.environment = DockerContainerWizardStates::Environment.new(environment_options)
+      state.environment.exposed_ports.new(:key => '1654', :value => 'tcp')
+      state.environment.exposed_ports.new(:key => '1654', :value => 'udp')
+      refute_valid state
+      assert_equal "Please ensure the following parameters are unique", state.errors[:'environment.exposed_ports'].first
     end
   end
 end

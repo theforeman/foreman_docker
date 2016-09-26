@@ -53,7 +53,7 @@ module Api
           param :memory, String
           param :cpu_shares, :number
           param :cpu_set, String
-          param :environment_variables, Hash
+          param :environment_variables, Array, :desc => N_("Optional array of environment variables hashes. e.g. 'environment_variables': [{'name' => 'example', 'value' => '123'}]")
           param :attach_stdout, :bool
           param :attach_stdin, :bool
           param :attach_stderr, :bool
@@ -80,9 +80,6 @@ module Api
           set_container_taxonomies
           process_response @container.save
         end
-      rescue ActiveModel::MassAssignmentSecurity::Error => e
-        render :json => { :error  => _("Wrong attributes: %s") % e.message },
-               :status => :unprocessable_entity
       end
 
       api :DELETE, '/containers/:id/', N_('Delete a container')
@@ -169,8 +166,14 @@ module Api
         end
 
         if params[:container][:environment_variables].present?
-          wizard_state.environment.environment_variables =
-            params[:container][:environment_variables]
+          environment_variables = []
+          params[:container][:environment_variables].each do |env_var|
+            environment_variable = DockerContainerWizardStates::EnvironmentVariable.new
+            environment_variable.key = env_var[:key]
+            environment_variable.value = env_var[:value]
+            environment_variables << environment_variable
+          end
+          wizard_state.environment.environment_variables = environment_variables
         end
         wizard_state.tap(&:save)
       end

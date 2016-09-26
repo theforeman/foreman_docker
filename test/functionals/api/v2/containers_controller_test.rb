@@ -109,6 +109,21 @@ module Api
                                           :tag => tag }
             assert_response :created
           end
+
+          test 'creates a container with correct params' do
+            repository_name = "centos"
+            tag = "8"
+            name = "foo2"
+            Service::Containers.any_instance.expects(:pull_image).returns(true)
+            Service::Containers.any_instance.expects(:start_container).returns(true)
+            post :create, :container => { :compute_resource_id => @compute_resource.id,
+                                          :name => name,
+                                          :registry_id => @registry.id,
+                                          :repository_name => repository_name,
+                                          :tag => tag,
+                                          :environment_variables => [{:key => 'ping_host', :value => 'example.com'}]}
+            assert_response :created
+          end
         end
 
         test 'creates a katello container with correct params' do

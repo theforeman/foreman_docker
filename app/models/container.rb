@@ -6,20 +6,19 @@ class Container < ActiveRecord::Base
   belongs_to :registry, :class_name => "DockerRegistry", :foreign_key => :registry_id
   has_many :environment_variables, :dependent  => :destroy, :foreign_key => :reference_id,
                                    :inverse_of => :container,
-                                   :class_name => 'EnvironmentVariable',
-                                   :validate => false
+                                   :class_name => 'EnvironmentVariable'
+
   accepts_nested_attributes_for :environment_variables, :allow_destroy => true
-  include ForemanDocker::ParameterValidators
 
   has_many :exposed_ports,  :dependent  => :destroy, :foreign_key => :reference_id,
                             :inverse_of => :container,
-                            :class_name => 'ExposedPort',
-                            :validate => true
+                            :class_name => 'ExposedPort'
 
   has_many :dns,  :dependent  => :destroy, :foreign_key => :reference_id,
                   :inverse_of => :container,
-                  :class_name => 'ForemanDocker::Dns',
-                  :validate => true
+                  :class_name => 'ForemanDocker::Dns'
+
+  include ForemanDocker::ParameterValidators
 
   accepts_nested_attributes_for :exposed_ports, :allow_destroy => true
   scoped_search :on => :name
@@ -41,10 +40,10 @@ class Container < ActiveRecord::Base
       'AttachStdout' => attach_stdout,          'AttachStdin'  => attach_stdin,
       'AttachStderr' => attach_stderr,          'CpuShares'    => cpu_shares,
       'Cpuset'       => cpu_set,
-      'Env' => environment_variables.map { |env| "#{env.name}=#{env.value}" },
-      'ExposedPorts' => Hash[*exposed_ports.map { |v| [v.name + "/" + v.value, {}] }.flatten],
+      'Env' => environment_variables.map { |env| "#{env.key}=#{env.value}" },
+      'ExposedPorts' => Hash[*exposed_ports.map { |v| [v.key + "/" + v.value, {}] }.flatten],
       'HostConfig' => {
-        'Dns' => dns.map { |env| "#{env.name}" }
+        'Dns' => dns.map { |env| "#{env.key}" }
       } }
   end
 

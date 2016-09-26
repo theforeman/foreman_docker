@@ -39,6 +39,10 @@ module Containers
       instance_variable_set("@docker_container_wizard_states_#{step}", s)
     end
 
+    def docker_parameters_permited_params
+      [:key, :reference_id, :value, :_destroy, :id]
+    end
+
     def state_params
       attrs = case step
               when :preliminary
@@ -50,8 +54,9 @@ module Containers
               when :environment
                 [:tty, :docker_container_wizard_state_id,
                  :attach_stdin, :attach_stdout, :attach_stderr,
-                 :exposed_ports_attributes => [], :environment_variables_attributes => [],
-                 :dns_attributes => []
+                 :exposed_ports_attributes => docker_parameters_permited_params,
+                 :environment_variables_attributes => docker_parameters_permited_params,
+                 :dns_attributes => docker_parameters_permited_params
                 ]
               end
 
@@ -72,6 +77,7 @@ module Containers
                   else
                     service.create_container!(@state)
                   end
+      
       if container.present?
         process_success(:object => container, :success_redirect => container_path(container))
       else
