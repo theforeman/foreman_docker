@@ -146,6 +146,7 @@ module ForemanDocker
       # Compatibility fixes - to be removed once 1.7 compatibility is no longer required
       Fog::Compute::Fogdocker::Images.send(:include, ::FogExtensions::Fogdocker::Images)
       ::Taxonomy.send(:include, ForemanDocker::TaxonomyExtensions)
+      ComputeResource.send(:include, ForemanDocker::ComputeResourceExtensions)
     end
   end
 end
