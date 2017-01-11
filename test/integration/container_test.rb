@@ -12,7 +12,7 @@ class ContainerIntegrationTest < ActionDispatch::IntegrationTest
       ComputeResource.any_instance.stubs(:vms).returns([])
       FactoryGirl.create(:docker_cr)
       visit containers_path
-      assert page.has_link? 'New container'
+      assert page.has_link? 'Create container'
       refute_equal current_path, new_compute_resource_path
     end
   end
