@@ -50,7 +50,7 @@ module ForemanDocker
           menu :top_menu, :containers,    :caption => N_('All Containers'),
                                           :url_hash => { :controller => :containers,
                                                          :action => :index }
-          menu :top_menu, :new_container, :caption => N_('New Container'),
+          menu :top_menu, :new_container, :caption => N_('Create Container'),
                                           :url_hash => { :controller => :containers,
                                                          :action => :new }
           menu :top_menu, :registries, :caption => N_('Registries'),
