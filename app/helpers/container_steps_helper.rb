@@ -34,6 +34,15 @@ module ContainerStepsHelper
     active_tab.to_s == tab_name.to_s ? "active" : ""
   end
 
+  # el7 returns -> "name" => "docker.io: docker.io/centos",
+  # while f20 returns -> "name" => "centos"
+  # we need repo name to be => "docker.io/centos" for el7 and "centos" for fedora
+  # to ensure proper search with respect to the tags, image creation etc.
+  def cleanup_image_name(name)
+    name.split.last
+  end
+
+
   def model_for(registry_type)
     if active_tab.to_s == registry_type.to_s
       @docker_container_wizard_states_image

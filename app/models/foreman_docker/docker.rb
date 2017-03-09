@@ -61,11 +61,7 @@ module ForemanDocker
       if exist?(image_name)
         tags_for_local_image(image(image_name))
       else
-        # If image is not found in the compute resource, get the tags from the Hub
-        hub_api_url = "https://index.docker.io/v1/repositories/#{image_name}/tags"
-        JSON.parse(URI.parse(hub_api_url).read).map do |tag|
-          tag['name']
-        end
+        Service::RegistryApi.docker_hub.tags(image_name).map { |tag| tag['name'] }
       end
     end
 

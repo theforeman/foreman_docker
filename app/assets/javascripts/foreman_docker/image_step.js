@@ -26,10 +26,36 @@ function setupAutoComplete(registryType) {
   });
 }
 
+function paramsForSearch(registryType) {
+  var image = getRepo(registryType),
+      tag = getTag(registryType),
+      registryId = $('#docker_container_wizard_states_image_registry_id').val(),
+      params = {
+        registry: registryType,
+        search: image.val()
+      }
+
+  if (tag.val() != '') {
+    params.search = image.val() + ':' + tag.val();
+  };
+
+  if (registryType == 'registry' && registryId != '') {
+    params.registry_id = registryId;
+  };
+
+  return params;
+}
+
 function autoCompleteRepo(item) {
   var registryType = $(item).data('registry'),
       search_add_on = getImageConfirmation(registryType),
-      tag = getTag(registryType);
+      tag = getTag(registryType),
+      params = paramsForSearch(registryType);
+
+  if (params.search == '' ||
+      (registryType == 'registry' && typeof params.registry_id == 'undefined')) {
+    return;
+  }
 
   // Patternfly spinner uses 'float: left' and moves it to the left of the
   // search button. Instead, we use FontAwesome's spinner to keep it at
@@ -39,7 +65,7 @@ function autoCompleteRepo(item) {
   $.ajax({
     type:'get',
     url: $(item).attr('data-url'),
-    data: { search: item.val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
+    data: params,
     success:function (result) {
        if(result == 'true'){
         search_add_on.attr('title', 'Image found in the compute resource');
@@ -59,11 +85,15 @@ function autoCompleteRepo(item) {
 }
 
 function setAutocompleteTags(registryType) {
-  var tag = getTag(registryType);
+  var registryType = registryType,
+      tag = getTag(registryType),
+      source = [];
+
   tag.addClass('spinner-label');
   tag.val('');
-  var source = [];
-  $.getJSON( tag.data("url"), { search: getRepo(registryType).val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
+
+  $.getJSON( tag.data("url"),
+      paramsForSearch(registryType),
       function(data) {
         getSearchSpinner(registryType).hide();
         tag.removeClass('spinner-label');
@@ -90,7 +120,7 @@ function searchRepo(item) {
     type:'get',
     dataType:'text',
     url: $(item).attr('data-url'),
-    data: { search: search.val(), registry_id: $('#docker_container_wizard_states_image_registry_id').val() },
+    data: paramsForSearch(registryType),
     success: function (result) {
       results.html(result);
     },

@@ -1,39 +1,21 @@
 class ImageSearchController < ::ApplicationController
-  before_filter :find_resource
-
-  # this is incredibly odd. for some reason, rails sees the
-  # requests ImageSearchControllerTest makes as requests from another host
-  # thus, violating CSRF.
-  protect_from_forgery :only => :nothing if Rails.env.test?
-
   def auto_complete_repository_name
     catch_network_errors do
-      text = if use_hub?
-               hub_image_exists?(params[:search])
-             else
-               registry_image_exists?(params[:search])
-             end
-      render :text => text.to_s
+      available = image_search_service.available?(params[:search])
+      render :text => available.to_s
     end
   end
 
   def auto_complete_image_tag
     catch_network_errors do
-      # This is the format jQuery UI autocomplete expects
-      tags = if use_hub?
-               hub_auto_complete_image_tags(params[:search])
-             else
-               registry_auto_complete_image_tags(params[:search])
-             end
-
-      tags = tags.map do |tag|
-        tag = CGI.escapeHTML(tag)
-        { :label => tag, :value => tag }
-      end
+      tags = image_search_service.search({
+        term: params[:search],
+        tags: 'true'
+      })
 
       respond_to do |format|
         format.js do
-          render :json => tags
+          render :json => prepare_for_autocomplete(tags)
         end
       end
     end
@@ -41,11 +23,10 @@ class ImageSearchController < ::ApplicationController
 
   def search_repository
     catch_network_errors do
-      repositories = if use_hub?
-                       hub_search_image(params[:search])
-                     else
-                       registry_search_image(params[:search])
-                     end
+      repositories = image_search_service.search({
+        term: params[:search].split(':').first,
+        tags: 'false'
+      })
 
       respond_to do |format|
         format.js do
@@ -56,6 +37,8 @@ class ImageSearchController < ::ApplicationController
       end
     end
   end
+
+  private
 
   def catch_network_errors
     yield
@@ -72,52 +55,6 @@ class ImageSearchController < ::ApplicationController
     @registry.nil?
   end
 
-  def hub_image_exists?(terms)
-    @compute_resource.exist?(terms)
-  end
-
-  def hub_auto_complete_image_tags(terms)
-    @compute_resource.tags(terms)
-  end
-
-  def hub_search_image(terms)
-    @compute_resource.search(terms).map do |item|
-      # el7 returns -> "name" => "docker.io: docker.io/centos",
-      # while f20 returns -> "name" => "centos"
-      # we need repo name to be => "docker.io/centos" for el7 and "centos" for fedora
-      # to ensure proper search with respect to the tags, image creation etc.
-      new_item = item.clone
-      new_item["name"] = item["name"].split.last
-      new_item
-    end
-  end
-
-  def registry_image_exists?(term)
-    result = ::Service::RegistryApi.new(:url => @registry.url,
-                                        :user => @registry.username,
-                                        :password => @registry.password).search(term)
-    registry_name = if term.split('/').size > 1
-                      term
-                    else
-                      "library/#{term}"
-                    end
-
-    result['results'].any? { |r| r['name'] == registry_name }
-  end
-
-  def registry_auto_complete_image_tags(terms)
-    ::Service::RegistryApi.new(:url => @registry.url,
-                               :user => @registry.username,
-                               :password => @registry.password).tags(terms).map { |t| t['name'] }
-  end
-
-  def registry_search_image(terms)
-    r = ::Service::RegistryApi.new(:url => @registry.url,
-                                   :user => @registry.username,
-                                   :password => @registry.password).search(terms)
-    r['results']
-  end
-
   def action_permission
     case params[:action]
     when 'auto_complete_repository_name', 'auto_complete_image_tag', 'search_repository'
@@ -127,13 +64,28 @@ class ImageSearchController < ::ApplicationController
     end
   end
 
-  def find_resource
-    if params[:registry_id].present?
-      @registry = DockerRegistry.authorized(:view_registries).find(params[:registry_id])
-    else
-      @compute_resource = ComputeResource.authorized(:view_compute_resources).find(params[:id])
+  # This is the format jQuery UI autocomplete expects
+  def prepare_for_autocomplete(tags)
+    tags.map do |tag|
+      tag = tag.is_a?(Hash) ? tag.fetch('name', tag) : tag
+      tag = CGI.escapeHTML(tag)
+      { :label => tag, :value => tag }
     end
-  rescue ActiveRecord::RecordNotFound
-    not_found
+  end
+
+  def image_search_service
+    @image_search_service ||= ForemanDocker::ImageSearch.new(*sources)
+  end
+
+  def sources
+    if params[:registry] == 'hub'
+      @registry ||= Service::RegistryApi.docker_hub
+      @compute_resource ||= ComputeResource.authorized(:view_compute_resources).find(params[:id])
+      [@registry, @compute_resource]
+    elsif params[:registry] == 'registry' && params[:registry_id].present?
+      @registry ||= DockerRegistry.authorized(:view_registries)
+        .find(params[:registry_id]).api
+      [@registry]
+    end
   end
 end

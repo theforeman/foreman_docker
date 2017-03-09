@@ -43,8 +43,7 @@ class DockerRegistry < ActiveRecord::Base
   end
 
   def api
-    @api ||= Service::RegistryApi.new(url: url,
-                                      user: username,
+    @api ||= Service::RegistryApi.new(url: url, user: username,
                                       password: password)
   end
 
