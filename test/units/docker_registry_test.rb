@@ -1,6 +1,8 @@
 require 'test_plugin_helper'
 
 class DockerRegistryTest < ActiveSupport::TestCase
+  subject { FactoryGirl.create(:docker_registry) }
+
   test 'used_location_ids should return correct location ids' do
     location = FactoryGirl.build(:location)
     r = as_admin do
@@ -29,21 +31,28 @@ class DockerRegistryTest < ActiveSupport::TestCase
   should validate_uniqueness_of(:name)
   should validate_uniqueness_of(:url)
 
-  context 'attempt to login' do
+  describe 'registry validation' do
     setup do
-      @registry = FactoryGirl.build(:docker_registry)
-      @registry.unstub(:attempt_login)
+      subject.unstub(:attempt_login)
     end
 
-    test 'before creating a registry' do
-      RestClient::Resource.any_instance.expects(:get)
-      assert @registry.valid?
+    test 'is valid when the api is ok' do
+      subject.api.expects(:ok?).returns(true)
+      assert subject.valid?
     end
 
-    test 'display errors in case authentication failed' do
-      RestClient::Resource.any_instance.expects(:get).
-        raises(Docker::Error::AuthenticationError)
-      refute @registry.valid?
+    test 'is not valid when api is not ok' do
+      subject.api.expects(:ok?)
+        .raises(Docker::Error::AuthenticationError)
+      refute subject.valid?
+    end
+  end
+
+  describe '#api' do
+    let(:api) { subject.api }
+
+    test 'returns a RegistryApi instance' do
+      assert_kind_of Service::RegistryApi, api
     end
   end
 end

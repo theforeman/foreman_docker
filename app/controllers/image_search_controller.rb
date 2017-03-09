@@ -25,9 +25,14 @@ class ImageSearchController < ::ApplicationController
              else
                registry_auto_complete_image_tags(params[:search])
              end
+
+      tags = tags.map do |tag|
+        tag = CGI.escapeHTML(tag)
+        { :label => tag, :value => tag }
+      end
+
       respond_to do |format|
         format.js do
-          tags.map! { |tag| { :label => CGI.escapeHTML(tag), :value => CGI.escapeHTML(tag) } }
           render :json => tags
         end
       end
@@ -103,7 +108,7 @@ class ImageSearchController < ::ApplicationController
   def registry_auto_complete_image_tags(terms)
     ::Service::RegistryApi.new(:url => @registry.url,
                                :user => @registry.username,
-                               :password => @registry.password).list_repository_tags(terms).keys
+                               :password => @registry.password).tags(terms).map { |t| t['name'] }
   end
 
   def registry_search_image(terms)

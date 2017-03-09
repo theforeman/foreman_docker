@@ -43,15 +43,16 @@ module Api
 
       test 'update a docker registry' do
         DockerRegistry.any_instance.stubs(:attempt_login)
-        put :update, :id => @registry.id, :registry => { :name => 'hello_world' }
+        new_name = 'hello_world'
+        put :update, :id => @registry.id, :registry => { :name => new_name }
         assert_response :success
-        assert DockerRegistry.exists?(:name => 'hello_world')
+        assert_equal new_name, @registry.reload.name
       end
 
       test 'deletes a docker registry' do
         delete :destroy, :id => @registry.id
         assert_response :success
-        refute DockerRegistry.exists?(@registry.id)
+        assert DockerRegistry.where(:id => @registry.id).blank?
       end
     end
   end

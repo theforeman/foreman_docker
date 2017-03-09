@@ -5,6 +5,19 @@ class ImageSearchControllerTest < ActionController::TestCase
     @container = FactoryGirl.create(:docker_cr)
   end
 
+  describe '#auto_complete_image_tag' do
+    let(:tags) { ['latest', '5', '4.3'] }
+
+    test 'returns an array of { label:, value: } hashes' do
+      ForemanDocker::Docker.any_instance.expects(:tags)
+        .with('test')
+        .returns(tags)
+      get :auto_complete_image_tag,
+          { search: "test", id: @container.id, format: :js }, set_session_user
+      assert_equal tags.first, JSON.parse(response.body).first['value']
+    end
+  end
+
   [Docker::Error::DockerError, Excon::Errors::Error, Errno::ECONNREFUSED].each do |error|
     test 'auto_complete_repository_name catches exceptions on network errors' do
       ForemanDocker::Docker.any_instance.expects(:exist?).raises(error)

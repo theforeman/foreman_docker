@@ -42,13 +42,16 @@ class DockerRegistry < ActiveRecord::Base
     _("Docker/Registry")
   end
 
+  def api
+    @api ||= Service::RegistryApi.new(url: url,
+                                      user: username,
+                                      password: password)
+  end
+
   private
 
   def attempt_login
-    login_endpoint = RestClient::Resource.new(url + '/v1/users',
-                                              :user => username,
-                                              :password => password)
-    login_endpoint.get == "\"OK\""
+    api.ok?
   rescue => e
     errors.add(:base, _('Unable to log in to this Docker Registry - %s') % e)
   end
