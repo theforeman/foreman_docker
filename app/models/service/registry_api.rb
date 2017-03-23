@@ -59,12 +59,6 @@ module Service
       get('/v2/'.freeze).is_a? Hash
     end
 
-    def ok?
-      get('/v1/').match("Docker Registry API")
-    rescue
-      get('/v2/').is_a? Hash
-    end
-
     def self.docker_hub
       @@docker_hub ||= new(url: DOCKER_HUB)
     end
@@ -87,6 +81,8 @@ module Service
 
     def tags_v2(image_name)
       get("/v2/#{image_name}/tags/list")['tags'].map { |tag| { 'name' => tag } }
+    rescue Docker::Error::NotFoundError
+      []
     end
 
     def credentials

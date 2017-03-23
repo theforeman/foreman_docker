@@ -6,7 +6,7 @@ module DockerContainerWizardStates
     belongs_to :wizard_state, :class_name => DockerContainerWizardState,
                               :foreign_key => :docker_container_wizard_state_id
 
-    validates :compute_resource_id, :presence => true
+    belongs_to :compute_resource, :required => true
 
     def used_location_ids
       Location.joins(:taxable_taxonomies).where(
