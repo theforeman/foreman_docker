@@ -42,7 +42,7 @@ module ForemanDocker
 
     initializer 'foreman_docker.register_plugin', :before => :finisher_hook do
       Foreman::Plugin.register :foreman_docker do
-        requires_foreman '>= 1.11'
+        requires_foreman '>= 1.15'
         compute_resource ForemanDocker::Docker
 
         sub_menu :top_menu, :containers_menu, :caption => N_('Containers'),
@@ -102,6 +102,8 @@ module ForemanDocker
                                          :search_repository] },
                      :resource_type => 'Docker/ImageSearch'
         end
+
+        add_all_permissions_to_default_roles
 
         parameter_filter ComputeResource, :email
 
