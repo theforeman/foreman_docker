@@ -1,6 +1,11 @@
 require 'test_plugin_helper'
 
 class ContainersControllerTest < ActionController::TestCase
+  setup do
+    stub_image_existance
+    stub_registry_api
+  end
+
   test 'redirect if Docker provider is not available' do
     get :index, {}, set_session_user
     assert_redirected_to new_compute_resource_path

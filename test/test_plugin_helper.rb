@@ -22,4 +22,3 @@ def stub_registry_api
   Service::RegistryApi.any_instance.stubs(:get).returns({'results' => []})
   Docker::Image.stubs(:all).returns([])
 end
-

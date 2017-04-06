@@ -9,6 +9,8 @@ class DockerContainerWizardState < ActiveRecord::Base
                         :dependent => :destroy, :validate => true, :autosave => true
 
   delegate :compute_resource_id,   :to => :preliminary
+  delegate :compute_resource, :to => :preliminary
+
   delegate :environment_variables, :to => :environment
   delegate :exposed_ports, :to => :environment
   delegate :dns, :to => :environment
