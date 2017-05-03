@@ -1,9 +1,9 @@
 require 'test_plugin_helper'
 
 class ImageSearchControllerTest < ActionController::TestCase
-  let(:image) { 'centos' }
+  let(:docker_image) { 'centos' }
   let(:tags) { ['latest', '5', '4.3'].map { |tag| "#{term}:#{tag}" } }
-  let(:term) { image }
+  let(:term) { docker_image }
 
   let(:docker_hub) { Service::RegistryApi.new(url: 'https://nothub.com') }
   let(:compute_resource) { FactoryGirl.create(:docker_cr) }
@@ -65,7 +65,7 @@ class ImageSearchControllerTest < ActionController::TestCase
 
   describe '#auto_complete_image_tag' do
     let(:tag_fragment) { 'lat' }
-    let(:term) { "#{image}:#{tag_fragment}"}
+    let(:term) { "#{docker_image}:#{tag_fragment}"}
 
     test 'returns an array of { label:, value: } hashes' do
       search_type = ['hub', 'registry'].sample
@@ -83,7 +83,7 @@ class ImageSearchControllerTest < ActionController::TestCase
       let(:search_type) { 'hub' }
 
       test 'it searches Docker Hub and the ComputeResource' do
-        compute_resource.expects(:image).with(image)
+        compute_resource.expects(:image).with(docker_image)
           .returns(term)
         compute_resource.expects(:tags_for_local_image)
           .returns(tags)
@@ -99,9 +99,9 @@ class ImageSearchControllerTest < ActionController::TestCase
       let(:search_type) { 'registry' }
 
       test 'it only queries the registry api' do
-        compute_resource.expects(:image).with(image).never
+        compute_resource.expects(:image).with(docker_image).never
         docker_hub.expects(:tags).never
-        registry.api.expects(:tags).with(image, tag_fragment)
+        registry.api.expects(:tags).with(docker_image, tag_fragment)
           .returns([])
 
         xhr :get, :auto_complete_image_tag,
@@ -142,9 +142,9 @@ class ImageSearchControllerTest < ActionController::TestCase
       let(:search_type) { 'registry' }
 
       test 'it only queries the registry api' do
-        compute_resource.expects(:local_images).with(image).never
+        compute_resource.expects(:local_images).with(docker_image).never
         docker_hub.expects(:search).never
-        registry.api.expects(:search).with(image)
+        registry.api.expects(:search).with(docker_image)
           .returns({})
 
         xhr :get, :search_repository,
