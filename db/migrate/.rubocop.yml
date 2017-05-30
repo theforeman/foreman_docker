@@ -1,5 +1,6 @@
 inherit_from: ../../.rubocop.yml
 
 # migrations line up column names
-Style/SingleSpaceBeforeFirstArg:
+
+Style/SpaceBeforeFirstArg:
   Enabled: false

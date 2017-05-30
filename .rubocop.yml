@@ -1,38 +1,38 @@
+# TODO: remove this file by either moving cops here or fixing code
+inherit_from:
+  - .rubocop_todo.yml
+
 AllCops:
-  RunRailsCops: true # always run the rails cops
+  TargetRubyVersion: 2.0
+
+Rails: # always run the rails cops
+  Enabled: true
+
+# Don't is_a? over kind_of?
+Style/ClassCheck:
+  Enabled: false
 
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false
 
-# Need to support ruby 1.8
+# Support both ruby19 and hash_rockets
 Style/HashSyntax:
-  EnforcedStyle: hash_rockets
+  Enabled: false
 
-# Force before_filter until upgrade to Rails 4
-Rails/ActionFilter:
-  EnforcedStyle: filter
+Style/StringLiterals:
+  Enabled: false
 
-Metrics/LineLength:
-  Max: 100
-
-Metrics/MethodLength:
-  Max: 20
-
-StringLiterals:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/ClassLength:
-  Max: 200
+  Exclude:
+    - 'test/**/*'
 
-Metrics/AbcSize:
-  Enabled: false # should we turn this on?
-
-Style/MethodCalledOnDoEndBlock:
-  Enabled: true
-
-Style/DotPosition:
-  EnforcedStyle: 'leading'
+Performance/FixedSize:
+  Exclude:
+    - 'test/**/*'
 
 Rails/Date:
   Exclude:
