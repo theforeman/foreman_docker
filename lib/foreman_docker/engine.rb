@@ -129,10 +129,6 @@ module ForemanDocker
       end
     end
 
-    rake_tasks do
-      load "#{ForemanDocker::Engine.root}/lib/foreman_docker/tasks/test.rake"
-    end
-
     require 'fog/fogdocker/models/compute/server'
     require 'fog/fogdocker/models/compute/image'
     require 'fog/fogdocker/models/compute/images'
