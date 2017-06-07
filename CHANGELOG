@@ -1,3 +1,58 @@
+2017-06-01	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Merge pull request #192 from ares/fix/19475
+
+2017-05-30	Marek Hulan <mhulan@redhat.com>
+	* Fixes #19633 - use standard plugin test setup
+
+2017-05-30	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #19694 - Align rubocop configuration with foreman-core
+
+2017-05-03	Sebastian Gräßl <mail@bastilian.me>
+	* Fixes #19396 - Rename test variable name to more specific term
+
+2017-04-06	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Merge pull request #186 from bastilian/fix/18518-PR2
+
+2017-04-06	Marek Hulán <ares@users.noreply.github.com>
+	* Fixes #17960 - add plugin permissions to core
+
+2017-03-23	Sebastian Gräßl <mail@bastilian.me>
+	* Fixes #18518 - Add proper validation for container image
+
+2017-03-09	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #18733 - Prevent fallback to Docker Hub on registry search
+	* Fixes #14175 - Add support for Docker Registry v2
+
+2017-02-15	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #18502 - Add excon version 0.46 and above as dependency
+
+2017-01-13	June Zhang <junzhang@redhat.com>
+	* Fixes #18021 - Add missing files for updating New buttons
+
+2017-01-11	June Zhang <junzhang@redhat.com>
+	* Fixes #18021 - update the button label from New to Create
+
+2016-12-20	Swapnil Abnave <sabnave@redhat.com>
+	* Fixes #17729 - APIdoc - URL desc add 'Docker' to CR types
+
+2016-11-17	orrabin <orabin@redhat.com>
+	* Refs #14370 - Adding new_link helper to containers and registries
+
+2016-09-26	orrabin <orabin@redhat.com>
+	* Fixes #13043 - Change Parameter inheritance to DockerParameter
+
+2016-09-26	Daniel Lobato García <me@daniellobato.me>
+	* Refs #9752 - Test Docker errors are propagated
+
+2016-09-20	Ranjan Kumar <ranjankumar188@gmail.com>
+	* Fixes #16090 - Docker container wizard missing image false.png
+
+2016-09-19	June Zhang <junzhang@redhat.com>
+	* Fixes #16594 - Capitalize the first letter of every word
+
+2016-08-01	Daniel Lobato <elobatocs@gmail.com>
+	* Version 3.0.0
+
 2016-08-01	David Davis <daviddavis@redhat.com>
 	* Fixes #15888 - Remove attr_accessible calls
 

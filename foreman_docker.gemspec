@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/theforeman/foreman-docker'
   s.summary     = 'Provision and manage Docker containers and images from Foreman'
   s.description = 'Provision and manage Docker containers and images from Foreman.'
-  s.licenses    = ['GPL-3']
+  s.licenses    = ['GPL-3.0']
 
   s.files = Dir['{app,config,db,lib,locale}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*', '.rubocop.yml']
