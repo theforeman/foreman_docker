@@ -42,7 +42,6 @@ module ContainerStepsHelper
     name.split.last
   end
 
-
   def model_for(registry_type)
     if active_tab.to_s == registry_type.to_s
       @docker_container_wizard_states_image

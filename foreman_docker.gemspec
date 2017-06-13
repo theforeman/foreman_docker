@@ -24,5 +24,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface', '< 2.0'
   s.add_dependency 'wicked', '~> 1.1'
 
-  s.add_development_dependency 'rubocop', '0.46.0'
+  s.add_development_dependency 'rubocop', '0.49.1'
 end

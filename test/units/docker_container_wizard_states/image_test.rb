@@ -32,7 +32,6 @@ module DockerContainerWizardStates
       Service::RegistryApi.stubs(:docker_hub).returns(docker_hub)
     end
 
-
     describe 'it validates that the image is available' do
       test 'validates via the image_search_service' do
         DockerContainerWizardStates::Image.any_instance
