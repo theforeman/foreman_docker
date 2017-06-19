@@ -20,17 +20,18 @@ module ForemanDocker
       end
     end
 
+    foreman_docker_assets = %w[foreman_docker/autocomplete.css
+                               foreman_docker/terminal.css
+                               foreman_docker/image_step.js
+                               foreman_docker/create_registry.js]
+
     initializer "foreman_docker.assets.precompile" do |app|
-      app.config.assets.precompile += %w(foreman_docker/autocomplete.css
-                                         foreman_docker/terminal.css
-                                         foreman_docker/image_step.js)
+      app.config.assets.precompile += foreman_docker_assets
     end
 
     initializer 'foreman_docker.configure_assets', :group => :assets do
       SETTINGS[:foreman_docker] =
-        { :assets => { :precompile => ['foreman_docker/autocomplete.css',
-                                       'foreman_docker/terminal.css',
-                                       'foreman_docker/image_step.js'] } }
+        { :assets => { :precompile => foreman_docker_assets } }
     end
 
     initializer 'foreman_docker.register_gettext', :after => :load_config_initializers do

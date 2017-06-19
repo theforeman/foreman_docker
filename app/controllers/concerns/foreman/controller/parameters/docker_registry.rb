@@ -4,7 +4,7 @@ module Foreman::Controller::Parameters::DockerRegistry
   class_methods do
     def docker_registry_params_filter
       Foreman::ParameterFilter.new(::DockerRegistry).tap do |filter|
-        filter.permit :name, :url, :username, :password, :description,
+        filter.permit :name, :url, :username, :password, :description, :verify_ssl,
                       :location_ids => [], :organization_ids => []
       end
     end

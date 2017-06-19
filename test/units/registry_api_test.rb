@@ -30,6 +30,15 @@ class RegistryApiTest < ActiveSupport::TestCase
         assert_equal password, subject.connection.options[:password]
       end
     end
+
+    context 'verify ssl is set' do
+      let(:verify_ssl) { [true, false].sample }
+      subject { Service::RegistryApi.new(url: url, verify_ssl: verify_ssl) }
+
+      test 'it passes it as ssl_verify_peer' do
+        assert_equal verify_ssl, subject.connection.options[:ssl_verify_peer]
+      end
+    end
   end
 
   describe '#get' do
@@ -185,8 +194,11 @@ class RegistryApiTest < ActiveSupport::TestCase
 
   describe '#ok?' do
     test 'calls the API via #get with /v1/' do
+      params = subject.send(:default_connection_options)
+                      .merge(subject.send(:credentials))
+                      .merge(path: '/v1/')
       subject.connection.expects(:get)
-             .with('/', nil, Service::RegistryApi::DEFAULTS[:connection].merge(path: '/v1/'))
+             .with('/', nil, params)
              .returns('Docker Registry API')
       assert subject.ok?
     end

@@ -44,14 +44,18 @@ class DockerRegistry < ActiveRecord::Base
 
   def api
     @api ||= Service::RegistryApi.new(url: url, user: username,
-                                      password: password)
+                                      password: password, verify_ssl: verify_ssl)
   end
 
   private
 
   def attempt_login
     api.ok?
-  rescue => e
-    errors.add(:base, _('Unable to log in to this Docker Registry - %s') % e)
+  rescue Excon::Error::Certificate
+    message = 'Unable to verify certificate.\
+              (Disable "Verify ssl" if you still want to use this Docker Registry)'
+    errors.add(:base, _(message))
+  rescue => error
+    errors.add(:base, _('Unable to log in to this Docker Registry - %s') % error)
   end
 end

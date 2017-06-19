@@ -12,19 +12,17 @@ module Service
     def initialize(params = {})
       self.config = DEFAULTS.merge(params)
       self.url = config[:url]
-      @user = config[:user] unless config[:user].blank?
-      @password = config[:password] unless config[:password].blank?
 
       Docker.logger = logger if Rails.env.development? || Rails.env.test?
     end
 
     def connection
-      @connection ||= ::Docker::Connection.new(url, credentials)
+      @connection ||= ::Docker::Connection.new(url, default_connection_options.merge(credentials))
     end
 
     def get(path, params = nil)
       response = connection.get('/'.freeze, params,
-                                DEFAULTS[:connection].merge({ path: "#{path}" }))
+                                connection.options.merge({ path: "#{path}" }))
       response = parse_json(response)
       response
     end
@@ -65,6 +63,12 @@ module Service
 
     private
 
+    def default_connection_options
+      @default_connection_options ||= DEFAULTS[:connection].tap do |defaults|
+        defaults[:ssl_verify_peer] = config.fetch(:verify_ssl, true)
+      end
+    end
+
     def parse_json(string)
       JSON.parse(string)
     rescue => e
@@ -86,7 +90,8 @@ module Service
     end
 
     def credentials
-      { user: @user, password: @password }
+      { user: config.fetch(:user, nil),
+        password: config.fetch(:password, nil) }
     end
 
     def filter_tags(result, query)

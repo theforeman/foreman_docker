@@ -1,3 +1,4 @@
+<%= javascript 'foreman_docker/create_registry' %>
 <%= form_for @registry, :url => (@registry.new_record? ? registries_path : registry_path(:id => @registry.id)) do |f| %>
     <%= base_errors_for @registry %>
     <ul class="nav nav-tabs" data-tabs="tabs">
@@ -14,9 +15,10 @@
       <div class="tab-pane active" id="primary">
         <%= text_f   f, :name %>
         <%= text_f   f, :url %>
-        <%= text_f   f, :description, :help_inline => _("Description of the registry") %>
-        <%= text_f   f, :username, :help_inline => _("Username used to access the registry") %>
-        <%= password_f   f, :password, :help_inline => _("Password used for authentication to the registry") %>
+        <%= text_f   f, :description, :label_help => _("Description of the registry") %>
+        <%= text_f   f, :username, :label_help => _("Username used to access the registry") %>
+        <%= password_f   f, :password, :label_help => _("Password used for authentication to the registry") %>
+        <%= checkbox_f f, :verify_ssl, :label_help => _("Disable to use an insecure registry"), :wrapper_class => 'form-group hidden' %>
       </div>
 
       <%= render 'taxonomies/loc_org_tabs', :f => f, :obj => @registry %>
