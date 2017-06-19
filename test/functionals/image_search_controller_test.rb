@@ -18,204 +18,155 @@ class ImageSearchControllerTest < ActionController::TestCase
       .stubs(:find).returns(registry)
   end
 
-  describe '#auto_complete_repository_name' do
-    test 'returns if an image is available' do
-      exists = ['true', 'false'].sample
-      search_type = ['hub', 'registry'].sample
-      subject.instance_variable_set(:@image_search_service, image_search_service)
-      image_search_service.expects(:available?).returns(exists)
-
-      xhr :get, :auto_complete_repository_name,
-        { registry: search_type, search: term,
-          id: compute_resource }, set_session_user
-      assert_equal exists, response.body
-    end
-
-    context 'it is a Docker Hub tab request' do
-      let(:search_type) { 'hub' }
-
-      test 'it queries the compute_resource and Docker Hub' do
-        compute_resource.expects(:image).with(term)
-          .returns(term)
-        compute_resource.expects(:tags_for_local_image)
-          .returns(tags)
-        docker_hub.expects(:tags).returns([])
-
-        xhr :get, :auto_complete_repository_name,
-          { registry: search_type, search: term,
-            id: compute_resource }, set_session_user
-      end
-    end
-
-    context 'it is a External Registry tab request' do
-      let(:search_type) { 'registry' }
-
-      test 'it only queries the registry api' do
-        compute_resource.expects(:image).with(term).never
-        docker_hub.expects(:tags).never
-        registry.api.expects(:tags).with(term, nil)
-          .returns(['latest'])
-
-        xhr :get, :auto_complete_repository_name,
-          { registry: search_type, registry_id: registry,
-            search: term, id: compute_resource }, set_session_user
-      end
-    end
-  end
-
-  describe '#auto_complete_image_tag' do
-    let(:tag_fragment) { 'lat' }
-    let(:term) { "#{docker_image}:#{tag_fragment}"}
-
-    test 'returns an array of { label:, value: } hashes' do
-      search_type = ['hub', 'registry'].sample
-      subject.instance_variable_set(:@image_search_service, image_search_service)
-      image_search_service.expects(:search)
-        .with({ term: term, tags: 'true' })
-        .returns(tags)
-      xhr :get, :auto_complete_image_tag,
-        { registry: search_type, search: term,
-          id: compute_resource }, set_session_user
-      assert_equal tags.first, JSON.parse(response.body).first['value']
-    end
-
-    context 'a Docker Hub tab request' do
-      let(:search_type) { 'hub' }
-
-      test 'it searches Docker Hub and the ComputeResource' do
-        compute_resource.expects(:image).with(docker_image)
-          .returns(term)
-        compute_resource.expects(:tags_for_local_image)
-          .returns(tags)
-        docker_hub.expects(:tags).returns([])
-
-        xhr :get, :auto_complete_image_tag,
-          { registry: search_type, search: term,
-            id: compute_resource }, set_session_user
-      end
-    end
-
-    context 'it is a External Registry tab request' do
-      let(:search_type) { 'registry' }
-
-      test 'it only queries the registry api' do
-        compute_resource.expects(:image).with(docker_image).never
-        docker_hub.expects(:tags).never
-        registry.api.expects(:tags).with(docker_image, tag_fragment)
-          .returns([])
-
-        xhr :get, :auto_complete_image_tag,
-          { registry: search_type, registry_id: registry,
-            search: term, id: compute_resource }, set_session_user
-      end
-    end
-  end
-
   describe '#search_repository' do
-    test 'returns html with the found images' do
-      search_type = ['hub', 'registry'].sample
-      subject.instance_variable_set(:@image_search_service, image_search_service)
-      image_search_service.expects(:search)
-        .with({ term: term, tags: 'false' })
-        .returns([{ 'name' => term}])
-      xhr :get, :search_repository,
-        { registry: search_type, search: term,
-          id: compute_resource }, set_session_user
-      assert response.body.include?(term)
-    end
+    let(:search_types) { ['hub', 'registry'] }
 
-    context 'a Docker Hub tab request' do
-      let(:search_type) { 'hub' }
+    describe 'calls #search on image_search_service' do
+      setup do
+        subject.instance_variable_set(:@image_search_service, image_search_service)
+      end
 
-      test 'it searches Docker Hub and the ComputeResource' do
-        compute_resource.expects(:local_images)
-          .returns([OpenStruct.new(info: { 'RepoTags' => [term] })])
-        docker_hub.expects(:search).returns({})
-
+      test 'passes params search and tags' do
+        tags_enabled = ['true', 'false'].sample
+        image_search_service.expects(:search).with({ term: term, tags: tags_enabled })
+          .returns([])
         xhr :get, :search_repository,
-          { registry: search_type, search: term,
+          { registry: search_types.sample, search: term, tags: tags_enabled,
             id: compute_resource }, set_session_user
       end
-    end
 
-    context 'it is a External Registry tab request' do
-      let(:search_type) { 'registry' }
-
-      test 'it only queries the registry api' do
-        compute_resource.expects(:local_images).with(docker_image).never
-        docker_hub.expects(:search).never
-        registry.api.expects(:search).with(docker_image)
-          .returns({})
-
+      test 'returns an array of { label:, value: } hashes' do
+        image_search_service.expects(:search).with({ term: term, tags: 'true' })
+          .returns(tags)
         xhr :get, :search_repository,
-          { registry: search_type, registry_id: registry,
-            search: term, id: compute_resource }, set_session_user
+          { registry: search_types.sample, search: term, tags: 'true',
+            id: compute_resource }, set_session_user
+        assert_equal tags.first, JSON.parse(response.body).first['value']
+      end
+
+      test 'returns html with the found images' do
+        image_search_service.expects(:search)
+          .with({ term: term, tags: 'false' })
+          .returns([{ 'name' => term }])
+        xhr :get, :search_repository,
+          { registry: search_types.sample, search: term,
+            id: compute_resource, format: :html}, set_session_user
+        assert response.body.include?(term)
+      end
+
+      [Docker::Error::DockerError, Excon::Errors::Error, Errno::ECONNREFUSED].each do |error|
+        test "search_repository catch exceptions on network errors like #{error}" do
+          image_search_service.expects(:search)
+            .raises(error)
+          xhr :get, :search_repository,
+            { registry: search_types.sample, search: term, id: compute_resource }, set_session_user
+
+          assert_response :error
+          assert response.body.include?('An error occured during repository search:')
+        end
+      end
+
+      test "centos 7 search responses are handled correctly" do
+        repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
+        repo_full_name = "redhat.com: #{repository}"
+        expected = [{  "description" => "Really fancy database app...",
+                       "is_official" => true,
+                       "is_trusted" => true,
+                       "name" =>  repo_full_name,
+                       "star_count" => 0
+                    }]
+        image_search_service.expects(:search).returns(expected)
+        xhr :get, :search_repository,
+          { registry: search_types.sample, search: 'centos', id: compute_resource, format: :html }, set_session_user
+        assert_response :success
+        refute response.body.include?(repo_full_name)
+        assert response.body.include?(repository)
+      end
+
+      test "fedora search responses are handled correctly" do
+        repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
+        repo_full_name = repository
+        request.env["HTTP_ACCEPT"] = "application/javascript"
+        expected = [{ "description" => "Really fancy database app...",
+                      "is_official" => true,
+                      "is_trusted" => true,
+                      "name" =>  repo_full_name,
+                      "star_count" => 0
+                    }]
+        image_search_service.expects(:search).returns(expected)
+        xhr :get, :search_repository,
+          { registry: search_types.sample, search: term, id: compute_resource, format: :html }, set_session_user
+        assert_response :success
+        assert response.body.include?(repo_full_name)
+        assert response.body.include?(repository)
       end
     end
-  end
 
-  [Docker::Error::DockerError, Excon::Errors::Error, Errno::ECONNREFUSED].each do |error|
-    test 'auto_complete_repository_name catches exceptions on network errors' do
-      ForemanDocker::ImageSearch.any_instance.expects(:available?)
-        .raises(error)
-      xhr :get, :auto_complete_repository_name,
-        { registry: 'hub', search: term, id: compute_resource }, set_session_user
-      assert_response_is_expected
+    describe 'for image names' do
+      context 'with a Docker Hub tab request' do
+        let(:search_type) { 'hub' }
+
+        test 'it searches Docker Hub and the ComputeResource' do
+          compute_resource.expects(:local_images)
+            .returns([OpenStruct.new(info: { 'RepoTags' => [term] })])
+          docker_hub.expects(:search).returns({})
+
+          xhr :get, :search_repository,
+            { registry: search_type, search: term,
+              id: compute_resource }, set_session_user
+        end
+      end
+
+      context 'with a External Registry tab request' do
+        let(:search_type) { 'registry' }
+
+        test 'it only queries the registry api' do
+          compute_resource.expects(:local_images).with(docker_image).never
+          docker_hub.expects(:search).never
+          registry.api.expects(:search).with(docker_image)
+            .returns({})
+
+          xhr :get, :search_repository,
+            { registry: search_type, registry_id: registry,
+              search: term, id: compute_resource }, set_session_user
+        end
+      end
     end
 
-    test 'auto_complete_image_tag catch exceptions on network errors' do
-      ForemanDocker::ImageSearch.any_instance.expects(:search).raises(error)
-      xhr :get, :auto_complete_image_tag,
-        { registry: 'hub', search:  term, id: compute_resource }, set_session_user
-      assert_response_is_expected
+    describe 'for tags' do
+      let(:tag_fragment) { 'lat' }
+      let(:term) { "#{docker_image}:#{tag_fragment}"}
+
+      context 'with a Docker Hub tab request' do
+        let(:search_type) { 'hub' }
+
+        test 'it searches Docker Hub and the ComputeResource' do
+          compute_resource.expects(:image).with(docker_image)
+            .returns(term)
+          compute_resource.expects(:tags_for_local_image)
+            .returns(tags)
+          docker_hub.expects(:tags).returns([])
+
+          xhr :get, :search_repository,
+            { registry: search_type, search: term, tags: 'true',
+              id: compute_resource }, set_session_user
+        end
+      end
+
+      context 'with a External Registry tab request' do
+        let(:search_type) { 'registry' }
+
+        test 'it only queries the registry api' do
+          compute_resource.expects(:image).with(docker_image).never
+          docker_hub.expects(:tags).never
+          registry.api.expects(:tags).with(docker_image, tag_fragment)
+            .returns([])
+
+          xhr :get, :search_repository,
+            { registry: search_type, registry_id: registry, tags: 'true',
+              search: term, id: compute_resource }, set_session_user
+        end
+      end
     end
-
-    test 'search_repository catch exceptions on network errors' do
-      ForemanDocker::ImageSearch.any_instance.expects(:search).raises(error)
-      xhr :get, :search_repository,
-        { registry: 'hub', search: term, id: compute_resource }, set_session_user
-      assert_response_is_expected
-    end
-  end
-
-  test "centos 7 search responses are handled correctly" do
-    repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
-    repo_full_name = "redhat.com: #{repository}"
-    request.env["HTTP_ACCEPT"] = "application/javascript"
-    expected = [{  "description" => "Really fancy database app...",
-                   "is_official" => true,
-                   "is_trusted" => true,
-                   "name" =>  repo_full_name,
-                   "star_count" => 0
-                }]
-    ForemanDocker::ImageSearch.any_instance.expects(:search).returns(expected).at_least_once
-    xhr :get, :search_repository,
-      { registry: 'hub', search: 'centos', id: compute_resource }, set_session_user
-    assert_response :success
-    refute response.body.include?(repo_full_name)
-    assert response.body.include?(repository)
-  end
-
-  test "fedora search responses are handled correctly" do
-    repository = "registry-fancycorp.rhcloud.com/fancydb-rhel7/fancydb"
-    repo_full_name = repository
-    request.env["HTTP_ACCEPT"] = "application/javascript"
-    expected = [{ "description" => "Really fancy database app...",
-                  "is_official" => true,
-                  "is_trusted" => true,
-                  "name" =>  repo_full_name,
-                  "star_count" => 0
-                }]
-    ForemanDocker::ImageSearch.any_instance.expects(:search).returns(expected).at_least_once
-    xhr :get, :search_repository,
-      { registry: 'hub', search: 'centos', id: compute_resource  }, set_session_user
-    assert_response :success
-    assert response.body.include?(repo_full_name)
-    assert response.body.include?(repository)
-  end
-
-  def assert_response_is_expected
-    assert_response :error
-    assert response.body.include?('An error occured during repository search:')
   end
 end

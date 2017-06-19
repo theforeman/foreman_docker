@@ -1,4 +1,4 @@
-<%= javascript 'foreman_docker/image_step' %>
+<%= javascript 'foreman_docker/container_image_search' %>
 <%= stylesheet 'foreman_docker/autocomplete' %>
 
 <%= render :layout => 'title', :locals => { :step => 2 } do %>
@@ -11,11 +11,9 @@
       <% end -%>
 
       <li class='<%= tab_class(:hub) %>'><a href="#hub" data-toggle="tab" id="hub_tab">
-        <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("Docker hub") %>
       </a></li>
       <li class='<%= tab_class(:registry) %>'><a href="#registry" data-toggle="tab" id="registry_tab">
-        <span class="glyphicon glyphicon-cloud-download"></span>
         <%= _("External registry") %>
       </a></li>
     </ul>

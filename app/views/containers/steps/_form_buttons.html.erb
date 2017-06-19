@@ -1,20 +1,18 @@
 <div class="clearfix">
-  <div class="form-actions">
+  <div class="form-actions col-md-6 col-md-offset-2 small-gutter">
     <% if step == :preliminary %>
       <%= link_to _("Cancel"), containers_path, :class => "btn btn-danger" %>
     <% else %>
       <a class="btn btn-default" href="<%= previous_wizard_path %>">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <%= _("Back") %>
+        <%= _("Previous Step") %>
       </a>
     <% end %>
-    <% next_id = defined?(registry) ? "next_#{registry}" : "next" %>
-    <%= button_tag(:id => next_id, :type => 'submit', :class => "btn btn-primary pull-right") do %>
+
+    <%= button_tag(:id => 'next', :type => 'submit', :class => "btn btn-primary") do %>
       <% if last_step? %>
         <%= _("Submit") %>
       <% else %>
-        <%= _("Next") %>
-        <span class="glyphicon glyphicon-chevron-right"></span>
+        <%= _("Next Step") %>
       <% end %>
     <% end %>
   </div>

@@ -22,7 +22,7 @@ module ForemanDocker
 
     foreman_docker_assets = %w[foreman_docker/autocomplete.css
                                foreman_docker/terminal.css
-                               foreman_docker/image_step.js
+                               foreman_docker/container_image_search.js
                                foreman_docker/create_registry.js]
 
     initializer "foreman_docker.assets.precompile" do |app|

@@ -17,47 +17,46 @@
   <% end %>
 
   <% if registry == "registry" -%>
-    <div class="input-group col-md-6">
       <%= select_registry f %>
-    </div>
   <% end -%>
 
   <% help_type = f.object.errors[:repository_name].present? ? :help_block : :help_inline %>
   <%= text_f(f, :repository_name,
     :label => _('Search'),
-    :size => 'col-md-6',
     :wrapper_class => (image_search_wrapper_class(model) if tab_active?(registry)),
-    :'data-url'  => auto_complete_repository_name_image_search_path(model.compute_resource_id),
+    :'data-url'  => search_repository_image_search_path(model.compute_resource_id),
     :value       => f.object.repository_name.present? ? f.object.repository_name : '',
     :'data-registry' => registry,
     :'data-image' => true,
-    :'data-search' => true,
     :'data-min-length' => 1,
     :focus_on_load => true,
     :placeholder => _('Find your favorite container, e.g. centos'),
     :control_group_id => "#{registry}_image_search",
-    help_type => link_to_function(
-        icon_text('search', ''),
-        'searchRepo(this)',
-        :class => 'btn btn-default',
-        :id => "search_repository_#{registry}",
-        :'data-registry' => registry,
-        :'data-url' => search_repository_image_search_path(model.compute_resource_id)
-      ) + content_tag(:span, '', :id => 'image-confirmation').html_safe) %>
+    :help_inline => spinner('', class: 'hide autocomplete-status')) %>
 
   <%= text_f f, :tag,
     :control_group_id => "#{registry}_tag_search",
     :'data-registry' => registry,
     :'data-tag' => true,
-    :'data-url' => auto_complete_image_tag_image_search_path(model.compute_resource_id) %>
+    :'data-min-length' => 0,
+    :'data-url' => search_repository_image_search_path(model.compute_resource_id),
+    :help_inline => spinner('', class: 'hide autocomplete-status') %>
 
-  <div class="col-md-12">
+  <div class="col-md-6 col-md-offset-2 small-gutter">
+    <%= link_to(icon_text('search', _('Search for images')), "#",
+          :id => "search_repository_button_#{registry}",
+          :class => 'image-search-button btn btn-default',
+          :'data-registry' => registry,
+          :'data-url' => search_repository_image_search_path(model.compute_resource_id)) %>
+  </div>
+
+  <div class="registry-search-results col-md-12">
     <div data-search-spinner=true class='col-md-offset-3 hide'>
       <span data-wait-text=true>
       </span>
-      <%= spinner('', :id => "loading_repositories_indicator_#{registry}") %>
+      <%= spinner('') %>
     </div>
-    <div data-repository-search-results=true >
+    <div class="registry-search-results-list">
     </div>
   </div>
   <%= render :partial => 'form_buttons', locals: { :registry => registry} %>

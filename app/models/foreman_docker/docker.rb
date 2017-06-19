@@ -42,11 +42,13 @@ module ForemanDocker
       ::Docker::Image.all({ 'filter' => filter }, docker_connection)
     end
 
-    def tags_for_local_image(image)
-      image.info['RepoTags'].map do |image_tag|
+    def tags_for_local_image(image, tag = nil)
+      result = image.info['RepoTags'].map do |image_tag|
         _, tag = image_tag.split(':')
         tag
       end
+      result = filter_tags(result, tag) if tag
+      result
     end
 
     def exist?(name)
@@ -126,6 +128,12 @@ module ForemanDocker
     end
 
     protected
+
+    def filter_tags(result, query)
+      result.select do |tag_name|
+        tag_name['name'] =~ /^#{query}/
+      end
+    end
 
     def docker_command
       yield
