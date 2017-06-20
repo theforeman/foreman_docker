@@ -1,38 +1,13 @@
 class ImageSearchController < ::ApplicationController
-  def auto_complete_repository_name
-    catch_network_errors do
-      available = image_search_service.available?(params[:search])
-      render :text => available.to_s
-    end
-  end
-
-  def auto_complete_image_tag
-    catch_network_errors do
-      tags = image_search_service.search({
-        term: params[:search],
-        tags: 'true'
-      })
-
-      respond_to do |format|
-        format.js do
-          render :json => prepare_for_autocomplete(tags)
-        end
-      end
-    end
-  end
-
   def search_repository
     catch_network_errors do
-      repositories = image_search_service.search({
-        term: params[:search].split(':').first,
-        tags: 'false'
-      })
+      tags_enabled = params[:tags] || 'false'
+      result = image_search_service.search(term: params[:search], tags: tags_enabled)
 
       respond_to do |format|
-        format.js do
-          render :partial => 'repository_search_results',
-                 :locals  => { :repositories => repositories,
-                               :use_hub => use_hub? }
+        format.js { render json: prepare_for_autocomplete(result) }
+        format.html do
+          render partial: 'repository_search_results', locals: { repositories: result }
         end
       end
     end
@@ -51,13 +26,9 @@ class ImageSearchController < ::ApplicationController
            :status => 500
   end
 
-  def use_hub?
-    @registry.nil?
-  end
-
   def action_permission
     case params[:action]
-    when 'auto_complete_repository_name', 'auto_complete_image_tag', 'search_repository'
+    when 'search_repository'
       :search_repository
     else
       super
