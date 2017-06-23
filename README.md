@@ -88,6 +88,15 @@ That's it. You're now ready to create and manage containers in your new Docker c
 | >= 1.7         | 3.0.0+          |
 | >= 1.15        | 3.1.0+          |
 
+## Docker Registry API Compatibility
+
+| Plugin version | Registry API version |
+| ---------------:| --------------:|
+| <  3.1.0        | [v1](http://docs.master.dockerproject.org/v1.7/reference/api/registry_api/)             |
+| >= 3.1.0        | [v1](http://docs.master.dockerproject.org/v1.7/reference/api/registry_api/), [v2](https://docs.docker.com/registry/spec/api/)*****    |
+
+_*** Note:** API v2 as default and v1 to fall back on._
+
 See extras/RELEASE.md for more detailed information on compatibility and releases.
 
 ## How to contribute?
@@ -125,4 +134,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
