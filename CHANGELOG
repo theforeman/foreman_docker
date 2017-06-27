@@ -1,3 +1,25 @@
+2017-06-27	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #19964 - Replace ActiveRecord
+
+2017-06-23	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #19957 - Add Registry compatiblity info to README
+
+2017-06-20	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Merge pull request #187 from bastilian/fix/18902-PR
+
+2017-06-19	Sebastian Gräßl <mail@bastilian.me>
+	* Fixes #18902 - Enable autocomplete for container image search
+
+2017-06-19	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #16235 - Add verify SSL option for Registries
+
+2017-06-13	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Refs #19694 - Bump rubocop version to 0.49.1
+
+2017-06-07	Daniel Lobato Garcia <me@daniellobato.me>
+	* Add compatibility info for latest version
+	* Version 3.1.0
+
 2017-06-01	Sebastian Gräßl <bastilian@users.noreply.github.com>
 	* Merge pull request #192 from ares/fix/19475
 
