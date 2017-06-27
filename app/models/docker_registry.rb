@@ -1,4 +1,4 @@
-class DockerRegistry < ActiveRecord::Base
+class DockerRegistry < ApplicationRecord
   include Authorizable
   include Taxonomix
   include Encryptable
