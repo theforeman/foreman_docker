@@ -1,5 +1,5 @@
 module DockerContainerWizardStates
-  class Environment < ApplicationRecord
+  class Environment < ActiveRecord::Base
     self.table_name_prefix = 'docker_container_wizard_states_'
     belongs_to :wizard_state, :class_name => DockerContainerWizardState
 

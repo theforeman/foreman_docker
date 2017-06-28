@@ -1,4 +1,4 @@
-class Container < ApplicationRecord
+class Container < ActiveRecord::Base
   include Authorizable
   include Taxonomix
 

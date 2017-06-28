@@ -1,4 +1,4 @@
-class DockerContainerWizardState < ApplicationRecord
+class DockerContainerWizardState < ActiveRecord::Base
   has_one :preliminary, :class_name => DockerContainerWizardStates::Preliminary,
                         :dependent => :destroy, :validate => true, :autosave => true
   has_one :image, :class_name => DockerContainerWizardStates::Image,

@@ -1,4 +1,4 @@
-class DockerParameter < ApplicationRecord
+class DockerParameter < ActiveRecord::Base
   extend FriendlyId
   friendly_id :key
   include Parameterizable::ByIdName
