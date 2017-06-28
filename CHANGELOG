@@ -1,3 +1,9 @@
+2017-06-28	Sebastian Gräßl <mail@bastilian.me>
+	* Revert "Fixes #19964 - Replace ActiveRecord
+
+2017-06-27	Sebastian Gräßl <mail@bastilian.me>
+	* Bump version to 3.2.0
+
 2017-06-27	Sebastian Gräßl <bastilian@users.noreply.github.com>
 	* Fixes #19964 - Replace ActiveRecord
 
