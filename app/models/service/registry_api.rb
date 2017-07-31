@@ -1,9 +1,10 @@
 module Service
   class RegistryApi
-    DOCKER_HUB = 'https://registry.hub.docker.com/'.freeze
+    DOCKER_HUB = 'https://index.docker.io/'.freeze
     DEFAULTS = {
       url: 'http://localhost:5000'.freeze,
-      connection: { omit_default_port: true }
+      connection: { omit_default_port: true,
+                    headers: { "Content-Type" => "application/json" }}
     }
 
     attr_accessor :config, :url

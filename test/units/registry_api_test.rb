@@ -13,6 +13,10 @@ class RegistryApiTest < ActiveSupport::TestCase
       assert_equal url, subject.connection.url
     end
 
+    test 'it requests json' do
+      assert_equal 'application/json', subject.connection.options[:headers]['Content-Type']
+    end
+
     context 'authentication is set' do
       let(:user) { 'username' }
       let(:password) { 'secretpassword' }
