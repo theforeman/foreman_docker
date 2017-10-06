@@ -47,6 +47,7 @@ module ForemanDocker
         compute_resource ForemanDocker::Docker
 
         sub_menu :top_menu, :containers_menu, :caption => N_('Containers'),
+                                              :icon => 'fa fa-cube',
                                               :after => :monitor_menu do
           menu :top_menu, :containers,    :caption => N_('All Containers'),
                                           :url_hash => { :controller => :containers,
