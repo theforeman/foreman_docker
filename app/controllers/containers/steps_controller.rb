@@ -5,9 +5,9 @@ module Containers
 
     steps :preliminary, :image, :configuration, :environment
 
-    before_filter :find_state
-    before_filter :build_state, :only => [:update]
-    before_filter :set_form, :only => [:show]
+    before_action :find_state
+    before_action :build_state, :only => [:update]
+    before_action :set_form, :only => [:show]
 
     def show
       @container_resources = allowed_resources if step == :preliminary

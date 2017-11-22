@@ -2,7 +2,7 @@
 module Api
   module V2
     class ContainersController < ::Api::V2::BaseController
-      before_filter :find_resource, :except => %w(index create)
+      before_action :find_resource, :except => %w(index create)
 
       resource_description do
         resource_id 'containers'

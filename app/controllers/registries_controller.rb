@@ -1,7 +1,7 @@
 class RegistriesController < ::ApplicationController
   include Foreman::Controller::AutoCompleteSearch
   include Foreman::Controller::Parameters::DockerRegistry
-  before_filter :find_registry, :only => [:edit, :update, :destroy]
+  before_action :find_registry, :only => [:edit, :update, :destroy]
 
   def index
     @registries = DockerRegistry.search_for(params[:search], :order => params[:order])

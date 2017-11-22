@@ -1,7 +1,7 @@
 class ContainersController < ::ApplicationController
   include ForemanDocker::FindContainer
 
-  before_filter :find_container, :only => [:show, :commit, :power]
+  before_action :find_container, :only => [:show, :commit, :power]
 
   def index
     @container_resources = allowed_resources
