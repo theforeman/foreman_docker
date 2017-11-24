@@ -15,7 +15,7 @@ class ContainersControllerTest < ActionController::TestCase
     Fog.mock!
     # Avoid rendering errors by not retrieving any container
     ComputeResource.any_instance.stubs(:vms).returns([])
-    FactoryGirl.create(:docker_cr)
+    FactoryBot.create(:docker_cr)
     get :index, {}, set_session_user
     assert_template 'index'
   end
@@ -23,7 +23,7 @@ class ContainersControllerTest < ActionController::TestCase
   context 'delete container' do
     setup do
       Fog.mock!
-      @container_resource = FactoryGirl.create(:docker_cr)
+      @container_resource = FactoryBot.create(:docker_cr)
       @container          = @container_resource.vms.first
     end
 
@@ -51,7 +51,7 @@ class ContainersControllerTest < ActionController::TestCase
     end
 
     test 'deleting a managed container deletes container in Docker' do
-      managed_container = FactoryGirl.create(
+      managed_container = FactoryBot.create(
         :container,
         :compute_resource => @container_resource)
       ComputeResource.any_instance.expects(:destroy_vm).
@@ -65,7 +65,7 @@ class ContainersControllerTest < ActionController::TestCase
     end
 
     test 'deleting with container params deletes container object' do
-      managed_container = FactoryGirl.create(
+      managed_container = FactoryBot.create(
         :container,
         :compute_resource => @container_resource)
       managed_container.update(:uuid => @container.id)
@@ -82,7 +82,7 @@ class ContainersControllerTest < ActionController::TestCase
     test 'failed deletion of managed container keeps container in Foreman' do
       ComputeResource.any_instance.stubs(:destroy_vm).
         raises(::Foreman::Exception.new('Could not destroy Docker container'))
-      managed_container = FactoryGirl.create(
+      managed_container = FactoryBot.create(
         :container,
         :compute_resource => @container_resource)
       delete :destroy, { :id => managed_container.id }, set_session_user
@@ -94,7 +94,7 @@ class ContainersControllerTest < ActionController::TestCase
   end
 
   test 'committing a managed container' do
-    container = FactoryGirl.create(:container)
+    container = FactoryBot.create(:container)
     request.env['HTTP_REFERER'] = container_path(:id => container.id)
     commit_hash = { :author => 'a', :repo => 'b', :tag => 'c', :comment => 'd' }
 

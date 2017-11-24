@@ -6,8 +6,8 @@ class ImageSearchControllerTest < ActionController::TestCase
   let(:term) { docker_image }
 
   let(:docker_hub) { Service::RegistryApi.new(url: 'https://nothub.com') }
-  let(:compute_resource) { FactoryGirl.create(:docker_cr) }
-  let(:registry) { FactoryGirl.create(:docker_registry) }
+  let(:compute_resource) { FactoryBot.create(:docker_cr) }
+  let(:registry) { FactoryBot.create(:docker_registry) }
   let(:image_search_service) { ForemanDocker::ImageSearch.new }
 
   setup do

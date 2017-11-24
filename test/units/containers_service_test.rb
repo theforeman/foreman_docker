@@ -7,7 +7,7 @@ class ContainersServiceTest < ActiveSupport::TestCase
     stub_registry_api
 
     @state = DockerContainerWizardState.create! do |s|
-      s.build_preliminary(:compute_resource_id => FactoryGirl.create(:docker_cr).id,
+      s.build_preliminary(:compute_resource_id => FactoryBot.create(:docker_cr).id,
                           :locations           => [taxonomies(:location1)],
                           :organizations       => [taxonomies(:organization1)])
       s.build_image(:repository_name => 'test', :tag => 'test', :wizard_state => s)

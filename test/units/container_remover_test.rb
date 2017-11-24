@@ -4,7 +4,7 @@ module ForemanDocker
   class ContainerRemoverTest < ActiveSupport::TestCase
     describe '#remove_unmanaged' do
       setup do
-        @docker_compute_resource = FactoryGirl.build_stubbed(:docker_cr)
+        @docker_compute_resource = FactoryBot.build_stubbed(:docker_cr)
         ComputeResource.expects(:authorized).
           with(:destroy_compute_resources_vms).
           returns(stub(:find => @docker_compute_resource))

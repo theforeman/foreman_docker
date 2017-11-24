@@ -5,8 +5,8 @@ module DockerContainerWizardStates
     let(:image) { 'centos' }
     let(:tags) { ['latest', '5', '4.3'] }
     let(:docker_hub) { Service::RegistryApi.new(url: 'https://nothub.com') }
-    let(:registry) { FactoryGirl.create(:docker_registry) }
-    let(:compute_resource) { FactoryGirl.create(:docker_cr) }
+    let(:registry) { FactoryBot.create(:docker_registry) }
+    let(:compute_resource) { FactoryBot.create(:docker_cr) }
     let(:image_search_service) { ForemanDocker::ImageSearch.new }
     let(:wizard_state) do
       DockerContainerWizardState.create

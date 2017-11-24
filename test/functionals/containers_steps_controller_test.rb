@@ -5,7 +5,7 @@ module Containers
     setup do
       stub_image_existance
       stub_registry_api
-      @container = FactoryGirl.create(:container)
+      @container = FactoryBot.create(:container)
       @state = DockerContainerWizardState.create!
     end
 
@@ -23,7 +23,7 @@ module Containers
 
     describe 'on image step' do
       setup do
-        @compute_resource = FactoryGirl.create(:docker_cr)
+        @compute_resource = FactoryBot.create(:docker_cr)
         @create_options = { :wizard_state => @state,
                            :compute_resource_id => @compute_resource.id }
         @state.preliminary = DockerContainerWizardStates::Preliminary.create!(@create_options)

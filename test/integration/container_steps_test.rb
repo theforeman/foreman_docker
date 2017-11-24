@@ -2,8 +2,8 @@ require 'integration_test_helper'
 
 class ContainerStepsTest < IntegrationTestWithJavascript
   let(:wizard_state) { DockerContainerWizardState.create! }
-  let(:compute_resource) { FactoryGirl.create(:docker_cr) }
-  let(:registry) { FactoryGirl.create(:docker_registry) }
+  let(:compute_resource) { FactoryBot.create(:docker_cr) }
+  let(:registry) { FactoryBot.create(:docker_registry) }
   let(:image_search_service) { ForemanDocker::ImageSearch.new }
   let(:image_search_results) do
     [{ 'name' => 'my_fake_repository_result',

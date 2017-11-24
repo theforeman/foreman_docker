@@ -1,8 +1,8 @@
 require 'test_plugin_helper'
 
 class ImageSearchServiceTest < ActiveSupport::TestCase
-  let(:compute_resource) { FactoryGirl.create(:docker_cr) }
-  let(:registry) { FactoryGirl.create(:docker_registry).api }
+  let(:compute_resource) { FactoryBot.create(:docker_cr) }
+  let(:registry) { FactoryBot.create(:docker_registry).api }
   let(:term) { 'centos' }
   let(:query) { { term: term, tags: 'false' } }
 

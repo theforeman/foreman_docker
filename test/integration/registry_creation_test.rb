@@ -1,7 +1,7 @@
 require 'integration_test_helper'
 
 class RegistryiCreationTest < IntegrationTestWithJavascript
-  let(:registry_values) { FactoryGirl.build(:docker_registry) }
+  let(:registry_values) { FactoryBot.build(:docker_registry) }
 
   setup do
     DockerRegistry.any_instance.stubs(:attempt_login).returns(true)

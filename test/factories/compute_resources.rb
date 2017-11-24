@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :container_resource, :class => ComputeResource do
     sequence(:name) { |n| "compute_resource#{n}" }
 

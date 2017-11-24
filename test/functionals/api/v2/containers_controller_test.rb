@@ -16,7 +16,7 @@ module Api
 
       test 'index can be filtered by name' do
         %w(thomas clayton wolfe).each do |name|
-          FactoryGirl.create(:container, :name => name)
+          FactoryBot.create(:container, :name => name)
         end
         get :index, { :search => 'name = thomas' }, set_session_user
         assert_response :success
@@ -25,9 +25,9 @@ module Api
 
       context 'container operations' do
         setup do
-          @container = FactoryGirl.create(:container, :name => 'foo')
-          @registry = FactoryGirl.create(:docker_registry)
-          @compute_resource = FactoryGirl.create(:docker_cr)
+          @container = FactoryBot.create(:container, :name => 'foo')
+          @registry = FactoryBot.create(:docker_registry)
+          @compute_resource = FactoryBot.create(:docker_cr)
         end
 
         test 'logs returns latest lines of container log' do

@@ -4,7 +4,7 @@ module Api
   module V2
     class RegistriesControllerTest < ActionController::TestCase
       setup do
-        @registry = FactoryGirl.create(:docker_registry)
+        @registry = FactoryBot.create(:docker_registry)
       end
 
       test 'index returns a list of all containers' do
@@ -15,7 +15,7 @@ module Api
 
       test 'index can be filtered by name' do
         %w(thomas clayton wolfe).each do |name|
-          FactoryGirl.create(:docker_registry, :name => name)
+          FactoryBot.create(:docker_registry, :name => name)
         end
         get :index, { :search => 'name = thomas' }, set_session_user
         assert_response :success
@@ -23,14 +23,14 @@ module Api
       end
 
       test 'creates a new registry with valid params' do
-        docker_attrs = FactoryGirl.attributes_for(:docker_registry)
+        docker_attrs = FactoryBot.attributes_for(:docker_registry)
         DockerRegistry.any_instance.stubs(:attempt_login)
         post :create, :registry => docker_attrs
         assert_response :success
       end
 
       test 'does not create a new registry with invalid params' do
-        docker_attrs = FactoryGirl.attributes_for(:docker_registry)
+        docker_attrs = FactoryBot.attributes_for(:docker_registry)
         docker_attrs.delete(:name)
         post :create, :registry => docker_attrs
         assert_response 422
