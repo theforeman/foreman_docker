@@ -17,11 +17,9 @@ module Api
       param_group :search_and_pagination, ::Api::V2::BaseController
 
       def index
-        compute_resource_id = params[:compute_resource_id].tap do |id|
-          id.present? ? { :compute_resource_id => id } : nil
-        end
-        scoped = Container.where(compute_resource_id)
-        @containers = scoped.search_for(params[:search], :order => params[:order])
+        scope = resource_scope
+        scope = scope.where(:compute_resource => params[:compute_resource_id]) if params[:compute_resource_id].present?
+        @containers = scope.search_for(params[:search], :order => params[:order])
                       .paginate(:page => params[:page])
       end
 
