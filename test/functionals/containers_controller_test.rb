@@ -7,7 +7,7 @@ class ContainersControllerTest < ActionController::TestCase
   end
 
   test 'redirect if Docker provider is not available' do
-    get :index, {}, set_session_user
+    get :index, session: set_session_user
     assert_redirected_to new_compute_resource_path
   end
 
@@ -16,7 +16,7 @@ class ContainersControllerTest < ActionController::TestCase
     # Avoid rendering errors by not retrieving any container
     ComputeResource.any_instance.stubs(:vms).returns([])
     FactoryBot.create(:docker_cr)
-    get :index, {}, set_session_user
+    get :index, session: set_session_user
     assert_template 'index'
   end
 
@@ -31,8 +31,7 @@ class ContainersControllerTest < ActionController::TestCase
 
     test 'deleting an unmanaged container redirects to containers index' do
       ComputeResource.any_instance.expects(:destroy_vm).with(@container.id)
-      delete :destroy, { :compute_resource_id => @container_resource,
-                         :id                  => @container.id }, set_session_user
+      delete :destroy, params: { :compute_resource_id => @container_resource, :id => @container.id }, session: set_session_user
       assert_redirected_to containers_path
       assert_equal "Container #{@container.id} is being deleted.",
         flash[:notice]
@@ -42,8 +41,7 @@ class ContainersControllerTest < ActionController::TestCase
       ComputeResource.any_instance.stubs(:destroy_vm).
         raises(::Foreman::Exception.new('Could not destroy Docker container'))
       @request.env['HTTP_REFERER'] = "http://test.host/#{containers_path}"
-      delete :destroy, { :compute_resource_id => @container_resource,
-                         :id                  => @container.id }, set_session_user
+      delete :destroy, params: { :compute_resource_id => @container_resource, :id => @container.id }, session: set_session_user
       assert @container.present?
       assert_redirected_to :back
       assert_equal 'Your container could not be deleted in Docker',
@@ -58,7 +56,7 @@ class ContainersControllerTest < ActionController::TestCase
         with('randomuuid')
       Container.any_instance.expects(:uuid).returns('randomuuid').at_least_once
       Container.any_instance.expects(:destroy)
-      delete :destroy, { :id => managed_container.id }, set_session_user
+      delete :destroy, params: { :id => managed_container.id }, session: set_session_user
       assert_redirected_to containers_path
       assert_equal "Container #{managed_container.uuid} is being deleted.",
         flash[:notice]
@@ -72,8 +70,7 @@ class ContainersControllerTest < ActionController::TestCase
       ComputeResource.any_instance.expects(:destroy_vm).
         with(@container.id).returns(true)
       Container.any_instance.expects(:destroy)
-      delete :destroy, { :compute_resource_id => @container_resource.id,
-                         :id                  => @container.id }, set_session_user
+      delete :destroy, params: { :compute_resource_id => @container_resource.id, :id => @container.id }, session: set_session_user
       assert_redirected_to containers_path
       assert_equal "Container #{managed_container.uuid} is being deleted.",
         flash[:notice]
@@ -85,7 +82,7 @@ class ContainersControllerTest < ActionController::TestCase
       managed_container = FactoryBot.create(
         :container,
         :compute_resource => @container_resource)
-      delete :destroy, { :id => managed_container.id }, set_session_user
+      delete :destroy, params: { :id => managed_container.id }, session: set_session_user
       assert managed_container.present? # Foreman container would not be deleted
       assert_redirected_to containers_path
       assert_equal 'Your container could not be deleted in Docker',
@@ -103,7 +100,6 @@ class ContainersControllerTest < ActionController::TestCase
       .returns(mock_container)
     mock_container.expects(:commit).with(commit_hash)
 
-    post :commit, { :commit => commit_hash,
-                    :id     => container.id }, set_session_user
+    post :commit, params: { :commit => commit_hash, :id => container.id }, session: set_session_user
   end
 end

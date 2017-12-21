@@ -1,4 +1,4 @@
-class CreateWizardStates < ActiveRecord::Migration
+class CreateWizardStates < ActiveRecord::Migration[4.2]
   # rubocop:disable Metrics/MethodLength
   def change
     create_table :docker_container_wizard_states, &:timestamps

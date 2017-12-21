@@ -1,4 +1,4 @@
-class CreateDockerRegistries < ActiveRecord::Migration
+class CreateDockerRegistries < ActiveRecord::Migration[4.2]
   def change
     create_table :docker_registries do |t|
       t.string :url

@@ -1,4 +1,4 @@
-class ChangeMemoryInContainer < ActiveRecord::Migration
+class ChangeMemoryInContainer < ActiveRecord::Migration[4.2]
   def up
     change_column :containers, :memory, :string
   end

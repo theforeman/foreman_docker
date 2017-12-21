@@ -9,7 +9,7 @@ module Api
       end
 
       test 'index returns a list of all containers' do
-        get :index, {}, set_session_user
+        get :index, session: set_session_user
         assert_response :success
         assert_template 'index'
       end
@@ -18,7 +18,7 @@ module Api
         %w(thomas clayton wolfe).each do |name|
           FactoryBot.create(:container, :name => name)
         end
-        get :index, { :search => 'name = thomas' }, set_session_user
+        get :index, params: { :search => 'name = thomas' }, session: set_session_user
         assert_response :success
         assert_equal 1, assigns(:containers).length
       end
@@ -34,13 +34,13 @@ module Api
           fake_container = Struct.new(:logs)
           fake_container.expects(:logs).returns('I am a log').twice
           Docker::Container.expects(:get).with(@container.uuid).returns(fake_container)
-          get :logs, :id => @container.id
+          get :logs, params: { :id => @container.id }
           assert_response :success
           assert_equal ActiveSupport::JSON.decode(response.body)['logs'], fake_container.logs
         end
 
         test 'show returns information about container' do
-          get :show, :id => @container.id
+          get :show, params: { :id => @container.id }
           assert_response :success
           assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
         end
@@ -52,7 +52,7 @@ module Api
 
           test 'delete removes a container in foreman and in Docker host' do
             Fog.mock!
-            delete :destroy, :id => @container.id
+            delete :destroy, params: { :id => @container.id }
             Fog.unmock!
             assert_response :success
             assert_equal ActiveSupport::JSON.decode(response.body)['name'], 'foo'
@@ -62,7 +62,7 @@ module Api
             ComputeResource.any_instance.expects(:destroy_vm).
               with('randomuuid').
               raises(::Foreman::Exception.new('Problem removing container'))
-            delete :destroy, :id => @container.id
+            delete :destroy, params: { :id => @container.id }
             assert_response :precondition_failed
           end
         end
@@ -73,20 +73,20 @@ module Api
 
           test 'power call turns on/off container in Docker host' do
             Fog::Compute::Fogdocker::Server.any_instance.expects(:start)
-            put :power, :id => @container.id, :power_action => 'start'
+            put :power, params: { :id => @container.id, :power_action => 'start' }
             assert_response :success
           end
 
           test 'power call checks status of container in Docker host' do
             Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
-            put :power, :id => @container.id, :power_action => 'status'
+            put :power, params: { :id => @container.id, :power_action => 'status' }
             assert_response :success
             assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
           end
 
           test 'power call host' do
             Fog::Compute::Fogdocker::Server.any_instance.expects(:ready?).returns(false)
-            put :power, :id => @container.id, :power_action => 'status'
+            put :power, params: { :id => @container.id, :power_action => 'status' }
             assert_response :success
             assert_equal ActiveSupport::JSON.decode(response.body)['running'], false
           end
@@ -107,11 +107,11 @@ module Api
               container.repository_pull_url.must_include(registry_uri.host)
               container.repository_pull_url.must_include("#{repository_name}:#{tag}")
             end
-            post :create, :container => { :compute_resource_id => @compute_resource.id,
-                                          :name => name,
-                                          :registry_id => @registry.id,
-                                          :repository_name => repository_name,
-                                          :tag => tag }
+            post :create, params: { :container => { :compute_resource_id => @compute_resource.id,
+                                                    :name => name,
+                                                    :registry_id => @registry.id,
+                                                    :repository_name => repository_name,
+                                                    :tag => tag } }
             assert_response :created
           end
 
@@ -121,12 +121,12 @@ module Api
             name = "foo2"
             Service::Containers.any_instance.expects(:pull_image).returns(true)
             Service::Containers.any_instance.expects(:start_container).returns(true)
-            post :create, :container => { :compute_resource_id => @compute_resource.id,
-                                          :name => name,
-                                          :registry_id => @registry.id,
-                                          :repository_name => repository_name,
-                                          :tag => tag,
-                                          :environment_variables => [{:key => 'ping_host', :value => 'example.com'}]}
+            post :create, params: { :container => { :compute_resource_id => @compute_resource.id,
+                                                    :name => name,
+                                                    :registry_id => @registry.id,
+                                                    :repository_name => repository_name,
+                                                    :tag => tag,
+                                                    :environment_variables => [{:key => 'ping_host', :value => 'example.com'}]} }
             assert_response :created
           end
         end
@@ -150,20 +150,20 @@ module Api
             container_attributes[:name].must_equal(name)
             wizard_state.image.capsule_id.must_equal(capsule_id)
           end
-          post :create, :container => { :compute_resource_id => @compute_resource.id,
-                                        :name => name,
-                                        :capsule_id => capsule_id,
-                                        :repository_name => repository_name,
-                                        :tag => tag }
+          post :create, params: { :container => { :compute_resource_id => @compute_resource.id,
+                                                  :name => name,
+                                                  :capsule_id => capsule_id,
+                                                  :repository_name => repository_name,
+                                                  :tag => tag } }
           assert_response :created
         end
 
         test 'creation fails with invalid container name' do
-          post :create, :container => { :compute_resource_id => @container.compute_resource_id,
-                                        :name => @container.name,
-                                        :registry_id => @registry.id,
-                                        :repository_name => 'centos',
-                                        :tag => 'latest' }
+          post :create, params: { :container => { :compute_resource_id => @container.compute_resource_id,
+                                                  :name => @container.name,
+                                                  :registry_id => @registry.id,
+                                                  :repository_name => 'centos',
+                                                  :tag => 'latest' } }
           assert_response :unprocessable_entity
           assert_match /Name has already been taken/, @response.body
         end

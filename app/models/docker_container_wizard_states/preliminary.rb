@@ -1,5 +1,5 @@
 module DockerContainerWizardStates
-  class Preliminary < ActiveRecord::Base
+  class Preliminary < ApplicationRecord
     include Taxonomix
 
     self.table_name_prefix = 'docker_container_wizard_states_'

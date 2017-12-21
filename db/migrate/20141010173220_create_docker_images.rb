@@ -1,4 +1,4 @@
-class CreateDockerImages < ActiveRecord::Migration
+class CreateDockerImages < ActiveRecord::Migration[4.2]
   def up
     create_table :docker_images do |t|
       t.string  :image_id

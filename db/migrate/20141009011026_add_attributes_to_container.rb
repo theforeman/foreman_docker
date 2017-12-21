@@ -1,4 +1,4 @@
-class AddAttributesToContainer < ActiveRecord::Migration
+class AddAttributesToContainer < ActiveRecord::Migration[4.2]
   def change
     add_column :containers, :entrypoint, :string
     add_column :containers, :cpu_set, :integer

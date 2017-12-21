@@ -1,4 +1,4 @@
-class ChangeCpusetInContainer < ActiveRecord::Migration
+class ChangeCpusetInContainer < ActiveRecord::Migration[4.2]
   def up
     change_column :containers, :cpu_set, :string
   end

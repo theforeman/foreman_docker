@@ -1,4 +1,4 @@
-class CreateDockerParameters < ActiveRecord::Migration
+class CreateDockerParameters < ActiveRecord::Migration[4.2]
   def change
     create_table :docker_parameters do |t|
       t.string :key, :limit => 255

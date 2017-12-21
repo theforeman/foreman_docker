@@ -1,4 +1,4 @@
-class ChangeContainerColumnType < ActiveRecord::Migration
+class ChangeContainerColumnType < ActiveRecord::Migration[4.2]
   def up
     change_column :containers, :cpu_shares, :integer
     change_column :docker_container_wizard_states_configurations, :cpu_shares, :integer

@@ -1,4 +1,4 @@
-class RemoveDockerTables < ActiveRecord::Migration
+class RemoveDockerTables < ActiveRecord::Migration[4.2]
   class DockerImage
   end
 
