@@ -30,7 +30,7 @@
     ![](http://i.imgur.com/DPcaHkZ.png)
 
 ### Planned
-* [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes/) integration
+* [Kubernetes](https://github.com/kubernetes/kubernetes/) integration
 * Events stream ([#8037](http://projects.theforeman.org/issues/8037))
 * Tight integration between Docker hosts [Atomic](http://www.projectatomic.io/) and [CoreOS](http://coreos.com/) and containers ([#7653](http://projects.theforeman.org/issues/7653), [#7652](http://projects.theforeman.org/issues/7652))
 * Quickstart images - pre-supplied images and configuration ([#7869](http://projects.theforeman.org/issues/7869))
