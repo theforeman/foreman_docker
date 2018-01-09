@@ -12,9 +12,9 @@ class ImageSearchControllerTest < ActionController::TestCase
 
   setup do
     Service::RegistryApi.stubs(:docker_hub).returns(docker_hub)
-    ComputeResource::ActiveRecord_Relation.any_instance
+    ComputeResource.const_get(:ActiveRecord_Relation).any_instance
       .stubs(:find).returns(compute_resource)
-    DockerRegistry::ActiveRecord_Relation.any_instance
+    DockerRegistry.const_get(:ActiveRecord_Relation).any_instance
       .stubs(:find).returns(registry)
   end
 
@@ -30,17 +30,22 @@ class ImageSearchControllerTest < ActionController::TestCase
         tags_enabled = ['true', 'false'].sample
         image_search_service.expects(:search).with({ term: term, tags: tags_enabled })
           .returns([])
-        xhr :get, :search_repository,
-          { registry: search_types.sample, search: term, tags: tags_enabled,
-            id: compute_resource }, set_session_user
+        get :search_repository,
+            params: { registry: search_types.sample, search: term, tags: tags_enabled,
+                      id: compute_resource },
+            session: set_session_user,
+            xhr: true
       end
 
       test 'returns an array of { label:, value: } hashes' do
         image_search_service.expects(:search).with({ term: term, tags: 'true' })
           .returns(tags)
-        xhr :get, :search_repository,
-          { registry: search_types.sample, search: term, tags: 'true',
-            id: compute_resource }, set_session_user
+        get :search_repository,
+            params: { registry: search_types.sample, search: term, tags: 'true',
+                      id: compute_resource },
+            session: set_session_user,
+            xhr: true
+
         assert_equal tags.first, JSON.parse(response.body).first['value']
       end
 
@@ -48,9 +53,11 @@ class ImageSearchControllerTest < ActionController::TestCase
         image_search_service.expects(:search)
           .with({ term: term, tags: 'false' })
           .returns([{ 'name' => term }])
-        xhr :get, :search_repository,
+        get :search_repository, params:
           { registry: search_types.sample, search: term,
-            id: compute_resource, format: :html}, set_session_user
+            id: compute_resource, format: :html },
+            session: set_session_user, xhr: true
+
         assert response.body.include?(term)
       end
 
@@ -58,8 +65,9 @@ class ImageSearchControllerTest < ActionController::TestCase
         test "search_repository catch exceptions on network errors like #{error}" do
           image_search_service.expects(:search)
             .raises(error)
-          xhr :get, :search_repository,
-            { registry: search_types.sample, search: term, id: compute_resource }, set_session_user
+          get :search_repository,
+              params: { registry: search_types.sample, search: term, id: compute_resource },
+              session: set_session_user, xhr: true
 
           assert_response :error
           assert response.body.include?('An error occured during repository search:')
@@ -76,8 +84,11 @@ class ImageSearchControllerTest < ActionController::TestCase
                        "star_count" => 0
                     }]
         image_search_service.expects(:search).returns(expected)
-        xhr :get, :search_repository,
-          { registry: search_types.sample, search: 'centos', id: compute_resource, format: :html }, set_session_user
+        get :search_repository,
+            params: { registry: search_types.sample, search: 'centos', id: compute_resource, format: :html },
+            session: set_session_user,
+            xhr: true
+
         assert_response :success
         refute response.body.include?(repo_full_name)
         assert response.body.include?(repository)
@@ -94,8 +105,11 @@ class ImageSearchControllerTest < ActionController::TestCase
                       "star_count" => 0
                     }]
         image_search_service.expects(:search).returns(expected)
-        xhr :get, :search_repository,
-          { registry: search_types.sample, search: term, id: compute_resource, format: :html }, set_session_user
+        get :search_repository,
+            params: { registry: search_types.sample, search: term, id: compute_resource, format: :html },
+            session: set_session_user,
+            xhr: true
+
         assert_response :success
         assert response.body.include?(repo_full_name)
         assert response.body.include?(repository)
@@ -111,9 +125,11 @@ class ImageSearchControllerTest < ActionController::TestCase
             .returns([OpenStruct.new(info: { 'RepoTags' => [term] })])
           docker_hub.expects(:search).returns({})
 
-          xhr :get, :search_repository,
-            { registry: search_type, search: term,
-              id: compute_resource }, set_session_user
+          get :search_repository,
+              params:  { registry: search_type, search: term,
+                         id: compute_resource },
+              session: set_session_user,
+              xhr: true
         end
       end
 
@@ -126,9 +142,11 @@ class ImageSearchControllerTest < ActionController::TestCase
           registry.api.expects(:search).with(docker_image)
             .returns({})
 
-          xhr :get, :search_repository,
-            { registry: search_type, registry_id: registry,
-              search: term, id: compute_resource }, set_session_user
+          get :search_repository,
+              params: { registry: search_type, registry_id: registry,
+              search: term, id: compute_resource },
+              session: set_session_user,
+              xhr: true
         end
       end
     end
@@ -147,9 +165,11 @@ class ImageSearchControllerTest < ActionController::TestCase
             .returns(tags)
           docker_hub.expects(:tags).returns([])
 
-          xhr :get, :search_repository,
-            { registry: search_type, search: term, tags: 'true',
-              id: compute_resource }, set_session_user
+          get :search_repository,
+              params: { registry: search_type, search: term,
+                        tags: 'true', id: compute_resource },
+              session: set_session_user,
+              xhr: true
         end
       end
 
@@ -162,9 +182,11 @@ class ImageSearchControllerTest < ActionController::TestCase
           registry.api.expects(:tags).with(docker_image, tag_fragment)
             .returns([])
 
-          xhr :get, :search_repository,
-            { registry: search_type, registry_id: registry, tags: 'true',
-              search: term, id: compute_resource }, set_session_user
+          get :search_repository,
+              params: { registry: search_type, registry_id: registry, tags: 'true',
+                        search: term, id: compute_resource },
+              session: set_session_user,
+              xhr: true
         end
       end
     end

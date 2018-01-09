@@ -16,13 +16,13 @@ module ForemanDocker
           errors = duplicate_key?(keys, param)
         end
 
-        self.errors[param_symbol] = _('Please ensure the following parameters are unique') if errors
+        self.errors.add(param_symbol, _('Please ensure the following parameters are unique')) if errors
       end
     end
 
     def duplicate_key?(keys, param)
       if keys.include?(param.key)
-        param.errors[:key] = _('has already been taken')
+        param.errors.add(:key, _('has already been taken'))
         return true
       else
         keys << param.key

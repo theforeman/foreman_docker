@@ -74,7 +74,7 @@ module Service
 
     def destroy_wizard_state(wizard_state)
       wizard_state.destroy
-      DockerContainerWizardState.destroy_all(["updated_at < ?", (Time.now.utc - 24.hours)])
+      DockerContainerWizardState.where(["updated_at < ?", (Time.now.utc - 24.hours)]).destroy_all
     end
 
     def load_environment_variables(state, r)
