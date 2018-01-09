@@ -29,7 +29,7 @@ class ContainersController < ::ApplicationController
       if @container.present?
         process_error(:redirect => containers_path)
       else
-        redirect_to :back
+        redirect_back(:fallback_location => containers_path)
       end
     end
   rescue ActiveRecord::RecordNotFound
@@ -67,12 +67,12 @@ class ContainersController < ::ApplicationController
       redirect_to containers_path(:id => @container.id)
     else
       error _("failed to %{action} %{vm}") % { :action => _(action), :vm => @docker_container }
-      redirect_to :back
+      redirect_back(:fallback_location => containers_path)
     end
     # This should only rescue Fog::Errors, but Fog returns all kinds of errors...
   rescue => e
     error _("Error - %{message}") % { :message => _(e.message) }
-    redirect_to :back
+    redirect_back(:fallback_location => containers_path)
   end
 
   private
