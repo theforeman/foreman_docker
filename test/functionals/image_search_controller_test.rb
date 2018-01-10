@@ -18,6 +18,7 @@ class ImageSearchControllerTest < ActionController::TestCase
       .stubs(:find).returns(registry)
   end
 
+  # rubocop:disable Metrics/BlockLength
   describe '#search_repository' do
     let(:search_types) { ['hub', 'registry'] }
 

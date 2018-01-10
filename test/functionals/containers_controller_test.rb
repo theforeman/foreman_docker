@@ -40,10 +40,10 @@ class ContainersControllerTest < ActionController::TestCase
     test 'failed deletion of unmanaged container in Docker' do
       ComputeResource.any_instance.stubs(:destroy_vm).
         raises(::Foreman::Exception.new('Could not destroy Docker container'))
-      @request.env['HTTP_REFERER'] = "http://test.host/#{containers_path}"
+      @request.env['HTTP_REFERER'] = "http://test.host#{containers_path}"
       delete :destroy, params: { :compute_resource_id => @container_resource, :id => @container.id }, session: set_session_user
       assert @container.present?
-      assert_redirected_to :back
+      assert_redirected_to containers_path
       assert_equal 'Your container could not be deleted in Docker',
         flash[:error]
     end
