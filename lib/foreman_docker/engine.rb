@@ -102,7 +102,7 @@ module ForemanDocker
                      { :image_search => [:auto_complete_repository_name,
                                          :auto_complete_image_tag,
                                          :search_repository] },
-                     :resource_type => 'Docker/ImageSearch'
+                     :resource_type => 'DockerRegistry'
         end
 
         add_all_permissions_to_default_roles
