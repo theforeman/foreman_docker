@@ -1,4 +1,53 @@
+2018-04-16	Stephen Benjamin <stephen@bitbin.de>
+	* refs #23019 - don't pass class to class_name in assocs (#211)
+
+2018-01-11	Daniel Lobato García <me@daniellobato.me>
+	* Fixes #20067 - Wrong constant name Docker/ImageSearch
+
+2018-01-10	Daniel Lobato García <me@daniellobato.me>
+	* Fix test redirect_to_back
+
+2018-01-09	Daniel Lobato Garcia <me@daniellobato.me>
+	* Remove redirect_to :back (Rails 5.1)
+
+2018-01-09	Michael Moll <kvedulv@kvedulv.de>
+	* More Rails 5.1 changes
+
+2018-01-05	Tim Meusel <tim@bastelfreak.de>
+	* update link to kubernetes github repo
+
+2017-12-21	Daniel Lobato Garcia <me@daniellobato.me>
+	* Version 4.0.0
+
+2017-12-21	Michael Moll <kvedulv@kvedulv.de>
+	* Update to Rails 5.1
+
+2017-12-14	Daniel Lobato Garcia <me@daniellobato.me>
+	* Refs #21893 - rubocop trailing whitespace
+
+2017-12-14	Marek Hulán <ares@users.noreply.github.com>
+	* Fixes #21893 - fix listing containers for specific CR
+
+2017-12-13	Swapnil Abnave <sabnave@redhat.com>
+	* Fixes #20429 - mandate URL for docker compute-resource
+
+2017-12-13	Michael Moll <kvedulv@kvedulv.de>
+	* Fixes #21921 - Upgrade rubocop to 0.51
+
+2017-11-24	Daniel Lobato Garcia <me@daniellobato.me>
+	* FactoryGirl to FactoryBot
+
+2017-11-22	Ondřej Pražák <xprazak2@users.noreply.github.com>
+	* Fixes #21732 - Replace :before_filter with :before_action
+
+2017-10-06	Walden Raines <walden@redhat.com>
+	* Fixes #21143: add containers icon for vertical navigation.
+
+2017-07-31	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Fixes #20355 - Request registry results in JSON
+
 2017-06-28	Sebastian Gräßl <mail@bastilian.me>
+	* Bump version to 3.2.1
 	* Revert "Fixes #19964 - Replace ActiveRecord
 
 2017-06-27	Sebastian Gräßl <mail@bastilian.me>
