@@ -3,7 +3,7 @@ class Container < ApplicationRecord
   include Taxonomix
 
   belongs_to :compute_resource
-  belongs_to :registry, :class_name => "DockerRegistry", :foreign_key => :registry_id
+  belongs_to :registry, :class_name => 'DockerRegistry', :foreign_key => :registry_id
   has_many :environment_variables, :dependent  => :destroy, :foreign_key => :reference_id,
                                    :inverse_of => :container,
                                    :class_name => 'EnvironmentVariable'

@@ -1,11 +1,11 @@
 class DockerContainerWizardState < ApplicationRecord
-  has_one :preliminary, :class_name => DockerContainerWizardStates::Preliminary,
+  has_one :preliminary, :class_name => 'DockerContainerWizardStates::Preliminary',
                         :dependent => :destroy, :validate => true, :autosave => true
-  has_one :image, :class_name => DockerContainerWizardStates::Image,
+  has_one :image, :class_name => 'DockerContainerWizardStates::Image',
                   :dependent => :destroy, :validate => true, :autosave => true
-  has_one :configuration, :class_name => DockerContainerWizardStates::Configuration,
+  has_one :configuration, :class_name => 'DockerContainerWizardStates::Configuration',
                           :dependent => :destroy, :validate => true, :autosave => true
-  has_one :environment, :class_name => DockerContainerWizardStates::Environment,
+  has_one :environment, :class_name => 'DockerContainerWizardStates::Environment',
                         :dependent => :destroy, :validate => true, :autosave => true
 
   delegate :compute_resource_id,   :to => :preliminary
