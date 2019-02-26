@@ -1,3 +1,12 @@
+2019-02-26	Sebastian Gräßl <bastilian@users.noreply.github.com>
+	* Merge pull request #216 from ares/fix/19591
+
+2019-02-22	Marek Hulan <mhulan@redhat.com>
+	* Fixes #19591 - provide clean up task
+
+2018-04-16	Daniel Lobato Garcia <me@daniellobato.me>
+	* Release 4.1.0
+
 2018-04-16	Stephen Benjamin <stephen@bitbin.de>
 	* refs #23019 - don't pass class to class_name in assocs (#211)
 
