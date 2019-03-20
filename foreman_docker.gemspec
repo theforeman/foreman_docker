@@ -12,15 +12,13 @@ Gem::Specification.new do |s|
   s.authors     = ['Daniel Lobato, Amos Benari']
   s.email       = ['dlobatog@redhat.com, abenari@redhat.com']
   s.homepage    = 'http://github.com/theforeman/foreman-docker'
-  s.summary     = 'Provision and manage Docker containers and images from Foreman'
-  s.description = 'Provision and manage Docker containers and images from Foreman.'
+  s.summary     = 'This version does not provide any functionality and only makes plugin removal easier.'
+  s.description = 'This version does not provide any functionality and only makes plugin removal easier.'
   s.licenses    = ['GPL-3.0']
 
   s.files = Dir['{app,config,db,lib,locale}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*', '.rubocop.yml']
 
-  s.add_dependency 'docker-api', '~> 1.18'
-  s.add_dependency 'excon', '~> 0.46'
   s.add_dependency 'deface', '< 2.0'
   s.add_dependency 'wicked', '~> 1.1'
 

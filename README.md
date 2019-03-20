@@ -1,5 +1,19 @@
 # Foreman Docker Plugin
 
+**This plugin has been discontinued. The latest release only helps with its removal. If you're interested in taking over the maintanance, let us know.**
+
+In order to remove the plugin from you Foreman installation, following steps need to be taken
+
+1. make a backup
+1. upgrade to last version of foreman-docker 5.0 (and Katello if you're using it)
+1. run `foreman-rake db:migrate` (if you have Katello, this will erase docker data)
+1. run `foreman-rake foreman_docker:cleanup` (cleans up all data that this plugin introduced)
+1. `yum remove tfm-rubygem-foreman_docker` or `apt remove ruby-foreman-docker`
+1. `yum remove tfm-rubygem-hammer_cli_foreman_docker` or `apt remove ruby-hammer-cli-foreman-docker` unless you still use katello commands from it
+1. update apipie cache `foreman-rake apipie:cache`
+1. `service httpd restart`
+
+
 [![Code Climate](https://codeclimate.com/github/theforeman/foreman-docker/badges/gpa.svg)](https://codeclimate.com/github/theforeman/foreman-docker)
 [![Gem Version](https://badge.fury.io/rb/foreman_docker.svg)](http://badge.fury.io/rb/foreman_docker)
 [![Dependency Status](https://gemnasium.com/theforeman/foreman-docker.svg)](https://gemnasium.com/theforeman/foreman-docker)
