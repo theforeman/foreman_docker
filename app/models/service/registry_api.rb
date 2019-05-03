@@ -4,7 +4,8 @@ module Service
     DEFAULTS = {
       url: 'http://localhost:5000'.freeze,
       connection: { omit_default_port: true,
-                    headers: { "Content-Type" => "application/json" }}
+                    headers: { "Content-Type" => "application/json" }
+                  }
     }
 
     attr_accessor :config, :url
@@ -80,7 +81,7 @@ module Service
     def get_tags(image_name)
       get("/v1/repositories/#{image_name}/tags")
     rescue => e
-      logger.warn "API v1 - Repository images request failed #{e.backtrace}"
+      Foreman::Logging.exception("API v1 - Repository images request failed", e)
       tags_v2(image_name)
     end
 
@@ -88,6 +89,14 @@ module Service
       get("/v2/#{image_name}/tags/list")['tags'].map { |tag| { 'name' => tag } }
     rescue Docker::Error::NotFoundError
       []
+    rescue Excon::Error::Found => e
+      if e.response.status == 302
+        new_path = URI.parse(e.response.headers['Location']).path
+        get(new_path)['tags'].map { |tag| { 'name' => tag } }
+      else
+        ::Foreman.exception "Could not load tags using v2", e
+        []
+      end
     end
 
     def credentials
