@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :registries, :except => [:show]
+  resources :registries, :except => [:show] do
+    collection do
+      get 'auto_complete_search'
+    end
+  end
 
   scope path: '/docker', as: :foreman_docker do
     namespace :api, :defaults => { :format => 'json' } do
