@@ -6,8 +6,10 @@ namespace :foreman_docker do
     User.as_anonymous_admin do
       puts '... deleting records from taxable_taxonomies'
       TaxableTaxonomy.where(:taxable_type => [ 'Container', 'DockerRegistry', 'Preliminary', 'ForemanDocker::Docker' ]).delete_all
-      puts '... removing all host group associations to Docker compute resources'
-      Hostgroup.where(:compute_resource_id => ForemanDocker::Docker.pluck(:id)).update_all("compute_resource_id = NULL")
+      [Host, Hostgroup, ComputeAttribute, Image, KeyPair].each do |klass|
+        puts "... removing all #{klass} associations to Docker compute resources"
+        klass.where(:compute_resource_id => ForemanDocker::Docker.pluck(:id)).update_all("compute_resource_id = NULL")
+      end
       puts '... deleting filters'
       Filter.joins(:permissions).where('permissions.resource_type' => Foreman::Plugin.find(:foreman_docker).registered_permissions.map { |p, attrs| attrs[:resource_type] }.uniq!).destroy_all
       puts '... deleting permissions'
